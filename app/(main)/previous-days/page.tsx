@@ -5,27 +5,48 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import { classNamesState, stateEmoji } from '@/constants'
+import { classNamesState, doneInWhichWay, stateEmoji } from '@/constants'
+import { getMostRepeatedState } from '@/lib/utils'
+import { Separator } from '@/components/ui/separator'
 
 export default async function page() {
     const allDaysInfo = await collectionTask.find().toArray()
 
     if (!allDaysInfo) return <p>No days on track</p>
 
+    const allDaysMostRepeated = allDaysInfo.map(c => getMostRepeatedState(c.tasks))
+
+    const doneDays = allDaysMostRepeated.filter(day => day === "done").length
+    const noDoneDays = allDaysMostRepeated.filter(day => day === "no done").length
+    const jobOccupiedDays = allDaysMostRepeated.filter(day => day === "job/occupied").length
+
+    function calculatePercentage(part: number) {
+        return (part / allDaysInfo.length) * 100;
+    }
+
+
     return (
         <>
-            <p>Total days: {allDaysInfo.length}</p>
-            <p>How Many days succeded (count) (percentage)</p>
-            <p>How Many days succeded (count) (percentage)</p>
-            <Accordion type="single" collapsible className="w-full">
+            <div className='flex flex-col items-center gap-2'>
+                <p>Total days: {allDaysInfo.length}</p>
+                <Separator orientation='horizontal' className='bg-foreground' />
+                <div className='flex gap-2 h-7'>
+                    <p>✅ {doneDays} ({calculatePercentage(doneDays)}%)</p>
+                    <Separator orientation='vertical' className='bg-foreground' decorative />
+                    <p>❌ {noDoneDays} ({calculatePercentage(noDoneDays)}%)</p>
+                    <Separator orientation='vertical' className='bg-foreground' decorative />
+                    <p>☑️ {jobOccupiedDays} ({calculatePercentage(jobOccupiedDays)}%)</p>
+                </div>
+            </div>
+            <Accordion type="single" collapsible className="w-[50%]">
                 {allDaysInfo.map(c => (
-                    <AccordionItem key={c.date} value={c.date}>
-                        <AccordionTrigger className='font-bold text-center text-2xl'>{c.date}</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem className='flex flex-col items-center gap-2' key={c.date} value={c.date}>
+                        <AccordionTrigger className='font-bold text-2xl'>{c.date} {doneInWhichWay[getMostRepeatedState(c.tasks)]}</AccordionTrigger>
+                        <AccordionContent className=''>
                             {c.tasks.map(task => {
                                 return (
                                     <div key={task.name + task.time}>
-                                        <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name}</p>
+                                        <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name} <span className='font-semibold'>({task.time})</span></p>
                                     </div>
                                 )
                             })}

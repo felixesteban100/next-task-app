@@ -6,9 +6,9 @@ export default async function RootLayout({
     children: React.ReactNode,
 }) {
     return (
-        <main className="flex flex-col gap-10 w-screen">
+        <main className="flex flex-col gap-10 w-[98vw]">
             <Navbar />
-            <div className="flex flex-col gap-2 mt-10 pt-20 justify-center items-center px-10">
+            <div className="flex flex-col gap-2 mt-10 pt-20 justify-center items-center ">
                 {children}
             </div>
         </main>
