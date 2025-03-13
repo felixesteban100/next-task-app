@@ -7,8 +7,13 @@ import { getTodaysDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 
 export async function addDefaultTasksWithTodaysDate() {
-    const tasks = await collectionTask.insertOne({ tasks: DEFAULT_TASKS, date: getTodaysDate() })
-    return tasks
+    const todayDate = getTodaysDate()
+    const existingDay = await collectionTask.findOne({ date: todayDate });
+
+    if (existingDay) return false
+
+    await collectionTask.insertOne({ tasks: DEFAULT_TASKS, date: todayDate })
+    return true
 }
 
 export async function saveTasksOfCurrentDate(date: string, tasks: Task[]) {

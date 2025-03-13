@@ -24,7 +24,6 @@ export default async function page() {
         return (part / allDaysInfo.length) * 100;
     }
 
-
     return (
         <>
             <div className='flex flex-col items-center gap-2'>
