@@ -10,7 +10,7 @@ import { getMostRepeatedState } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
 export default async function page() {
-    const allDaysInfo = await collectionTask.find().toArray()
+    const allDaysInfo = await collectionTask.find().sort({ date: -1 }).toArray()
 
     if (!allDaysInfo) return <p>No days on track</p>
 
