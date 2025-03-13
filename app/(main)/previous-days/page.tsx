@@ -38,13 +38,13 @@ export default async function page() {
                 </div>
             </div>
             <Accordion type="single" collapsible className="w-[60%]">
-                {allDaysInfo.map(c => (
+                {allDaysInfo.map((c, cIndex) => (
                     <AccordionItem className='flex flex-col items-center gap-2' key={c.date} value={c.date}>
                         <AccordionTrigger className='font-bold text-2xl'>{c.date} {doneInWhichWay[getMostRepeatedState(c.tasks)]}</AccordionTrigger>
                         <AccordionContent className=''>
-                            {c.tasks.map(task => {
+                            {c.tasks.map((task, taskIndex) => {
                                 return (
-                                    <div key={task.name + task.time}>
+                                    <div key={cIndex + task.name + task.time + taskIndex}>
                                         {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
                                         <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name} <span className='font-semibold'>({task.time})</span></p>
                                     </div>

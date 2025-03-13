@@ -2,11 +2,8 @@ import Tasks from "@/components/TaskToEdit";
 import { collectionTask } from "@/db/mongodb/mongodb";
 import { getTodaysDate } from "@/lib/utils";
 
-// create and add a mongodb database to store each day
-// store in the localstorage the data in the day
-// pass 11 pm save the tracked progress from localstorage into the database
+// add auth to the app
 
-// make another page where I see the passed days in an accordion and each tasks state
 export default async function Home() {
   const today = getTodaysDate()
 

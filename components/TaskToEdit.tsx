@@ -4,7 +4,7 @@ import {
     ToggleGroup,
     ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { cn, filterFutureTimes, getMostRepeatedState, getTotalDoneImportantTasks, getTotalDoneSpiritualTasks } from '@/lib/utils'
+import { cn, filterFutureTimes, getMostRepeatedState, getTotalTasksByType } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { TIMES } from "@/constants"
@@ -95,22 +95,13 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
 
     }
 
-    function changeTime(taskName: string, newTime: string) {
-        const [taskToEditName] = taskName.split("->");
-
-        const updatedTasks = tasksState.map((task, indexTask) =>
-            `${task.name}_${task.time}_${indexTask}` === taskToEditName ? { ...task, time: newTime as TaskStates } : task
-        )
-        form.setValue("tasks", updatedTasks)
-    }
-
     return (
         <div className='flex flex-col gap-10 items-center mb-10 w-full'>
+            <p className='font-bold text-2xl'>{stateEmoji[getMostRepeatedState(tasksState)]}{date} (Today)</p>
             <div className='flex flex-row gap-10 items-center'>
-                <p className='font-bold text-2xl'>{date} (Today)</p>
-                <p>Overall: {stateEmoji[getMostRepeatedState(tasksState)]}</p>
-                <p>Spiritual {/* 📖🙏⚔🛡✝ */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "spiritual"))]} */} {getTotalDoneSpiritualTasks(tasksState)}</p>
-                <p>Important {/* 💻💪🦵😎💡 */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "important"))]} */} {getTotalDoneImportantTasks(tasksState)}</p>
+                <p>Spiritual{/* 📖🙏⚔🛡✝ */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "spiritual"))]} */} {getTotalTasksByType(tasksState, "spiritual")}</p>
+                <p>Important{/* 💻💪🦵😎💡 */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "important"))]} */} {getTotalTasksByType(tasksState, "spiritual")}</p>
+                <p>Normal{/* 💻💪🦵😎💡 */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "important"))]} */} {getTotalTasksByType(tasksState, "normal")}</p>
             </div>
             <div className='flex flex-row gap-10 items-center'>
                 <p>Done: {doneTasks}</p>
@@ -166,10 +157,26 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
                                                     >
                                                         {task.name}
                                                     </p>
-                                                    <select defaultValue={task.time} onChange={(e) => changeTime(`${task.name}_${task.time}_${index}`, e.target.value)}>
-                                                        {TIMES.map((time) => {
-                                                            return <option disabled={!filterFutureTimes(TIMES).includes(time)} className="text-foreground bg-background" key={task.name + time} value={time}>{time}</option>
-                                                        })}
+                                                    <select defaultValue={`${task.name}_${task.time}_${index}->${task.time}`} onChange={(e) => {
+                                                        if (!e) return; // Early exit if empty
+                                                        const [taskToEditName, newValue] = e.target.value.split("->");
+                                                        if (taskToEditName !== `${task.name}_${task.time}_${index}`) return; // Skip unnecessary update
+                                                        const updatedTasks = field.value.map((item, indexItem) =>
+                                                            `${item.name}_${item.time}_${indexItem}` === taskToEditName ? { ...item, time: newValue } : item
+                                                        )
+                                                        field.onChange(updatedTasks); // ✅ Pass the new array directly
+                                                    }}>
+                                                        {TIMES.map(c => ({ value: `${task.name}_${task.time}_${index}->${c}`, name: c })).map((time) => (
+                                                            <option
+                                                                key={task.name + time.name}
+                                                                // value={`${task.name}_${task.time}_${index}->${time}`}
+                                                                value={time.value}
+                                                                className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-yellow-500 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                            // disabled={!filterFutureTimes(TIMES).includes(time.name)}
+                                                            >
+                                                                {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                 </div>
                                             </div>

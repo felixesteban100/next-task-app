@@ -1,4 +1,4 @@
-import { Task, TaskStates } from "@/components/TaskToEdit";
+import { Task, TaskStates, TaskTypes } from "@/components/TaskToEdit";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -16,25 +16,23 @@ export function getTodaysDate() {
 }
 
 export function filterFutureTimes(times: string[]): string[] {
-  const now = new Date();
-  const currentHour = now.getHours();
-  const currentMinute = now.getMinutes();
+  const now = new Date(), currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-  return times.filter(time => {
+  const toMinutes = (time: string) => {
     const match = time.match(/(\d{1,2}):(\d{2}) (am|pm)/i);
-    if (!match) return false;
+    if (!match) return -1;
+    const [, h, m, p] = match;
+    const hour = parseInt(h, 10) % 12 + (p.toLowerCase() === "pm" ? 12 : 0);
+    return hour * 60 + parseInt(m, 10);
+  };
 
-    const [, hourStr, minuteStr, period] = match;
-    let hour = parseInt(hourStr, 10);
-    const minute = parseInt(minuteStr, 10);
+  // Find the first time that is equal to or greater than current time
+  let index = times.findIndex(t => toMinutes(t) >= currentMinutes);
 
-    // Convert to 24-hour format
-    if (period.toLowerCase() === "pm" && hour !== 12) hour += 12;
-    if (period.toLowerCase() === "am" && hour === 12) hour = 0;
+  // If there’s a previous time, include it
+  if (index > 0) index--;
 
-    // Compare time
-    return hour > currentHour || (hour === currentHour && minute > currentMinute);
-  });
+  return index === -1 ? [] : times.slice(index);
 }
 
 export function getMostRepeatedState(tasks: Task[]) {
@@ -49,13 +47,7 @@ export function getMostRepeatedState(tasks: Task[]) {
   ).value;
 };
 
-
-export function getTotalDoneSpiritualTasks(tasks: Task[]) {
-  const spiritualTasks = tasks.filter(c => c.type === "spiritual")
-  return `${spiritualTasks.filter(c => c.state === "done").length} / ${spiritualTasks.length}`
-}
-
-export function getTotalDoneImportantTasks(tasks: Task[]) {
-  const importantTasks = tasks.filter(c => c.type === "important")
-  return `${importantTasks.filter(c => c.state === "done").length} / ${importantTasks.length}`
+export function getTotalTasksByType(tasks: Task[], type: TaskTypes) {
+  const tasksByType = tasks.filter(c => c.type === type)
+  return `✅${tasksByType.filter(c => c.state === "done").length} ❌${tasksByType.filter(c => c.state === "no done").length} ☑${tasksByType.filter(c => c.state === "job/occupied").length} / ${tasksByType.length}`
 }
