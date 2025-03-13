@@ -4,7 +4,7 @@ import {
     ToggleGroup,
     ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { cn, getMostRepeatedState, getTotalDoneImportantTasks, getTotalDoneSpiritualTasks } from '@/lib/utils'
+import { cn, filterFutureTimes, getMostRepeatedState, getTotalDoneImportantTasks, getTotalDoneSpiritualTasks } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { TIMES } from "@/constants"
@@ -24,6 +24,7 @@ import {
 import { saveTasksOfCurrentDate } from "@/server/actions"
 import { classNamesState, classNamesType, stateEmoji } from "@/constants"
 import { Separator } from "./ui/separator"
+import { SaveAll } from "lucide-react"
 
 export type DailyTaskAndDetails = {
     tasks: Task[],
@@ -95,15 +96,16 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
     }
 
     function changeTime(taskName: string, newTime: string) {
-        const updatedTasks = tasksState.map(task => {
-            if (task.name !== taskName) return task
-            return { ...task, time: newTime }
-        })
+        const [taskToEditName] = taskName.split("->");
+
+        const updatedTasks = tasksState.map((task, indexTask) =>
+            `${task.name}_${task.time}_${indexTask}` === taskToEditName ? { ...task, time: newTime as TaskStates } : task
+        )
         form.setValue("tasks", updatedTasks)
     }
 
     return (
-        <div className='flex flex-col gap-10 items-center mb-10'>
+        <div className='flex flex-col gap-10 items-center mb-10 w-full'>
             <div className='flex flex-row gap-10 items-center'>
                 <p className='font-bold text-2xl'>{date} (Today)</p>
                 <p>Overall: {stateEmoji[getMostRepeatedState(tasksState)]}</p>
@@ -118,9 +120,9 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
             </div>
 
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center items-center">
-                    <Button disabled={form.formState.isSubmitting || !formTasksChanged} className={`w-fit px-5 `} type="submit">
-                        <p className={`${!formTasksChanged ? "" : "animate-bounce"}`}>{form.formState.isSubmitting ? "Saving..." : "Save progress"}</p>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">
+                    <Button disabled={form.formState.isSubmitting || !formTasksChanged} className={`w-fit p-7 text-xl fixed bottom-10 right-10`} type="submit">
+                        <p className={`${!formTasksChanged ? "" : "animate-bounce"} flex gap-2 items-center`}>{form.formState.isSubmitting ? "Saving..." : <>Save progress<SaveAll size={80} /></>}</p>
                     </Button>
                     <FormField
                         control={form.control}
@@ -140,22 +142,22 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
                                                         onValueChange={(e) => {
                                                             if (!e) return; // Early exit if empty
                                                             const [taskToEditName, newValue] = e.split("->");
-                                                            if (taskToEditName !== `${task.name}_${task.time}`) return; // Skip unnecessary update
-                                                            const updatedItems = field.value.map((item: Task) =>
-                                                                `${item.name}_${item.time}` === taskToEditName ? { ...item, state: newValue as TaskStates } : item
+                                                            if (taskToEditName !== `${task.name}_${task.time}_${index}`) return; // Skip unnecessary update
+                                                            const updatedItems = field.value.map((item: Task, indexItem: number) =>
+                                                                `${item.name}_${item.time}_${indexItem}` === taskToEditName ? { ...item, state: newValue as TaskStates } : item
                                                             );
                                                             field.onChange(updatedItems); // ✅ Pass the new array directly
                                                         }}
                                                         type="single"
                                                         defaultValue={task.state}
                                                     >
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}->done`} className={`${task.state !== "done" ? "grayscale-100" : ""}`}>
+                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->done`} className={`${task.state !== "done" ? "grayscale-100" : ""}`}>
                                                             ✅
                                                         </ToggleGroupItem>
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}->no done`} className={`${task.state !== "no done" ? "grayscale-100" : ""}`}>
+                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->no done`} className={`${task.state !== "no done" ? "grayscale-100" : ""}`}>
                                                             ❌
                                                         </ToggleGroupItem>
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}->job/occupied`} className={`${task.state !== "job/occupied" ? "grayscale-100" : ""}`} /* disabled={task.type === "spiritual"} */>
+                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->job/occupied`} className={`${task.state !== "job/occupied" ? "grayscale-100" : ""}`} /* disabled={task.type === "spiritual"} */>
                                                             ☑️
                                                         </ToggleGroupItem>
                                                     </ToggleGroup>
@@ -164,9 +166,9 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
                                                     >
                                                         {task.name}
                                                     </p>
-                                                    <select defaultValue={task.time} onChange={(e) => changeTime(task.name, e.target.value)}>
-                                                        {TIMES.map(time => {
-                                                            return <option className="text-foreground bg-background" key={task.name + time} value={time}>{time}</option>
+                                                    <select defaultValue={task.time} onChange={(e) => changeTime(`${task.name}_${task.time}_${index}`, e.target.value)}>
+                                                        {TIMES.map((time) => {
+                                                            return <option disabled={!filterFutureTimes(TIMES).includes(time)} className="text-foreground bg-background" key={task.name + time} value={time}>{time}</option>
                                                         })}
                                                     </select>
                                                 </div>

@@ -15,6 +15,28 @@ export function getTodaysDate() {
   }).format(new Date());
 }
 
+export function filterFutureTimes(times: string[]): string[] {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+
+  return times.filter(time => {
+    const match = time.match(/(\d{1,2}):(\d{2}) (am|pm)/i);
+    if (!match) return false;
+
+    const [, hourStr, minuteStr, period] = match;
+    let hour = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr, 10);
+
+    // Convert to 24-hour format
+    if (period.toLowerCase() === "pm" && hour !== 12) hour += 12;
+    if (period.toLowerCase() === "am" && hour === 12) hour = 0;
+
+    // Compare time
+    return hour > currentHour || (hour === currentHour && minute > currentMinute);
+  });
+}
+
 export function getMostRepeatedState(tasks: Task[]) {
   const frequencyMap = tasks.reduce<Record<string, number>>((acc, item) => {
     acc[item.state] = (acc[item.state] || 0) + 1;
