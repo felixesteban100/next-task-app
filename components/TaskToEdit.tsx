@@ -103,7 +103,7 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
     }
 
     return (
-        <div className='flex flex-col gap-10 items-center'>
+        <div className='flex flex-col gap-10 items-center mb-10'>
             <div className='flex flex-row gap-10 items-center'>
                 <p className='font-bold text-2xl'>{date} (Today)</p>
                 <p>Overall: {stateEmoji[getMostRepeatedState(tasksState)]}</p>

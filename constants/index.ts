@@ -27,73 +27,73 @@ export const doneInWhichWay = {
 export const DEFAULT_TASKS: Task[] = [{
     "name": "Wake up early",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:00 am"
 },
 {
     "name": "Go to the bathroom for grooming and brush teeth",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:05 am"
 },
 {
     "name": "Organize bed",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:15 am"
 },
 {
     "name": "Say a phrase: To hate sin and lust and To love God and his holiness",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:20 am"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:20 am"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "7:05 am"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "7:05 am"
 },
 {
     "name": "Listen 3 christian music",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "7:05 am"
 },
 {
     "name": "Read Bible (10+ chapters or an entire book)",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "7:10 am"
 },
 {
     "name": "Upload youtube short/ instagram reel to Palabra Abierta",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:20 am"
 },
 {
     "name": "Share a Christian quote or a verse to social networks",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:30 am"
 },
 {
     "name": "Data structures: read and record audio",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:40 am"
 },
 
@@ -104,73 +104,73 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:50 am"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:50 am"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:50 am"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:50 am"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push , heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:50 am"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:50 am"
 },
 {
     "name": "Exercises for the knee (all)",
     "type": "important",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "9:00 am"
 },
 {
     "name": "Neck exercises",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:10 am"
 },
 {
     "name": "Practice Hard riddle TedEd/MindYourDecisions/Brilliant",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:20 am"
 },
 {
     "name": "Practice one Math exercise",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:30 am"
 },
 {
     "name": "Practice one Music reading exercise",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:35 am"
 },
 {
     "name": "Rubik's cubes 5x5 / games",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:40 am"
 },
 
@@ -185,49 +185,49 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:50 am"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:50 am"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:50 am"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:50 am"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:50 am"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:50 am"
 },
 {
     "name": "Data structures: read and record audio",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "11:00 am"
 },
 {
     "name": "Software development / code projects",
     "type": "important",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "11:20 am"
 },
 
@@ -242,73 +242,73 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:00 pm"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:00 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:00 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:00 pm"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:00 pm"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:00 pm"
 },
 {
     "name": "Record yourself imitating a manly voice",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:10 pm"
 },
 {
     "name": "Spin basketball",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:20 pm"
 },
 {
     "name": "Rubik's cubes 4x4 / games",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:30 pm"
 },
 {
     "name": "Practice one Math exercise",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:40 pm"
 },
 {
     "name": "Practice one Music reading exercise",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "12:50 pm"
 },
 {
     "name": "Do a brilliant lesson",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:00 pm"
 },
 
@@ -323,55 +323,55 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:10 pm"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:10 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:10 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:10 pm"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:10 pm"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:10 pm"
 },
 {
     "name": "REPLACE THIS WITH SOMETHING",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "1:20 pm"
 },
 {
     "name": "Play marvel snap",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "2:00 pm"
 },
 {
     "name": "Populate mongodb databases",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "2:30 pm"
 },
 
@@ -386,61 +386,61 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:00 pm"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:00 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:00 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:00 pm"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:00 pm"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:00 pm"
 },
 {
     "name": "Workout to sweat (if injured job or knee exercise counts)",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:10 pm"
 },
 {
     "name": "Record yourself imitating a manly voice (10 min)",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:40 pm"
 },
 {
     "name": "Read from be a man (demark last and mark current)",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "3:50 pm"
 },
 {
     "name": "Data structures: read and record audio",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:00 am"
 },
 
@@ -455,55 +455,55 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:10 pm"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:10 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:10 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:10 pm"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:10 pm"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:10 pm"
 },
 {
     "name": "Learn or practice one card trick",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:20 pm"
 },
 {
     "name": "Do something pending from the To Do list below",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:30 pm"
 },
 {
     "name": "Learn a new english word",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "4:55 pm"
 },
 
@@ -518,55 +518,55 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:00 pm"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:00 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:00 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:00 pm"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:00 pm"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:00 pm"
 },
 {
     "name": "REPLACE THIS WITH SOMETHING",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:10 pm"
 },
 {
     "name": "Learn new Software development with tutorials/courses",
     "type": "important",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "5:50 pm"
 },
 {
     "name": "Spin basketball",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:30 pm"
 },
 
@@ -581,61 +581,61 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:40 pm"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:40 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:40 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:40 pm"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:40 pm"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:40 pm"
 },
 {
     "name": "Solve problem from advent of code / leetcode / brilliant",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "6:50 pm"
 },
 {
     "name": "Family time",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "7:10 pm"
 },
 {
     "name": "Get all mobile devices out of the bedroom",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:00 pm"
 },
 {
     "name": "Prayer time with family",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:00 pm"
 },
 
@@ -650,67 +650,67 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:30 pm"
 },
 {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:30 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:30 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:30 pm"
 },
 {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:30 pm"
 },
 {
     "name": "10x: push-ups, L-sit, core, walk, elevate leg",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:30 pm"
 },
 {
     "name": "REPLACE THIS WITH SOMETHING",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "8:40 pm"
 },
 {
     "name": "Brush teeth",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "9:00 pm"
 },
 {
     "name": "Read 100 pure thoughts",
     "type": "normal",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "9:10 pm"
 },
 {
-    "name": "Put the clock and turn off the TV before 9:00 pm (RESETS AT 11:00 PM)",
+    "name": "Put the clock and turn off the TV",
     "type": "important",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:00 pm"
 },
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)",
     "type": "spiritual",
-    "state": "job/occupied",
+    "state": "no done",
     "time": "10:00 pm"
 }]
 

@@ -38,7 +38,7 @@ export default async function page() {
                     <p>☑️ {jobOccupiedDays} ({calculatePercentage(jobOccupiedDays)}%)</p>
                 </div>
             </div>
-            <Accordion type="single" collapsible className="w-[50%]">
+            <Accordion type="single" collapsible className="w-[60%]">
                 {allDaysInfo.map(c => (
                     <AccordionItem className='flex flex-col items-center gap-2' key={c.date} value={c.date}>
                         <AccordionTrigger className='font-bold text-2xl'>{c.date} {doneInWhichWay[getMostRepeatedState(c.tasks)]}</AccordionTrigger>
@@ -46,6 +46,7 @@ export default async function page() {
                             {c.tasks.map(task => {
                                 return (
                                     <div key={task.name + task.time}>
+                                        {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
                                         <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name} <span className='font-semibold'>({task.time})</span></p>
                                     </div>
                                 )

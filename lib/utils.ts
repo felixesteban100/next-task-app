@@ -6,6 +6,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function getTodaysDate() {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date());
+}
+
 export function getMostRepeatedState(tasks: Task[]) {
   const frequencyMap = tasks.reduce<Record<string, number>>((acc, item) => {
     acc[item.state] = (acc[item.state] || 0) + 1;

@@ -3,10 +3,12 @@
 import { Task } from "@/components/TaskToEdit"
 import { DEFAULT_TASKS } from "@/constants"
 import { collectionTask } from "@/db/mongodb/mongodb"
+import { getTodaysDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 
 export async function addDefaultTasksWithTodaysDate() {
-    await collectionTask.insertOne({ tasks: DEFAULT_TASKS, date: new Date().toLocaleDateString() })
+    const tasks = await collectionTask.insertOne({ tasks: DEFAULT_TASKS, date: getTodaysDate() })
+    return tasks
 }
 
 export async function saveTasksOfCurrentDate(date: string, tasks: Task[]) {
@@ -22,5 +24,4 @@ export async function saveTasksOfCurrentDate(date: string, tasks: Task[]) {
     }
 
     return false
-
 }
