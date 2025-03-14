@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 
 export const metadata: Metadata = {
   title: {
@@ -10,9 +13,9 @@ export const metadata: Metadata = {
   },
   description: 'App for tracking my daily activities.',
   // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
-  // icons: {
-  //   icon: 'https://cdn-icons-png.flaticon.com/512/2098/2098402.png',
-  // },
+  icons: {
+    icon: "https://img.icons8.com/?size=100&id=KBhpl0Y7pupX&format=png&color=000000",
+  },
 };
 
 export default function RootLayout({
@@ -21,19 +24,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster richColors />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <head />
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster richColors />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
