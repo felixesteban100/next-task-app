@@ -24,7 +24,7 @@ export async function saveTasksOfCurrentDate(date: string, tasks: Task[]) {
     );
 
     if (result.modifiedCount > 0) {
-        revalidatePath("/")
+        revalidatePath("*")
         return true
     }
 
