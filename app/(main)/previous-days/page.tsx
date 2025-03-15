@@ -39,8 +39,8 @@ export default async function page() {
             </div>
             <Accordion type="single" collapsible className="w-[65%]">
                 {allDaysInfo.map((c, cIndex) => (
-                    <AccordionItem className='flex flex-col items-center gap-2' key={c.date} value={c.date}>
-                        <AccordionTrigger className='font-bold text-2xl'>{c.date} {doneInWhichWay[getMostRepeatedState(c.tasks)]} {c.tasks.some(c => c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") === true ? <span className='text-red-600'>Don't Lust</span> : null}</AccordionTrigger>
+                    <AccordionItem className='flex flex-col items-center gap-2' key={c._id.toString() + c.date} value={c.date}>
+                        <AccordionTrigger className='font-bold text-2xl'>{c.date} {doneInWhichWay[getMostRepeatedState(c.tasks)]} {c.tasks.some(c => c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") === true ? <span className='text-red-600'>Do not Lust</span> : null}</AccordionTrigger>
                         <AccordionContent className=''>
                             {c.tasks.reverse().map((task, taskIndex) => {
                                 return (
