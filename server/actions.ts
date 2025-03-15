@@ -5,8 +5,10 @@ import { DEFAULT_TASKS } from "@/constants"
 import { collectionTask } from "@/db/mongodb/mongodb"
 import { getTodaysDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
+import { connection } from 'next/server'
 
 export async function addDefaultTasksWithTodaysDate() {
+    connection()
     const todayDate = getTodaysDate()
     const existingDay = await collectionTask.findOne({ date: todayDate });
 
@@ -17,6 +19,7 @@ export async function addDefaultTasksWithTodaysDate() {
 }
 
 export async function saveTasksOfCurrentDate(date: string, tasks: Task[]) {
+    connection()
     const result = await collectionTask.updateOne(
         { date },
         { $set: { tasks: tasks } }, // ✅ Use `$set` to update the `tasks` array

@@ -7,7 +7,6 @@ import { getTodaysDate } from "@/lib/utils";
 
 export default async function Home() {
   const today = getTodaysDate()
-
   const ToDayInfo = await collectionTask.findOne({ date: today })
 
   return (
