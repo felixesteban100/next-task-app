@@ -96,19 +96,26 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
     }
 
     return (
-        <div className='flex flex-col gap-10 items-center mb-10 w-full'>
-            <p className='font-bold text-2xl'>{stateEmoji[getMostRepeatedState(tasksState)]}{date} (Today)</p>
+        <div className='flex flex-col gap-7 items-center mb-10 w-full'>
+            <div className="flex items-center justify-center gap-2">
+                <span className='font-bold text-2xl'>
+                    {stateEmoji[getMostRepeatedState(tasksState)]}{date} (Today)
+                </span>
+                <p>{doneTasks}</p>
+                <p>{noDoneTasks}</p>
+                <p>{job_OccupiedTasks}</p>
+            </div>
             <div className='flex flex-row gap-10 items-center'>
                 <p>Spiritual{/* 📖🙏⚔🛡✝ */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "spiritual"))]} */} {getTotalTasksByType(tasksState, "spiritual")}</p>
                 <p>Important{/* 💻💪🦵😎💡 */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "important"))]} */} {getTotalTasksByType(tasksState, "spiritual")}</p>
                 <p>Normal{/* 💻💪🦵😎💡 */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "important"))]} */} {getTotalTasksByType(tasksState, "normal")}</p>
             </div>
-            <div className='flex flex-row gap-10 items-center'>
+            {/* <div className='flex flex-row gap-10 items-center'>
                 <p>Done: {doneTasks}</p>
                 <p>No Done: {noDoneTasks}</p>
                 <p>Job/Occupied: {job_OccupiedTasks}</p>
                 <p>Total: {tasks.length}</p>
-            </div>
+            </div> */}
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">

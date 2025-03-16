@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner"
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
