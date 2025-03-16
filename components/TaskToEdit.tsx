@@ -4,7 +4,7 @@ import {
     ToggleGroup,
     ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { cn, filterFutureTimes, getMostRepeatedState, getTotalTasksByType } from '@/lib/utils'
+import { cn, filterFutureTimes, /* getMostRepeatedState, */ getTotalTasksByType } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { TIMES } from "@/constants"
@@ -25,6 +25,13 @@ import { saveTasksOfCurrentDate } from "@/server/actions"
 import { classNamesState, classNamesType, stateEmoji } from "@/constants"
 import { Separator } from "./ui/separator"
 import { SaveAll } from "lucide-react"
+
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export type DailyTaskAndDetails = {
     tasks: Task[],
@@ -97,25 +104,23 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
 
     return (
         <div className='flex flex-col gap-7 items-center mb-10 w-full'>
-            <div className="flex items-center justify-center gap-2">
-                <span className='font-bold text-2xl'>
-                    {stateEmoji[getMostRepeatedState(tasksState)]}{date} (Today)
-                </span>
-                <p>{doneTasks}</p>
-                <p>{noDoneTasks}</p>
-                <p>{job_OccupiedTasks}</p>
-            </div>
-            <div className='flex flex-row gap-10 items-center'>
-                <p>Spiritual{/* 📖🙏⚔🛡✝ */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "spiritual"))]} */} {getTotalTasksByType(tasksState, "spiritual")}</p>
-                <p>Important{/* 💻💪🦵😎💡 */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "important"))]} */} {getTotalTasksByType(tasksState, "spiritual")}</p>
-                <p>Normal{/* 💻💪🦵😎💡 */}: {/* {stateEmoji[getMostRepeatedState(tasksState.filter(c => c.type === "important"))]} */} {getTotalTasksByType(tasksState, "normal")}</p>
-            </div>
-            {/* <div className='flex flex-row gap-10 items-center'>
-                <p>Done: {doneTasks}</p>
-                <p>No Done: {noDoneTasks}</p>
-                <p>Job/Occupied: {job_OccupiedTasks}</p>
-                <p>Total: {tasks.length}</p>
-            </div> */}
+            <TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <span className='font-bold text-2xl'>
+                            {/* {stateEmoji[getMostRepeatedState(tasksState)]} */}{date} (Today)
+                        </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <div className='flex flex-col gap-2 items-center text-2xl'>
+                            <p>Spiritual{/* 📖🙏⚔🛡✝ */}: {getTotalTasksByType(tasksState, "spiritual")}</p>
+                            <p>Important{/* 💻💪🦵😎💡 */}: {getTotalTasksByType(tasksState, "spiritual")}</p>
+                            <p>Normal{/* 💻💪🦵😎💡 */}: {getTotalTasksByType(tasksState, "normal")}</p>
+                            <p>Total: {doneTasks} {noDoneTasks} {job_OccupiedTasks}</p>
+                        </div>
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">

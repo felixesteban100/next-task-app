@@ -41,7 +41,9 @@ export default function Navbar() {
             </Link>
             <div className="flex gap-2 items-center">
                 <SignedOut>
-                    <SignInButton />
+                    <Button asChild>
+                        <SignInButton />
+                    </Button>
                 </SignedOut>
                 <SignedIn>
                     {links.map(link => {
@@ -62,7 +64,7 @@ export default function Navbar() {
                             </TooltipProvider>
                         )
                     })}
-                    <UserButton />
+                    <UserButton appearance={{ elements: { userButtonAvatarBox: { height: "35px", width: "35px" } } }} />
                 </SignedIn>
                 <ModeToggle />
             </div>
