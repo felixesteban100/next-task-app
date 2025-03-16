@@ -1,11 +1,11 @@
 import Tasks from "@/components/TaskToEdit";
 import { collectionTask } from "@/db/mongodb/mongodb";
 import { getTodaysDate } from "@/lib/utils";
-
-// add auth to the app (clerk)
-// disable cache for all pages
+import { connection } from "next/server";
 
 export default async function Home() {
+  connection()
+
   const today = getTodaysDate()
   const ToDayInfo = await collectionTask.findOne({ date: today })
 

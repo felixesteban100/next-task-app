@@ -6,7 +6,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { classNamesState, doneInWhichWay, stateEmoji } from '@/constants'
-import { getMostRepeatedState } from '@/lib/utils'
+import { getMostRepeatedState, getTodaysDate } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/tooltip"
 
 export default async function page() {
+    const today = getTodaysDate()
     const allDaysInfo = await collectionTask.find().sort({ date: -1 }).toArray()
 
     if (!allDaysInfo) return <p>No days on track</p>
@@ -49,7 +50,7 @@ export default async function page() {
                     <div key={c._id.toString() + c.date} className='flex flex-row justify-center items-start'>
                         <AccordionItem className='flex flex-col items-center gap-2' value={c.date}>
                             <AccordionTrigger className='font-bold text-2xl' >
-                                {c.date} {doneInWhichWay[getMostRepeatedState(c.tasks)]}
+                                {c.date} {c.date == today ? "🙏Fear, ❤love and 🙌glorify God today" : doneInWhichWay[getMostRepeatedState(c.tasks)]}
                             </AccordionTrigger>
                             <AccordionContent>
                                 {c.tasks.reverse().map((task, taskIndex) => {
@@ -62,7 +63,7 @@ export default async function page() {
                                 })}
                             </AccordionContent>
                         </AccordionItem>
-                        {c.tasks.some(c => c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") === true ?
+                        {c.date == today ? null : c.tasks.some(c => c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") === true ?
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger className='font-bold text-2xl mt-4'>😞🔥✝️</TooltipTrigger>
