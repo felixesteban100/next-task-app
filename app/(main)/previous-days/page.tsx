@@ -15,8 +15,11 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { connection } from "next/server";
 
 export default async function page() {
+    connection()
+
     const today = getTodaysDate()
     const allDaysInfo = await collectionTask.find().sort({ date: -1 }).toArray()
 
