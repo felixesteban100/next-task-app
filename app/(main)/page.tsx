@@ -1,4 +1,9 @@
+import Simple from "@/components/Rive";
 
 export default function page() {
-    return null
+    return (
+        <div>
+            <Simple />
+        </div>
+    )
 }
