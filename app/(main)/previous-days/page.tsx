@@ -32,7 +32,7 @@ export default async function page() {
     const jobOccupiedDays = allDaysMostRepeated.filter(day => day === "job/occupied").length
 
     function calculatePercentage(part: number) {
-        return (part / allDaysInfo.length) * 100;
+        return ((part / allDaysInfo.length) * 100).toFixed(2);
     }
 
     return (
