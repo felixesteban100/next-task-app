@@ -90,12 +90,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 am"
 },
-{
+/* {
     "name": "Data structures: read and record audio",
     "type": "normal",
     "state": "no done",
     "time": "8:40 am"
-},
+}, */
 
 
 
@@ -143,12 +143,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "9:00 am"
 },
-{
+/* {
     "name": "Neck exercises",
     "type": "normal",
     "state": "no done",
     "time": "10:10 am"
-},
+}, */
 {
     "name": "Practice Hard riddle TedEd/MindYourDecisions/Brilliant",
     "type": "normal",
@@ -167,13 +167,18 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "10:35 am"
 },
-{
+/* {
     "name": "Rubik's cubes 5x5 / games",
     "type": "normal",
     "state": "no done",
     "time": "10:40 am"
+}, */
+{
+    "name": "Rubik's cubes 5x5 / 4x4",
+    "type": "normal",
+    "state": "no done",
+    "time": "10:40 am"
 },
-
 
 
 
@@ -218,12 +223,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "10:50 am"
 },
-{
+/* {
     "name": "Data structures: read and record audio",
     "type": "normal",
     "state": "no done",
     "time": "11:00 am"
-},
+}, */
 {
     "name": "Software development / code projects",
     "type": "important",
@@ -287,7 +292,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "12:20 pm"
 },
-{
+/* {
     "name": "Rubik's cubes 4x4 / games",
     "type": "normal",
     "state": "no done",
@@ -310,6 +315,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "type": "normal",
     "state": "no done",
     "time": "1:00 pm"
+}, */
+{
+    "name": "Work on a side hustle",
+    "type": "important",
+    "state": "no done",
+    "time": "12:30 pm"
 },
 
 
@@ -357,12 +368,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "1:10 pm"
 },
 {
-    "name": "REPLACE THIS WITH SOMETHING",
+    "name": "Nek exercises",
     "type": "normal",
     "state": "no done",
     "time": "1:20 pm"
 },
-{
+/* {
     "name": "Play marvel snap",
     "type": "normal",
     "state": "no done",
@@ -373,7 +384,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "type": "normal",
     "state": "no done",
     "time": "2:30 pm"
-},
+}, */
 
 
 
@@ -419,12 +430,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "3:00 pm"
 },
-{
+/* {
     "name": "Workout to sweat (if injured job or knee exercise counts)",
     "type": "normal",
     "state": "no done",
     "time": "3:10 pm"
-},
+}, */
 {
     "name": "Record yourself imitating a manly voice (10 min)",
     "type": "normal",
@@ -489,17 +500,17 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "4:10 pm"
 },
 {
-    "name": "Learn or practice one card trick",
+    "name": "Learn or practice one card trick 🃏",
     "type": "normal",
     "state": "no done",
     "time": "4:20 pm"
 },
-{
+/* {
     "name": "Do something pending from the To Do list below",
     "type": "normal",
     "state": "no done",
     "time": "4:30 pm"
-},
+}, */
 {
     "name": "Learn a new english word",
     "type": "normal",
@@ -552,7 +563,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "5:00 pm"
 },
 {
-    "name": "REPLACE THIS WITH SOMETHING",
+    "name": "Back exercises",
     "type": "normal",
     "state": "no done",
     "time": "5:10 pm"
@@ -614,24 +625,24 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "6:40 pm"
 },
-{
+/* {
     "name": "Solve problem from advent of code / leetcode / brilliant",
     "type": "normal",
     "state": "no done",
     "time": "6:50 pm"
-},
+}, */
 {
     "name": "Family time",
     "type": "normal",
     "state": "no done",
     "time": "7:10 pm"
 },
-{
+/* {
     "name": "Get all mobile devices out of the bedroom",
     "type": "normal",
     "state": "no done",
     "time": "8:00 pm"
-},
+}, */
 {
     "name": "Prayer time with family",
     "type": "normal",
@@ -683,12 +694,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
-{
+/* {
     "name": "REPLACE THIS WITH SOMETHING",
     "type": "normal",
     "state": "no done",
     "time": "8:40 pm"
-},
+}, */
 {
     "name": "Brush teeth",
     "type": "normal",
@@ -701,18 +712,25 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "9:10 pm"
 },
-{
+/* {
     "name": "Put the clock and turn off the TV",
     "type": "important",
     "state": "no done",
     "time": "10:00 pm"
-},
-{
+}, */
+/* {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)",
     "type": "spiritual",
     "state": "no done",
     "time": "10:00 pm"
-}]
+} */
+{
+    "name": "Are you going to honor God, love your family and invest in your future?",
+    "type": "spiritual",
+    "state": "no done",
+    "time": "10:00 pm"
+}
+]
 
 export const TIMES = [
     "6:00 am",

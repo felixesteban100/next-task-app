@@ -32,6 +32,29 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
+import { useState } from "react"
+
+const loadingStates = [
+    {
+        text: "Client Sends Data",
+    },
+    {
+        text: "Next.js API Route Handles Request",
+    },
+    {
+        text: "Database Connection is Established",
+    },
+    {
+        text: "Data is Mapped to a MongoDB Schema",
+    },
+    {
+        text: "Data is Inserted into MongoDB",
+    },
+    {
+        text: "Response is Sent Back to the Client",
+    }
+];
 
 export type DailyTaskAndDetails = {
     tasks: Task[],
@@ -60,6 +83,8 @@ type FormSchemaType = z.infer<typeof formSchema>;
 
 
 export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }) {
+    const [loading, setLoading] = useState(false);
+
     const { tasks, date } = dayInfo
 
     const form = useForm<FormSchemaType>({
@@ -79,31 +104,30 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
     const formTasksChanged = form.formState.isDirty && (JSON.stringify(tasks) !== JSON.stringify(tasksState))
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        if (!formTasksChanged) {
-            toast.info("Didn't change anything.", {
-                description: date,
-            })
-            return
-        }
+        setLoading(true)
 
         const result = await saveTasksOfCurrentDate(values.date, values.tasks)
-
         form.reset(values);
 
-        if (result === true) {
-            toast.success("Tasks have been saved.", {
-                description: date,
-            })
-        } else {
-            toast.error("Tasks didn't save.", {
-                description: date,
-            })
-        }
+        setTimeout(() => {
+            setLoading(false)
 
+            if (result === true) {
+                toast.success("Tasks have been saved.", {
+                    description: date,
+                })
+            } else {
+                toast.error("Tasks didn't save.", {
+                    description: date,
+                })
+            }
+        }, 2000 * loadingStates.length);
     }
 
     return (
         <div className='flex flex-col gap-7 items-center mb-10 w-full'>
+            <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={2000} loop={false} callbackAfterLoading={() => setLoading(false)} />
+
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>

@@ -1,32 +1,32 @@
 import { AnimatedTestimonials } from "@/components/acernity-ui/animated-testimonials";
 
 export function AnimatedTestimonialsDemo() {
-    const testimonialsGod = [
-        {
-            focusTheme: "God",
-            bibleVerse: "Matthew 5:8 – 'Blessed are the pure in heart, for they shall see God.'",
-            quote: "Lust dims my love for God; I will guard my heart and honor Him.",
-            src: "https://www.dbackdrop.com/cdn/shop/products/D1050-1.jpg?v=1673495873",
-        },
-        {
-            focusTheme: "God",
-            bibleVerse: "Colossians 3:2 – 'Set your minds on things that are above, not on things that are on earth.'",
-            quote: "My mind belongs to God, not to the corruption of the world.",
-            src: "https://t3.ftcdn.net/jpg/05/54/39/50/360_F_554395094_D4zOhvLOkvVt5OaWq8dUhqcHDDS87ltG.jpg",
-        },
-        {
-            focusTheme: "God",
-            bibleVerse: "Romans 12:1 – 'I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.'",
-            quote: "Every moment of purity is an act of worship to God.",
-            src: "https://t3.ftcdn.net/jpg/01/94/11/30/360_F_194113074_rZ1a8I9TrRY9LCWLdlyvl2UiKlqOalPH.jpg",
-        },
-        {
-            focusTheme: "God",
-            bibleVerse: "2 Timothy 2:22 – 'So flee youthful passions and pursue righteousness, faith, love, and peace, along with those who call on the Lord from a pure heart.'",
-            quote: "I will not fight temptation; I will flee from it.",
-            src: "https://historyuk.s3.eu-west-2.amazonaws.com/s3fs-public/2023-03/shutterstock_1909472887-min.jpg",
-        }
-    ];
+    // const testimonialsGod = [
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "Matthew 5:8 – 'Blessed are the pure in heart, for they shall see God.'",
+    //         quote: "Lust dims my love for God; I will guard my heart and honor Him.",
+    //         src: "https://www.dbackdrop.com/cdn/shop/products/D1050-1.jpg?v=1673495873",
+    //     },
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "Colossians 3:2 – 'Set your minds on things that are above, not on things that are on earth.'",
+    //         quote: "My mind belongs to God, not to the corruption of the world.",
+    //         src: "https://t3.ftcdn.net/jpg/05/54/39/50/360_F_554395094_D4zOhvLOkvVt5OaWq8dUhqcHDDS87ltG.jpg",
+    //     },
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "Romans 12:1 – 'I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.'",
+    //         quote: "Every moment of purity is an act of worship to God.",
+    //         src: "https://t3.ftcdn.net/jpg/01/94/11/30/360_F_194113074_rZ1a8I9TrRY9LCWLdlyvl2UiKlqOalPH.jpg",
+    //     },
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "2 Timothy 2:22 – 'So flee youthful passions and pursue righteousness, faith, love, and peace, along with those who call on the Lord from a pure heart.'",
+    //         quote: "I will not fight temptation; I will flee from it.",
+    //         src: "https://historyuk.s3.eu-west-2.amazonaws.com/s3fs-public/2023-03/shutterstock_1909472887-min.jpg",
+    //     }
+    // ];
 
     const testimonialsFamily = [
         {
@@ -91,7 +91,7 @@ export function AnimatedTestimonialsDemo() {
 
     return (
         <div className="flex flex-col justify-start items-start w-full gap-2">
-            <AnimatedTestimonials indexTestimonial={1} testimonials={testimonialsGod} autoplay={true} />
+            {/* <AnimatedTestimonials indexTestimonial={1} testimonials={testimonialsGod} autoplay={true} /> */}
             <AnimatedTestimonials indexTestimonial={2} testimonials={testimonialsFamily} autoplay={true} />
             <AnimatedTestimonials indexTestimonial={3} testimonials={testimonialsFuture} autoplay={true} />
         </div>
