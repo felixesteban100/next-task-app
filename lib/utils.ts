@@ -49,6 +49,5 @@ export function getMostRepeatedState(tasks: Task[]) {
 
 export function getTotalTasksByType(tasks: Task[], type: TaskTypes) {
   const tasksByType = tasks.filter(c => c.type === type)
-  console.log("tasksByType", type, tasksByType)
   return `✅${tasksByType.filter(c => c.state === "done").length} ❌${tasksByType.filter(c => c.state === "no done").length} ☑${tasksByType.filter(c => c.state === "job/occupied").length}` /* + ` / ${tasksByType.length}` */
 }
