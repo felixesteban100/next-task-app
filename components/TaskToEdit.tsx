@@ -18,7 +18,7 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
+    // FormLabel,
     FormMessage,
 } from "@/components/ui/form"
 import { saveTasksOfCurrentDate } from "@/server/actions"
@@ -37,9 +37,10 @@ import { useState } from "react"
 
 const loadingStates = [
     {
-        text: "Client Sends Data",
+        // text: "Client Sends Data",
+        text: "Client Sends Data to server",
     },
-    {
+    /* {
         text: "Next.js API Route Handles Request",
     },
     {
@@ -47,12 +48,13 @@ const loadingStates = [
     },
     {
         text: "Data is Mapped to a MongoDB Schema",
+    }, */
+    {
+        // text: "Data is Inserted into MongoDB",
+        text: "Data is inserted from server into database ",
     },
     {
-        text: "Data is Inserted into MongoDB",
-    },
-    {
-        text: "Response is Sent Back to the Client",
+        text: "Response is sent back from the server to the client",
     }
 ];
 
@@ -138,7 +140,7 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
                     <TooltipContent>
                         <div className='flex flex-col gap-2 items-center text-2xl'>
                             <p>Spiritual{/* 📖🙏⚔🛡✝ */}: {getTotalTasksByType(tasksState, "spiritual")}</p>
-                            <p>Important{/* 💻💪🦵😎💡 */}: {getTotalTasksByType(tasksState, "spiritual")}</p>
+                            <p>Important{/* 💻💪🦵😎💡 */}: {getTotalTasksByType(tasksState, "important")}</p>
                             <p>Normal{/* 💻💪🦵😎💡 */}: {getTotalTasksByType(tasksState, "normal")}</p>
                             <p>Total: {doneTasks} {noDoneTasks} {job_OccupiedTasks}</p>
                         </div>
@@ -156,7 +158,7 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
                         name="tasks"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-xl">Tasks:</FormLabel>
+                                {/* <FormLabel className="text-xl">Tasks:</FormLabel> */}
                                 <FormMessage />
                                 <FormControl>
                                     <div>
@@ -165,7 +167,7 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
                                                 {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
                                                 <div className="flex gap-2 items-center justify-start">
                                                     <ToggleGroup
-                                                        variant={"outline"}
+                                                        variant={"default"}
                                                         onValueChange={(e) => {
                                                             if (!e) return; // Early exit if empty
                                                             const [taskToEditName, newValue] = e.split("->");
@@ -176,9 +178,11 @@ export default function TaskToEdit({ dayInfo }: { dayInfo: DailyTaskAndDetails }
                                                             field.onChange(updatedItems); // ✅ Pass the new array directly
                                                         }}
                                                         type="single"
+                                                        rovingFocus={true}
                                                         defaultValue={task.state}
+
                                                     >
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->done`} className={`${task.state !== "done" ? "grayscale-100" : ""}`}>
+                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->done`} className={`${task.state !== "done" ? "grayscale-100" : ""}`} >
                                                             ✅
                                                         </ToggleGroupItem>
                                                         <ToggleGroupItem value={`${task.name}_${task.time}_${index}->no done`} className={`${task.state !== "no done" ? "grayscale-100" : ""}`}>
