@@ -1,5 +1,4 @@
 import { AnimatedTestimonialsDemo } from "@/components/animated-testimonials";
-// import { MultiStepLoaderDemo } from "@/components/MultiStepLoaderDemo";
 import Tasks from "@/components/TaskToEdit";
 import { collectionTask } from "@/db/mongodb/mongodb";
 import { getTodaysDate } from "@/lib/utils";
@@ -36,7 +35,6 @@ export default async function Home() {
         <p className="font-semibold text-2xl">{today} tasks were not added the database</p>
       }
       {isNightTime ? <AnimatedTestimonialsDemo /> : null}
-      {/* <MultiStepLoaderDemo /> */}
     </>
   );
 }

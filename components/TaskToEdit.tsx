@@ -1,9 +1,9 @@
 "use client"
 
-import {
-    ToggleGroup,
-    ToggleGroupItem,
-} from "@/components/ui/toggle-group"
+// import {
+//     ToggleGroup,
+//     ToggleGroupItem,
+// } from "@/components/ui/toggle-group"
 import { cn, filterFutureTimes, getTotalTasksByType } from '@/lib/utils'
 import { toast } from "sonner"
 
@@ -65,6 +65,7 @@ const formSchema = z.object({
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
+const durationLoader = 1000
 
 export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskAndDetails, hourAdded: string }) {
     const [loading, setLoading] = useState(false);
@@ -105,7 +106,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                     description: date,
                 })
             }
-        }, 2000 * loadingStates.length);
+        }, durationLoader * loadingStates.length);
     }
 
     function updateTask(
@@ -132,7 +133,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
     return (
         <div className='flex flex-col gap-7 items-center mb-10 w-full'>
-            <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={2000} loop={false} callbackAfterLoading={() => setLoading(false)} />
+            <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
 
             <TooltipProvider>
                 <Tooltip>
@@ -179,7 +180,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                             <div key={task.name + task.time + index} >
                                                 {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
                                                 <div className="flex gap-2 items-center justify-start">
-                                                    <ToggleGroup
+                                                    {/* <ToggleGroup
                                                         variant={"default"}
                                                         onValueChange={(e) => updateTask(e, task, index, "state", field.onChange)}
                                                         type="single"
@@ -192,10 +193,23 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                                         <ToggleGroupItem value={`${task.name}_${task.time}_${index}->no done`} className={`${task.state !== "no done" ? "grayscale-100" : ""}`}>
                                                             ❌
                                                         </ToggleGroupItem>
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->job/occupied`} className={`${task.state !== "job/occupied" ? "grayscale-100" : ""}`} /* disabled={task.type === "spiritual"} */>
+                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->job/occupied`} className={`${task.state !== "job/occupied" ? "grayscale-100" : ""}`}>
                                                             ☑️
                                                         </ToggleGroupItem>
-                                                    </ToggleGroup>
+                                                    </ToggleGroup> */}
+                                                    {Object.entries(stateEmoji).map(([state, emoji]) => (
+                                                        <Button
+                                                            key={index + state}
+                                                            type="button"
+                                                            size="icon"
+                                                            variant={"ghost"}
+                                                            className={`${task.state !== state ? "grayscale-100" : ""}`}
+                                                            onClick={() => updateTask(`${task.name}_${task.time}_${index}->${state}`, task, index, "state", field.onChange)}
+                                                        >
+                                                            {emoji}
+                                                        </Button>
+                                                    ))}
+
                                                     <p
                                                         className={cn(classNamesType[task.type], classNamesState[task.state])}
                                                     >

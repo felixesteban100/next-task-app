@@ -35,12 +35,12 @@ const LoaderCore = ({
                             )}
                             {index <= value && (
                                 <CheckCircle2Icon
-                                    className="stroke-primary"
+                                    className="fill-primary stroke-primary-foreground"
                                 />
                             )}
                         </div>
                         <span
-                            className={`${value === index && "text-primary opacity-100"}`}
+                            className={`${value === index && "text-primary opacity-100 font-semibold"}`}
                         >
                             {loadingState.text}
                         </span>

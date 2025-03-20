@@ -2,7 +2,7 @@ import { Task } from "@/components/TaskToEdit";
 
 export const classNamesType = {
     "normal": "",
-    "important": "underline",
+    "important": "underline font-semibold",
     "spiritual": "bg-secondary rounded-md p-1 text-blue-500",
 }
 
