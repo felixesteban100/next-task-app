@@ -32,6 +32,9 @@ export default async function page() {
     const noDoneDays = allDaysMostRepeated.filter(day => day === "no done").length
     const jobOccupiedDays = allDaysMostRepeated.filter(day => day === "job/occupied").length
 
+    const daysWithoutLust = allDaysInfo.filter(c => c.tasks[c.tasks.length - 1].state === "done").length
+    const daysWithLust = allDaysInfo.filter(c => c.tasks[c.tasks.length - 1].state === "no done").length
+
     function calculatePercentage(part: number) {
         return ((part / allDaysInfo.length) * 100).toFixed(2);
     }
@@ -48,30 +51,59 @@ export default async function page() {
                     <Separator orientation='vertical' className='bg-foreground' decorative />
                     <p>☑️{jobOccupiedDays} ({calculatePercentage(jobOccupiedDays)}%)</p>
                 </div>
+                <Separator orientation='horizontal' className='bg-foreground' />
+                <div className='flex gap-2 h-7'>
+                    <p><TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger className='font-bold text-2xl'>😞🔥✝️</TooltipTrigger>
+                            <TooltipContent>
+                                <ul>
+                                    <li>😞 Regret and sorrow for the sin.</li>
+                                    <li>🔥 The struggle and temptation of lust.</li>
+                                    <li>✝️ Turning to Christ for forgiveness, holiness, and righteousness.</li>
+                                </ul>
+                                <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>{daysWithLust} ({calculatePercentage(daysWithLust)}%)</p>
+                    <Separator orientation='vertical' className='bg-foreground' decorative />
+                    <p><TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger className='font-bold text-2xl'>😊❄️✝️</TooltipTrigger>
+                            <TooltipContent>
+                                <ul>
+                                    <li>😊 Joy and peace in victory over sin.</li>
+                                    <li>❄️ Purity and self-control through God&apos;s strength.</li>
+                                    <li>✝️ Walking in faith and righteousness with Christ.</li>
+                                </ul>
+                                <p className='font-bold'>Keep fighting the good fight!</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>{daysWithoutLust} ({calculatePercentage(daysWithoutLust)}%)</p>
+                </div>
             </div>
             <Accordion type="single" collapsible className="w-[65%]">
-                {allDaysInfo.map((c, cIndex) => {
-                    const documentId = new ObjectId(c._id); // Example _id
+                {allDaysInfo.map((day, cIndex) => {
+                    const documentId = new ObjectId(day._id); // Example _id
                     const timestamp = documentId.getTimestamp(); // Get the creation timestamp
 
-                    // Format the time as HH:MM:SS
-                    const hours = timestamp.getHours().toString().padStart(2, "0");
-                    const minutes = timestamp.getMinutes().toString().padStart(2, "0");
-                    const seconds = timestamp.getSeconds().toString().padStart(2, "0");
-
-                    const period = parseInt(hours) >= 12 ? "PM" : "AM"; // Determine AM or PM
-
-                    const formattedTime = `${hours}:${minutes}:${seconds} ${period}`;
+                    const formattedTime = new Intl.DateTimeFormat("en-US", {
+                        timeZone: "America/New_York",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true,
+                    }).format(timestamp);
 
                     return (
-                        <div key={c._id.toString() + c.date} className='flex flex-row justify-center items-start'>
-                            <AccordionItem className='flex flex-col items-center gap-2' value={c.date}>
+                        <div key={day._id.toString() + day.date} className='flex flex-row justify-center items-start'>
+                            <AccordionItem className='flex flex-col items-center gap-2' value={day.date}>
                                 <AccordionTrigger className='font-bold text-2xl' >
-                                    {c.date} {c.date == today ? "🙏Fear, ❤love and 🙌glorify God today" : doneInWhichWay[getMostRepeatedState(c.tasks)]}
+                                    {day.date} {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>
-                                    {c.tasks.reverse().map((task, taskIndex) => {
+                                    {day.tasks.reverse().map((task, taskIndex) => {
                                         return (
                                             <div key={cIndex + task.name + task.time + taskIndex}>
                                                 {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
@@ -81,7 +113,8 @@ export default async function page() {
                                     })}
                                 </AccordionContent>
                             </AccordionItem>
-                            {c.date == today ? null : c.tasks.some(c => c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") === true ?
+                            {/* (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" || c.name === "Are you going to honor God, love your family and invest in your future?") */}
+                            {day.date == today ? null : day.tasks.some((c, index) => index === 0 && c.state === "no done") === true ?
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger className='font-bold text-2xl mt-4'>😞🔥✝️</TooltipTrigger>

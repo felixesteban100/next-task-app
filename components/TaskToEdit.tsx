@@ -145,9 +145,9 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                     <TooltipContent>
                         <p>Added at: {hourAdded}</p>
                         <div className='flex flex-col gap-2 items-center text-2xl'>
-                            <p>Spiritual{/* 📖🙏⚔🛡✝ */}: {getTotalTasksByType(tasksState, "spiritual")}</p>
-                            <p>Important{/* 💻💪🦵😎💡 */}: {getTotalTasksByType(tasksState, "important")}</p>
-                            <p>Normal{/* 💻💪🦵😎💡 */}: {getTotalTasksByType(tasksState, "normal")}</p>
+                            <p>Spiritual: {getTotalTasksByType(tasksState, "spiritual")}</p>
+                            <p>Important: {getTotalTasksByType(tasksState, "important")}</p>
+                            <p>Normal: {getTotalTasksByType(tasksState, "normal")}</p>
                             <p>Total: {doneTasks} {noDoneTasks} {job_OccupiedTasks}</p>
                         </div>
                     </TooltipContent>
@@ -180,23 +180,6 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                             <div key={task.name + task.time + index} >
                                                 {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
                                                 <div className="flex gap-2 items-center justify-start">
-                                                    {/* <ToggleGroup
-                                                        variant={"default"}
-                                                        onValueChange={(e) => updateTask(e, task, index, "state", field.onChange)}
-                                                        type="single"
-                                                        rovingFocus={true}
-                                                        defaultValue={task.state}
-                                                    >
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->done`} className={`${task.state !== "done" ? "grayscale-100" : ""}`} >
-                                                            ✅
-                                                        </ToggleGroupItem>
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->no done`} className={`${task.state !== "no done" ? "grayscale-100" : ""}`}>
-                                                            ❌
-                                                        </ToggleGroupItem>
-                                                        <ToggleGroupItem value={`${task.name}_${task.time}_${index}->job/occupied`} className={`${task.state !== "job/occupied" ? "grayscale-100" : ""}`}>
-                                                            ☑️
-                                                        </ToggleGroupItem>
-                                                    </ToggleGroup> */}
                                                     {Object.entries(stateEmoji).map(([state, emoji]) => (
                                                         <Button
                                                             key={index + state}

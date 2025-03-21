@@ -18,14 +18,13 @@ export default async function Home() {
   const documentId = new ObjectId(ToDayInfo?._id); // Example _id
   const timestamp = documentId.getTimestamp(); // Get the creation timestamp
 
-  // Format the time as HH:MM:SS
-  const hours = timestamp.getHours().toString().padStart(2, "0");
-  const minutes = timestamp.getMinutes().toString().padStart(2, "0");
-  const seconds = timestamp.getSeconds().toString().padStart(2, "0");
-
-  const period = parseInt(hours) >= 12 ? "PM" : "AM"; // Determine AM or PM
-
-  const formattedTime = `${hours}:${minutes}:${seconds} ${period}`;
+  const formattedTime = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  }).format(timestamp);
 
   return (
     <>
