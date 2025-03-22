@@ -89,8 +89,14 @@ export function AnimatedTestimonialsDemo() {
 
     ]
 
+    // const now = new Date();
+    // const hoursNow = now.getHours();
+    // const isNightTime = hoursNow >= 21 || hoursNow < 6;
+
+    // if (!isNightTime) return null;
+
     return (
-        <div className="flex flex-col justify-start items-start w-full gap-2">
+        <div className="flex flex-col justify-start items-start w-full gap-2 pb-10">
             {/* <AnimatedTestimonials indexTestimonial={1} testimonials={testimonialsGod} autoplay={true} /> */}
             <AnimatedTestimonials indexTestimonial={2} testimonials={testimonialsFamily} autoplay={true} />
             <AnimatedTestimonials indexTestimonial={3} testimonials={testimonialsFuture} autoplay={true} />
