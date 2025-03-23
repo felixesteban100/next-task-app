@@ -1,6 +1,6 @@
 "use client";
 
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+// import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
@@ -26,9 +26,9 @@ export const AnimatedTestimonials = ({
         setActive((prev) => (prev + 1) % testimonials.length);
     }, [testimonials.length]);
 
-    const handlePrev = useCallback(() => {
-        setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    }, [testimonials.length]);
+    // const handlePrev = useCallback(() => {
+    //     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    // }, [testimonials.length]);
 
     const isActive = (index: number) => {
         return index === active;
