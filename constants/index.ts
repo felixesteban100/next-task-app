@@ -437,7 +437,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "3:10 pm"
 }, */
 {
-    "name": "Record yourself imitating a manly voice (10 min)",
+    "name": "Record yourself imitating a manly voice",
     "type": "normal",
     "state": "no done",
     "time": "3:40 pm"
