@@ -23,7 +23,7 @@ import {
 import { saveTasksOfCurrentDate } from "@/server/actions"
 import { classNamesState, classNamesType, stateEmoji } from "@/constants"
 import { Separator } from "./ui/separator"
-import { SaveAll } from "lucide-react"
+import { Loader2, SaveAll } from "lucide-react"
 
 import {
     Tooltip,
@@ -157,17 +157,26 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">
+
                     <Button
                         id="saveButton"
                         disabled={form.formState.isSubmitting || !formTasksChanged}
-                        className={`group disabled:grayscale-25 w-fit p-7 text-xl fixed bottom-10 right-10`}
+                        className={`group disabled:grayscale-25 w-fit p-7 text-xl fixed bottom-10 left-[65rem] ${form.formState.isSubmitting || !formTasksChanged ? "" : "animate-[pulse_2s_infinite]"}`}
                         type="submit"
                     >
                         <p
                             className={`group-enabled:animate-bounce flex gap-2 items-center`}
                         >
-                            {form.formState.isSubmitting ? "Saving..." : <>Save progress<SaveAll size={80} /></>}
+                            {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
                         </p>
+                        {/* {form.formState.isSubmitting || !formTasksChanged ? null :
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-500/40 to-transparent"
+                                    initial={{ x: "-100%" }}
+                                    animate={{ x: "100%" }}
+                                    transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                                />
+                            } */}
                     </Button>
                     <FormField
                         control={form.control}

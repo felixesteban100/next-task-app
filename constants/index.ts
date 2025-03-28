@@ -368,7 +368,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "1:10 pm"
 },
 {
-    "name": "Nek exercises",
+    "name": "Neck exercises",
     "type": "normal",
     "state": "no done",
     "time": "1:20 pm"
