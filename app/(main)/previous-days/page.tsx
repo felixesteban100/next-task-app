@@ -32,11 +32,16 @@ export default async function page() {
     const noDoneDays = allDaysMostRepeated.filter(day => day === "no done").length
     const jobOccupiedDays = allDaysMostRepeated.filter(day => day === "job/occupied").length
 
-    const daysWithoutLust = allDaysInfo.filter(c => c.tasks[c.tasks.length - 1].state === "done").length
-    const daysWithLust = allDaysInfo.filter(c => c.tasks[c.tasks.length - 1].state === "no done").length
+    const daysWithOutLastOne = allDaysInfo.slice(0, -1)
+    const daysWithoutLust = daysWithOutLastOne.filter(c => c.tasks[c.tasks.length - 1].state === "done").length
+    const daysWithLust = daysWithOutLastOne.filter(c => c.tasks[c.tasks.length - 1].state === "no done").length
 
     function calculatePercentage(part: number) {
-        return ((part / allDaysInfo.length) * 100).toFixed(2);
+        return ((part / allDaysMostRepeated.length) * 100).toFixed(2);
+    }
+
+    function calculatePercentageWithoutLastOne(part: number) {
+        return ((part / daysWithOutLastOne.length) * 100).toFixed(2);
     }
 
     return (
@@ -65,7 +70,7 @@ export default async function page() {
                                 <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
                             </TooltipContent>
                         </Tooltip>
-                    </TooltipProvider>{daysWithLust} ({calculatePercentage(daysWithLust)}%)</p>
+                    </TooltipProvider>{daysWithLust} ({calculatePercentageWithoutLastOne(daysWithLust)}%)</p>
                     <Separator orientation='vertical' className='bg-foreground' decorative />
                     <p><TooltipProvider>
                         <Tooltip>
@@ -79,7 +84,7 @@ export default async function page() {
                                 <p className='font-bold'>Keep fighting the good fight!</p>
                             </TooltipContent>
                         </Tooltip>
-                    </TooltipProvider>{daysWithoutLust} ({calculatePercentage(daysWithoutLust)}%)</p>
+                    </TooltipProvider>{daysWithoutLust} ({calculatePercentageWithoutLastOne(daysWithoutLust)}%)</p>
                 </div>
             </div>
             <Accordion type="single" collapsible className="w-[65%]">
