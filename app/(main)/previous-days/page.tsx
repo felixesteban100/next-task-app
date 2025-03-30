@@ -30,7 +30,7 @@ export default async function page() {
 
     const doneDays = allDaysMostRepeated.filter(day => day === "done").length
     const noDoneDays = allDaysMostRepeated.filter(day => day === "no done").length
-    const jobOccupiedDays = allDaysMostRepeated.filter(day => day === "job/occupied").length
+    const occupiedDays = allDaysMostRepeated.filter(day => day === "occupied").length
 
     const daysWithOutLastOne = allDaysInfo.slice(1, allDaysInfo.length) // Exclude the last day to avoid bias in calculations
     const daysWithoutLust = daysWithOutLastOne.filter(c => c.tasks[c.tasks.length - 1].state === "done").length
@@ -54,7 +54,7 @@ export default async function page() {
                     <Separator orientation='vertical' className='bg-foreground' decorative />
                     <p>❌{noDoneDays} ({calculatePercentage(noDoneDays)}%)</p>
                     <Separator orientation='vertical' className='bg-foreground' decorative />
-                    <p>☑️{jobOccupiedDays} ({calculatePercentage(jobOccupiedDays)}%)</p>
+                    <p>☑️{occupiedDays} ({calculatePercentage(occupiedDays)}%)</p>
                 </div>
                 <Separator orientation='horizontal' className='bg-foreground' />
                 <div className='flex gap-2 h-7'>

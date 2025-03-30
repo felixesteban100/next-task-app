@@ -47,7 +47,7 @@ export type DailyTaskAndDetails = {
 }
 
 const TaskTypesSchema = z.enum(['normal', 'important', 'spiritual'])
-const TaskStatesSchema = z.enum(["done", "no done", "job/occupied"]);
+const TaskStatesSchema = z.enum(["done", "no done", "occupied"]);
 const TaskSchema = z.object({
     name: z.string(),
     type: TaskTypesSchema,
@@ -87,7 +87,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
     const doneTasks = `${stateEmoji["done"]}${tasksState.filter(c => c.state === "done").length}`
     const noDoneTasks = `${stateEmoji["no done"]}${tasksState.filter(c => c.state === "no done").length}`
-    const job_OccupiedTasks = `${stateEmoji["job/occupied"]}${tasksState.filter(c => c.state === "job/occupied").length}`
+    const occupiedTasks = `${stateEmoji["occupied"]}${tasksState.filter(c => c.state === "occupied").length}`
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true)
@@ -149,7 +149,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                             <p>Spiritual: {getTotalTasksByType(tasksState, "spiritual")}</p>
                             <p>Important: {getTotalTasksByType(tasksState, "important")}</p>
                             <p>Normal: {getTotalTasksByType(tasksState, "normal")}</p>
-                            <p>Total: {doneTasks} {noDoneTasks} {job_OccupiedTasks}</p>
+                            <p>Total: {doneTasks} {noDoneTasks} {occupiedTasks}</p>
                         </div>
                     </TooltipContent>
                 </Tooltip>

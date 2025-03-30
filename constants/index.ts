@@ -9,19 +9,19 @@ export const classNamesType = {
 export const classNamesState = {
     "done": "text-green-700 dark:text-green-300",
     "no done": "text-red-700 dark:text-red-300",
-    "job/occupied": "text-blue-700 dark:text-blue-300",
+    "occupied": "text-blue-700 dark:text-blue-300",
 }
 
 export const stateEmoji = {
     "done": "✅",
     "no done": "❌",
-    "job/occupied": "☑️"
+    "occupied": "☑️"
 }
 
 export const doneInWhichWay = {
     "done": "✅Well done, to God be the glory 🙌",
     "no done": "❌Bad done, stop please, fear the Lord 💔",
-    "job/occupied": "☑️Fairly done, to God be the glory 🙌",
+    "occupied": "☑️Fairly done, to God be the glory 🙌",
 }
 
 export const DEFAULT_TASKS: Task[] = [{
