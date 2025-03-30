@@ -32,7 +32,7 @@ export default async function page() {
     const noDoneDays = allDaysMostRepeated.filter(day => day === "no done").length
     const jobOccupiedDays = allDaysMostRepeated.filter(day => day === "job/occupied").length
 
-    const daysWithOutLastOne = allDaysInfo.slice(0, -1)
+    const daysWithOutLastOne = allDaysInfo.slice(1, allDaysInfo.length) // Exclude the last day to avoid bias in calculations
     const daysWithoutLust = daysWithOutLastOne.filter(c => c.tasks[c.tasks.length - 1].state === "done").length
     const daysWithLust = daysWithOutLastOne.filter(c => c.tasks[c.tasks.length - 1].state === "no done").length
 
@@ -58,33 +58,37 @@ export default async function page() {
                 </div>
                 <Separator orientation='horizontal' className='bg-foreground' />
                 <div className='flex gap-2 h-7'>
-                    <p><TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger className='font-bold text-2xl'>😞🔥✝️</TooltipTrigger>
-                            <TooltipContent>
-                                <ul>
-                                    <li>😞 Regret and sorrow for the sin.</li>
-                                    <li>🔥 The struggle and temptation of lust.</li>
-                                    <li>✝️ Turning to Christ for forgiveness, holiness, and righteousness.</li>
-                                </ul>
-                                <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>{daysWithLust} ({calculatePercentageWithoutLastOne(daysWithLust)}%)</p>
+                    <p>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger className='font-bold text-2xl'>😞🔥✝️</TooltipTrigger>
+                                <TooltipContent>
+                                    <ul>
+                                        <li>😞 Regret and sorrow for the sin.</li>
+                                        <li>🔥 The struggle and temptation of lust.</li>
+                                        <li>✝️ Turning to Christ for forgiveness, holiness, and righteousness.</li>
+                                    </ul>
+                                    <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>{daysWithLust} ({calculatePercentageWithoutLastOne(daysWithLust)}%)
+                    </p>
                     <Separator orientation='vertical' className='bg-foreground' decorative />
-                    <p><TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger className='font-bold text-2xl'>😊❄️✝️</TooltipTrigger>
-                            <TooltipContent>
-                                <ul>
-                                    <li>😊 Joy and peace in victory over sin.</li>
-                                    <li>❄️ Purity and self-control through God&apos;s strength.</li>
-                                    <li>✝️ Walking in faith and righteousness with Christ.</li>
-                                </ul>
-                                <p className='font-bold'>Keep fighting the good fight!</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>{daysWithoutLust} ({calculatePercentageWithoutLastOne(daysWithoutLust)}%)</p>
+                    <p>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger className='font-bold text-2xl'>😊❄️✝️</TooltipTrigger>
+                                <TooltipContent>
+                                    <ul>
+                                        <li>😊 Joy and peace in victory over sin.</li>
+                                        <li>❄️ Purity and self-control through God&apos;s strength.</li>
+                                        <li>✝️ Walking in faith and righteousness with Christ.</li>
+                                    </ul>
+                                    <p className='font-bold'>Keep fighting the good fight!</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>{daysWithoutLust} ({calculatePercentageWithoutLastOne(daysWithoutLust)}%)
+                    </p>
                 </div>
             </div>
             <Accordion type="single" collapsible className="w-[65%]">
@@ -108,7 +112,7 @@ export default async function page() {
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>
-                                    {day.tasks.reverse().map((task, taskIndex) => {
+                                    {day.tasks.slice().reverse().map((task, taskIndex) => {
                                         return (
                                             <div key={cIndex + task.name + task.time + taskIndex}>
                                                 {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
