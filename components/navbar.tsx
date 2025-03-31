@@ -1,7 +1,7 @@
 "use client"
 
 import { ModeToggle } from "@/components/mode-toggle"
-import { Calendar, History, Loader, PlusIcon } from "lucide-react"
+import { Calendar, Clock, History, Loader, PlusIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { SignInButton, useAuth, UserButton } from "@clerk/nextjs"
@@ -55,6 +55,11 @@ const links = [
         href: "/api/today",
         label: "Add today to the database",
         icon: <PlusIcon />
+    },
+    {
+        href: "/clock",
+        label: "Clock App",
+        icon: <Clock />
     },
 ]
 
@@ -117,6 +122,14 @@ export default function Navbar() {
         }, 5000); // Change text every 2 seconds
         return () => clearInterval(intervalId); // Cleanup interval on unmount
     }, []);
+
+    // if (pathname === "/clock") return (
+    //     <div className="w-full flex justify-end">
+    //         <Button size={"icon"} className="h-10" variant="ghost" asChild>
+    //             <Link href="/today"><X className="size-10" /></Link>
+    //         </Button>
+    //     </div>
+    // )
 
     return (
         <nav className='h-fit bg-secondary flex flex-row justify-between py-2 px-10 fixed top-0 w-screen z-50'>

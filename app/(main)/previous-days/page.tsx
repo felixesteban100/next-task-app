@@ -123,7 +123,7 @@ export default async function page() {
                                 </AccordionContent>
                             </AccordionItem>
                             {/* (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" || c.name === "Are you going to honor God, love your family and invest in your future?") */}
-                            {day.date == today ? null : day.tasks.some((c, index) => index === 0 && c.state === "no done") === true ?
+                            {day.date == today ? null : day.tasks.slice().reverse().some((c, index) => index === 0 && c.state === "no done") === true ?
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger className='font-bold text-2xl mt-4'>😞🔥✝️</TooltipTrigger>

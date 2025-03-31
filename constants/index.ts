@@ -67,7 +67,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "7:05 am"
 },
 {
-    "name": "Listen 3 christian music",
+    "name": "Listen to christian music",
     "type": "normal",
     "state": "no done",
     "time": "7:05 am"

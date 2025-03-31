@@ -1,32 +1,32 @@
 import { AnimatedTestimonials } from "@/components/acernity-ui/animated-testimonials";
 
 export function AnimatedTestimonialsDemo() {
-    // const testimonialsGod = [
-    //     {
-    //         focusTheme: "God",
-    //         bibleVerse: "Matthew 5:8 – 'Blessed are the pure in heart, for they shall see God.'",
-    //         quote: "Lust dims my love for God; I will guard my heart and honor Him.",
-    //         src: "https://www.dbackdrop.com/cdn/shop/products/D1050-1.jpg?v=1673495873",
-    //     },
-    //     {
-    //         focusTheme: "God",
-    //         bibleVerse: "Colossians 3:2 – 'Set your minds on things that are above, not on things that are on earth.'",
-    //         quote: "My mind belongs to God, not to the corruption of the world.",
-    //         src: "https://t3.ftcdn.net/jpg/05/54/39/50/360_F_554395094_D4zOhvLOkvVt5OaWq8dUhqcHDDS87ltG.jpg",
-    //     },
-    //     {
-    //         focusTheme: "God",
-    //         bibleVerse: "Romans 12:1 – 'I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.'",
-    //         quote: "Every moment of purity is an act of worship to God.",
-    //         src: "https://t3.ftcdn.net/jpg/01/94/11/30/360_F_194113074_rZ1a8I9TrRY9LCWLdlyvl2UiKlqOalPH.jpg",
-    //     },
-    //     {
-    //         focusTheme: "God",
-    //         bibleVerse: "2 Timothy 2:22 – 'So flee youthful passions and pursue righteousness, faith, love, and peace, along with those who call on the Lord from a pure heart.'",
-    //         quote: "I will not fight temptation; I will flee from it.",
-    //         src: "https://historyuk.s3.eu-west-2.amazonaws.com/s3fs-public/2023-03/shutterstock_1909472887-min.jpg",
-    //     }
-    // ];
+    const testimonialsGod = [
+        {
+            focusTheme: "God",
+            bibleVerse: "Matthew 5:8 – 'Blessed are the pure in heart, for they shall see God.'",
+            quote: "Lust dims my love for God; I will guard my heart and honor Him.",
+            src: "https://www.dbackdrop.com/cdn/shop/products/D1050-1.jpg?v=1673495873",
+        },
+        {
+            focusTheme: "God",
+            bibleVerse: "Colossians 3:2 – 'Set your minds on things that are above, not on things that are on earth.'",
+            quote: "My mind belongs to God, not to the corruption of the world.",
+            src: "https://t3.ftcdn.net/jpg/05/54/39/50/360_F_554395094_D4zOhvLOkvVt5OaWq8dUhqcHDDS87ltG.jpg",
+        },
+        {
+            focusTheme: "God",
+            bibleVerse: "Romans 12:1 – 'I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.'",
+            quote: "Every moment of purity is an act of worship to God.",
+            src: "https://t3.ftcdn.net/jpg/01/94/11/30/360_F_194113074_rZ1a8I9TrRY9LCWLdlyvl2UiKlqOalPH.jpg",
+        },
+        {
+            focusTheme: "God",
+            bibleVerse: "2 Timothy 2:22 – 'So flee youthful passions and pursue righteousness, faith, love, and peace, along with those who call on the Lord from a pure heart.'",
+            quote: "I will not fight temptation; I will flee from it.",
+            src: "https://historyuk.s3.eu-west-2.amazonaws.com/s3fs-public/2023-03/shutterstock_1909472887-min.jpg",
+        }
+    ];
 
     const testimonialsFamily = [
         {
@@ -55,39 +55,39 @@ export function AnimatedTestimonialsDemo() {
         }
     ]
 
-    const testimonialsFuture = [
-        {
-            focusTheme: "My Future",
-            bibleVerse: "Proverbs 14:12 – 'There is a way that seems right to a man, but its end is the way to death.'",
-            quote: "A moment of sin can lead to a lifetime of consequences.",
-            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/43680101_1145584718938408_7772744079556739072_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=WrE-qI17EHkQ7kNvgE_IjSP&_nc_oc=Adl1i3eZT36eyj8C5w1xORE19u9fDXOusXgUsbEEkIhU7e9Ok9RTDzZTd7pUiWBV3hFlhB_Ce8ioGnET2cLWmhWh&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=T3n_5azoUmQ3iGxlQPwgPQ&oh=00_AYHf2LIRckeAtb4-S13KxY60IVMTkgiXLvb2C7w9O_xNsg&oe=6802617F",
-        },
-        {
-            focusTheme: "My Future",
-            bibleVerse: "Romans 13:14 – 'But put on the Lord Jesus Christ, and make no provision for the flesh, to gratify its desires.'",
-            quote: "I will not feed my flesh; I will strengthen my spirit.",
-            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/44877100_1145487295614817_77590014426349568_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sU8cPF5N9X0Q7kNvgG1Ttdb&_nc_oc=Adk8094P7pFo-APB39_ZZ16AKK1en4l9r08BdAga9y09YpQ4L5uLiJYulSmo8ncXstRF4DesBP9ilctwmag3Xs46&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=L6UZWuHoEc68XPrgX8949A&oh=00_AYE4Rl_b3CNgi3RfcuXt96U759tX5SNQD4oRv_oS10lMew&oe=68025002",
-        },
-        {
-            focusTheme: "My Future",
-            bibleVerse: "Philippians 4:8 – 'Finally, brothers, whatever is true, whatever is honorable, whatever is just, whatever is pure, whatever is lovely, whatever is commendable, if there is any excellence, if there is anything worthy of praise, think about these things.'",
-            quote: "The battle is won or lost in the mind—I choose purity.",
-            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/71706824_1394218094075068_4242365233798053888_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=GcJOPgHmVowQ7kNvgGtT9TA&_nc_oc=Adlp4BRrlhMPda5muavYYMLjkSw048dkfwD8_6go1hym28lZo7hefsmb6bFo7Fyc05NbCM9o6gTWzCdWGGgON4nX&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=sMpKfvr84upGV4vRlyevrg&oh=00_AYF0bU_cLXNkW9-PDlTo1GqR-o0fHQuscV1yea0-PsWkfA&oe=6802547F",
-        },
-        {
-            focusTheme: "My Future",
-            bibleVerse: "James 1:12 – 'Blessed is the man who remains steadfast under trial, for when he has stood the test he will receive the crown of life, which God has promised to those who love him.'",
-            quote: "Victory over temptation brings eternal rewards.",
-            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/54435599_1244447309052148_3771102592944308224_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=KOWPXGEBrH0Q7kNvgF98zz3&_nc_oc=AdmkddbJKUbEWHmL3CwIL7lCvAMlccomabZXJidQcewrCblOznl5wUqPFaQ8w3IYul2TuBp-xCJ9Sr5345TLzF-q&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=Y9SA5je8qtrBVU2uF_QxhA&oh=00_AYFXWgRBb7w8xmOYP145Qd7KrjrXDc7dCM53cto0FxdoWw&oe=68024EDF",
-        },
-        {
-            focusTheme: "My Future",
-            bibleVerse: "Galatians 6:9 – 'And let us not grow weary of doing good, for in due season we will reap, if we do not give up.'",
-            quote: "I’ve been fighting this battle since I was 13. A decade of struggle will not define me—my victory will.",
-            src: "https://yykak7svby.ufs.sh/f/lVsxh5PLVTj9n0G5TvhJqKC61hLa92zGwTr5vE8dUejxyJcM",
-        },
+    // const testimonialsFuture = [
+    //     {
+    //         focusTheme: "My Future",
+    //         bibleVerse: "Proverbs 14:12 – 'There is a way that seems right to a man, but its end is the way to death.'",
+    //         quote: "A moment of sin can lead to a lifetime of consequences.",
+    //         src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/43680101_1145584718938408_7772744079556739072_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=WrE-qI17EHkQ7kNvgE_IjSP&_nc_oc=Adl1i3eZT36eyj8C5w1xORE19u9fDXOusXgUsbEEkIhU7e9Ok9RTDzZTd7pUiWBV3hFlhB_Ce8ioGnET2cLWmhWh&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=T3n_5azoUmQ3iGxlQPwgPQ&oh=00_AYHf2LIRckeAtb4-S13KxY60IVMTkgiXLvb2C7w9O_xNsg&oe=6802617F",
+    //     },
+    //     {
+    //         focusTheme: "My Future",
+    //         bibleVerse: "Romans 13:14 – 'But put on the Lord Jesus Christ, and make no provision for the flesh, to gratify its desires.'",
+    //         quote: "I will not feed my flesh; I will strengthen my spirit.",
+    //         src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/44877100_1145487295614817_77590014426349568_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sU8cPF5N9X0Q7kNvgG1Ttdb&_nc_oc=Adk8094P7pFo-APB39_ZZ16AKK1en4l9r08BdAga9y09YpQ4L5uLiJYulSmo8ncXstRF4DesBP9ilctwmag3Xs46&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=L6UZWuHoEc68XPrgX8949A&oh=00_AYE4Rl_b3CNgi3RfcuXt96U759tX5SNQD4oRv_oS10lMew&oe=68025002",
+    //     },
+    //     {
+    //         focusTheme: "My Future",
+    //         bibleVerse: "Philippians 4:8 – 'Finally, brothers, whatever is true, whatever is honorable, whatever is just, whatever is pure, whatever is lovely, whatever is commendable, if there is any excellence, if there is anything worthy of praise, think about these things.'",
+    //         quote: "The battle is won or lost in the mind—I choose purity.",
+    //         src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/71706824_1394218094075068_4242365233798053888_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=GcJOPgHmVowQ7kNvgGtT9TA&_nc_oc=Adlp4BRrlhMPda5muavYYMLjkSw048dkfwD8_6go1hym28lZo7hefsmb6bFo7Fyc05NbCM9o6gTWzCdWGGgON4nX&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=sMpKfvr84upGV4vRlyevrg&oh=00_AYF0bU_cLXNkW9-PDlTo1GqR-o0fHQuscV1yea0-PsWkfA&oe=6802547F",
+    //     },
+    //     {
+    //         focusTheme: "My Future",
+    //         bibleVerse: "James 1:12 – 'Blessed is the man who remains steadfast under trial, for when he has stood the test he will receive the crown of life, which God has promised to those who love him.'",
+    //         quote: "Victory over temptation brings eternal rewards.",
+    //         src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/54435599_1244447309052148_3771102592944308224_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=KOWPXGEBrH0Q7kNvgF98zz3&_nc_oc=AdmkddbJKUbEWHmL3CwIL7lCvAMlccomabZXJidQcewrCblOznl5wUqPFaQ8w3IYul2TuBp-xCJ9Sr5345TLzF-q&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=Y9SA5je8qtrBVU2uF_QxhA&oh=00_AYFXWgRBb7w8xmOYP145Qd7KrjrXDc7dCM53cto0FxdoWw&oe=68024EDF",
+    //     },
+    //     {
+    //         focusTheme: "My Future",
+    //         bibleVerse: "Galatians 6:9 – 'And let us not grow weary of doing good, for in due season we will reap, if we do not give up.'",
+    //         quote: "I’ve been fighting this battle since I was 13. A decade of struggle will not define me—my victory will.",
+    //         src: "https://yykak7svby.ufs.sh/f/lVsxh5PLVTj9n0G5TvhJqKC61hLa92zGwTr5vE8dUejxyJcM",
+    //     },
 
-    ]
+    // ]
 
     // const now = new Date();
     // const hoursNow = now.getHours();
@@ -97,9 +97,9 @@ export function AnimatedTestimonialsDemo() {
 
     return (
         <div className="flex flex-col justify-start items-start w-full gap-2 pb-10">
-            {/* <AnimatedTestimonials indexTestimonial={1} testimonials={testimonialsGod} autoplay={true} /> */}
+            {/* <AnimatedTestimonials indexTestimonial={3} testimonials={testimonialsFuture} autoplay={true} /> */}
             <AnimatedTestimonials indexTestimonial={2} testimonials={testimonialsFamily} autoplay={true} />
-            <AnimatedTestimonials indexTestimonial={3} testimonials={testimonialsFuture} autoplay={true} />
+            <AnimatedTestimonials indexTestimonial={1} testimonials={testimonialsGod} autoplay={true} />
         </div>
     );
 }
