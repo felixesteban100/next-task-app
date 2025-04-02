@@ -46,14 +46,19 @@ export default async function Home() {
     "💤 How will this affect my sleep, energy, and mindset tomorrow?",
     "🔄 What’s one small action I can take right now to shift my focus (praying, stretching, reading)?",
     "🤝 What would I say to a close friend struggling with this?",
-    "😁 Who will smile if I sin: God or Devil?"
+    "😁 Who will smile if I sin: God or Devil?",
+    "❤️ God is always with you, and He loves you. Do you love Him?",
+    "🤔 Is this a sin? If yes, what would God say?",
+    "💭 What would I tell my future self about this moment?",
+    "💪God has given you the power to say no to sin. Are you using it?",
+    "💭 God has given you so many blessings. Do you remember them?",
+    "⏲ God is always with you. Are you with Him?",
   ];
 
   const getRandomQuestions = (count: number): string[] => {
     const shuffled = [...reflectionQuestions].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
   };
-
 
   return (
     <>
