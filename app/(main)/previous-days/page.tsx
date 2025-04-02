@@ -16,13 +16,41 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { connection } from "next/server";
-import { ObjectId } from 'mongodb'
+import { ObjectId, WithId } from 'mongodb'
+import QueryTasks from '@/components/QueryTasks'
+import { DailyTaskAndDetails } from '@/components/TaskToEdit'
 
-export default async function page() {
+export default async function page({
+    searchParams: { search, },
+}: {
+    searchParams: {
+        search?: string;
+    },
+}) {
     connection()
 
+    const searchValue = (await search) ?? ""
+
+    // const query = searchValue ? { "tasks.name": { $regex: searchValue, $options: "i" } } : {}
+
     const today = getTodaysDate()
-    const allDaysInfo = await collectionTask.find().sort({ date: -1 }).toArray()
+    // const allDaysInfo = await collectionTask.find(query).sort({ date: -1 }).toArray()
+    const allDaysInfo = await collectionTask.aggregate([
+        {
+            $project: {
+                tasks: {
+                    $filter: {
+                        input: "$tasks",
+                        as: "task",
+                        cond: { $regexMatch: { input: "$$task.name", regex: searchValue, options: "i" } }
+                    }
+                },
+                date: true,
+                _id: true
+            }
+        },
+        { $match: { tasks: { $ne: [] } } } // Remove documents where no tasks match
+    ]).sort({ date: -1 }).toArray() as WithId<DailyTaskAndDetails>[]
 
     if (!allDaysInfo) return <p>No days on track</p>
 
@@ -46,7 +74,7 @@ export default async function page() {
 
     return (
         <>
-            <div className='flex flex-col items-center gap-2 text-xl'>
+            <div className='flex flex-col items-center gap-2 text-xl mb-4'>
                 <p className='font-semibold'>Total days: {allDaysInfo.length}</p>
                 <Separator orientation='horizontal' className='bg-foreground' />
                 <div className='flex gap-2 h-7'>
@@ -56,41 +84,45 @@ export default async function page() {
                     <Separator orientation='vertical' className='bg-foreground' decorative />
                     <p>☑️{occupiedDays} ({calculatePercentage(occupiedDays)}%)</p>
                 </div>
-                <Separator orientation='horizontal' className='bg-foreground' />
-                <div className='flex gap-2 h-7'>
-                    <p>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger className='font-bold text-2xl'>😞🔥✝️</TooltipTrigger>
-                                <TooltipContent>
-                                    <ul>
-                                        <li>😞 Regret and sorrow for the sin.</li>
-                                        <li>🔥 The struggle and temptation of lust.</li>
-                                        <li>✝️ Turning to Christ for forgiveness, holiness, and righteousness.</li>
-                                    </ul>
-                                    <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>{daysWithLust} ({calculatePercentageWithoutLastOne(daysWithLust)}%)
-                    </p>
-                    <Separator orientation='vertical' className='bg-foreground' decorative />
-                    <p>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger className='font-bold text-2xl'>😊❄️✝️</TooltipTrigger>
-                                <TooltipContent>
-                                    <ul>
-                                        <li>😊 Joy and peace in victory over sin.</li>
-                                        <li>❄️ Purity and self-control through God&apos;s strength.</li>
-                                        <li>✝️ Walking in faith and righteousness with Christ.</li>
-                                    </ul>
-                                    <p className='font-bold'>Keep fighting the good fight!</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>{daysWithoutLust} ({calculatePercentageWithoutLastOne(daysWithoutLust)}%)
-                    </p>
-                </div>
+                {searchValue != "" ? null :
+                    <>
+                        <Separator orientation='horizontal' className='bg-foreground' />
+                        <div className='flex gap-2 h-7'>
+                            <p>
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger className='font-bold text-2xl'>😞🔥✝️</TooltipTrigger>
+                                        <TooltipContent>
+                                            <ul>
+                                                <li>😞 Regret and sorrow for the sin.</li>
+                                                <li>🔥 The struggle and temptation of lust.</li>
+                                                <li>✝️ Turning to Christ for forgiveness, holiness, and righteousness.</li>
+                                            </ul>
+                                            <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>{daysWithLust} ({calculatePercentageWithoutLastOne(daysWithLust)}%)
+                            </p>
+                            <Separator orientation='vertical' className='bg-foreground' decorative />
+                            <p>
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger className='font-bold text-2xl'>😊❄️✝️</TooltipTrigger>
+                                        <TooltipContent>
+                                            <ul>
+                                                <li>😊 Joy and peace in victory over sin.</li>
+                                                <li>❄️ Purity and self-control through God&apos;s strength.</li>
+                                                <li>✝️ Walking in faith and righteousness with Christ.</li>
+                                            </ul>
+                                            <p className='font-bold'>Keep fighting the good fight!</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>{daysWithoutLust} ({calculatePercentageWithoutLastOne(daysWithoutLust)}%)
+                            </p>
+                        </div>
+                    </>}
             </div>
+            <QueryTasks searchValue={searchValue} />
             <Accordion type="single" collapsible className="w-[65%]">
                 {allDaysInfo.map((day, cIndex) => {
                     const documentId = new ObjectId(day._id); // Example _id
@@ -123,7 +155,7 @@ export default async function page() {
                                 </AccordionContent>
                             </AccordionItem>
                             {/* (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" || c.name === "Are you going to honor God, love your family and invest in your future?") */}
-                            {day.date == today ? null : day.tasks.slice().reverse().some((c, index) => index === 0 && c.state === "no done") === true ?
+                            {searchValue != "" ? null : day.date == today ? null : day.tasks.slice().reverse().some((c, index) => index === 0 && c.state === "no done") === true ?
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger className='font-bold text-2xl mt-4'>😞🔥✝️</TooltipTrigger>

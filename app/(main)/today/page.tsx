@@ -87,7 +87,6 @@ export default async function Home() {
               <h2 className="font-semibold text-center">Reflection Questions</h2>
               <ul className="list-disc">
                 {getRandomQuestions(5).map((question, index) => {
-                  // return <li key={index} dangerouslySetInnerHTML={{ __html: question.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") }} />
                   return <li key={index}>{question}</li>
                 })}
               </ul>
