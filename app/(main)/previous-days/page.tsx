@@ -21,15 +21,15 @@ import QueryTasks from '@/components/QueryTasks'
 import { DailyTaskAndDetails } from '@/components/TaskToEdit'
 
 export default async function page({
-    searchParams: { search, },
+    searchParams
 }: {
-    searchParams: {
+    searchParams?: Promise<{
         search?: string;
-    },
+    }>,
 }) {
     connection()
 
-    const searchValue = (await search) ?? ""
+    const searchValue = (await searchParams)?.search ?? ""
 
     // const query = searchValue ? { "tasks.name": { $regex: searchValue, $options: "i" } } : {}
 
