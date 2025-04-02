@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/tooltip"
 import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
 import { useState } from "react"
-import { AnimatedTestimonialsDemo } from './animated-testimonials'
+// import { AnimatedTestimonialsDemo } from './animated-testimonials'
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -189,7 +189,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                         {field.value.map((task, index) => (
                                             <div key={task.name + task.time + index} >
                                                 {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
-                                                {task.name === "Say what you did recently: was it sinful or righteous before God?" && task.time === "8:30 pm" ? <AnimatedTestimonialsDemo /> : null}
+                                                {/* {task.name === "Say what you did recently: was it sinful or righteous before God?" && task.time === "8:30 pm" ? <AnimatedTestimonialsDemo /> : null} */}
                                                 <div className="flex gap-2 items-center justify-start">
                                                     {Object.entries(stateEmoji).map(([state, emoji]) => (
                                                         <Button

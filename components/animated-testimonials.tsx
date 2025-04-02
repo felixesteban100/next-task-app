@@ -1,32 +1,33 @@
-import { AnimatedTestimonials } from "@/components/acernity-ui/animated-testimonials";
+// import { AnimatedTestimonials } from "@/components/acernity-ui/animated-testimonials";
+import { AnimatedTestimonialsCarousel } from "@/components/acernity-ui/animated-testimonials-carousel";
 
 export function AnimatedTestimonialsDemo() {
-    const testimonialsGod = [
-        {
-            focusTheme: "God",
-            bibleVerse: "Matthew 5:8 – 'Blessed are the pure in heart, for they shall see God.'",
-            quote: "Lust dims my love for God; I will guard my heart and honor Him.",
-            src: "https://www.dbackdrop.com/cdn/shop/products/D1050-1.jpg?v=1673495873",
-        },
-        {
-            focusTheme: "God",
-            bibleVerse: "Colossians 3:2 – 'Set your minds on things that are above, not on things that are on earth.'",
-            quote: "My mind belongs to God, not to the corruption of the world.",
-            src: "https://t3.ftcdn.net/jpg/05/54/39/50/360_F_554395094_D4zOhvLOkvVt5OaWq8dUhqcHDDS87ltG.jpg",
-        },
-        {
-            focusTheme: "God",
-            bibleVerse: "Romans 12:1 – 'I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.'",
-            quote: "Every moment of purity is an act of worship to God.",
-            src: "https://t3.ftcdn.net/jpg/01/94/11/30/360_F_194113074_rZ1a8I9TrRY9LCWLdlyvl2UiKlqOalPH.jpg",
-        },
-        {
-            focusTheme: "God",
-            bibleVerse: "2 Timothy 2:22 – 'So flee youthful passions and pursue righteousness, faith, love, and peace, along with those who call on the Lord from a pure heart.'",
-            quote: "I will not fight temptation; I will flee from it.",
-            src: "https://historyuk.s3.eu-west-2.amazonaws.com/s3fs-public/2023-03/shutterstock_1909472887-min.jpg",
-        }
-    ];
+    // const testimonialsGod = [
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "Matthew 5:8 – 'Blessed are the pure in heart, for they shall see God.'",
+    //         quote: "Lust dims my love for God; I will guard my heart and honor Him.",
+    //         src: "https://www.dbackdrop.com/cdn/shop/products/D1050-1.jpg?v=1673495873",
+    //     },
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "Colossians 3:2 – 'Set your minds on things that are above, not on things that are on earth.'",
+    //         quote: "My mind belongs to God, not to the corruption of the world.",
+    //         src: "https://t3.ftcdn.net/jpg/05/54/39/50/360_F_554395094_D4zOhvLOkvVt5OaWq8dUhqcHDDS87ltG.jpg",
+    //     },
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "Romans 12:1 – 'I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.'",
+    //         quote: "Every moment of purity is an act of worship to God.",
+    //         src: "https://t3.ftcdn.net/jpg/01/94/11/30/360_F_194113074_rZ1a8I9TrRY9LCWLdlyvl2UiKlqOalPH.jpg",
+    //     },
+    //     {
+    //         focusTheme: "God",
+    //         bibleVerse: "2 Timothy 2:22 – 'So flee youthful passions and pursue righteousness, faith, love, and peace, along with those who call on the Lord from a pure heart.'",
+    //         quote: "I will not fight temptation; I will flee from it.",
+    //         src: "https://historyuk.s3.eu-west-2.amazonaws.com/s3fs-public/2023-03/shutterstock_1909472887-min.jpg",
+    //     }
+    // ];
 
     const testimonialsFamily = [
         {
@@ -39,7 +40,7 @@ export function AnimatedTestimonialsDemo() {
             focusTheme: "My Family",
             bibleVerse: "1 Peter 5:8 – 'Be sober-minded; be watchful. Your adversary the devil prowls around like a roaring lion, seeking someone to devour.'",
             quote: "Satan wants to destroy my family; I will not give him an open door.",
-            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t39.30808-6/317916221_2363389450491256_6130071076831361264_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=IEBYcWHyEAUQ7kNvgGs4k-d&_nc_oc=AdkM758L-7qBmkHFNhpfue7OwUJ3BBPPAOEDWOlGSAgWseDthsWybT478X4-vj-PVOAi3XqahiLdPrpW6nEK7emi&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=x_T3WpOyJR3jcND1H3gRnw&oh=00_AYFgwxzzvtQwubEWILCw5btGAhSUezAcgubB42n_gdmQaA&oe=67E0C65A",
+            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t39.30808-6/317916221_2363389450491256_6130071076831361264_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=pe4zghLma_UQ7kNvgEPjUxY&_nc_oc=AdkVZC-j3O-3YX1AE7tunVnN22leRnfmHVuG7T8wCQZZcaiMYAl57ULcnwL-Z3ClMzN2T0dxG-h4F4Vvx_1up3gD&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=zGAL9u-_aiRHuDp_T5fa-w&oh=00_AYESN2vHpHJl5eBmcjAa3XfNUIrWfIZ9bddPLMfZPFdtNQ&oe=67F3739A",
         },
         {
             focusTheme: "My Family",
@@ -52,6 +53,47 @@ export function AnimatedTestimonialsDemo() {
             bibleVerse: "Ephesians 5:25 – 'Husbands, love your wives, as Christ loved the church and gave himself up for her.'",
             quote: "True love is sacrifice, not selfish desire.",
             src: "https://scontent-bos5-1.xx.fbcdn.net/v/t39.30808-6/480794267_2985321704964691_5009842528868479282_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=k11A3qksqgYQ7kNvgGwsMS2&_nc_oc=Adk4g24U2LxCIrxkP9sd6vMqrhY317gdnEZlVbnVwixYmY61OehxAvLG6rJYEuIUbYkxoAr1hG5cuCi3HY3DiElp&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=49R44U-foBt1mYl2xkiaLg&oh=00_AYGC80vPbj-jJ6OUf7xXkRJC0Td-wLE_208_cBBeAe6CnQ&oe=67E0CAA4",
+        }/* ,
+        {
+            focusTheme: "",
+            bibleVerse: "",
+            quote: "",
+            src: "",
+        } */
+        ,
+        {
+            focusTheme: "",
+            bibleVerse: "",
+            quote: "",
+            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/134428277_1804731329690407_6927641860027794869_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=71f6e8w07CAQ7kNvgGU4w3N&_nc_oc=Adl-tgNBHq-uKc-NrOBJT14woPV0ulizq8i7xFE1UNvCXCwk53Tah1HZp1TUAA0IFpz4dx6H37c-SONJwpCauzjw&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=YvYdiJ0lvlAD8_x5c7RMIw&oh=00_AYGdysW_52K-8yq7vnZ6ldId791L9XoXQA_Q4zDRGHrVZA&oe=6815224E",
+        }
+        ,
+        {
+            focusTheme: "",
+            bibleVerse: "",
+            quote: "",
+            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/46663213_1165560270274186_7325182361027477504_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=O5bQtznjHg0Q7kNvgGNj_ha&_nc_oc=AdlZFrJhHIoyGmlzbY13Ov1Far72M9CskaFXWSZrBN92KCW7HIEu4syCBA2lhleO-UuspPomgZOPaxZtW0mllnov&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=sR43Sm5OpEVUEePrGfk0LA&oh=00_AYEnYZRGJEG_mDV6N4J9-u9-g3xpz--OLfY2tG2CnpYcFQ&oe=6814FDE8",
+        }
+        ,
+        {
+            focusTheme: "",
+            bibleVerse: "",
+            quote: "",
+            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/41457212_1900058046778153_6770369875983466496_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ks5uIKJz91MQ7kNvgH2WNlx&_nc_oc=AdlYtb_lGrX9B-L1o3wmUCEfiOWIyR4kwmJ4d05QUGSW8i0eSiFrdEqYkVzdL6sXPrGr1oxoJemcQCTBIUBskfnk&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=du9m9m2i91QNCwYIt2q0tg&oh=00_AYHoKOV2yygl9gl4yYFroOT4wO8RbLKA8gxWeH1jVBVFJg&oe=68153524",
+        }
+        ,
+        {
+            focusTheme: "",
+            bibleVerse: "",
+            quote: "",
+            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/37987973_1824682094315749_4136965649727488000_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=w64KoXHW5_4Q7kNvgF_W_ru&_nc_oc=AdkrY_t6LPSFJgasr4PLMPbe493PllviNrEsrvos5J_Ou8v2pQJEOStDZmLmrZYZUDUtEF91Ia14YhSEbwb4FXql&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=pkZUd7f99nlEJDGG82uZYw&oh=00_AYHgAJ3B_dYTD6WE_kRAc5Y41BwM0lUUOMvpk4y6oNWM4w&oe=68152D7D",
+        }
+        ,
+        {
+            focusTheme: "",
+            bibleVerse: "",
+            quote: "",
+            src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/31478663_1700462706737689_3970282951131791360_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ZT4xvnlkpK0Q7kNvgHYGHIZ&_nc_oc=AdnSwuF-pLkgqEUcxM7fODbvbVx03ZVuolitFcPBx6o7b5pqHDuJ8zvubjd6rd1BM81XKDXBSA-JyAyeJA5-ZKY-&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=R1hCNiYEmyZohfjT225Tng&oh=00_AYEjC6eNr-fA6H6HFPnmiXZzIaKZDFnF6r6YcahKqUJTkw&oe=6815342C",
         }
     ]
 
@@ -95,11 +137,12 @@ export function AnimatedTestimonialsDemo() {
 
     // if (!isNightTime) return null;
 
-    return (
+    /* return (
         <div className="flex flex-col justify-start items-start w-full gap-2 pb-10">
-            {/* <AnimatedTestimonials indexTestimonial={3} testimonials={testimonialsFuture} autoplay={true} /> */}
+            <AnimatedTestimonials indexTestimonial={3} testimonials={testimonialsFuture} autoplay={true} />
             <AnimatedTestimonials indexTestimonial={2} testimonials={testimonialsFamily} autoplay={true} />
             <AnimatedTestimonials indexTestimonial={1} testimonials={testimonialsGod} autoplay={true} />
         </div>
-    );
+    ); */
+    return <AnimatedTestimonialsCarousel testimonials={testimonialsFamily} autoplay={true} />
 }

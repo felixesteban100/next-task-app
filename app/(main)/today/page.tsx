@@ -1,3 +1,4 @@
+import { AnimatedTestimonialsDemo } from "@/components/animated-testimonials";
 import Tasks from "@/components/TaskToEdit";
 import { collectionTask } from "@/db/mongodb/mongodb";
 import { getTodaysDate } from "@/lib/utils";
@@ -76,6 +77,7 @@ export default async function Home() {
               </ul>
             </div>
 
+
             {/* <div>
               <p>Because you have seen the same cicle🔁❌:</p>
               <p>You feel tempted, you don&apos;t think in God (even forget God), you sin, you feel guilty, and forget that you sin</p>
@@ -83,14 +85,18 @@ export default async function Home() {
               <p>Scape that temptation knowing is not worth it, pray to God, do what you have to do (responsabilities)</p>
             </div> */}
 
-            <div>
-              <h2 className="font-semibold text-center">Reflection Questions</h2>
-              <ul className="list-disc">
-                {getRandomQuestions(5).map((question, index) => {
-                  return <li key={index}>{question}</li>
-                })}
-              </ul>
+            <div className="flex flex-row gap-12 justify-center items-center">
+              <AnimatedTestimonialsDemo />
+              <div>
+                <h2 className="font-semibold text-center">Reflection Questions</h2>
+                <ul className="list-disc">
+                  {getRandomQuestions(5).map((question, index) => {
+                    return <li key={index}>{question}</li>
+                  })}
+                </ul>
+              </div>
             </div>
+
           </div>
         </>
         :
