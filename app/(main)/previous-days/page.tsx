@@ -31,10 +31,7 @@ export default async function page({
 
     const searchValue = (await searchParams)?.search ?? ""
 
-    // const query = searchValue ? { "tasks.name": { $regex: searchValue, $options: "i" } } : {}
-
     const today = getTodaysDate()
-    // const allDaysInfo = await collectionTask.find(query).sort({ date: -1 }).toArray()
     const allDaysInfo = await collectionTask.aggregate([
         {
             $project: {
