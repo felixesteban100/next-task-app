@@ -138,10 +138,16 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "8:50 am"
 },
 {
+    "name": "Take vitamin D, omega 3, and vitamin C",
+    "type": "normal",
+    "state": "no done",
+    "time": "9:00 am"
+},
+{
     "name": "Exercises for the knee",
     "type": "important",
     "state": "no done",
-    "time": "9:00 am"
+    "time": "9:10 am"
 },
 /* {
     "name": "Neck exercises",
