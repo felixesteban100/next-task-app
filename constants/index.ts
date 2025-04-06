@@ -158,31 +158,31 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Practice Hard riddle TedEd/MindYourDecisions/Brilliant",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "10:20 am"
 },
 {
     "name": "Practice one Math exercise",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "10:30 am"
 },
 {
     "name": "Practice one Music reading exercise",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "10:35 am"
 },
 /* {
     "name": "Rubik's cubes 5x5 / games",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "10:40 am"
 }, */
 {
     "name": "Rubik's cubes 5x5 / 4x4",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "10:40 am"
 },
 
