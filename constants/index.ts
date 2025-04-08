@@ -42,12 +42,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "6:15 am"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and lust and To love God and his holiness",
     "type": "normal",
     "state": "no done",
     "time": "6:20 am"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
     "type": "spiritual",
@@ -60,9 +60,16 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "7:05 am"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
+    "state": "no done",
+    "time": "7:05 am"
+},
+ */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
     "state": "no done",
     "time": "7:05 am"
 },
@@ -107,12 +114,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:50 am"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "no done",
     "time": "8:50 am"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -132,7 +139,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "8:50 am"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "no done",
     "time": "8:50 am"
@@ -199,12 +206,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "10:50 am"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "occupied",
     "time": "10:50 am"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -217,14 +224,20 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "10:50 am"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
     "time": "10:50 am"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "occupied",
+    "time": "10:50 am"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "occupied",
     "time": "10:50 am"
@@ -256,12 +269,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "12:00 pm"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "occupied",
     "time": "12:00 pm"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -274,14 +287,21 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "12:00 pm"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
     "time": "12:00 pm"
 },
+ */
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "occupied",
+    "time": "12:00 am"
+},
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "occupied",
     "time": "12:00 pm"
@@ -343,12 +363,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "1:10 pm"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "occupied",
     "time": "1:10 pm"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -361,14 +381,20 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "1:10 pm"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
     "time": "1:10 pm"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "occupied",
+    "time": "1:10 am"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "occupied",
     "time": "1:10 pm"
@@ -406,12 +432,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "3:00 pm"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "occupied",
     "time": "3:00 pm"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -424,14 +450,20 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "3:00 pm"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
     "time": "3:00 pm"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "occupied",
+    "time": "3:00 am"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "occupied",
     "time": "3:00 pm"
@@ -475,12 +507,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "4:10 pm"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "occupied",
     "time": "4:10 pm"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -493,14 +525,20 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "4:10 pm"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
     "time": "4:10 pm"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "occupied",
+    "time": "4:10 am"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "occupied",
     "time": "4:10 pm"
@@ -538,12 +576,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "5:00 pm"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "occupied",
     "time": "5:00 pm"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -556,14 +594,20 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "5:00 pm"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
     "time": "5:00 pm"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "occupied",
+    "time": "5:00 am"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "occupied",
     "time": "5:00 pm"
@@ -601,12 +645,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "6:40 pm"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "occupied",
     "time": "6:40 pm"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -619,14 +663,20 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "6:40 pm"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
     "time": "6:40 pm"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "occupied",
+    "time": "6:40 pm"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "occupied",
     "time": "6:40 pm"
@@ -670,12 +720,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
-{
+/* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
     "state": "no done",
     "time": "8:30 pm"
-},
+}, */
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
@@ -688,14 +738,20 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
-{
+/* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "no done",
     "time": "8:30 pm"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "no done",
+    "time": "8:30 am"
 },
 {
-    "name": "10x: push-ups, L-sit, core, walk, elevate leg",
+    "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "no done",
     "time": "8:30 pm"
