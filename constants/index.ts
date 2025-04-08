@@ -133,17 +133,24 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "8:50 am"
 },
 {
-    "name": "5x: move knee cap, hyperextended quad push , heel slides",
-    "type": "normal",
-    "state": "no done",
-    "time": "8:50 am"
-},
-{
     "name": "10x or 30s: push-ups, L-sit, core",
     "type": "normal",
     "state": "no done",
     "time": "8:50 am"
 },
+/* {
+    "name": "5x: move knee cap, hyperextended quad push , heel slides",
+    "type": "normal",
+    "state": "no done",
+    "time": "8:50 am"
+}, */
+{
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "no done",
+    "time": "8:50 am"
+},
+
 {
     "name": "Take vitamin D, omega 3, and vitamin C",
     "type": "normal",
@@ -224,6 +231,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "10:50 am"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "occupied",
+    "time": "10:50 am"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -236,12 +249,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "10:50 am"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "occupied",
-    "time": "10:50 am"
-},
+
 /* {
     "name": "Data structures: read and record audio",
     "type": "normal",
@@ -287,6 +295,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "12:00 pm"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "occupied",
+    "time": "12:00 pm"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -300,12 +314,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "12:00 am"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "occupied",
-    "time": "12:00 pm"
-},
+
 {
     "name": "Record yourself imitating a manly voice",
     "type": "normal",
@@ -381,6 +390,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "1:10 pm"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "occupied",
+    "time": "1:10 pm"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -393,12 +408,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "1:10 am"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "occupied",
-    "time": "1:10 pm"
-},
+
 {
     "name": "Neck exercises",
     "type": "normal",
@@ -450,6 +460,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "3:00 pm"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:00 pm"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -462,12 +478,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "3:00 am"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "occupied",
-    "time": "3:00 pm"
-},
+
 /* {
     "name": "Workout to sweat (if injured job or knee exercise counts)",
     "type": "normal",
@@ -525,6 +536,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "4:10 pm"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "occupied",
+    "time": "4:10 pm"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -537,12 +554,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "4:10 am"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "occupied",
-    "time": "4:10 pm"
-},
+
 {
     "name": "Learn or practice one card trick 🃏",
     "type": "normal",
@@ -594,6 +606,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "5:00 pm"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "occupied",
+    "time": "5:00 pm"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -606,12 +624,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "5:00 am"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "occupied",
-    "time": "5:00 pm"
-},
+
 {
     "name": "Back exercises",
     "type": "normal",
@@ -663,6 +676,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "6:40 pm"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "occupied",
+    "time": "6:40 pm"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -675,12 +694,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "6:40 pm"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "occupied",
-    "time": "6:40 pm"
-},
+
 /* {
     "name": "Solve problem from advent of code / leetcode / brilliant",
     "type": "normal",
@@ -738,6 +752,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
+{
+    "name": "10x or 30s: push-ups, L-sit, core",
+    "type": "normal",
+    "state": "no done",
+    "time": "8:30 pm"
+},
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -750,12 +770,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 am"
 },
-{
-    "name": "10x or 30s: push-ups, L-sit, core",
-    "type": "normal",
-    "state": "no done",
-    "time": "8:30 pm"
-},
+
 /* {
     "name": "REPLACE THIS WITH SOMETHING",
     "type": "normal",

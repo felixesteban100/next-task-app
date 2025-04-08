@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/tooltip"
 import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
 import { useState } from "react"
-import { DialogTrigger } from './ui/dialog'
+// import { DialogTrigger } from './ui/dialog'
 // import { AnimatedTestimonialsDemo } from './animated-testimonials'
 
 const loadingStates = [
@@ -205,7 +205,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                                         </Button>
                                                     ))}
 
-                                                    {task.name === "🦵 Knee improvement Routine" ?
+                                                    {/* {task.name === "🦵 Knee improvement Routine" ?
                                                         <DialogTrigger>
                                                             <p
                                                                 className={cn(classNamesType[task.type], classNamesState[task.state], "cursor-pointer font-semibold underline hover:underline-offset-4")}
@@ -213,13 +213,13 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                                                 {task.name}
                                                             </p>
                                                         </DialogTrigger>
-                                                        :
-                                                        <p
-                                                            className={cn(classNamesType[task.type], classNamesState[task.state])}
-                                                        >
-                                                            {task.name}
-                                                        </p>
-                                                    }
+                                                        : */}
+                                                    <p
+                                                        className={cn(classNamesType[task.type], classNamesState[task.state])}
+                                                    >
+                                                        {task.name}
+                                                    </p>
+                                                    {/* } */}
 
                                                     <select
                                                         defaultValue={`${task.name}_${task.time}_${index}->${task.time}`}

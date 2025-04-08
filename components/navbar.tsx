@@ -39,6 +39,14 @@ import ThinkingMechanics from "@/public/emoji/ThinkingMechanics.json"
 import RunningMan from "@/public/emoji/RunningMan.json"
 import HeartFilled from "@/public/emoji/HeartFilled.json"
 
+import {
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog"
+import KneeFlexionRoutine from "@/components/KneeFlexionRoutine";
+
 
 const links = [
     {
@@ -167,10 +175,37 @@ export default function Navbar() {
             <div className="flex gap-2 items-center">
                 {!isLoaded && <Loader className="animate-spin" />}
 
+
+
                 {isLoaded && isSignedIn && (
                     <>
                         <UserButton appearance={{ elements: { userButtonAvatarBox: { height: "30px", width: "30px" } } }} />
                         {links.map(link => {
+                            if (link.label === "Knee Improvement Routine") return (
+                                <Dialog key={link.href}>
+                                    <DialogTrigger>
+                                        <TooltipProvider key={link.href}>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <Button variant={"outline"} size={"icon"} className={`${pathname === link.href ? "bg-primary text-primary-foreground" : ""} rounded-full`} asChild>
+                                                        <div>{link.icon}</div>
+                                                    </Button>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>{link.label}</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+
+                                    </DialogTrigger>
+                                    <DialogContent className="h-[85vh] overflow-y-scroll">
+                                        <DialogTitle>🦵 Knee improvement Routine</DialogTitle>
+                                        <KneeFlexionRoutine />
+                                    </DialogContent>
+                                </Dialog>
+                            )
+
+
                             return (
                                 <TooltipProvider key={link.href}>
                                     <Tooltip>
@@ -201,3 +236,83 @@ export default function Navbar() {
         </nav>
     )
 }
+
+
+
+{/* <div className="space-y-5 overflow-y-scroll h-96">
+                            <section >
+                                <h2 className="text-xl font-semibold mb-2">✅ 1. Warm-Up (Pick One – 5–10 min)</h2>
+                                <ul className="list-disc list-inside space-y-1">
+                                    <li>🚲 Stationary Bike – 5–8 min, low resistance</li>
+                                    <li>🔥 Heat Pack – 10 min on front of the knee</li>
+                                </ul>
+                            </section>
+
+                            <section >
+                                <h2 className="text-xl font-semibold mb-2">✅ 2. Patella (Kneecap) Mobilization (2–3 min)</h2>
+                                <ul className="list-disc list-inside space-y-1">
+                                    <li>Sit or lie down with the quad relaxed</li>
+                                    <li>Use fingers to gently move the kneecap:</li>
+                                    <ul className="list-inside list-disc ml-6">
+                                        <li>⬆️ Up and ⬇️ Down</li>
+                                        <li>⬅️ Left and ➡️ Right</li>
+                                    </ul>
+                                    <li>Hold each direction for 5–10 sec</li>
+                                    <li>Do for 1–2 min total</li>
+                                    <li><em>Tip: Do this before stretching to improve knee bending!</em></li>
+                                </ul>
+                            </section>
+
+                            <section >
+                                <h2 className="text-xl font-semibold mb-2">✅ 3. Flexion Exercises (10–15 min)</h2>
+                                <h3 className="font-semibold mt-2">🔁 Heel Slides (Rocking)</h3>
+                                <ul className="list-disc list-inside ml-4 mb-4">
+                                    <li>Lie down, foot on towel/sliders</li>
+                                    <li>Slide heel toward glutes until discomfort</li>
+                                    <li>Hold for 30 sec, rock gently</li>
+                                    <li>10 reps × 2–3 sets</li>
+                                </ul>
+                                <h3 className="font-semibold mt-2">🪑 Seated Wall Scoots</h3>
+                                <ul className="list-disc list-inside ml-4 mb-4">
+                                    <li>Sit on floor, back against wall</li>
+                                    <li>Slide butt toward heel until deep stretch</li>
+                                    <li>Hold 30–60 sec</li>
+                                    <li>Repeat 2–3 times</li>
+                                </ul>
+                                <h3 className="font-semibold mt-2">🦵 Quad Stretch (Heel to Butt)</h3>
+                                <ul className="list-disc list-inside ml-4 mb-4">
+                                    <li>Stand or lie on stomach</li>
+                                    <li>Pull heel to butt using hand or strap</li>
+                                    <li>Keep hips neutral</li>
+                                    <li>30 sec × 3 reps</li>
+                                </ul>
+                            </section>
+
+                            <section >
+                                <h2 className="text-xl font-semibold mb-2">✅ 4. Optional Bonus Work</h2>
+                                <ul className="list-disc list-inside space-y-1">
+                                    <li>Foam Roll quads, hamstrings, IT band – 1–2 min each</li>
+                                    <li>Deep squat holds (if safe) – 10–20 sec × 2 reps</li>
+                                    <li>Quad activation (e.g., TKEs, leg raises) – 2 sets of 10</li>
+                                </ul>
+                            </section>
+
+                            <section >
+                                <h2 className="text-xl font-semibold mb-2">✅ 5. Post-Session Swelling Management</h2>
+                                <ul className="list-disc list-inside space-y-1">
+                                    <li>🧊 Ice the knee for 15–20 min (use a towel barrier)</li>
+                                    <li>🦵 Elevate leg above heart level for 15–20 min</li>
+                                    <li>🧦 Wear compression sleeve (optional but helpful)</li>
+                                    <li>🚶‍♂️ Walk lightly (10–20 steps/hour) if tolerated</li>
+                                </ul>
+                            </section>
+
+                            <section>
+                                <h2 className="text-xl font-semibold mb-2">✅ 💡 Progress Notes</h2>
+                                <ul className="list-disc list-inside space-y-1">
+                                    <li>Mild discomfort = ✅ OK (1–3/10 pain)</li>
+                                    <li>Sharp or lingering pain = ❌ Stop/scale back</li>
+                                    <li>Reassess flexion every 2–3 days</li>
+                                </ul>
+                            </section>
+                        </div> */}
