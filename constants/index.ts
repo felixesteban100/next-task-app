@@ -28,19 +28,19 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Wake up early",
     "type": "normal",
     "state": "no done",
-    "time": "6:00 am"
+    "time": "6:40 am"
 },
 {
     "name": "Go to the bathroom for grooming and brush teeth",
     "type": "normal",
     "state": "no done",
-    "time": "6:05 am"
+    "time": "6:50 am"
 },
 {
     "name": "Organize bed",
     "type": "normal",
     "state": "no done",
-    "time": "6:15 am"
+    "time": "6:50 am"
 },
 /* {
     "name": "Say a phrase: To hate sin and lust and To love God and his holiness",
@@ -52,13 +52,13 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
     "type": "spiritual",
     "state": "no done",
-    "time": "6:20 am"
+    "time": "7:00 am"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
     "state": "no done",
-    "time": "7:05 am"
+    "time": "7:00 am"
 },
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
@@ -71,19 +71,19 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "no done",
-    "time": "7:05 am"
+    "time": "7:10 am"
 },
 {
     "name": "Listen to christian music",
     "type": "normal",
     "state": "no done",
-    "time": "7:05 am"
+    "time": "7:20 am"
 },
 {
     "name": "Read Bible (10+ chapters or an entire book)",
     "type": "spiritual",
     "state": "no done",
-    "time": "7:10 am"
+    "time": "7:30 am"
 },
 {
     "name": "Upload youtube short/ instagram reel to Palabra Abierta",
@@ -810,15 +810,20 @@ export const DEFAULT_TASKS: Task[] = [{
 ]
 
 export const TIMES = [
+    "5:00 am",
     "6:00 am",
-    "6:05 am",
-    "6:15 am",
+    "6:10 am",
     "6:20 am",
-    "7:05 am",
+    "6:30 am",
+    "6:40 am",
+    "6:50 am",
+    "7:00 am",
     "7:10 am",
     "7:20 am",
     "7:30 am",
     "7:40 am",
+    "7:50 am",
+    "8:00 am",
     "8:10 am",
     "8:20 am",
     "8:30 am",
