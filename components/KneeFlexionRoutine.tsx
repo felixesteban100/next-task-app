@@ -56,7 +56,7 @@ const KneeFlexionRoutine: React.FC = () => {
                     ]}
                 />
 
-                <Exercise
+                {/* <Exercise
                     title="🪑 Seated Wall Scoots"
                     steps={[
                         "Sit on floor, back against wall",
@@ -64,7 +64,7 @@ const KneeFlexionRoutine: React.FC = () => {
                         "Hold 30–60 sec",
                         "Repeat 2–3 times"
                     ]}
-                />
+                /> */}
 
                 <Exercise
                     title="🦵 Quad Stretch (Heel to Butt)"
@@ -87,9 +87,9 @@ const KneeFlexionRoutine: React.FC = () => {
 
             <Section title="5. Post-Session Swelling Management">
                 <List items={[
-                    "🧊 Ice the knee for 15–20 min (use a towel barrier)",
+                    // "🧊 Ice the knee for 15–20 min (use a towel barrier)",
                     "🦵 Elevate leg above heart level for 15–20 min",
-                    "🧦 Wear compression sleeve (optional but helpful)",
+                    // "🧦 Wear compression sleeve (optional but helpful)",
                     "🚶‍♂️ Walk lightly (10–20 steps/hour) if tolerated"
                 ]} />
             </Section>
