@@ -48,13 +48,13 @@ export function AnimatedTestimonialsDemo() {
             quote: "This sin is a chain holding me back from my dreams. My grandmother needs me to be strong.",
             src: "https://yykak7svby.ufs.sh/f/lVsxh5PLVTj9JJmiGoWedDI1uCH7Rl4KXsantWhTmgbwGFOf"
         },
-        {
+        /* {
             focusTheme: "My Family",
             bibleVerse: "Ephesians 5:25 – 'Husbands, love your wives, as Christ loved the church and gave himself up for her.'",
             quote: "True love is sacrifice, not selfish desire.",
             src: "https://scontent-bos5-1.xx.fbcdn.net/v/t39.30808-6/480794267_2985321704964691_5009842528868479282_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=k11A3qksqgYQ7kNvgGwsMS2&_nc_oc=Adk4g24U2LxCIrxkP9sd6vMqrhY317gdnEZlVbnVwixYmY61OehxAvLG6rJYEuIUbYkxoAr1hG5cuCi3HY3DiElp&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=49R44U-foBt1mYl2xkiaLg&oh=00_AYGC80vPbj-jJ6OUf7xXkRJC0Td-wLE_208_cBBeAe6CnQ&oe=67E0CAA4",
         }
-        /* ,
+        , */
         {
             focusTheme: "",
             bibleVerse: "",
@@ -88,14 +88,14 @@ export function AnimatedTestimonialsDemo() {
             bibleVerse: "",
             quote: "",
             src: "https://scontent-bos5-1.xx.fbcdn.net/v/t1.6435-9/31478663_1700462706737689_3970282951131791360_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ZT4xvnlkpK0Q7kNvgHYGHIZ&_nc_oc=AdnSwuF-pLkgqEUcxM7fODbvbVx03ZVuolitFcPBx6o7b5pqHDuJ8zvubjd6rd1BM81XKDXBSA-JyAyeJA5-ZKY-&_nc_zt=23&_nc_ht=scontent-bos5-1.xx&_nc_gid=R1hCNiYEmyZohfjT225Tng&oh=00_AYEjC6eNr-fA6H6HFPnmiXZzIaKZDFnF6r6YcahKqUJTkw&oe=6815342C",
-        } */
+        }
         /* ,
         {
             focusTheme: "",
             bibleVerse: "",
             quote: "",
             src: "",
-        } */
+        }*/
     ]
 
     // const testimonialsFuture = [

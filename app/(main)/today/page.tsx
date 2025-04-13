@@ -60,7 +60,7 @@ export default async function Home() {
                     <h2 className="font-semibold text-center">Reflection Questions</h2>
                     <ul className="list-disc">
                       {getRandomQuestions(5, reflectionQuestions.reflectionQuestions ?? []).map((question, index) => {
-                        return <li key={index}>{question}</li>
+                        return <li key={index} className="max-w-md text-wrap">{question}</li>
                       })}
                     </ul>
                   </div>

@@ -4,6 +4,8 @@
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
+import { Button } from "../ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Testimonial = {
     focusTheme: string;
@@ -24,9 +26,9 @@ export const AnimatedTestimonialsCarousel = ({
         setActive((prev) => (prev + 1) % testimonials.length);
     }, [testimonials.length]);
 
-    // const handlePrev = useCallback(() => {
-    //     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    // }, [testimonials.length]);
+    const handlePrev = useCallback(() => {
+        setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    }, [testimonials.length]);
 
     const isActive = (index: number) => {
         return index === active;
@@ -34,7 +36,7 @@ export const AnimatedTestimonialsCarousel = ({
 
     useEffect(() => {
         if (autoplay) {
-            const interval = setInterval(handleNext, 2000);
+            const interval = setInterval(handleNext, 5000);
             return () => clearInterval(interval);
         }
     }, [autoplay, handleNext]);
@@ -44,7 +46,7 @@ export const AnimatedTestimonialsCarousel = ({
     };
     return (
         <div className=" font-sans antialiased ">
-            <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
+            <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2 mb-10">
                 <div className="h-40 w-16">
                     <AnimatePresence>
                         {testimonials.map((testimonial, index) => (
@@ -91,6 +93,10 @@ export const AnimatedTestimonialsCarousel = ({
                         ))}
                     </AnimatePresence>
                 </div>
+            </div>
+            <div className="w-full flex justify-between items-center">
+                <Button variant={"ghost"} onClick={() => handlePrev()}><ArrowLeft /></Button>
+                <Button variant={"ghost"} onClick={() => handleNext()}><ArrowRight /></Button>
             </div>
         </div>
     );
