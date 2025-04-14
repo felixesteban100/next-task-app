@@ -108,12 +108,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "no done",
     "time": "8:50 am"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -207,12 +207,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "occupied",
     "time": "10:50 am"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -271,12 +271,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "occupied",
     "time": "12:00 pm"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -366,12 +366,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "occupied",
     "time": "1:10 pm"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -436,12 +436,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "occupied",
     "time": "3:00 pm"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -512,12 +512,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "occupied",
     "time": "4:10 pm"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -582,12 +582,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "occupied",
     "time": "5:00 pm"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -652,12 +652,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "occupied",
     "time": "6:40 pm"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -728,12 +728,12 @@ export const DEFAULT_TASKS: Task[] = [{
 
 
 
-{
+/* {
     "name": "Say what you did recently: was it sinful or righteous before God?",
     "type": "normal",
     "state": "no done",
     "time": "8:30 pm"
-},
+}, */
 /* {
     "name": "Say a phrase: To hate sin and To love God",
     "type": "normal",
@@ -842,7 +842,11 @@ export const TIMES = [
     "10:40 am",
     "10:50 am",
     "11:00 am",
+    "11:10 am",
     "11:20 am",
+    "11:30 am",
+    "11:40 am",
+    "11:50 am",
     "12:00 pm",
     "12:10 pm",
     "12:20 pm",
@@ -869,18 +873,36 @@ export const TIMES = [
     "6:30 pm",
     "6:40 pm",
     "6:50 pm",
+    "7:00 pm",
     "7:10 pm",
+    "7:20 pm",
+    "7:30 pm",
+    "7:40 pm",
+    "7:50 pm",
     "8:00 pm",
+    "8:10 pm",
+    "8:20 pm",
     "8:30 pm",
     "8:40 pm",
+    "8:50 pm",
     "9:00 pm",
     "9:10 pm",
+    "9:20 pm",
+    "9:30 pm",
+    "9:40 pm",
+    "9:50 pm",
     "10:00 pm",
     "10:20 pm",
     "10:30 pm",
     "10:40 pm",
     "10:50 pm",
-    "11:00 pm"
+    "11:00 pm",
+    "11:10 pm",
+    "11:20 pm",
+    "11:30 pm",
+    "11:40 pm",
+    "11:50 pm",
+    "12:00 am",
 ];
 
 

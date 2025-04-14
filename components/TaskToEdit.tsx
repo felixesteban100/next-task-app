@@ -92,12 +92,14 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true)
+        document.body.classList.add('overflow-hidden'); // disable scroll
 
         const result = await saveTasksOfCurrentDate(values.date, values.tasks)
         form.reset(values);
 
         setTimeout(() => {
             setLoading(false)
+            document.body.classList.remove('overflow-hidden'); // enable scroll
 
             if (result === true) {
                 toast.success("Tasks have been saved.", {
@@ -134,7 +136,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
 
     return (
-        <div className='flex flex-col gap-7 items-center mb-10 w-full'>
+        <div className={`flex flex-col gap-7 items-center mb-10 w-full `}>
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
 
             <TooltipProvider>
@@ -170,14 +172,6 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                         >
                             {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
                         </p>
-                        {/* {form.formState.isSubmitting || !formTasksChanged ? null :
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-500/40 to-transparent"
-                                    initial={{ x: "-100%" }}
-                                    animate={{ x: "100%" }}
-                                    transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-                                />
-                            } */}
                     </Button>
                     <FormField
                         control={form.control}
@@ -189,8 +183,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                     <div>
                                         {field.value.map((task, index) => (
                                             <div key={task.name + task.time + index} >
-                                                {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
-                                                {/* {task.name === "Say what you did recently: was it sinful or righteous before God?" && task.time === "8:30 pm" ? <AnimatedTestimonialsDemo /> : null} */}
+                                                {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
                                                 <div className="flex gap-2 items-center justify-start">
                                                     {Object.entries(stateEmoji).map(([state, emoji]) => (
                                                         <Button
@@ -205,21 +198,11 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                                         </Button>
                                                     ))}
 
-                                                    {/* {task.name === "🦵 Knee improvement Routine" ?
-                                                        <DialogTrigger>
-                                                            <p
-                                                                className={cn(classNamesType[task.type], classNamesState[task.state], "cursor-pointer font-semibold underline hover:underline-offset-4")}
-                                                            >
-                                                                {task.name}
-                                                            </p>
-                                                        </DialogTrigger>
-                                                        : */}
                                                     <p
                                                         className={cn(classNamesType[task.type], classNamesState[task.state])}
                                                     >
                                                         {task.name}
                                                     </p>
-                                                    {/* } */}
 
                                                     <select
                                                         defaultValue={`${task.name}_${task.time}_${index}->${task.time}`}

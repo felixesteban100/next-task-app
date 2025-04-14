@@ -4,6 +4,12 @@ import { collectionReflectionQuestions, collectionTask } from "@/db/mongodb/mong
 import { getTodaysDate } from "@/lib/utils";
 import { ObjectId } from "mongodb";
 import { connection } from "next/server";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 
 export type ReflectionQuestions = {
@@ -43,32 +49,34 @@ export default async function Home() {
           <div className="flex flex-col gap-5 justify-center items-center">
             <div className="flex flex-col justify-center items-center">
               <p className="font-semibold text-xl ">Today ({today}) is <span className="text-red-400">not a day to sin</span> but is <span className="text-green-400">a day to live for God.</span> Amen.</p>
-              <div className="space-y-2">
-                <p>Your mission is, was and is going to always be to <span className="font-bold text-green-600">life for the glory of God</span></p>
-                <p>How to achieve that? Do these daily✔</p>
-                <ul className="list-decimal">
-                  <li>🕊🙏😴Have a peaceful night sleep </li>
-                  <li>💪🦵🏋️‍♀️Workout and get physically stronger</li>
-                  <li>🧠👀👂Fill your mind with godly things : </li>
-                  <ul className="list-inside list-disc">
-                    <li>🎵Music </li>
-                    <li>📖Read the bible </li>
-                    <li>📖Watch biblical sermons </li>
-                    <li>💻📱Godly content in the internet </li>
-                    <li>🗣Conversations about the Gospel of Jesus Christ </li>
-                  </ul>
-                  <li>🤔🧠💭Think on these thing </li>
-                  <li>😃👋🙌Be a blessing to others</li>
-                  <li>💯🎯Whatever work or activity, I must give 100% effort</li>
-                  <li>⌛✍Do not waste time</li>
-                </ul>
-              </div>
-              {/* <ul className="list-disc">
-                <li>Open clock app</li>
-                <li>Turn off TV</li>
-                <li>Wrap yourself up in the blanket</li>
-                <li>Thank God for this day and for forgiveness of sins</li>
-              </ul> */}
+              <Accordion type="single" collapsible>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="">
+                    <div className="flex flex-col gap-2">
+                      <p>Your mission is, was and is going to always be to <span className="font-bold text-green-600">life for the glory of God</span></p>
+                      <p>How to achieve that? Do these daily✔</p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="space-y-2">
+                      <li>🕊🙏😴Have a peaceful night sleep </li>
+                      <li>💪🦵🏋️‍♀️Workout and get physically stronger</li>
+                      <li>🧠👀👂Fill your mind with godly things: </li>
+                      <ul className="pl-12 list-disc">
+                        <li>🎵Music </li>
+                        <li>📖Read the bible </li>
+                        <li>📖Watch biblical sermons </li>
+                        <li>💻📱Godly content in the internet </li>
+                        <li>🗣Conversations about the Gospel of Jesus Christ </li>
+                      </ul>
+                      <li>🤔🧠💭Think on these thing </li>
+                      <li>😃👋🙌Be a blessing to others</li>
+                      <li>💯🎯Whatever work or activity, I must give 100% effort</li>
+                      <li>⌛✍Do not waste time</li>
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
 
             <div className="flex flex-row gap-12 justify-center items-center">
@@ -78,7 +86,7 @@ export default async function Home() {
                   <div>
                     <h2 className="font-semibold text-center">Reflection Questions</h2>
                     <ul className="list-outside">
-                      {getRandomQuestions(5, reflectionQuestions.reflectionQuestions ?? []).map((question, index) => {
+                      {getRandomQuestions(3, reflectionQuestions.reflectionQuestions ?? []).map((question, index) => {
                         return <li key={index} className="max-w-md text-wrap">{question}</li>
                       })}
                     </ul>
