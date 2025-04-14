@@ -312,7 +312,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "occupied",
-    "time": "12:00 am"
+    "time": "12:00 pm"
 },
 
 {
@@ -406,7 +406,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "occupied",
-    "time": "1:10 am"
+    "time": "1:10 pm"
 },
 
 {
@@ -476,7 +476,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "occupied",
-    "time": "3:00 am"
+    "time": "3:00 pm"
 },
 
 /* {
@@ -552,7 +552,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "occupied",
-    "time": "4:10 am"
+    "time": "4:10 pm"
 },
 
 {
@@ -622,7 +622,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "occupied",
-    "time": "5:00 am"
+    "time": "5:00 pm"
 },
 
 {
@@ -768,7 +768,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "no done",
-    "time": "8:30 am"
+    "time": "8:30 pm"
 },
 
 /* {
