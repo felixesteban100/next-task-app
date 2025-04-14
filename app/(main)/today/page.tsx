@@ -1,6 +1,6 @@
-import { AnimatedTestimonialsDemo } from "@/components/animated-testimonials";
+// import { AnimatedTestimonialsDemo } from "@/components/animated-testimonials";
 import Tasks from "@/components/TaskToEdit";
-import { collectionReflectionQuestions, collectionTask } from "@/db/mongodb/mongodb";
+import { /* collectionReflectionQuestions, */ collectionTask } from "@/db/mongodb/mongodb";
 import { getTodaysDate } from "@/lib/utils";
 import { ObjectId } from "mongodb";
 import { connection } from "next/server";
@@ -21,7 +21,7 @@ export default async function Home() {
 
   const today = getTodaysDate()
   const ToDayInfo = await collectionTask.findOne({ date: today })
-  const reflectionQuestions = await collectionReflectionQuestions.findOne()
+  // const reflectionQuestions = await collectionReflectionQuestions.findOne()
 
   const documentId = new ObjectId(ToDayInfo?._id); // Example _id
   const timestamp = documentId.getTimestamp(); // Get the creation timestamp
@@ -35,10 +35,10 @@ export default async function Home() {
   }).format(timestamp);
 
 
-  const getRandomQuestions = (count: number, questions: string[]): string[] => {
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, count);
-  };
+  // const getRandomQuestions = (count: number, questions: string[]): string[] => {
+  //   const shuffled = [...questions].sort(() => Math.random() - 0.5);
+  //   return shuffled.slice(0, count);
+  // };
 
   return (
     <>
@@ -54,6 +54,7 @@ export default async function Home() {
                   <AccordionTrigger className="">
                     <div className="flex flex-col gap-2">
                       <p>Your mission is, was and is going to always be to <span className="font-bold text-green-600">life for the glory of God</span></p>
+                      <p>That means to do all activities in this list and out of this list <span className="font-bold text-green-600">for the glory of God</span></p>
                       <p>How to achieve that? Do these daily✔</p>
                     </div>
                   </AccordionTrigger>
@@ -79,7 +80,7 @@ export default async function Home() {
               </Accordion>
             </div>
 
-            <div className="flex flex-row gap-12 justify-center items-center">
+            {/* <div className="flex flex-row gap-12 justify-center items-center">
               <AnimatedTestimonialsDemo />
               {
                 reflectionQuestions ?
@@ -93,7 +94,7 @@ export default async function Home() {
                   </div>
                   : null
               }
-            </div>
+            </div> */}
           </div>
         </>
         :

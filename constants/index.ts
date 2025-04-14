@@ -802,10 +802,10 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "10:00 pm"
 } */
 {
-    "name": "Are you going to honor God, love your family and invest in your future?",
+    "name": "Are you going to honor God, love your family and invest in your future tonight?",
     "type": "spiritual",
     "state": "no done",
-    "time": "10:00 pm"
+    "time": "9:30 pm"
 }
 ]
 
