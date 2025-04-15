@@ -141,10 +141,10 @@ export default async function page({
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>
-                                    {day.tasks.slice().reverse().map((task, taskIndex) => {
+                                    {day.tasks/* .slice().reverse() */.map((task, taskIndex) => {
                                         return (
                                             <div key={cIndex + task.name + task.time + taskIndex}>
-                                                {task.name === "Say what you did recently: was it sinful or righteous before God?" ? <Separator className="my-5" /> : null}
+                                                {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
                                                 <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name} <span className='font-semibold'>({task.time})</span></p>
                                             </div>
                                         )
