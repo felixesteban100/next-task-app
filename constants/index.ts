@@ -498,7 +498,8 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "3:50 pm"
 },
 {
-    "name": "Data structures: read and record audio",
+    // "name": "Data structures: read and record audio",
+    "name": "Learn and study Data structures▶💻⚙📊💡💾",
     "type": "normal",
     "state": "occupied",
     "time": "4:00 am"
