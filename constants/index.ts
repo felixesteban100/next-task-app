@@ -74,12 +74,6 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "7:10 am"
 },
 {
-    "name": "Listen to christian music",
-    "type": "normal",
-    "state": "no done",
-    "time": "7:20 am"
-},
-{
     "name": "Read Bible (10+ chapters or an entire book)",
     "type": "spiritual",
     "state": "no done",
@@ -789,6 +783,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "type": "normal",
     "state": "no done",
     "time": "9:10 pm"
+},
+{
+    "name": "Listen to christian music",
+    "type": "normal",
+    "state": "no done",
+    "time": "9:20 pm"
 },
 /* {
     "name": "Put the clock and turn off the TV",
