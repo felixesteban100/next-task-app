@@ -68,7 +68,7 @@ export const DEFAULT_TASKS: Task[] = [{
 },
  */
 {
-    "name": "🦵 Knee improvement Routine",
+    "name": "🦵 Knee improvement Routine + Measure knee swelling",
     "type": "important",
     "state": "no done",
     "time": "7:10 am"
@@ -760,7 +760,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "8:30 pm"
 }, */
 {
-    "name": "🦵 Knee improvement Routine",
+    "name": "🦵 Knee improvement Routine + Measure knee swelling",
     "type": "important",
     "state": "no done",
     "time": "8:30 pm"
@@ -785,7 +785,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "9:10 pm"
 },
 {
-    "name": "Listen to christian music",
+    "name": "Cover in blanket and Listen to christian music",
     "type": "normal",
     "state": "no done",
     "time": "9:20 pm"
