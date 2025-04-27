@@ -5,8 +5,8 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import { classNamesState, doneInWhichWay, stateEmoji } from '@/constants'
-import { getMostRepeatedState, getTodaysDate } from '@/lib/utils'
+import { classNamesState, classNamesType, doneInWhichWay, stateEmoji } from '@/constants'
+import { cn, getMostRepeatedState, getTodaysDate } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
 import {
@@ -142,10 +142,16 @@ export default async function page({
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>
                                     {day.tasks/* .slice().reverse() */.map((task, taskIndex) => {
+                                        const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
                                         return (
-                                            <div key={cIndex + task.name + task.time + taskIndex}>
-                                                {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
-                                                <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name} <span className='font-semibold'>({task.time})</span></p>
+                                            <div key={cIndex + task.name + task.time + taskIndex} className='flex flex-col items-start justify-center'>
+                                                {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className='my-2' /> : null}
+                                                {/* <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name} <span className='font-semibold'>({task.time})</span></p> */}
+                                                <p
+                                                    className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state], "my-1")}
+                                                >
+                                                    {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name}
+                                                </p>
                                             </div>
                                         )
                                     })}

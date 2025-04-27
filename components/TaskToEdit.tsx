@@ -127,7 +127,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
         const updatedTasks = tasksState.map((item, indexItem) =>
             `${item.name}_${item.time}_${indexItem}` === taskToEditName
-                ? { ...item, [property]: newValue }
+                ? { ...item, [property]: newValue, }
                 : item
         );
 
@@ -160,7 +160,6 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">
-
                     <Button
                         id="saveButton"
                         disabled={form.formState.isSubmitting || !formTasksChanged}
@@ -181,47 +180,50 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                 <FormMessage />
                                 <FormControl>
                                     <div>
-                                        {field.value.map((task, index) => (
-                                            <div key={task.name + task.time + index} >
-                                                {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
-                                                <div className="flex gap-2 items-center justify-start">
-                                                    {Object.entries(stateEmoji).map(([state, emoji]) => (
-                                                        <Button
-                                                            key={index + state}
-                                                            type="button"
-                                                            size="icon"
-                                                            variant={"ghost"}
-                                                            className={`${task.state !== state ? "grayscale-100" : ""}`}
-                                                            onClick={() => updateTask(`${task.name}_${task.time}_${index}->${state}`, task, index, "state", field.onChange)}
-                                                        >
-                                                            {emoji}
-                                                        </Button>
-                                                    ))}
-
-                                                    <p
-                                                        className={cn(classNamesType[task.type], classNamesState[task.state])}
-                                                    >
-                                                        {task.name}
-                                                    </p>
-
-                                                    <select
-                                                        defaultValue={`${task.name}_${task.time}_${index}->${task.time}`}
-                                                        onChange={(e) => updateTask(e.target.value, task, index, "time", field.onChange)}
-                                                        className="appearance-none border-none bg-secondary/80 text-foreground rounded-md p-1 "
-                                                    >
-                                                        {TIMES.map(c => ({ value: `${task.name}_${task.time}_${index}->${c}`, name: c })).map((time) => (
-                                                            <option
-                                                                key={task.name + time.name}
-                                                                value={time.value}
-                                                                className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-yellow-500 font-stretch-semi-condensed" : "text-foreground"}`}
+                                        {field.value.map((task, index) => {
+                                            const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
+                                            return (
+                                                <div key={task.name + task.time + index} >
+                                                    {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
+                                                    <div className="flex gap-2 items-center justify-start">
+                                                        {Object.entries(stateEmoji).map(([state, emoji]) => (
+                                                            <Button
+                                                                key={index + state}
+                                                                type="button"
+                                                                size="icon"
+                                                                variant={"ghost"}
+                                                                className={`${task.state !== state ? "grayscale-100" : ""}`}
+                                                                onClick={() => updateTask(`${task.name}_${task.time}_${index}->${state}`, task, index, "state", field.onChange)}
                                                             >
-                                                                {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
-                                                            </option>
+                                                                {emoji}
+                                                            </Button>
                                                         ))}
-                                                    </select>
+
+                                                        <p
+                                                            className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state])}
+                                                        >
+                                                            {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name}
+                                                        </p>
+
+                                                        <select
+                                                            defaultValue={`${task.name}_${task.time}_${index}->${task.time}`}
+                                                            onChange={(e) => updateTask(e.target.value, task, index, "time", field.onChange)}
+                                                            className="appearance-none border-none bg-secondary/80 text-foreground rounded-md p-1 "
+                                                        >
+                                                            {TIMES.map(c => ({ value: `${task.name}_${task.time}_${index}->${c}`, name: c })).map((time) => (
+                                                                <option
+                                                                    key={task.name + time.name}
+                                                                    value={time.value}
+                                                                    className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-yellow-500 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                                >
+                                                                    {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        })}
                                     </div>
                                 </FormControl>
                             </FormItem>

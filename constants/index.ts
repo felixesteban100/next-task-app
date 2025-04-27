@@ -28,19 +28,25 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Wake up early",
     "type": "normal",
     "state": "no done",
-    "time": "6:40 am"
+    "time": "6:30 am"
+},
+{
+    "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
+    "type": "spiritual",
+    "state": "no done",
+    "time": "6:30 am"
 },
 {
     "name": "Go to the bathroom for grooming and brush teeth",
     "type": "normal",
     "state": "no done",
-    "time": "6:50 am"
+    "time": "6:40 am"
 },
 {
     "name": "Organize bed",
     "type": "normal",
     "state": "no done",
-    "time": "6:50 am"
+    "time": "6:40 am"
 },
 /* {
     "name": "Say a phrase: To hate sin and lust and To love God and his holiness",
@@ -48,18 +54,18 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "6:20 am"
 }, */
-{
+/* {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
     "type": "spiritual",
     "state": "no done",
     "time": "7:00 am"
-},
-{
+}, */
+/* {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
     "state": "no done",
     "time": "7:00 am"
-},
+}, */
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
@@ -68,28 +74,41 @@ export const DEFAULT_TASKS: Task[] = [{
 },
  */
 {
-    "name": "🦵 Knee improvement Routine + Measure knee swelling",
-    "type": "important",
-    "state": "no done",
-    "time": "7:10 am"
-},
-{
     "name": "Read Bible (10+ chapters or an entire book)",
     "type": "spiritual",
     "state": "no done",
-    "time": "7:30 am"
+    "time": "6:50 am"
+},
+{
+    "name": "Read from be a man (demark last and mark current)",
+    "type": "normal",
+    "state": "no done",
+    "time": "6:50 am"
+},
+{
+    // "name": "🦵 Knee improvement Routine + Measure knee swelling",
+    "name": "Measure knee swelling",
+    "type": "important",
+    "state": "no done",
+    "time": "7:20 am"
+},
+{
+    "name": "Exercises for the knee",
+    "type": "important",
+    "state": "no done",
+    "time": "7:20 am"
 },
 {
     "name": "Upload youtube short/ instagram reel to Palabra Abierta",
     "type": "normal",
     "state": "no done",
-    "time": "8:20 am"
+    "time": "8:40 am"
 },
 {
     "name": "Share a Christian quote or a verse to social networks",
     "type": "normal",
     "state": "no done",
-    "time": "8:30 am"
+    "time": "8:40 am"
 },
 /* {
     "name": "Data structures: read and record audio",
@@ -138,12 +157,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:50 am"
 }, */
-/* {
+{
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "no done",
     "time": "8:50 am"
-}, */
+},
 
 {
     "name": "Take vitamin D, omega 3, and vitamin C",
@@ -152,11 +171,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "9:00 am"
 },
 {
-    "name": "Exercises for the knee",
+    "name": "Software development / code projects",
     "type": "important",
     "state": "no done",
     "time": "9:10 am"
 },
+
 /* {
     "name": "Neck exercises",
     "type": "normal",
@@ -167,19 +187,19 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Practice Hard riddle TedEd/MindYourDecisions/Brilliant",
     "type": "normal",
     "state": "no done",
-    "time": "10:20 am"
+    "time": "10:00 am"
 },
 {
     "name": "Practice one Math exercise",
     "type": "normal",
     "state": "no done",
-    "time": "10:30 am"
+    "time": "10:10 am"
 },
 {
     "name": "Practice one Music reading exercise",
     "type": "normal",
     "state": "no done",
-    "time": "10:35 am"
+    "time": "10:20 am"
 },
 /* {
     "name": "Rubik's cubes 5x5 / games",
@@ -191,9 +211,14 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Rubik's cubes 5x5 / 4x4",
     "type": "normal",
     "state": "no done",
+    "time": "10:30 am"
+},
+{
+    "name": "Games for brain training",
+    "type": "normal",
+    "state": "no done",
     "time": "10:40 am"
 },
-
 
 
 
@@ -421,7 +446,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "2:30 pm"
 }, */
-
+{
+    "name": "Software development / code projects (long session)",
+    "type": "important",
+    "state": "occupied",
+    "time": "1:50 pm"
+},
 
 
 
@@ -485,18 +515,13 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "3:40 pm"
 },
-{
-    "name": "Read from be a man (demark last and mark current)",
-    "type": "normal",
-    "state": "occupied",
-    "time": "3:50 pm"
-},
+
 {
     // "name": "Data structures: read and record audio",
     "name": "Learn and study Data structures▶💻⚙📊💡💾",
-    "type": "normal",
+    "type": "important",
     "state": "occupied",
-    "time": "4:00 am"
+    "time": "3:50 am"
 },
 
 
@@ -836,6 +861,7 @@ export const TIMES = [
     "9:30 am",
     "9:40 am",
     "9:50 am",
+    "10:00 am",
     "10:10 am",
     "10:20 am",
     "10:30 am",
@@ -857,6 +883,9 @@ export const TIMES = [
     "1:00 pm",
     "1:10 pm",
     "1:20 pm",
+    "1:30 pm",
+    "1:40 pm",
+    "1:50 pm",
     "2:00 pm",
     "2:30 pm",
     "3:00 pm",
@@ -870,6 +899,9 @@ export const TIMES = [
     "4:55 pm",
     "5:00 pm",
     "5:10 pm",
+    "5:20 pm",
+    "5:30 pm",
+    "5:40 pm",
     "5:50 pm",
     "6:00 pm",
     "6:10 pm",
@@ -896,6 +928,7 @@ export const TIMES = [
     "9:40 pm",
     "9:50 pm",
     "10:00 pm",
+    "10:10 pm",
     "10:20 pm",
     "10:30 pm",
     "10:40 pm",
