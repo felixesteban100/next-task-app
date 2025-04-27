@@ -645,17 +645,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "5:00 pm"
 },
 
-{
-    "name": "Back exercises",
-    "type": "normal",
-    "state": "occupied",
-    "time": "5:10 pm"
-},
+
 {
     "name": "Learn new Software development with tutorials/courses",
     "type": "important",
     "state": "occupied",
-    "time": "5:50 pm"
+    "time": "5:10 pm"
 },
 {
     "name": "Spin basketball",
@@ -723,7 +718,7 @@ export const DEFAULT_TASKS: Task[] = [{
 }, */
 {
     "name": "Family time",
-    "type": "normal",
+    "type": "spiritual",
     "state": "occupied",
     "time": "7:10 pm"
 },
@@ -735,7 +730,7 @@ export const DEFAULT_TASKS: Task[] = [{
 }, */
 {
     "name": "Prayer time with family",
-    "type": "normal",
+    "type": "spiritual",
     "state": "occupied",
     "time": "8:00 pm"
 },
@@ -790,7 +785,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
-
+{
+    "name": "Back exercises",
+    "type": "normal",
+    "state": "no done",
+    "time": "8:40 pm"
+},
 /* {
     "name": "REPLACE THIS WITH SOMETHING",
     "type": "normal",
