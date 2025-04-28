@@ -48,6 +48,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "6:40 am"
 },
+{
+    "name": "Todays Four points to overcome and self-directed behavioral change",
+    "type": "important",
+    "state": "no done",
+    "time": "6:50 am"
+},
 /* {
     "name": "Say a phrase: To hate sin and lust and To love God and his holiness",
     "type": "normal",
@@ -98,12 +104,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "7:20 am"
 },
-{
-    "name": "Upload youtube short/ instagram reel to Palabra Abierta",
-    "type": "normal",
-    "state": "no done",
-    "time": "8:40 am"
-},
+
 {
     "name": "Share a Christian quote or a verse to social networks",
     "type": "normal",
@@ -281,7 +282,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "11:20 am"
 },
-
+{
+    "name": "Upload youtube short/ instagram reel to Palabra Abierta",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 am"
+},
 
 
 
@@ -780,7 +786,13 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "8:30 pm"
 }, */
 {
-    "name": "🦵 Knee improvement Routine + Measure knee swelling",
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "no done",
+    "time": "8:30 pm"
+},
+{
+    "name": "Measure knee swelling",
     "type": "important",
     "state": "no done",
     "time": "8:30 pm"
