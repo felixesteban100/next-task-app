@@ -178,7 +178,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "9:10 am"
 },
 {
-    "name": "Practice passes and dribles",
+    "name": "🏀Spin basketball / Practice dribble and passes",
     "type": "normal",
     "state": "no done",
     "time": "9:50 am"
@@ -353,7 +353,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "12:10 pm"
 },
 {
-    "name": "Spin basketball",
+    "name": "🏀Spin basketball / Practice dribble and passes",
     "type": "normal",
     "state": "occupied",
     "time": "12:20 pm"
@@ -665,10 +665,10 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "5:10 pm"
 },
 {
-    "name": "Spin basketball",
+    "name": "🏀Spin basketball / Practice dribble and passes",
     "type": "normal",
     "state": "occupied",
-    "time": "6:30 pm"
+    "time": "7:20 pm"
 },
 
 
