@@ -695,31 +695,36 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
     "state": "occupied",
-    "time": "6:40 pm"
+    // "time": "6:40 pm"
+    "time": "7:30 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
     "state": "occupied",
-    "time": "6:40 pm"
+    // "time": "6:40 pm"
+    "time": "7:30 pm"
 },
 {
     "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "occupied",
-    "time": "6:40 pm"
+    // "time": "6:40 pm"
+    "time": "7:30 pm"
 },
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
     "state": "occupied",
-    "time": "6:40 pm"
+   // "time": "6:40 pm"
+    "time": "7:30 pm"
 }, */
 {
     "name": "🦵 Knee improvement Routine",
     "type": "important",
     "state": "occupied",
-    "time": "6:40 pm"
+    // "time": "6:40 pm"
+    "time": "7:30 pm"
 },
 
 /* {
@@ -732,7 +737,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Family time",
     "type": "spiritual",
     "state": "occupied",
-    "time": "7:10 pm"
+    "time": "7:40 pm"
 },
 /* {
     "name": "Get all mobile devices out of the bedroom",
@@ -779,11 +784,17 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
-{
+/* {
     "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "no done",
     "time": "8:30 pm"
+}, */
+{
+    "name": "Back exercises",
+    "type": "normal",
+    "state": "no done",
+    "time": "8:40 pm"
 },
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
@@ -803,12 +814,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
-{
-    "name": "Back exercises",
-    "type": "normal",
-    "state": "no done",
-    "time": "8:40 pm"
-},
+
 /* {
     "name": "REPLACE THIS WITH SOMETHING",
     "type": "normal",
