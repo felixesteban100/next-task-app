@@ -185,7 +185,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                             return (
                                                 <div key={task.name + task.time + index} >
                                                     {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
-                                                    <div className="flex gap-2 items-center justify-start">
+                                                    <div className="flex gap-2 items-center justify-start group">
                                                         {Object.entries(stateEmoji).map(([state, emoji]) => (
                                                             <Button
                                                                 key={index + state}
@@ -199,10 +199,22 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                                             </Button>
                                                         ))}
 
-                                                        <p
+                                                        {/* <p
                                                             className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state])}
                                                         >
                                                             {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name}
+                                                        </p> */}
+
+                                                        <p
+                                                            className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state])}
+                                                        >
+                                                            {/* {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name} */}
+                                                            {occupiedAndNotSpiritual ?
+                                                                <>
+                                                                    <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                                    <span className='hidden group-hover:block'>{task.name}</span>
+                                                                </>
+                                                                : task.name}
                                                         </p>
 
                                                         <select

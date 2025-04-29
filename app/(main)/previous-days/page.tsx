@@ -144,13 +144,19 @@ export default async function page({
                                     {day.tasks/* .slice().reverse() */.map((task, taskIndex) => {
                                         const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
                                         return (
-                                            <div key={cIndex + task.name + task.time + taskIndex} className='flex flex-col items-start justify-center'>
+                                            <div key={cIndex + task.name + task.time + taskIndex} className='flex flex-col items-start justify-center group'>
                                                 {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className='my-2' /> : null}
                                                 {/* <p className={`${classNamesState[task.state]}`}>{stateEmoji[task.state]} {task.name} <span className='font-semibold'>({task.time})</span></p> */}
                                                 <p
                                                     className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state], "my-1")}
                                                 >
-                                                    {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name}
+                                                    {/* {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name} */}
+                                                    {occupiedAndNotSpiritual ?
+                                                        <>
+                                                            <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                            <span className='hidden group-hover:block'>{task.name}</span>
+                                                        </>
+                                                        : task.name}
                                                 </p>
                                             </div>
                                         )

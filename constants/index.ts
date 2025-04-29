@@ -177,6 +177,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "9:10 am"
 },
+{
+    "name": "Practice passes and dribles",
+    "type": "normal",
+    "state": "no done",
+    "time": "9:50 am"
+},
 
 /* {
     "name": "Neck exercises",
