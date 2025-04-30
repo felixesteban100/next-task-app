@@ -80,7 +80,7 @@ export const DEFAULT_TASKS: Task[] = [{
 },
  */
 {
-    "name": "Read Bible (10+ chapters or an entire book)",
+    "name": "📖✝Read Bible (10+ chapters or an entire book)",
     "type": "spiritual",
     "state": "no done",
     "time": "6:50 am"
@@ -294,7 +294,66 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "11:50 am"
 },
-
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "11:50 pm"
+},
 
 
 
@@ -388,7 +447,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "12:30 pm"
 },
-
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "12:50 pm"
+},
 
 
 
@@ -465,7 +529,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "1:50 pm"
 },
 
-
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "1:50 pm"
+},
 
 
 
@@ -536,7 +605,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "3:50 am"
 },
 
-
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:50 pm"
+},
 
 
 
@@ -784,6 +858,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
+{
+    "name": "Todays Four points to overcome and self-directed behavioral change",
+    "type": "important",
+    "state": "no done",
+    "time": "8:40 am"
+},
 /* {
     "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
@@ -794,7 +874,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Back exercises",
     "type": "normal",
     "state": "no done",
-    "time": "8:40 pm"
+    "time": "8:50 pm"
 },
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
@@ -802,25 +882,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 }, */
-{
-    "name": "🦵 Knee improvement Routine",
-    "type": "important",
-    "state": "no done",
-    "time": "8:30 pm"
-},
-{
-    "name": "Measure knee swelling",
-    "type": "important",
-    "state": "no done",
-    "time": "8:30 pm"
-},
 
-/* {
-    "name": "REPLACE THIS WITH SOMETHING",
-    "type": "normal",
-    "state": "no done",
-    "time": "8:40 pm"
-}, */
 {
     "name": "Brush teeth",
     "type": "normal",
@@ -834,11 +896,23 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "9:10 pm"
 },
 {
+    "name": "🦵 Knee improvement Routine",
+    "type": "important",
+    "state": "no done",
+    "time": "9:00 pm"
+},
+{
+    "name": "Measure knee swelling and elevate leg 20 min",
+    "type": "important",
+    "state": "no done",
+    "time": "9:00 pm"
+},
+/* {
     "name": "Cover in blanket and Listen to christian music",
     "type": "normal",
     "state": "no done",
     "time": "9:20 pm"
-},
+}, */
 /* {
     "name": "Put the clock and turn off the TV",
     "type": "important",
