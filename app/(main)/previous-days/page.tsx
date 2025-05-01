@@ -157,6 +157,7 @@ export default async function page({
                                                             <span className='hidden group-hover:block'>{task.name}</span>
                                                         </>
                                                         : task.name}
+                                                    <span className='font-semibold'>({task.time})</span>
                                                 </p>
                                             </div>
                                         )
