@@ -871,6 +871,18 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "8:30 pm"
 }, */
 {
+    "name": "Brush teeth",
+    "type": "normal",
+    "state": "no done",
+    "time": "9:00 pm"
+},
+{
+    "name": "Read 100 pure thoughts",
+    "type": "normal",
+    "state": "no done",
+    "time": "9:10 pm"
+},
+{
     "name": "Back exercises",
     "type": "normal",
     "state": "no done",
@@ -883,18 +895,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "8:30 pm"
 }, */
 
-{
-    "name": "Brush teeth",
-    "type": "normal",
-    "state": "no done",
-    "time": "9:00 pm"
-},
-{
-    "name": "Read 100 pure thoughts",
-    "type": "normal",
-    "state": "no done",
-    "time": "9:10 pm"
-},
+
 {
     "name": "🦵 Knee improvement Routine",
     "type": "important",
