@@ -191,7 +191,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "10:10 am"
 }, */
 {
-    "name": "Practice Hard riddle TedEd/MindYourDecisions/Brilliant",
+    "name": "Practice with Brilliant App",
     "type": "normal",
     "state": "no done",
     "time": "10:00 am"
@@ -446,6 +446,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "type": "important",
     "state": "occupied",
     "time": "12:30 pm"
+},
+{
+    "name": "Practice Hard riddle TedEd/MindYourDecisions",
+    "type": "normal",
+    "state": "no done",
+    "time": "12:50 am"
 },
 {
     "name": "Meditate in what you are doing?",
@@ -858,12 +864,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:30 pm"
 },
-{
-    "name": "Todays Four points to overcome and self-directed behavioral change",
-    "type": "important",
-    "state": "no done",
-    "time": "8:40 am"
-},
+
 /* {
     "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
@@ -903,10 +904,16 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "9:00 pm"
 },
 {
-    "name": "Measure knee swelling and elevate leg 20 min",
+    "name": "Measure knee swelling and elevate leg 30 min",
     "type": "important",
     "state": "no done",
     "time": "9:00 pm"
+},
+{
+    "name": "Todays Four points to overcome and self-directed behavioral change",
+    "type": "important",
+    "state": "no done",
+    "time": "9:30 am"
 },
 /* {
     "name": "Cover in blanket and Listen to christian music",
