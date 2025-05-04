@@ -786,7 +786,24 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "7:20 pm"
 },
-
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "7:20 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "7:20 pm"
+},
+{
+    "name": "Meditate in what you are doing?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "7:20 pm"
+},
 
 
 
