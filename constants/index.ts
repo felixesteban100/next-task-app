@@ -295,65 +295,24 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "11:50 am"
 },
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "11:50 pm"
 },
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "11:50 pm"
 },
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "11:50 pm"
 },
-{
-    "name": "Meditate in what you are doing?",
-    "type": "normal",
-    "state": "occupied",
-    "time": "11:50 pm"
-},
-{
-    "name": "Meditate in what you are doing?",
-    "type": "normal",
-    "state": "occupied",
-    "time": "11:50 pm"
-},
-{
-    "name": "Meditate in what you are doing?",
-    "type": "normal",
-    "state": "occupied",
-    "time": "11:50 pm"
-},
-{
-    "name": "Meditate in what you are doing?",
-    "type": "normal",
-    "state": "occupied",
-    "time": "11:50 pm"
-},
-{
-    "name": "Meditate in what you are doing?",
-    "type": "normal",
-    "state": "occupied",
-    "time": "11:50 pm"
-},
-{
-    "name": "Meditate in what you are doing?",
-    "type": "normal",
-    "state": "occupied",
-    "time": "11:50 pm"
-},
-{
-    "name": "Meditate in what you are doing?",
-    "type": "normal",
-    "state": "occupied",
-    "time": "11:50 pm"
-},
+
 
 
 
@@ -454,7 +413,25 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "12:50 am"
 },
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "12:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "12:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "12:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "12:50 pm"
@@ -536,7 +513,25 @@ export const DEFAULT_TASKS: Task[] = [{
 },
 
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "1:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "1:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "1:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "1:50 pm"
@@ -612,7 +607,31 @@ export const DEFAULT_TASKS: Task[] = [{
 },
 
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:50 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "3:50 pm"
@@ -685,7 +704,24 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "4:55 pm"
 },
-
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "4:55 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "4:55 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "4:55 pm"
+},
 
 
 
@@ -814,10 +850,29 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "6:50 pm"
 }, */
 {
+    "name": "Learn or practice one card trick 🃏",
+    "type": "normal",
+    "state": "occupied",
+    "time": "7:40 pm"
+},
+{
+    "name": "Learn a new english word",
+    "type": "normal",
+    "state": "occupied",
+    "time": "7:50 pm"
+},
+{
     "name": "Family time",
     "type": "spiritual",
     "state": "occupied",
-    "time": "7:40 pm"
+    "time": "8:00 pm"
+},
+
+{
+    "name": "Prayer time with family",
+    "type": "spiritual",
+    "state": "occupied",
+    "time": "8:00 pm"
 },
 /* {
     "name": "Get all mobile devices out of the bedroom",
@@ -825,13 +880,6 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "8:00 pm"
 }, */
-{
-    "name": "Prayer time with family",
-    "type": "spiritual",
-    "state": "occupied",
-    "time": "8:00 pm"
-},
-
 
 
 
