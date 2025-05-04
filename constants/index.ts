@@ -636,6 +636,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "3:50 pm"
 },
+{
+    "name": "Meditate in what you are doing with the Bible?",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:50 pm"
+},
 
 
 
@@ -700,6 +706,12 @@ export const DEFAULT_TASKS: Task[] = [{
 }, */
 {
     "name": "Learn a new english word",
+    "type": "normal",
+    "state": "occupied",
+    "time": "4:55 pm"
+},
+{
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "4:55 pm"
@@ -787,23 +799,24 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "7:20 pm"
 },
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "7:20 pm"
 },
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "7:20 pm"
 },
 {
-    "name": "Meditate in what you are doing?",
+    "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
     "time": "7:20 pm"
 },
+
 
 
 
