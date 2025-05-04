@@ -840,35 +840,35 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
     "type": "spiritual",
-    "state": "occupied",
+    "state": "no done",
     // "time": "6:40 pm"
     "time": "7:30 pm"
 },
 {
     "name": "Bible verse📖✝: read, memorize and record audio",
     "type": "spiritual",
-    "state": "occupied",
+    "state": "no done",
     // "time": "6:40 pm"
     "time": "7:30 pm"
 },
 {
     "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     // "time": "6:40 pm"
     "time": "7:30 pm"
 },
 /* {
     "name": "5x: move knee cap, hyperextended quad push, heel slides",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
    // "time": "6:40 pm"
     "time": "7:30 pm"
 }, */
 {
     "name": "🦵 Knee improvement Routine",
     "type": "important",
-    "state": "occupied",
+    "state": "no done",
     // "time": "6:40 pm"
     "time": "7:30 pm"
 },
@@ -876,38 +876,38 @@ export const DEFAULT_TASKS: Task[] = [{
 /* {
     "name": "Solve problem from advent of code / leetcode / brilliant",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "6:50 pm"
 }, */
 {
     "name": "Learn or practice one card trick 🃏",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "7:40 pm"
 },
 {
     "name": "Learn a new english word",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "7:50 pm"
 },
 {
     "name": "Family time",
     "type": "spiritual",
-    "state": "occupied",
+    "state": "no done",
     "time": "8:00 pm"
 },
 
 {
     "name": "Prayer time with family",
     "type": "spiritual",
-    "state": "occupied",
+    "state": "no done",
     "time": "8:00 pm"
 },
 /* {
     "name": "Get all mobile devices out of the bedroom",
     "type": "normal",
-    "state": "occupied",
+    "state": "no done",
     "time": "8:00 pm"
 }, */
 
