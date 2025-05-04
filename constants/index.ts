@@ -962,7 +962,8 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "9:10 pm"
 },
 {
-    "name": "Back exercises",
+    // "name": "Back exercises",
+    "name": "Stretching exercises",
     "type": "normal",
     "state": "no done",
     "time": "8:50 pm"
