@@ -409,7 +409,7 @@ export const DEFAULT_TASKS: Task[] = [{
 {
     "name": "Practice Hard riddle TedEd/MindYourDecisions",
     "type": "normal",
-    "state": "no done",
+    "state": "occupied",
     "time": "12:50 am"
 },
 {
@@ -711,7 +711,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "4:55 pm"
 },
 {
-    "name": "Meditate in what you are doing with the Bible?",
+    "name": "Back exercises",
     "type": "normal",
     "state": "occupied",
     "time": "4:55 pm"
