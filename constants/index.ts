@@ -410,7 +410,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Practice Hard riddle TedEd/MindYourDecisions",
     "type": "normal",
     "state": "occupied",
-    "time": "12:50 am"
+    "time": "12:50 pm"
 },
 {
     "name": "Meditate in what you are doing with the Bible?",
@@ -603,7 +603,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Learn and study Data structures▶💻⚙📊💡💾",
     "type": "important",
     "state": "occupied",
-    "time": "3:50 am"
+    "time": "3:50 pm"
 },
 
 {
@@ -992,7 +992,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Todays Four points to overcome and self-directed behavioral change",
     "type": "important",
     "state": "no done",
-    "time": "9:30 am"
+    "time": "9:30 pm"
 },
 /* {
     "name": "Cover in blanket and Listen to christian music",
