@@ -86,12 +86,6 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "6:50 am"
 },
 {
-    "name": "Read from be a man (demark last and mark current)",
-    "type": "normal",
-    "state": "no done",
-    "time": "6:50 am"
-},
-{
     // "name": "🦵 Knee improvement Routine + Measure knee swelling",
     "name": "Measure knee swelling",
     "type": "important",
@@ -105,12 +99,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "7:20 am"
 },
 
-{
-    "name": "Share a Christian quote or a verse to social networks",
-    "type": "normal",
-    "state": "no done",
-    "time": "8:40 am"
-},
+
 /* {
     "name": "Data structures: read and record audio",
     "type": "normal",
@@ -595,9 +584,14 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Record yourself imitating a manly voice",
     "type": "normal",
     "state": "occupied",
-    "time": "3:40 pm"
+    "time": "3:20 pm"
 },
-
+{
+    "name": "Share a Christian quote or a verse to social networks",
+    "type": "normal",
+    "state": "occupied",
+    "time": "3:30 pm"
+},
 {
     // "name": "Data structures: read and record audio",
     "name": "Learn and study Data structures▶💻⚙📊💡💾",
@@ -691,12 +685,17 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "4:10 pm"
 },
-
+{
+    "name": "Read from be a man (demark last and mark current)",
+    "type": "normal",
+    "state": "occupied",
+    "time": "4:20 pm"
+},
 {
     "name": "Learn or practice one card trick 🃏",
     "type": "normal",
     "state": "occupied",
-    "time": "4:20 pm"
+    "time": "4:30 pm"
 },
 /* {
     "name": "Do something pending from the To Do list below",
@@ -904,6 +903,8 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "8:00 pm"
 },
+
+
 /* {
     "name": "Get all mobile devices out of the bedroom",
     "type": "normal",
@@ -994,6 +995,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "9:30 pm"
 },
+{
+    "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
+    "type": "spiritual",
+    "state": "no done",
+    "time": "9:40 pm"
+},
 /* {
     "name": "Cover in blanket and Listen to christian music",
     "type": "normal",
@@ -1016,7 +1023,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Are you going to honor God, love your family and invest in your future tonight?",
     "type": "spiritual",
     "state": "no done",
-    "time": "9:30 pm"
+    "time": "9:50 pm"
 }
 ]
 
