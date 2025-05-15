@@ -783,12 +783,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "5:00 pm"
 },
-{
+/* {
     "name": "Learn or practice one card trick 🃏",
     "type": "normal",
     "state": "occupied",
     "time": "5:10 pm"
-},
+}, */
 {
     "name": "Learn a new english word",
     "type": "normal",
@@ -1083,13 +1083,16 @@ export const TIMES = [
     "2:30 pm",
     "3:00 pm",
     "3:10 pm",
+    "3:20 pm",
+    "3:30 pm",
     "3:40 pm",
     "3:50 pm",
-    "4:00 am",
+    "4:00 pm",
     "4:10 pm",
     "4:20 pm",
     "4:30 pm",
-    "4:55 pm",
+    "4:40 pm",
+    "4:50 pm",
     "5:00 pm",
     "5:10 pm",
     "5:20 pm",
