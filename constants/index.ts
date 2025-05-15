@@ -956,12 +956,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "9:00 pm"
 },
-{
+/* {
     "name": "Read 100 pure thoughts",
     "type": "normal",
     "state": "no done",
     "time": "9:10 pm"
-},
+}, */
 {
     // "name": "Back exercises",
     "name": "Stretching exercises",
