@@ -691,12 +691,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "4:20 pm"
 },
-{
+/* {
     "name": "Learn or practice one card trick 🃏",
     "type": "normal",
     "state": "occupied",
     "time": "4:30 pm"
-},
+}, */
 /* {
     "name": "Do something pending from the To Do list below",
     "type": "normal",
@@ -707,13 +707,13 @@ export const DEFAULT_TASKS: Task[] = [{
     "name": "Learn a new english word",
     "type": "normal",
     "state": "occupied",
-    "time": "4:55 pm"
+    "time": "4:30 pm"
 },
 {
     "name": "Back exercises",
     "type": "normal",
     "state": "occupied",
-    "time": "4:55 pm"
+    "time": "4:40 pm"
 },
 {
     "name": "Meditate in what you are doing with the Bible?",
@@ -783,12 +783,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "5:00 pm"
 },
-/* {
+{
     "name": "Learn or practice one card trick 🃏",
     "type": "normal",
     "state": "occupied",
     "time": "5:10 pm"
-}, */
+},
 {
     "name": "Learn a new english word",
     "type": "normal",
