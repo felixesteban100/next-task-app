@@ -783,13 +783,24 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "occupied",
     "time": "5:00 pm"
 },
-
+{
+    "name": "Learn or practice one card trick 🃏",
+    "type": "normal",
+    "state": "occupied",
+    "time": "5:10 pm"
+},
+{
+    "name": "Learn a new english word",
+    "type": "normal",
+    "state": "occupied",
+    "time": "5:20 pm"
+},
 
 {
     "name": "Learn new Software development with tutorials/courses",
     "type": "important",
     "state": "occupied",
-    "time": "5:10 pm"
+    "time": "5:30 pm"
 },
 {
     "name": "🏀Spin basketball / Practice dribble and passes",
@@ -879,17 +890,12 @@ export const DEFAULT_TASKS: Task[] = [{
     "time": "6:50 pm"
 }, */
 {
-    "name": "Learn or practice one card trick 🃏",
-    "type": "normal",
+    "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
+    "type": "spiritual",
     "state": "no done",
     "time": "7:40 pm"
 },
-{
-    "name": "Learn a new english word",
-    "type": "normal",
-    "state": "no done",
-    "time": "7:50 pm"
-},
+
 {
     "name": "Family time",
     "type": "spiritual",
@@ -995,12 +1001,7 @@ export const DEFAULT_TASKS: Task[] = [{
     "state": "no done",
     "time": "9:30 pm"
 },
-{
-    "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
-    "type": "spiritual",
-    "state": "no done",
-    "time": "9:40 pm"
-},
+
 /* {
     "name": "Cover in blanket and Listen to christian music",
     "type": "normal",
