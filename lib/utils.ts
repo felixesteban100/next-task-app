@@ -51,3 +51,22 @@ export function getTotalTasksByType(tasks: Task[], type: TaskTypes) {
   const tasksByType = tasks.filter(c => c.type === type)
   return `✅${tasksByType.filter(c => c.state === "done").length} ❌${tasksByType.filter(c => c.state === "no done").length} ☑${tasksByType.filter(c => c.state === "occupied").length}` /* + ` / ${tasksByType.length}` */
 }
+
+
+
+export function sortByProperty(array: Task[], property: "time" | "id"): Task[] {
+  return property === "time" ? array.sort((a, b) => {
+    const getMinutes = (timeStr: string): number => {
+      const [, hourStr, minuteStr, meridian] = timeStr.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i)!;
+      let hour = parseInt(hourStr, 10);
+      const minute = parseInt(minuteStr, 10);
+
+      if (meridian.toUpperCase() === 'PM' && hour !== 12) hour += 12;
+      if (meridian.toUpperCase() === 'AM' && hour === 12) hour = 0;
+
+      return hour * 60 + minute;
+    };
+
+    return getMinutes(a.time) - getMinutes(b.time);
+  }) : array.sort((a, b) => a.id - b.id);
+}

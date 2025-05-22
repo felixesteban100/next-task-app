@@ -25,6 +25,9 @@ export default function Simple() {
     });
     // const thumbsUp = rive?.stateMachineInputs("Is pressed")[0]
 
+
+    /* https://rive.app/marketplace/10275-35738-test-responsive-guy/ */
+
     return <>
         <div className="center" style={{ width: '800px', height: '500px' }}>
             {/* <RiveComponentPlayback onClick={() => bumpInput && bumpInput.fire()} className="h-full w-auto" /> */}

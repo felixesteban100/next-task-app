@@ -4,7 +4,7 @@
 //     ToggleGroup,
 //     ToggleGroupItem,
 // } from "@/components/ui/toggle-group"
-import { cn, filterFutureTimes, getTotalTasksByType } from '@/lib/utils'
+import { cn, filterFutureTimes, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { TIMES } from "@/constants"
@@ -35,6 +35,9 @@ import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
 import { useState } from "react"
 // import { DialogTrigger } from './ui/dialog'
 // import { AnimatedTestimonialsDemo } from './animated-testimonials'
+import { useSearchParams } from 'next/navigation'
+import ButtonOrganizeByTime from './ButtonOrganizeByTime'
+
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -54,6 +57,7 @@ const TaskSchema = z.object({
     type: TaskTypesSchema,
     state: TaskStatesSchema,
     time: z.string(),
+    id: z.number()
 })
 
 export type Task = z.infer<typeof TaskSchema>
@@ -70,6 +74,8 @@ type FormSchemaType = z.infer<typeof formSchema>;
 const durationLoader = 1000
 
 export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskAndDetails, hourAdded: string }) {
+    const organizeByTime = new URLSearchParams(useSearchParams()).get('organizeByTime') === "true" ? true : false
+
     const [loading, setLoading] = useState(false);
 
     const { tasks, date } = dayInfo
@@ -132,46 +138,52 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
         );
 
         fieldOnChange(updatedTasks); // ✅ Pass the new array directly
+        // fieldOnChange(sortByProperty(updatedTasks, "id")); // ✅ Pass the new array directly
     }
-
 
     return (
         <div className={`flex flex-col gap-7 items-center mb-10 w-full `}>
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
 
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger>
-                        <span className='font-bold text-2xl'>
-                            {date} (Today)
-                        </span>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Added at: {hourAdded}</p>
-                        <div className='flex flex-col gap-2 items-center text-2xl'>
-                            <p>Spiritual: {getTotalTasksByType(tasksState, "spiritual")}</p>
-                            <p>Important: {getTotalTasksByType(tasksState, "important")}</p>
-                            <p>Normal: {getTotalTasksByType(tasksState, "normal")}</p>
-                            <p>Total: {doneTasks} {noDoneTasks} {occupiedTasks}</p>
-                        </div>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+            <div className='flex flex-col gap-5 items-center justify-between w-full'>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <span className='font-bold text-2xl'>
+                                {date} (Today)
+                            </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Added at: {hourAdded}</p>
+                            <div className='flex flex-col gap-2 items-center text-2xl'>
+                                <p>Spiritual: {getTotalTasksByType(tasksState, "spiritual")}</p>
+                                <p>Important: {getTotalTasksByType(tasksState, "important")}</p>
+                                <p>Normal: {getTotalTasksByType(tasksState, "normal")}</p>
+                                <p>Total: {doneTasks} {noDoneTasks} {occupiedTasks}</p>
+                            </div>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+                <ButtonOrganizeByTime />
+            </div>
+
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">
-                    <Button
-                        id="saveButton"
-                        disabled={form.formState.isSubmitting || !formTasksChanged}
-                        className={`group disabled:grayscale-25 w-fit p-7 text-xl fixed bottom-10 left-[65rem] ${form.formState.isSubmitting || !formTasksChanged ? "" : "animate-[pulse_2s_infinite]"}`}
-                        type="submit"
-                    >
-                        <p
-                            className={`group-enabled:animate-bounce flex gap-2 items-center`}
+                    <div className='fixed bottom-10 left-10/12 -translate-x-10/12 flex gap-5'>
+                        <Button
+                            id="saveButton"
+                            disabled={form.formState.isSubmitting || !formTasksChanged}
+                            className={`group disabled:grayscale-25 p-7 text-xl   ${/* form.formState.isSubmitting || !formTasksChanged ? "" : "animate-[pulse_2s_infinite]" */""}`}
+                            type="submit"
                         >
-                            {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
-                        </p>
-                    </Button>
+                            <p
+                                className={`group-enabled:animate-bounce flex gap-2 items-center`}
+                            >
+                                {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
+                            </p>
+                        </Button>
+                    </div>
                     <FormField
                         control={form.control}
                         name="tasks"
@@ -180,35 +192,28 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                 <FormMessage />
                                 <FormControl>
                                     <div>
-                                        {field.value.map((task, index) => {
+                                        {(sortByProperty(field.value, organizeByTime ? "time" : "id")).map((task) => {
                                             const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
                                             return (
-                                                <div key={task.name + task.time + index} >
+                                                <div key={task.name + task.time + task.id} >
                                                     {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
                                                     <div className="flex gap-2 items-center justify-start group">
                                                         {Object.entries(stateEmoji).map(([state, emoji]) => (
                                                             <Button
-                                                                key={index + state}
+                                                                key={task.id + state}
                                                                 type="button"
                                                                 size="icon"
                                                                 variant={"ghost"}
                                                                 className={`${task.state !== state ? "grayscale-100" : ""}`}
-                                                                onClick={() => updateTask(`${task.name}_${task.time}_${index}->${state}`, task, index, "state", field.onChange)}
+                                                                onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
                                                             >
                                                                 {emoji}
                                                             </Button>
                                                         ))}
 
-                                                        {/* <p
-                                                            className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state])}
-                                                        >
-                                                            {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name}
-                                                        </p> */}
-
                                                         <p
                                                             className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state])}
                                                         >
-                                                            {/* {occupiedAndNotSpiritual ? "Either Working or occupied..." : task.name} */}
                                                             {occupiedAndNotSpiritual ?
                                                                 <>
                                                                     <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
@@ -218,15 +223,15 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                                         </p>
 
                                                         <select
-                                                            defaultValue={`${task.name}_${task.time}_${index}->${task.time}`}
-                                                            onChange={(e) => updateTask(e.target.value, task, index, "time", field.onChange)}
+                                                            defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
+                                                            onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
                                                             className="appearance-none border-none bg-secondary/80 text-foreground rounded-md p-1 "
                                                         >
-                                                            {TIMES.map(c => ({ value: `${task.name}_${task.time}_${index}->${c}`, name: c })).map((time) => (
+                                                            {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
                                                                 <option
                                                                     key={task.name + time.name}
                                                                     value={time.value}
-                                                                    className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-yellow-500 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                                    className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-red-300 font-stretch-semi-condensed" : "text-foreground"}`}
                                                                 >
                                                                     {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
                                                                 </option>
