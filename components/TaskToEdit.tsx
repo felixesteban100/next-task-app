@@ -38,6 +38,7 @@ import { useState } from "react"
 import { useSearchParams } from 'next/navigation'
 import ButtonOrganizeByTime from './ButtonOrganizeByTime'
 
+import { AnimatePresence, motion } from "framer-motion";
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -90,7 +91,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
 
     const { tasks: tasksState } = form.watch();
 
-    const formTasksChanged = form.formState.isDirty && (JSON.stringify(tasks) !== JSON.stringify(tasksState))
+    const formTasksChanged = form.formState.isDirty && (JSON.stringify(tasks.sort((a, b) => a.id - b.id)) !== JSON.stringify(tasksState.sort((a, b) => a.id - b.id)))
 
     const doneTasks = `${stateEmoji["done"]}${tasksState.filter(c => c.state === "done").length}`
     const noDoneTasks = `${stateEmoji["no done"]}${tasksState.filter(c => c.state === "no done").length}`
@@ -137,8 +138,8 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                 : item
         );
 
-        fieldOnChange(updatedTasks); // ✅ Pass the new array directly
-        // fieldOnChange(sortByProperty(updatedTasks, "id")); // ✅ Pass the new array directly
+        // fieldOnChange(updatedTasks); // ✅ Pass the new array directly
+        fieldOnChange(sortByProperty(updatedTasks, "id")); // ✅ Pass the new array directly
     }
 
     return (
@@ -195,50 +196,62 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                         {(sortByProperty(field.value, organizeByTime ? "time" : "id")).map((task) => {
                                             const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
                                             return (
-                                                <div key={task.name + task.time + task.id} >
-                                                    {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
-                                                    <div className="flex gap-2 items-center justify-start group">
-                                                        {Object.entries(stateEmoji).map(([state, emoji]) => (
-                                                            <Button
-                                                                key={task.id + state}
-                                                                type="button"
-                                                                size="icon"
-                                                                variant={"ghost"}
-                                                                className={`${task.state !== state ? "grayscale-100" : ""}`}
-                                                                onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
-                                                            >
-                                                                {emoji}
-                                                            </Button>
-                                                        ))}
-
-                                                        <p
-                                                            className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state])}
-                                                        >
-                                                            {occupiedAndNotSpiritual ?
-                                                                <>
-                                                                    <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
-                                                                    <span className='hidden group-hover:block'>{task.name}</span>
-                                                                </>
-                                                                : task.name}
-                                                        </p>
-
-                                                        <select
-                                                            defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
-                                                            onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
-                                                            className="appearance-none border-none bg-secondary/80 text-foreground rounded-md p-1 "
-                                                        >
-                                                            {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
-                                                                <option
-                                                                    key={task.name + time.name}
-                                                                    value={time.value}
-                                                                    className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-red-300 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                <AnimatePresence key={task.name + task.time + task.id}>
+                                                    {/* <div */}
+                                                    <motion.div
+                                                        transition={{
+                                                            type: "spring",
+                                                            damping: 20,
+                                                            stiffness: 300
+                                                        }}
+                                                        layout
+                                                        key={task.name + task.time + task.id}
+                                                    >
+                                                        {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
+                                                        <div className="flex gap-2 items-center justify-start group">
+                                                            {Object.entries(stateEmoji).map(([state, emoji]) => (
+                                                                <Button
+                                                                    key={task.id + state}
+                                                                    type="button"
+                                                                    size="icon"
+                                                                    variant={"ghost"}
+                                                                    className={`${task.state !== state ? "grayscale-100" : ""}`}
+                                                                    onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
                                                                 >
-                                                                    {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
-                                                                </option>
+                                                                    {emoji}
+                                                                </Button>
                                                             ))}
-                                                        </select>
-                                                    </div>
-                                                </div>
+
+                                                            <p
+                                                                className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state])}
+                                                            >
+                                                                {occupiedAndNotSpiritual ?
+                                                                    <>
+                                                                        <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                                        <span className='hidden group-hover:block'>{task.name}</span>
+                                                                    </>
+                                                                    : task.name}
+                                                            </p>
+
+                                                            <select
+                                                                defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
+                                                                onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
+                                                                className="appearance-none border-none bg-secondary/80 text-foreground rounded-md p-1 "
+                                                            >
+                                                                {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
+                                                                    <option
+                                                                        key={task.name + time.name}
+                                                                        value={time.value}
+                                                                        className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-red-300 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                                    >
+                                                                        {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    </motion.div>
+                                                    {/* </div> */}
+                                                </AnimatePresence>
                                             )
                                         })}
                                     </div>

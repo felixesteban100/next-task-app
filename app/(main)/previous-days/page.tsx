@@ -6,7 +6,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { classNamesState, classNamesType, doneInWhichWay, stateEmoji } from '@/constants'
-import { cn, getMostRepeatedState, getTodaysDate } from '@/lib/utils'
+import { cn, getMostRepeatedState, getTodaysDate, sortByProperty } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
 import {
@@ -141,7 +141,7 @@ export default async function page({
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>
-                                    {day.tasks/* .slice().reverse() */.map((task, taskIndex) => {
+                                    {sortByProperty(day.tasks, "time").map((task, taskIndex) => {
                                         const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
                                         return (
                                             <div key={cIndex + task.name + task.time + taskIndex} className='flex flex-col items-start justify-center group'>

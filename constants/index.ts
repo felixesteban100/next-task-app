@@ -1033,42 +1033,42 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "Wake up early",
         "type": "normal",
         "state": "no done",
-        "time": "6:30 am",
+        "time": "6:10 am",
         "id": 0
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
         "type": "spiritual",
         "state": "no done",
-        "time": "6:30 am",
+        "time": "6:10 am",
         "id": 1
     },
     {
         "name": "Go to the bathroom for grooming and brush teeth",
         "type": "normal",
         "state": "no done",
-        "time": "6:40 am",
+        "time": "6:20 am",
         "id": 2
     },
     {
         "name": "Organize bed",
         "type": "normal",
         "state": "no done",
-        "time": "6:40 am",
+        "time": "6:20 am",
         "id": 3
     },
     {
         "name": "Todays Four points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
-        "time": "6:50 am",
+        "time": "6:30 am",
         "id": 4
     },
     {
         "name": "📖✝Read Bible (10+ chapters or an entire book)",
         "type": "spiritual",
         "state": "no done",
-        "time": "6:50 am",
+        "time": "6:40 am",
         "id": 5
     },
     {
