@@ -165,7 +165,7 @@ export default async function page({
                                 </AccordionContent>
                             </AccordionItem>
                             {/* (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" || c.name === "Are you going to honor God, love your family and invest in your future?") */}
-                            {searchValue != "" ? null : day.date == today ? null : day.tasks.slice().reverse().some((c, index) => index === 0 && c.state === "no done") === true ?
+                            {searchValue != "" ? null : day.date == today ? null : day.tasks.slice().reverse().some((c, index) => (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") || (c.name == "Are you going to honor God, love your family and invest in your future tonight?" && c.state === "no done") || (index === 0 && c.state === "no done")) === true ?
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger className='font-bold text-2xl mt-4'>😞🔥✝️</TooltipTrigger>
