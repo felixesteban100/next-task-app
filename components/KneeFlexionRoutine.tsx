@@ -47,6 +47,15 @@ const KneeFlexionRoutine: React.FC = () => {
 
             <Section title="3. Flexion Exercises (10–15 min)">
                 <Exercise
+                    title="🧎 Assisted ATG Split Squat on Elevated Surface (Chair Support)"
+                    steps={[
+                        "Start in a split stance, front foot elevated and back foot a comfortable distance behind",
+                        "Lower slowly by bending your front knee forward over your toes.",
+                        "Use the chair lightly for balance, not to pull yourself up.",
+                        "Pause at the bottom, then push through the front foot to return to the starting position.",
+                    ]}
+                />
+                <Exercise
                     title="🔁 Heel Slides (Rocking)"
                     steps={[
                         "Lie down, foot on towel/sliders",
