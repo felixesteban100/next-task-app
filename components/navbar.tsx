@@ -1,7 +1,7 @@
 "use client"
 
 import { ModeToggle } from "@/components/mode-toggle"
-import { Accessibility, Calendar, Clock, History, Loader, PlusIcon } from "lucide-react"
+import { Accessibility, Calendar, Clock, History, LetterText, Loader, PlusIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { SignInButton, useAuth, UserButton } from "@clerk/nextjs"
@@ -73,6 +73,11 @@ const links = [
         href: "/knee",
         label: "Knee Improvement Routine",
         icon: <Accessibility />
+    },
+    {
+        href: "/speak-english",
+        label: "Speak English",
+        icon: <LetterText />
     },
 ]
 

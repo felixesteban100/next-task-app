@@ -1513,7 +1513,7 @@ export const DEFAULT_TASKS: Task[] = [
         "id": 68
     },
     {
-        "name": "Learn a new english word",
+        "name": "Learn a new english word / Speaking module in the task app",
         "type": "normal",
         "state": "occupied",
         "time": "4:30 pm",
@@ -1583,7 +1583,7 @@ export const DEFAULT_TASKS: Task[] = [
         "id": 78
     },
     {
-        "name": "Learn a new english word",
+        "name": "Learn a new english word / Speaking module in the task app",
         "type": "normal",
         "state": "occupied",
         "time": "5:20 pm",
