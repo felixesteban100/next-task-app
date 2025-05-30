@@ -28,7 +28,7 @@ export default function WordDisplay() {
                 }
                 setTimer(`00:${timeLeft < 10 ? '0' : ''}${timeLeft}`)
             }
-        }, (100 * timeLeft))
+        }, (1000 * timeLeft))
 
         return () => clearInterval(interval)
     }, [isPaused])
