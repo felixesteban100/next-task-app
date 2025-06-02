@@ -1733,6 +1733,11 @@ export const DEFAULT_TASKS: Task[] = [
 
 export const TIMES = [
     "5:00 am",
+    "5:10 am",
+    "5:20 am",
+    "5:30 am",
+    "5:40 am",
+    "5:50 am",
     "6:00 am",
     "6:10 am",
     "6:20 am",
