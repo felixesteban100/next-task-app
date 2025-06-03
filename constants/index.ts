@@ -1033,703 +1033,607 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "Wake up early",
         "type": "normal",
         "state": "no done",
-        "time": "6:10 am",
-        "id": 0
+        "time": "5:30 am",
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
         "type": "spiritual",
         "state": "no done",
-        "time": "6:10 am",
-        "id": 1
+        "time": "5:40 am",
     },
     {
         "name": "Go to the bathroom for grooming and brush teeth",
         "type": "normal",
         "state": "no done",
-        "time": "6:20 am",
-        "id": 2
+        "time": "5:40 am",
     },
     {
         "name": "Organize bed",
         "type": "normal",
         "state": "no done",
-        "time": "6:20 am",
-        "id": 3
-    },
-    {
-        "name": "Todays Four points to overcome and self-directed behavioral change",
-        "type": "important",
-        "state": "no done",
-        "time": "6:30 am",
-        "id": 4
-    },
-    {
-        "name": "📖✝Read Bible (10+ chapters or an entire book)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "6:40 am",
-        "id": 5
+        "time": "5:40 am",
     },
     {
         "name": "Measure knee swelling",
         "type": "important",
         "state": "no done",
-        "time": "7:20 am",
-        "id": 6
+        "time": "6:00 am",
     },
     {
-        "name": "Exercises for the knee",
+        "name": "Todays Four points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
-        "time": "7:20 am",
-        "id": 7
+        "time": "6:10 am",
     },
+    {
+        "name": "📖✝Read Bible (10+ chapters or an entire book)",
+        "type": "spiritual",
+        "state": "no done",
+        "time": "6:30 am",
+    },
+    {
+        "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
+        "type": "spiritual",
+        "state": "no done",
+        "time": "6:30 pm",
+    },
+    {
+        "name": "Gym or Exercises for the knee 🦵🏋️‍♂️🏋️‍♀️",
+        "type": "important",
+        "state": "no done",
+        "time": "7:00 am",
+    },
+    {
+        "name": "Share a Christian quote or a verse to social networks",
+        "type": "normal",
+        "state": "no done",
+        "time": "7:00 am",
+    },
+    {
+        "name": "Practice with Brilliant App",
+        "type": "normal",
+        "state": "no done",
+        "time": "7:10 am",
+    },
+    {
+        "name": "Practice one Math exercise",
+        "type": "normal",
+        "state": "no done",
+        "time": "7:10 am",
+    },
+    {
+        "name": "Practice one Music reading exercise",
+        "type": "normal",
+        "state": "no done",
+        "time": "7:10 am",
+    },
+    {
+        "name": "Rubik's cubes 5x5 / 4x4",
+        "type": "normal",
+        "state": "no done",
+        "time": "7:10 am",
+    },
+    {
+        "name": "Games for brain training",
+        "type": "normal",
+        "state": "no done",
+        "time": "7:10 am",
+    },
+
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "no done",
         "time": "8:50 am",
-        "id": 8
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "no done",
         "time": "8:50 am",
-        "id": 9
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "no done",
         "time": "8:50 am",
-        "id": 10
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "no done",
         "time": "8:50 am",
-        "id": 11
     },
     {
         "name": "Take vitamin D, omega 3, and vitamin C",
         "type": "normal",
         "state": "no done",
         "time": "9:00 am",
-        "id": 12
-    },
-    {
-        "name": "Software development / code projects",
-        "type": "important",
-        "state": "no done",
-        "time": "9:10 am",
-        "id": 13
     },
     {
         "name": "🏀Spin basketball / Practice dribble and passes",
         "type": "normal",
         "state": "no done",
-        "time": "9:50 am",
-        "id": 14
+        "time": "9:10 am"
     },
     {
-        "name": "Practice with Brilliant App",
-        "type": "normal",
+        "name": "Software development / code projects",
+        "type": "important",
         "state": "no done",
-        "time": "10:00 am",
-        "id": 15
-    },
-    {
-        "name": "Practice one Math exercise",
-        "type": "normal",
-        "state": "no done",
-        "time": "10:10 am",
-        "id": 16
-    },
-    {
-        "name": "Practice one Music reading exercise",
-        "type": "normal",
-        "state": "no done",
-        "time": "10:20 am",
-        "id": 17
-    },
-    {
-        "name": "Rubik's cubes 5x5 / 4x4",
-        "type": "normal",
-        "state": "no done",
-        "time": "10:30 am",
-        "id": 18
-    },
-    {
-        "name": "Games for brain training",
-        "type": "normal",
-        "state": "no done",
-        "time": "10:40 am",
-        "id": 19
+        "time": "9:30 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
-        "state": "occupied",
-        "time": "10:50 am",
-        "id": 20
+        "state": "no done",
+        "time": "10:50 am"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
-        "state": "occupied",
-        "time": "10:50 am",
-        "id": 21
+        "state": "no done",
+        "time": "10:50 am"
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
-        "time": "10:50 am",
-        "id": 22
+        "time": "10:50 am"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "occupied",
-        "time": "10:50 am",
-        "id": 23
+        "time": "10:50 am"
     },
     {
         "name": "Software development / code projects",
         "type": "important",
         "state": "occupied",
-        "time": "11:20 am",
-        "id": 24
+        "time": "11:20 am"
     },
     {
         "name": "Upload youtube short/ instagram reel to Palabra Abierta",
         "type": "normal",
         "state": "occupied",
-        "time": "11:50 am",
-        "id": 25
+        "time": "11:50 am"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "11:50 am",
-        "id": 26
+        "time": "11:50 am"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "11:50 am",
-        "id": 27
+        "time": "11:50 am"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "11:50 am",
-        "id": 28
+        "time": "11:50 am"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "occupied",
-        "time": "12:00 pm",
-        "id": 29
+        "time": "12:00 pm"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "occupied",
-        "time": "12:00 pm",
-        "id": 30
+        "time": "12:00 pm"
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
-        "time": "12:00 pm",
-        "id": 31
+        "time": "12:00 pm"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "occupied",
-        "time": "12:00 pm",
-        "id": 32
+        "time": "12:00 pm"
     },
     {
         "name": "Record yourself imitating a manly voice",
         "type": "normal",
         "state": "occupied",
-        "time": "12:10 pm",
-        "id": 33
+        "time": "12:10 pm"
     },
     {
         "name": "🏀Spin basketball / Practice dribble and passes",
         "type": "normal",
         "state": "occupied",
-        "time": "12:20 pm",
-        "id": 34
+        "time": "12:20 pm"
     },
     {
         "name": "Work on a side hustle",
         "type": "important",
         "state": "occupied",
-        "time": "12:30 pm",
-        "id": 35
+        "time": "12:30 pm"
     },
     {
         "name": "Practice Hard riddle TedEd/MindYourDecisions",
         "type": "normal",
         "state": "occupied",
-        "time": "12:50 pm",
-        "id": 36
+        "time": "12:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "12:50 pm",
-        "id": 37
+        "time": "12:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "12:50 pm",
-        "id": 38
+        "time": "12:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "12:50 pm",
-        "id": 39
+        "time": "12:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "12:50 pm",
-        "id": 40
+        "time": "12:50 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "occupied",
-        "time": "1:10 pm",
-        "id": 41
+        "time": "1:10 pm"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "occupied",
-        "time": "1:10 pm",
-        "id": 42
+        "time": "1:10 pm"
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
-        "time": "1:10 pm",
-        "id": 43
+        "time": "1:10 pm"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "occupied",
-        "time": "1:10 pm",
-        "id": 44
+        "time": "1:10 pm"
     },
     {
         "name": "Neck exercises",
         "type": "normal",
         "state": "occupied",
-        "time": "1:20 pm",
-        "id": 45
+        "time": "1:20 pm"
     },
     {
         "name": "Software development / code projects (long session)",
         "type": "important",
         "state": "occupied",
-        "time": "1:50 pm",
-        "id": 46
+        "time": "1:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "1:50 pm",
-        "id": 47
+        "time": "1:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "1:50 pm",
-        "id": 48
+        "time": "1:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "1:50 pm",
-        "id": 49
+        "time": "1:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "1:50 pm",
-        "id": 50
+        "time": "1:50 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "occupied",
-        "time": "3:00 pm",
-        "id": 51
+        "time": "3:00 pm"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "occupied",
-        "time": "3:00 pm",
-        "id": 52
+        "time": "3:00 pm"
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
-        "time": "3:00 pm",
-        "id": 53
+        "time": "3:00 pm"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "occupied",
-        "time": "3:00 pm",
-        "id": 54
+        "time": "3:00 pm"
     },
     {
         "name": "Record yourself imitating a manly voice",
         "type": "normal",
         "state": "occupied",
-        "time": "3:20 pm",
-        "id": 55
-    },
-    {
-        "name": "Share a Christian quote or a verse to social networks",
-        "type": "normal",
-        "state": "occupied",
-        "time": "3:30 pm",
-        "id": 56
+        "time": "3:20 pm"
     },
     {
         "name": "Learn and study Data structures▶💻⚙📊💡💾",
         "type": "important",
         "state": "occupied",
-        "time": "3:50 pm",
-        "id": 57
+        "time": "3:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "3:50 pm",
-        "id": 58
+        "time": "3:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "3:50 pm",
-        "id": 59
+        "time": "3:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "3:50 pm",
-        "id": 60
+        "time": "3:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "3:50 pm",
-        "id": 61
+        "time": "3:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "3:50 pm",
-        "id": 62
+        "time": "3:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "3:50 pm",
-        "id": 63
+        "time": "3:50 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "occupied",
-        "time": "4:10 pm",
-        "id": 64
+        "time": "4:10 pm"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "occupied",
-        "time": "4:10 pm",
-        "id": 65
+        "time": "4:10 pm"
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
-        "time": "4:10 pm",
-        "id": 66
+        "time": "4:10 pm"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "occupied",
-        "time": "4:10 pm",
-        "id": 67
+        "time": "4:10 pm"
     },
     {
         "name": "Read from be a man (demark last and mark current)",
         "type": "normal",
         "state": "occupied",
-        "time": "4:20 pm",
-        "id": 68
+        "time": "4:20 pm"
     },
     {
         "name": "Learn a new english word / Speaking module in the task app",
         "type": "normal",
         "state": "occupied",
-        "time": "4:30 pm",
-        "id": 69
+        "time": "4:30 pm"
     },
     {
         "name": "Back exercises",
         "type": "normal",
         "state": "occupied",
-        "time": "4:40 pm",
-        "id": 70
+        "time": "4:40 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "4:55 pm",
-        "id": 71
+        "time": "4:55 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "4:55 pm",
-        "id": 72
+        "time": "4:55 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "4:55 pm",
-        "id": 73
+        "time": "4:55 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "occupied",
-        "time": "5:00 pm",
-        "id": 74
+        "time": "5:00 pm"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "occupied",
-        "time": "5:00 pm",
-        "id": 75
+        "time": "5:00 pm"
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
-        "time": "5:00 pm",
-        "id": 76
+        "time": "5:00 pm"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "occupied",
-        "time": "5:00 pm",
-        "id": 77
+        "time": "5:00 pm"
     },
     {
         "name": "Learn or practice one card trick 🃏",
         "type": "normal",
         "state": "occupied",
-        "time": "5:10 pm",
-        "id": 78
+        "time": "5:10 pm"
     },
     {
         "name": "Learn a new english word / Speaking module in the task app",
         "type": "normal",
         "state": "occupied",
-        "time": "5:20 pm",
-        "id": 79
+        "time": "5:20 pm"
     },
     {
         "name": "Learn new Software development with tutorials/courses",
         "type": "important",
         "state": "occupied",
-        "time": "5:30 pm",
-        "id": 80
+        "time": "5:30 pm"
     },
     {
         "name": "🏀Spin basketball / Practice dribble and passes",
         "type": "normal",
         "state": "occupied",
-        "time": "7:20 pm",
-        "id": 81
+        "time": "7:20 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "7:20 pm",
-        "id": 82
+        "time": "7:20 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "7:20 pm",
-        "id": 83
+        "time": "7:20 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "7:20 pm",
-        "id": 84
+        "time": "7:20 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "no done",
-        "time": "7:30 pm",
-        "id": 85
+        "time": "7:30 pm"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "no done",
-        "time": "7:30 pm",
-        "id": 86
+        "time": "7:30 pm"
     },
     {
         "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "no done",
-        "time": "7:30 pm",
-        "id": 87
+        "time": "7:30 pm"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "no done",
-        "time": "7:30 pm",
-        "id": 88
+        "time": "7:30 pm"
     },
-    {
-        "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "7:40 pm",
-        "id": 89
-    },
+
     {
         "name": "Family time",
         "type": "spiritual",
         "state": "no done",
-        "time": "8:00 pm",
-        "id": 90
+        "time": "8:00 pm"
     },
     {
         "name": "Prayer time with family",
         "type": "spiritual",
         "state": "no done",
-        "time": "8:00 pm",
-        "id": 91
+        "time": "8:00 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "no done",
-        "time": "8:30 pm",
-        "id": 92
+        "time": "8:30 pm"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "no done",
-        "time": "8:30 pm",
-        "id": 93
+        "time": "8:30 pm"
     },
     {
         "name": "Brush teeth",
         "type": "normal",
         "state": "no done",
-        "time": "9:00 pm",
-        "id": 94
+        "time": "9:00 pm"
     },
     {
         "name": "Stretching exercises",
         "type": "normal",
         "state": "no done",
-        "time": "8:50 pm",
-        "id": 95
+        "time": "8:50 pm"
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "no done",
-        "time": "9:00 pm",
-        "id": 96
+        "time": "9:00 pm"
     },
     {
         "name": "Measure knee swelling and elevate leg 30 min",
         "type": "important",
         "state": "no done",
-        "time": "9:00 pm",
-        "id": 97
+        "time": "9:00 pm"
     },
     {
         "name": "Todays Four points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
-        "time": "9:30 pm",
-        "id": 98
+        "time": "9:30 pm"
     },
     {
         "name": "Are you going to honor God, love your family and invest in your future tonight?",
         "type": "spiritual",
         "state": "no done",
-        "time": "9:50 pm",
-        "id": 99
+        "time": "9:50 pm"
     }
-]
+].map((c, i): Task => {
+    return { ...c, id: i } as Task
+})
 
 export const TIMES = [
     "5:00 am",
