@@ -73,7 +73,7 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
         "type": "spiritual",
         "state": "no done",
-        "time": "6:30 pm",
+        "time": "6:30 am",
     },
     {
         "name": "Gym or Exercises for the knee 🦵🏋️‍♂️🏋️‍♀️",
