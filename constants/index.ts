@@ -131,7 +131,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "8:50 am",
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "no done",
         "time": "8:50 am",
@@ -158,7 +159,7 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "Software development / code projects",
         "type": "important",
         "state": "no done",
-        "time": "9:30 pm"
+        "time": "9:30 am"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
@@ -173,7 +174,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "10:50 am"
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
         "time": "10:50 am"
@@ -227,7 +229,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "12:00 pm"
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
         "time": "12:00 pm"
@@ -299,7 +302,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "1:10 pm"
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
         "time": "1:10 pm"
@@ -359,7 +363,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "3:00 pm"
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
         "time": "3:00 pm"
@@ -431,7 +436,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "4:10 pm"
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
         "time": "4:10 pm"
@@ -491,7 +497,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "5:00 pm"
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "occupied",
         "time": "5:00 pm"
@@ -557,7 +564,8 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "7:30 pm"
     },
     {
-        "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+        // "name": "10x or 30s: push-ups, L-sit, core (if not working)",
         "type": "normal",
         "state": "no done",
         "time": "7:30 pm"
@@ -1942,7 +1950,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "8:50 am"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "no done",
     "time": "8:50 am"
@@ -2053,7 +2062,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "10:50 am"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "occupied",
     "time": "10:50 am"
@@ -2140,7 +2150,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "12:00 pm"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "occupied",
     "time": "12:00 pm"
@@ -2264,7 +2275,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "1:10 pm"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "occupied",
     "time": "1:10 pm"
@@ -2362,7 +2374,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "3:00 pm"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "occupied",
     "time": "3:00 pm"
@@ -2474,7 +2487,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "4:10 pm"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "occupied",
     "time": "4:10 pm"
@@ -2572,7 +2586,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "5:00 pm"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "occupied",
     "time": "5:00 pm"
@@ -2668,7 +2683,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "time": "7:30 pm"
 },
 {
-    "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+    "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
     "type": "normal",
     "state": "no done",
     // "time": "6:40 pm"
@@ -2757,7 +2773,8 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
 },
 
 // {
-//     "name": "10x or 30s: push-ups, L-sit, core (if not working)",
+//     "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+// "name": "10x or 30s: push-ups, L-sit, core (if not working)",
 //     "type": "normal",
 //     "state": "no done",
 //     "time": "8:30 pm"
