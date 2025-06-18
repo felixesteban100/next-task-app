@@ -58,7 +58,7 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "6:00 am",
     },
     {
-        "name": "Todays Four points to overcome and self-directed behavioral change",
+        "name": "📃🙏Todays points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
         "time": "6:10 am",
@@ -627,7 +627,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Todays Four points to overcome and self-directed behavioral change",
+        "name": "📃🙏Retype Todays points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
         "time": "9:30 pm"
