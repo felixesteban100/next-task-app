@@ -11,13 +11,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
-
 export type ReflectionQuestions = {
   reflectionQuestions: string[]
 }
 
-export default async function Home({ searchParams }: {
-  searchParams: { [key: string]: string | string[] | undefined }
+export default async function Home({
+  searchParams
+}: {
+  searchParams?: Promise<{
+    hideOccupied?: string;
+  }>,
 }) {
   connection()
 

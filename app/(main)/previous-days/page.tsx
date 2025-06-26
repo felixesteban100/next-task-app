@@ -29,7 +29,8 @@ export default async function page({
 }) {
     connection()
 
-    const searchValue = (await searchParams)?.search ?? ""
+    const { search } = searchParams ? await searchParams : {};
+    const searchValue = search ? search : ""
 
     const today = getTodaysDate()
     const allDaysInfo = await collectionTask.aggregate([
