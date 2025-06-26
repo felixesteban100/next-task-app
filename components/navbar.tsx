@@ -50,7 +50,7 @@ import KneeFlexionRoutine from "@/components/KneeFlexionRoutine";
 
 const links = [
     {
-        href: "/today",
+        href: "/today?hideOccupied=true",
         label: "Today",
         icon: <Calendar />
     },

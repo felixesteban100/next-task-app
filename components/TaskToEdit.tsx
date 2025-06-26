@@ -39,6 +39,7 @@ import { useSearchParams } from 'next/navigation'
 import ButtonOrganizeByTime from './ButtonOrganizeByTime'
 
 import { AnimatePresence, motion } from "framer-motion";
+import ButtonHideOccupied from './ButtonHideOccupied'
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -74,7 +75,7 @@ type FormSchemaType = z.infer<typeof formSchema>;
 
 const durationLoader = 1000
 
-export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskAndDetails, hourAdded: string }) {
+export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayInfo: DailyTaskAndDetails, hourAdded: string, hideOccupied: boolean }) {
     const organizeByTime = new URLSearchParams(useSearchParams()).get('organizeByTime') === "true" ? true : false
 
     const [loading, setLoading] = useState(false);
@@ -165,7 +166,10 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
-                <ButtonOrganizeByTime />
+                <div className='flex gap-5'>
+                    <ButtonOrganizeByTime />
+                    <ButtonHideOccupied />
+                </div>
             </div>
 
 
@@ -225,7 +229,7 @@ export default function TaskToEdit({ dayInfo, hourAdded }: { dayInfo: DailyTaskA
                                                             <p
                                                                 className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state])}
                                                             >
-                                                                {occupiedAndNotSpiritual ?
+                                                                {occupiedAndNotSpiritual && hideOccupied ?
                                                                     <>
                                                                         <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
                                                                         <span className='hidden group-hover:block'>{task.name}</span>

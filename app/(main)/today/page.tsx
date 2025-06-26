@@ -16,8 +16,12 @@ export type ReflectionQuestions = {
   reflectionQuestions: string[]
 }
 
-export default async function Home() {
+export default async function Home({ searchParams }: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
   connection()
+
+  const { hideOccupied } = searchParams ? await searchParams : {};
 
   const today = getTodaysDate()
   const ToDayInfo = await collectionTask.findOne({ date: today })
@@ -44,7 +48,7 @@ export default async function Home() {
     <>
       {ToDayInfo ?
         <>
-          <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} />
+          <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} hideOccupied={hideOccupied === "true"} />
 
           <div className="flex flex-col gap-5 justify-center items-center">
             <div className="flex flex-col justify-center items-center">
