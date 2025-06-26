@@ -460,8 +460,14 @@ export const DEFAULT_TASKS: Task[] = [
         "state": "occupied",
         "time": "4:30 pm"
     },
+    // {
+    //     "name": "Back exercises",
+    //     "type": "normal",
+    //     "state": "occupied",
+    //     "time": "4:40 pm"
+    // },
     {
-        "name": "Back exercises",
+        "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
         "time": "4:40 pm"
@@ -470,19 +476,19 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "4:55 pm"
+        "time": "4:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "4:55 pm"
+        "time": "4:50 pm"
     },
     {
         "name": "Meditate in what you are doing with the Bible?",
         "type": "normal",
         "state": "occupied",
-        "time": "4:55 pm"
+        "time": "4:50 pm"
     },
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
@@ -677,7 +683,6 @@ export const TIMES = [
     "10:10 am",
     "10:20 am",
     "10:30 am",
-    "10:35 am",
     "10:40 am",
     "10:50 am",
     "11:00 am",
@@ -2539,19 +2544,19 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
     "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
-    "time": "4:55 pm"
+    "time": "4:50 pm"
 },
 {
     "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
-    "time": "4:55 pm"
+    "time": "4:50 pm"
 },
 {
     "name": "Meditate in what you are doing with the Bible?",
     "type": "normal",
     "state": "occupied",
-    "time": "4:55 pm"
+    "time": "4:50 pm"
 },
 
 
