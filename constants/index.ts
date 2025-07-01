@@ -607,6 +607,18 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "8:10 pm"
     },
     {
+        "name": "🦵 Knee improvement Routine",
+        "type": "important",
+        "state": "no done",
+        "time": "8:30 pm"
+    },
+    {
+        "name": "Brush teeth",
+        "type": "normal",
+        "state": "no done",
+        "time": "8:50 pm"
+    },
+    {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "no done",
@@ -619,30 +631,16 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "9:00 pm"
     },
     {
-        "name": "Brush teeth",
-        "type": "normal",
-        "state": "no done",
-        "time": "9:10 pm"
-    },
-
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "no done",
-        "time": "9:20 pm"
-    },
-
-    {
         "name": "📃🙏Retype Todays points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
-        "time": "9:30 pm"
+        "time": "9:10 pm"
     },
     {
         "name": "Are you going to honor God, love your family and invest in your future tonight?",
         "type": "spiritual",
         "state": "no done",
-        "time": "9:50 pm"
+        "time": "9:20 pm"
     }
 ].map((c, i): Task => {
     return { ...c, id: i } as Task
