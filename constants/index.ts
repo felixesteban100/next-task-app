@@ -329,6 +329,12 @@ export const DEFAULT_TASKS: Task[] = [
         "state": "occupied",
         "time": "4:20 pm"
     },
+    {
+        "name": "Learn new Software development with tutorials/courses",
+        "type": "important",
+        "state": "occupied",
+        "time": "4:30 pm"
+    },
 
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
