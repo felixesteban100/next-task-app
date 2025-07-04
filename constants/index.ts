@@ -157,13 +157,13 @@ export const DEFAULT_TASKS: Task[] = [
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
-        "state": "no done",
+        "state": "occupied",
         "time": "10:50 am"
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
-        "state": "no done",
+        "state": "occupied",
         "time": "10:50 am"
     },
     {
