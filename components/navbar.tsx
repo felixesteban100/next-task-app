@@ -50,7 +50,8 @@ import KneeFlexionRoutine from "@/components/KneeFlexionRoutine";
 
 const links = [
     {
-        href: "/today?hideOccupied=true",
+        href: "/today",
+        searchParams: "?hideOccupied=true&organizeByTime=true",
         label: "Today",
         icon: <Calendar />
     },
@@ -216,7 +217,7 @@ export default function Navbar() {
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <Button variant={"outline"} size={"icon"} className={`${pathname === link.href ? "bg-primary text-primary-foreground" : ""} rounded-full`} asChild>
-                                                <Link href={link.href}>
+                                                <Link href={`${link.href}${link.searchParams || ""}`}>
                                                     {link.icon}
                                                 </Link>
                                             </Button>
