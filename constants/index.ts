@@ -426,7 +426,7 @@ export const DEFAULT_TASKS: Task[] = [
     {
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
-        "state": "no done",
+        "state": "done",
         "time": "9:00 pm"
     },
     {
@@ -438,7 +438,7 @@ export const DEFAULT_TASKS: Task[] = [
     {
         "name": "Are you going to honor God, love your family and invest in your future tonight?",
         "type": "spiritual",
-        "state": "no done",
+        "state": "done",
         "time": "9:10 pm"
     }
 ].map((c, i): Task => {
