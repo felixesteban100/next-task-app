@@ -4,7 +4,7 @@
 //     ToggleGroup,
 //     ToggleGroupItem,
 // } from "@/components/ui/toggle-group"
-import { cn, filterFutureTimes, getTotalTasksByType, sortByProperty } from '@/lib/utils'
+import { cn, filterFutureTimes, getDayName, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { TIMES } from "@/constants"
@@ -152,7 +152,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                     <Tooltip>
                         <TooltipTrigger>
                             <span className='font-bold text-2xl'>
-                                {date} (Today)
+                                (Today)  {date} ({getDayName(date)})
                             </span>
                         </TooltipTrigger>
                         <TooltipContent>

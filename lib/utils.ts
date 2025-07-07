@@ -15,6 +15,23 @@ export function getTodaysDate() {
   }).format(new Date());
 }
 
+export function getDayName(dateStr: string): string {
+  const [month, day, year] = dateStr.split('/').map(Number);
+
+  // Validate date components
+  if (!month || !day || !year) {
+    throw new Error('Invalid date format. Use "m/d/y".');
+  }
+
+  const date = new Date(year, month - 1, day); // JavaScript months are 0-based
+
+  const dayNames = [
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+  ];
+
+  return dayNames[date.getDay()];
+}
+
 export function filterFutureTimes(times: string[]): string[] {
   const now = new Date(), currentMinutes = now.getHours() * 60 + now.getMinutes();
 

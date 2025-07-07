@@ -6,7 +6,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { classNamesState, classNamesType, doneInWhichWay, stateEmoji } from '@/constants'
-import { cn, getMostRepeatedState, getTodaysDate, sortByProperty } from '@/lib/utils'
+import { cn, getDayName, getMostRepeatedState, getTodaysDate, sortByProperty } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
 import {
@@ -25,15 +25,17 @@ export default async function page({
 }: {
     searchParams?: Promise<{
         search?: string;
+        day?: string;
     }>,
 }) {
     connection()
 
-    const { search } = searchParams ? await searchParams : {};
+    const { search, day } = searchParams ? await searchParams : {};
     const searchValue = search ? search : ""
+    const dayValue = day ? day : ""
 
     const today = getTodaysDate()
-    const allDaysInfo = await collectionTask.aggregate([
+    const allDaysInfoDb = await collectionTask.aggregate([
         {
             $project: {
                 tasks: {
@@ -50,7 +52,11 @@ export default async function page({
         { $match: { tasks: { $ne: [] } } } // Remove documents where no tasks match
     ]).sort({ date: -1 }).toArray() as WithId<DailyTaskAndDetails>[]
 
-    if (!allDaysInfo) return <p>No days on track</p>
+    if (!allDaysInfoDb) return <p>No days on track</p>
+
+    const allDaysInfoByDay = allDaysInfoDb.filter(c => getDayName(c.date) === dayValue)
+
+    const allDaysInfo = dayValue && dayValue !== "all" ? allDaysInfoByDay : allDaysInfoDb
 
     const allDaysMostRepeated = allDaysInfo.map(c => getMostRepeatedState(c.tasks))
 
@@ -120,9 +126,11 @@ export default async function page({
                         </div>
                     </>}
             </div>
-            <QueryTasks searchValue={searchValue} />
-            <Accordion type="single" collapsible className="w-[65%]">
+            <QueryTasks searchValue={searchValue} dayValue={dayValue} />
+            <Accordion type="single" collapsible className="w-[80%]">
                 {allDaysInfo.map((day, cIndex) => {
+                    // if (dayValue && dayValue != "all" && getDayName(day.date) !== dayValue) return null; // Filter by specific day if provided
+
                     const documentId = new ObjectId(day._id); // Example _id
                     const timestamp = documentId.getTimestamp(); // Get the creation timestamp
 
@@ -138,7 +146,7 @@ export default async function page({
                         <div key={day._id.toString() + day.date} className='flex flex-row justify-center items-start'>
                             <AccordionItem className='flex flex-col items-center gap-2' value={day.date}>
                                 <AccordionTrigger className='font-bold text-2xl' >
-                                    {day.date} {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
+                                    {day.date} ({getDayName(day.date).slice(0, 3)})  {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>
