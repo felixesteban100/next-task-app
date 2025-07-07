@@ -116,37 +116,37 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
         "type": "spiritual",
         "state": "no done",
-        "time": "8:50 am",
+        "time": "9:00 am",
     },
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
         "state": "no done",
-        "time": "8:50 am",
+        "time": "9:00 am",
     },
     {
         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
         "type": "normal",
         "state": "no done",
-        "time": "8:50 am",
+        "time": "9:00 am",
     },
     {
         "name": "🦵 Knee improvement Routine",
         "type": "important",
         "state": "no done",
-        "time": "8:50 am",
+        "time": "9:00 am",
     },
     {
         "name": "💊Take vitamins and supplements",
         "type": "normal",
         "state": "no done",
-        "time": "9:00 am",
+        "time": "9:10 am",
     },
     {
         "name": "🏀Spin basketball / Practice dribble and passes",
         "type": "normal",
         "state": "no done",
-        "time": "9:10 am"
+        "time": "9:20 am"
     },
     {
         "name": "Software development / code projects",
