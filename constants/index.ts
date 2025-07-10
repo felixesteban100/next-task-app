@@ -12,6 +12,18 @@ export const classNamesState = {
     "occupied": "text-blue-700 dark:text-blue-300",
 }
 
+export const failEmojis = [
+    "😞",
+    "🔥",
+    "✝️",
+]
+
+export const successEmojis = [
+    "😊",
+    "❄️",
+    "✝️"
+]
+
 export const stateEmoji = {
     "done": "✅",
     "no done": "❌",

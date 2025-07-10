@@ -5,7 +5,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import { classNamesState, classNamesType, doneInWhichWay, stateEmoji } from '@/constants'
+import { classNamesState, classNamesType, doneInWhichWay, failEmojis, stateEmoji, successEmojis } from '@/constants'
 import { cn, getDayName, getMostRepeatedState, getTodaysDate, sortByProperty } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
@@ -95,12 +95,12 @@ export default async function page({
                             <p>
                                 <TooltipProvider>
                                     <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl'>😞🔥✝️</TooltipTrigger>
+                                        <TooltipTrigger className='font-bold text-2xl'>{failEmojis.join("")}</TooltipTrigger>
                                         <TooltipContent>
                                             <ul>
-                                                <li>😞 Regret and sorrow for the sin.</li>
-                                                <li>🔥 The struggle and temptation of lust.</li>
-                                                <li>✝️ Turning to Christ for forgiveness, holiness, and righteousness.</li>
+                                                <li>{failEmojis[0]} Regret and sorrow for the sin.</li>
+                                                <li>{failEmojis[1]} The struggle and temptation of lust.</li>
+                                                <li>{failEmojis[2]} Turning to Christ for forgiveness, holiness, and righteousness.</li>
                                             </ul>
                                             <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
                                         </TooltipContent>
@@ -111,12 +111,12 @@ export default async function page({
                             <p>
                                 <TooltipProvider>
                                     <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl'>😊❄️✝️</TooltipTrigger>
+                                        <TooltipTrigger className='font-bold text-2xl'>{successEmojis.join("")}</TooltipTrigger>
                                         <TooltipContent>
                                             <ul>
-                                                <li>😊 Joy and peace in victory over sin.</li>
-                                                <li>❄️ Purity and self-control through God&apos;s strength.</li>
-                                                <li>✝️ Walking in faith and righteousness with Christ.</li>
+                                                <li>{successEmojis[0]} Joy and peace in victory over sin.</li>
+                                                <li>{successEmojis[1]} Purity and self-control through God&apos;s strength.</li>
+                                                <li>{successEmojis[2]} Walking in faith and righteousness with Christ.</li>
                                             </ul>
                                             <p className='font-bold'>Keep fighting the good fight!</p>
                                         </TooltipContent>
@@ -177,12 +177,12 @@ export default async function page({
                             {searchValue != "" ? null : day.date == today ? null : day.tasks.slice().reverse().some((c, index) => (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") || (c.name == "Are you going to honor God, love your family and invest in your future tonight?" && c.state === "no done") || (index === 0 && c.state === "no done")) === true ?
                                 <TooltipProvider>
                                     <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl mt-4'>😞🔥✝️</TooltipTrigger>
+                                        <TooltipTrigger className='font-bold text-2xl mt-4'>{failEmojis.join("")}</TooltipTrigger>
                                         <TooltipContent>
                                             <ul>
-                                                <li>😞 Regret and sorrow for the sin.</li>
-                                                <li>🔥 The struggle and temptation of lust.</li>
-                                                <li>✝️ Turning to Christ for forgiveness, holiness, and righteousness.</li>
+                                                <li>{failEmojis[0]} Regret and sorrow for the sin.</li>
+                                                <li>{failEmojis[1]} The struggle and temptation of lust.</li>
+                                                <li>{failEmojis[2]} Turning to Christ for forgiveness, holiness, and righteousness.</li>
                                             </ul>
                                             <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
                                         </TooltipContent>
@@ -191,12 +191,12 @@ export default async function page({
                                 :
                                 <TooltipProvider>
                                     <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl mt-4'>😊❄️✝️</TooltipTrigger>
+                                        <TooltipTrigger className='font-bold text-2xl'>{successEmojis.join("")}</TooltipTrigger>
                                         <TooltipContent>
                                             <ul>
-                                                <li>😊 Joy and peace in victory over sin.</li>
-                                                <li>❄️ Purity and self-control through God&apos;s strength.</li>
-                                                <li>✝️ Walking in faith and righteousness with Christ.</li>
+                                                <li>{successEmojis[0]} Joy and peace in victory over sin.</li>
+                                                <li>{successEmojis[1]} Purity and self-control through God&apos;s strength.</li>
+                                                <li>{successEmojis[2]} Walking in faith and righteousness with Christ.</li>
                                             </ul>
                                             <p className='font-bold'>Keep fighting the good fight!</p>
                                         </TooltipContent>

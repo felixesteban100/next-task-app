@@ -40,6 +40,7 @@ export default function QueryTasks({ searchValue, dayValue }: { searchValue: str
                 }}
                 className='w-[45%] '
             />
+            {/* filter by range dates */}
             <Select defaultValue="all" value={day} onValueChange={(value) => {
                 setDay(value)
             }}>
