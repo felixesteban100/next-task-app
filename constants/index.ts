@@ -46,7 +46,7 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "5:30 am",
     },
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏(kneeling down)",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(kneeling down)",
         "type": "spiritual",
         "state": "no done",
         "time": "5:40 am",
@@ -125,7 +125,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "no done",
         "time": "9:00 am",
@@ -167,7 +167,7 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "9:30 am"
     },
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "occupied",
         "time": "10:50 am"
@@ -204,7 +204,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "occupied",
         "time": "12:00 pm"
@@ -248,7 +248,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "occupied",
         "time": "1:10 pm"
@@ -280,7 +280,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "occupied",
         "time": "3:00 pm"
@@ -312,7 +312,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "occupied",
         "time": "4:10 pm"
@@ -349,7 +349,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "occupied",
         "time": "5:00 pm"
@@ -387,7 +387,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "no done",
         "time": "7:30 pm"
@@ -436,7 +436,7 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "8:50 pm"
     },
     {
-        "name": "Battle Prayer ⚔🛡 and thanksgiving 🙏",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",
         "state": "done",
         "time": "9:00 pm"
