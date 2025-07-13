@@ -36,7 +36,7 @@ export const doneInWhichWay = {
     "occupied": "☑️Fairly done, to God be the glory 🙌",
 }
 
-
+export const TASKS_THAT_SEPARATE_SECTIONS = "Thanksgiving 🙏 and Battle Prayer ⚔🛡"
 
 export const DEFAULT_TASKS: Task[] = [
     {

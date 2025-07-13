@@ -7,7 +7,7 @@
 import { cn, filterFutureTimes, getDayName, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
-import { TIMES } from "@/constants"
+import { TASKS_THAT_SEPARATE_SECTIONS, TIMES } from "@/constants"
 
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -211,7 +211,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                                                         layout
                                                         key={task.name + task.time + task.id}
                                                     >
-                                                        {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-5" /> : null}
+                                                        {task.name === TASKS_THAT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null}
                                                         <div className="flex gap-2 items-center justify-start group">
                                                             {Object.entries(stateEmoji).map(([state, emoji]) => (
                                                                 <Button
