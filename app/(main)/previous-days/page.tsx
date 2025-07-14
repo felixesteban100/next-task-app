@@ -5,7 +5,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import { classNamesState, classNamesType, doneInWhichWay, failEmojis, stateEmoji, successEmojis } from '@/constants'
+import { classNamesState, classNamesType, doneInWhichWay, failEmojis, GODLY_TASK, PREVIOUS_GODLY_TASK, stateEmoji, successEmojis } from '@/constants'
 import { cn, getDayName, getMostRepeatedState, getTodaysDate, sortByProperty } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
@@ -64,16 +64,22 @@ export default async function page({
     const noDoneDays = allDaysMostRepeated.filter(day => day === "no done").length
     const occupiedDays = allDaysMostRepeated.filter(day => day === "occupied").length
 
-    const daysWithOutLastOne = allDaysInfo.slice(1, allDaysInfo.length) // Exclude the last day to avoid bias in calculations
-    const daysWithoutLust = daysWithOutLastOne.filter(c => c.tasks[c.tasks.length - 1].state === "done").length
-    const daysWithLust = daysWithOutLastOne.filter(c => c.tasks[c.tasks.length - 1].state === "no done").length
+    const daysWithoutLust = allDaysInfo.filter(c => isHolyLastTaskDone(c.tasks) === true).length
+    const daysWithLust = allDaysInfo.filter(c => isHolyLastTaskDone(c.tasks) === false).length
 
     function calculatePercentage(part: number) {
         return ((part / allDaysMostRepeated.length) * 100).toFixed(2);
     }
 
-    function calculatePercentageWithoutLastOne(part: number) {
-        return ((part / daysWithOutLastOne.length) * 100).toFixed(2);
+
+    function isHolyLastTaskDone(tasks: DailyTaskAndDetails["tasks"]) {
+        const lastTask = tasks.filter(c => c.name === PREVIOUS_GODLY_TASK || c.name == GODLY_TASK).slice(-1)[0];
+        if (!lastTask) {
+            // If no holy task found, check the actual last task in the list
+            const actualLastTask = tasks[tasks.length - 1];
+            return actualLastTask.state === "done" ? true : false;
+        }
+        return lastTask.state === "done" ? true : false;
     }
 
     return (
@@ -105,7 +111,8 @@ export default async function page({
                                             <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
                                         </TooltipContent>
                                     </Tooltip>
-                                </TooltipProvider>{daysWithLust} ({calculatePercentageWithoutLastOne(daysWithLust)}%)
+                                </TooltipProvider>
+                                {daysWithLust} ({calculatePercentage(daysWithLust)}%)
                             </p>
                             <Separator orientation='vertical' className='bg-foreground' decorative />
                             <p>
@@ -121,7 +128,8 @@ export default async function page({
                                             <p className='font-bold'>Keep fighting the good fight!</p>
                                         </TooltipContent>
                                     </Tooltip>
-                                </TooltipProvider>{daysWithoutLust} ({calculatePercentageWithoutLastOne(daysWithoutLust)}%)
+                                </TooltipProvider>
+                                {daysWithoutLust} ({calculatePercentage(daysWithoutLust)}%)
                             </p>
                         </div>
                     </>}
@@ -129,8 +137,6 @@ export default async function page({
             <QueryTasks searchValue={searchValue} dayValue={dayValue} />
             <Accordion type="single" collapsible className="w-[80%]">
                 {allDaysInfo.map((day, cIndex) => {
-                    // if (dayValue && dayValue != "all" && getDayName(day.date) !== dayValue) return null; // Filter by specific day if provided
-
                     const documentId = new ObjectId(day._id); // Example _id
                     const timestamp = documentId.getTimestamp(); // Get the creation timestamp
 
@@ -173,8 +179,7 @@ export default async function page({
                                     })}
                                 </AccordionContent>
                             </AccordionItem>
-                            {/* (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" || c.name === "Are you going to honor God, love your family and invest in your future?") */}
-                            {searchValue != "" ? null : day.date == today ? null : day.tasks.slice().reverse().some((c, index) => (c.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)" && c.state === "no done") || (c.name == "Are you going to honor God, love your family and invest in your future tonight?" && c.state === "no done") || (index === 0 && c.state === "no done")) === true ?
+                            {searchValue != "" ? null : day.date == today ? null : isHolyLastTaskDone(day.tasks) === false ?
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger className='font-bold text-2xl mt-4'>{failEmojis.join("")}</TooltipTrigger>

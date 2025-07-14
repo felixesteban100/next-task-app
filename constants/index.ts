@@ -38,6 +38,9 @@ export const doneInWhichWay = {
 
 export const TASKS_THAT_SEPARATE_SECTIONS = "Thanksgiving 🙏 and Battle Prayer ⚔🛡"
 
+export const PREVIOUS_GODLY_TASK = "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)"
+export const GODLY_TASK = "Are you going to honor God, love your family and invest in your future tonight?"
+
 export const DEFAULT_TASKS: Task[] = [
     {
         "name": "Wake up early",
