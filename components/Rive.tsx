@@ -31,7 +31,7 @@ export default function Simple() {
     return <>
         <div className="center" style={{ width: '800px', height: '500px' }}>
             {/* <RiveComponentPlayback onClick={() => bumpInput && bumpInput.fire()} className="h-full w-auto" /> */}
-            <RiveComponentPlayback /* onClick={() => thumbsUp && thumbsUp.fire()}  */ className="h-full w-auto" />
+            <RiveComponentPlayback className="h-full w-auto" />
         </div>
     </>;
 }

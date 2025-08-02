@@ -6,6 +6,7 @@ import {
   ClerkProvider,
 } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
+import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -39,7 +40,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <main className="flex flex-col gap-10 w-[98vw]">
+              <Navbar />
+              <div className="flex flex-col gap-2 mt-10 py-10 justify-center items-center mb-10">
+                {children}
+              </div>
+            </main>
             <Toaster richColors />
           </ThemeProvider>
         </body>

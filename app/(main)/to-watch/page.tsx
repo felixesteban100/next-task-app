@@ -24,7 +24,7 @@ export default async function page() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {toWatch.map((item) => (
                     <div key={item._id?.toString() ?? item.name}>
-                        <Image src={item.img_portrait} alt={item.name} className="w-full h-[30rem] rounded-lg mb-4" width={1000} height={1000} />
+                        <Image src={item.img_portrait} alt={item.name} className="max-w-full h-[30rem] rounded-lg mb-4" width={1000} height={1000} />
                         <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
                         <p className="mb-1">Type: {item.type}</p>
                         <p className="mb-1">State: {item.watching_state}</p>
