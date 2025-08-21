@@ -447,7 +447,7 @@ export const DEFAULT_TASKS: Task[] = [
     {
         "name": "Bible verse📖✝: read, memorize and record audio",
         "type": "spiritual",
-        "state": "no done",
+        "state": "done",
         "time": "9:00 pm"
     },
     {
