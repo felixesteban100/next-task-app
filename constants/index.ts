@@ -49,6 +49,12 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "5:30 am",
     },
     {
+        "name": "Share a Christian quote or a verse to social networks",
+        "type": "normal",
+        "state": "no done",
+        "time": "7:40 am",
+    },
+    {
         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(kneeling down)",
         "type": "spiritual",
         "state": "no done",
@@ -90,12 +96,7 @@ export const DEFAULT_TASKS: Task[] = [
         "state": "no done",
         "time": "7:00 am",
     },
-    {
-        "name": "Share a Christian quote or a verse to social networks",
-        "type": "normal",
-        "state": "no done",
-        "time": "7:00 am",
-    },
+
     {
         "name": "Practice with Brilliant App",
         "type": "normal",
