@@ -2,6 +2,8 @@ import { MediaCard } from "@/components/media-card"
 import { collectionToWatch } from "@/db/mongodb/mongodb"
 import { connection } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export type ToWatch = {
     name: string
     url_last_watched: string,
@@ -18,7 +20,7 @@ export type ToWatch = {
     // main_characters: { name: string, image: string }[]
 }
 
-export default async function page() {
+export default async function ToWatchPage() {
     connection()
 
     // add a way to filter by type and state (I think by name won't be necessary)
