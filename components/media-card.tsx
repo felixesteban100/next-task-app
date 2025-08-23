@@ -117,7 +117,8 @@ export function MediaCard({ media }: MediaCardProps) {
                 <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground font-medium">{media.rated}</span>
                     <div>
-                        {media.seasons && <span className="text-xs text-muted-foreground">S{media.seasons}</span>} -
+                        {media.seasons && <span className="text-xs text-muted-foreground">S{media.seasons}</span>}
+                        <span> - </span>
                         {media.episodes && <span className="text-xs text-muted-foreground">{media.episodes} episodes</span>}
                     </div>
                 </div>

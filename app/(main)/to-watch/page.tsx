@@ -1,3 +1,4 @@
+import FilterToWatch, { allowedTypes, allowedWatchingStates } from "@/components/FilterToWatch";
 import { MediaCard } from "@/components/media-card"
 import { collectionToWatch } from "@/db/mongodb/mongodb"
 import { connection } from "next/server";
@@ -20,15 +21,42 @@ export type ToWatch = {
     // main_characters: { name: string, image: string }[]
 }
 
-export default async function ToWatchPage() {
+
+
+export default async function ToWatchPage({
+    searchParams
+}: {
+    searchParams?: Promise<{
+        types?: string;
+        watchingStates?: string;
+    }>,
+}) {
     connection()
 
+    const { types, watchingStates } = searchParams ? await searchParams : {};
+    const typesValue = types ? types : ""
+    const watchingStatesValue = watchingStates ? watchingStates : ""
+
     // add a way to filter by type and state (I think by name won't be necessary)
-    const toWatch = await collectionToWatch.find().toArray()
+
+    const typeArray = typesValue.split(',').filter(c => c != "") as typeof allowedTypes[number][]
+
+    const watchingStateArray = watchingStatesValue.split(',').filter(c => c != "") as typeof allowedWatchingStates[number][]
+
+    const queryToWatch = {
+        ...(typeArray.length > 0 ? { type: { $in: typeArray } } : {}),
+        ...(watchingStateArray.length > 0 ? { watching_state: { $in: watchingStateArray } } : {}),
+    }
+
+    const toWatch = await collectionToWatch
+        .find(queryToWatch)
+        .sort({ _id: -1 })
+        .toArray()
 
     return (
-        <div className="w-full px-10">
+        <div className="w-full flex flex-col px-10 space-y-5 items-center">
             <h1 className="text-3xl font-bold mb-4">To Watch List</h1>
+            <FilterToWatch />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
                 {toWatch.map((media) => (
                     <MediaCard key={media.name} media={JSON.parse(JSON.stringify(media))} />
@@ -37,18 +65,3 @@ export default async function ToWatchPage() {
         </div>
     )
 }
-
-
-/* 
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {toWatch.map((item) => (
-                    <div key={item._id?.toString() ?? item.name} className="relative">
-                        <Image src={item.img_portrait} alt={item.name} className="max-w- h-full rounded-lg mb-4 object-cover" width={1000} height={1000} />
-                        <div className="w-full absolute bottom-2 left-2 flex flex-col space-y-1 items-center justify-center">
-                            <h2 className="text-md font-semibold bg-background bg-opacity-50 px-2 py-1 rounded">{item.name}</h2>
-                            <p className="bg-background bg-opacity-50 px-2 py-1 rounded">Type: {item.type}</p>
-                            <p className="bg-background bg-opacity-50 px-2 py-1 rounded">State: {item.watching_state}</p>
-                        </div>
-                    </div>
-                ))}
-            </div> */
