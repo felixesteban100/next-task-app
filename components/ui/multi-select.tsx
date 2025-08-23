@@ -217,9 +217,9 @@ export function MultiSelectValue({
             onClick={
               clickToRemove
                 ? e => {
-                    e.stopPropagation()
-                    toggleValue(value)
-                  }
+                  e.stopPropagation()
+                  toggleValue(value)
+                }
                 : undefined
             }
           >
