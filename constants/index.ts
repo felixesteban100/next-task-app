@@ -52,7 +52,7 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "Share a Christian quote or a verse to social networks",
         "type": "normal",
         "state": "no done",
-        "time": "7:40 am",
+        "time": "5:40 am",
     },
     {
         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(kneeling down)",

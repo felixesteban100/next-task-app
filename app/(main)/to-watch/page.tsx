@@ -1,5 +1,6 @@
 import { MediaCard } from "@/components/media-card"
 import { collectionToWatch } from "@/db/mongodb/mongodb"
+import { connection } from "next/server";
 
 export type ToWatch = {
     name: string
@@ -18,6 +19,8 @@ export type ToWatch = {
 }
 
 export default async function page() {
+    connection()
+
     // add a way to filter by type and state (I think by name won't be necessary)
     const toWatch = await collectionToWatch.find().toArray()
 
