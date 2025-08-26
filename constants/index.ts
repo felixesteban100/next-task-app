@@ -76,58 +76,58 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "📃🙏Todays points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
-        "time": "6:10 am",
+        "time": "5:50 am",
     },
-    {
-        "name": "📖✝Read Bible (10+ chapters or an entire book)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "6:30 am",
-    },
-    {
-        "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "6:30 am",
-    },
+
     {
         "name": "Gym or Exercises for the knee 🦵🏋️‍♂️🏋️‍♀️",
         "type": "important",
         "state": "no done",
-        "time": "7:00 am",
+        "time": "6:30 am",
     },
 
     {
         "name": "Practice with Brilliant App",
         "type": "normal",
         "state": "no done",
-        "time": "7:10 am",
+        "time": "6:30 am",
     },
     {
         "name": "Practice one Math exercise",
         "type": "normal",
         "state": "no done",
-        "time": "7:10 am",
+        "time": "6:30 am",
     },
     {
         "name": "Practice one Music reading exercise",
         "type": "normal",
         "state": "no done",
-        "time": "7:10 am",
+        "time": "6:30 am",
     },
     {
         "name": "Rubik's cubes 5x5 / 4x4",
         "type": "normal",
         "state": "no done",
-        "time": "7:10 am",
+        "time": "6:30 am",
     },
     {
         "name": "Games for brain training",
         "type": "normal",
         "state": "no done",
-        "time": "7:10 am",
+        "time": "6:30 am",
     },
-
+    {
+        "name": "📖✝Read Bible (10+ chapters or an entire book)",
+        "type": "spiritual",
+        "state": "no done",
+        "time": "8:50 am",
+    },
+    {
+        "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
+        "type": "spiritual",
+        "state": "no done",
+        "time": "8:50 am",
+    },
     {
         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
         "type": "spiritual",

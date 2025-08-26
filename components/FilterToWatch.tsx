@@ -12,9 +12,7 @@ import {
     MultiSelectValue,
 } from "@/components/ui/multi-select"
 import { Search, X } from 'lucide-react'
-// import { allowedTypes, allowedWatchingStates } from '@/app/(main)/to-watch/page'
-export const allowedTypes = ["anime", "cartoon", "movie", "series", "documentary"] as const;
-export const allowedWatchingStates = ["completed", "uncompleted", "waiting", "watching"] as const;
+import { allowedTypes, allowedWatchingStates } from '@/lib/toWatch_utils'
 
 export default function FilterToWatch() {
     const [types, setTypes] = useState<string[]>([])

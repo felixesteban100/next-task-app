@@ -1,83 +1,16 @@
+
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star, Play, Calendar, Tv, Clock, Check } from "lucide-react"
+import { Star } from "lucide-react"
 import Image from "next/image"
 import { ToWatch } from "@/app/(main)/to-watch/page"
-
-// export interface MediaItem {
-//     id: string
-//     title: string
-//     poster: string
-//     rating: number
-//     genre: string
-//     year: number
-//     type: "movie" | "series" | "anime"
-//     // duration?: string
-//     episodes?: number
-// }
-
-export type MediaItem = ToWatch
+import { getTypeColor, getTypeIcon, getWatchingColor, getWatchingIcon } from "@/lib/toWatch_utils"
 
 interface MediaCardProps {
-    media: MediaItem
-}
-
-const getTypeColor = (type: MediaItem["type"]) => {
-    switch (type) {
-        case "movie":
-            return "bg-primary text-primary-foreground"
-        case "series":
-            return "bg-secondary text-secondary-foreground"
-        case "anime":
-            return "bg-accent text-accent-foreground"
-        default:
-            return "bg-muted text-muted-foreground"
-    }
-}
-
-const getTypeIcon = (type: MediaItem["type"]) => {
-    switch (type) {
-        case "movie":
-            return <Play className="w-3 h-3" />
-        case "series":
-            return <Calendar className="w-3 h-3" />
-        case "anime":
-            return <Star className="w-3 h-3" />
-        default:
-            return null
-    }
-}
-
-const getWatchingColor = (type: MediaItem["watching_state"]) => {
-    switch (type) {
-        case "completed":
-            return "bg-green-500 text-foreground"
-        case "uncompleted":
-            return "bg-red-500 text-foreground"
-        case "waiting":
-            return "bg-yellow-500 text-foreground"
-        case "watching":
-            return "bg-blue-500 text-foreground"
-        default:
-            return "bg-muted text-foreground"
-    }
-}
-
-const getWatchingIcon = (type: MediaItem["watching_state"]) => {
-    switch (type) {
-        case "completed":
-            return <Check className="w-3 h-3" />
-        case "uncompleted":
-            return <Calendar className="w-3 h-3" />
-        case "waiting":
-            return <Clock className="w-3 h-3" />
-        case "watching":
-            return <Tv className="w-3 h-3" />
-        default:
-            return null
-    }
+    media: ToWatch
 }
 
 export function MediaCard({ media }: MediaCardProps) {

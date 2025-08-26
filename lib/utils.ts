@@ -87,3 +87,6 @@ export function sortByProperty(array: Task[], property: "time" | "id"): Task[] {
     return getMinutes(a.time) - getMinutes(b.time);
   }) : array.sort((a, b) => a.id - b.id);
 }
+
+
+

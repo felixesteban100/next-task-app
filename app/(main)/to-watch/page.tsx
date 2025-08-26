@@ -1,7 +1,18 @@
-import FilterToWatch, { allowedTypes, allowedWatchingStates } from "@/components/FilterToWatch";
+import FilterToWatch from "@/components/FilterToWatch";
 import { MediaCard } from "@/components/media-card"
 import { collectionToWatch } from "@/db/mongodb/mongodb"
 import { connection } from "next/server";
+
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { allowedTypes, allowedWatchingStates } from "@/lib/toWatch_utils";
 
 export const dynamic = 'force-dynamic';
 
@@ -44,9 +55,11 @@ export default async function ToWatchPage({
     const watchingStateArray = watchingStatesValue.split(',').filter(c => c != "") as typeof allowedWatchingStates[number][]
 
     const queryToWatch = {
-        ...(typeArray.length > 0 ? { type: { $in: typeArray } } : {}),
-        ...(watchingStateArray.length > 0 ? { watching_state: { $in: watchingStateArray } } : {}),
+        ...(typeArray && typeArray.length > 0 ? { type: { $in: typeArray } } : {}),
+        ...(watchingStateArray && watchingStateArray.length > 0 ? { watching_state: { $in: watchingStateArray } } : {}),
     }
+
+    console.log(queryToWatch)
 
     const toWatch = await collectionToWatch
         .find(queryToWatch)
@@ -59,7 +72,51 @@ export default async function ToWatchPage({
             <FilterToWatch />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
                 {toWatch.map((media) => (
-                    <MediaCard key={media.name} media={JSON.parse(JSON.stringify(media))} />
+                    <Dialog key={media.name}>
+                        <DialogTrigger>
+                            <MediaCard media={JSON.parse(JSON.stringify(media))} />
+                        </DialogTrigger>
+                        <DialogContent className="w-screen">
+                            <DialogHeader>
+                                <DialogTitle>{media.name}</DialogTitle>
+                            </DialogHeader>
+                            <div className="flex flex-row gap-4">
+                                <div className="relative aspect-[2/3] overflow-hidden max-h-90 w-fit">
+                                    <Image
+                                        src={media.img_portrait || "/placeholder.svg"}
+                                        alt={`${media.name} poster`}
+                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                        width={500}
+                                        height={500}
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <Badge className={`w-fit gap-1 ${media.type === "anime" ? "bg-purple-500 text-foreground" : media.type === "cartoon" ? "bg-pink-500 text-foreground" : media.type === "movie" ? "bg-blue-500 text-foreground" : media.type === "series" ? "bg-green-500 text-foreground" : media.type === "documentary" ? "bg-yellow-500 text-foreground" : "bg-muted text-foreground"}`}>
+                                        {media.type.charAt(0).toUpperCase() + media.type.slice(1)}
+                                    </Badge>
+                                    <div>
+                                        {allowedWatchingStates.map((state) => {
+                                            return (
+                                                <Badge key={state} className={`w-fit gap-1 capitalize ${state === media.watching_state ? "opacity-100" : "opacity-70"} ${state === "completed" ? "bg-green-500 text-foreground" : state === "uncompleted" ? "bg-red-500 text-foreground" : state === "waiting" ? "bg-yellow-500 text-foreground" : state === "watching" ? "bg-blue-500 text-foreground" : "bg-muted text-foreground"}`}>
+                                                    {state}
+                                                </Badge>
+                                            )
+                                        })}
+                                    </div>
+                                    <p><span className="font-bold">Seasons:</span> {media.seasons}</p>
+                                    <p><span className="font-bold">Episodes:</span> {media.episodes}</p>
+                                    <p><span className="font-bold">Rated:</span> {media.rated}</p>
+                                    <p><span className="font-bold">Release Year:</span> {media.release_year}</p>
+                                    <p><span className="font-bold">End Year:</span> {media.end_year}</p>
+                                    <p><span className="font-bold">Rating:</span> {media.rating}</p>
+                                    <a href={media.url_last_watched} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                                        Go to last watched episode
+                                    </a>
+                                </div>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+
                 ))}
             </div>
         </div>
