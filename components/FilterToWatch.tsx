@@ -15,6 +15,10 @@ import { Search, X } from 'lucide-react'
 import { allowedTypes, allowedWatchingStates } from '@/lib/toWatch_utils'
 
 export default function FilterToWatch() {
+    // use states for types and watchingStates from url params in first render
+    // add filter by name
+    // add sorting by: name, release_year, rating,  asc and desc (depending of _id)
+
     const [types, setTypes] = useState<string[]>([])
     const [watchingStates, setWatchingStates] = useState<string[]>([])
 

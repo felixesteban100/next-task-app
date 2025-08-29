@@ -1,18 +1,11 @@
 import FilterToWatch from "@/components/FilterToWatch";
-import { MediaCard } from "@/components/media-card"
 import { collectionToWatch } from "@/db/mongodb/mongodb"
 import { connection } from "next/server";
 
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
+
+// import { Badge } from "@/components/ui/badge";
 import { allowedTypes, allowedWatchingStates } from "@/lib/toWatch_utils";
+import WatchToEdit from "@/components/WatchToEdit";
 
 export const dynamic = 'force-dynamic';
 
@@ -31,7 +24,6 @@ export type ToWatch = {
     rating: number,
     // main_characters: { name: string, image: string }[]
 }
-
 
 
 export default async function ToWatchPage({
@@ -59,7 +51,7 @@ export default async function ToWatchPage({
         ...(watchingStateArray && watchingStateArray.length > 0 ? { watching_state: { $in: watchingStateArray } } : {}),
     }
 
-    console.log(queryToWatch)
+    // console.log(queryToWatch)
 
     const toWatch = await collectionToWatch
         .find(queryToWatch)
@@ -72,11 +64,17 @@ export default async function ToWatchPage({
             <FilterToWatch />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
                 {toWatch.map((media) => (
-                    <Dialog key={media.name}>
-                        <DialogTrigger>
-                            <MediaCard media={JSON.parse(JSON.stringify(media))} />
-                        </DialogTrigger>
-                        <DialogContent className="w-screen">
+                    <WatchToEdit
+                        key={media._id.toString()}
+                        media={JSON.parse(JSON.stringify(media)) as ToWatch}
+                    />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+{/* <DialogContent className="w-screen">
                             <DialogHeader>
                                 <DialogTitle>{media.name}</DialogTitle>
                             </DialogHeader>
@@ -114,11 +112,4 @@ export default async function ToWatchPage({
                                     </a>
                                 </div>
                             </div>
-                        </DialogContent>
-                    </Dialog>
-
-                ))}
-            </div>
-        </div>
-    )
-}
+                        </DialogContent> */}

@@ -433,14 +433,14 @@ export const DEFAULT_TASKS: Task[] = [
         "state": "no done",
         "time": "8:20 pm"
     },
-    {
+    /* {
         "name": "📃🙏Retype Todays points to overcome and self-directed behavioral change",
         "type": "important",
         "state": "no done",
         "time": "8:50 pm"
-    },
+    }, */
     {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡 (in my room, kneeling down)",
         "type": "spiritual",
         "state": "done",
         "time": "9:00 pm"
