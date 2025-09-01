@@ -128,8 +128,7 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
                             <TabsTrigger value="info">Info</TabsTrigger>
                             <TabsTrigger value="edit">Edit</TabsTrigger>
                         </TabsList>
-                        <TabsContent value="info" className="p-4 space-y-4">
-
+                        <TabsContent value="info" className="p-4 space-y-4 lg:overflow-y-scroll max-h-[350px]">
                             <div className="w-full flex justify-between">
                                 <h3 className={`font-bold text-lg leading-tight text-card-foreground line-clamp-1 transition-colors`}>
                                     {media.name}
