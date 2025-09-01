@@ -157,7 +157,7 @@ export default function Navbar() {
 
     return (
         <nav className='h-fit bg-secondary flex flex-row justify-between py-2 px-10 fixed top-0 w-screen z-50'>
-            <Link href={`/`} className="text-2xl font-bold text-center  transition-opacity duration-300 relative w-full">
+            <Link href={`/`} className=" text-2xl font-bold text-center  transition-opacity duration-300 relative w-full">
                 <AnimatePresence>
                     <motion.h1
                         key={index}
@@ -185,8 +185,6 @@ export default function Navbar() {
             </Link>
             <div className="flex gap-2 items-center">
                 {!isLoaded && <Loader className="animate-spin" />}
-
-
 
                 {isLoaded && isSignedIn && (
                     <>
