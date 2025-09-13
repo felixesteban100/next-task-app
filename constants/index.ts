@@ -93,11 +93,17 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "6:30 am",
     },
     {
-        "name": "Practice one Math exercise",
+        "name": "Practice for GED tests (science, math, social studies, reasoning in language arts)",
         "type": "normal",
         "state": "no done",
         "time": "6:30 am",
     },
+    /* {
+        "name": "Practice one Math exercise",
+        "type": "normal",
+        "state": "no done",
+        "time": "6:30 am",
+    }, */
     {
         "name": "Practice one Music reading exercise",
         "type": "normal",
