@@ -36,7 +36,9 @@ export const doneInWhichWay = {
     "occupied": "☑️Fairly done, to God be the glory 🙌",
 }
 
-export const TASKS_THAT_SEPARATE_SECTIONS = "Thanksgiving 🙏 and Battle Prayer ⚔🛡"
+// export const TASKS_THAT_SEPARATE_SECTIONS = "Thanksgiving 🙏 and Battle Prayer ⚔🛡"
+export const TASKS_THAT_SEPARATE_SECTIONS = "Prayer"
+export const TASKS_THAT_DONT_SEPARATE_SECTIONS = "Thanksgiving 🙏 and Battle Prayer ⚔🛡(morning kneeling down)"
 
 export const PREVIOUS_GODLY_TASK = "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)"
 export const GODLY_TASK = "Are you going to honor God, love your family and invest in your future tonight?"
@@ -46,28 +48,28 @@ export const DEFAULT_TASKS: Task[] = [
         "name": "Wake up early",
         "type": "normal",
         "state": "no done",
-        "time": "5:30 am",
-    },
-    {
-        "name": "Share a Christian quote or a verse to social networks",
-        "type": "normal",
-        "state": "no done",
-        "time": "5:40 am",
-    },
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(kneeling down)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "5:40 am",
+        "time": "5:10 am",
     },
     {
         "name": "Go to the bathroom for grooming and brush teeth",
         "type": "normal",
         "state": "no done",
-        "time": "5:40 am",
+        "time": "5:10 am",
     },
     {
         "name": "Organize bed",
+        "type": "normal",
+        "state": "no done",
+        "time": "5:10 am",
+    },
+    {
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(morning kneeling down)",
+        "type": "spiritual",
+        "state": "no done",
+        "time": "5:20 am",
+    },
+    {
+        "name": "Share a Christian quote or a verse to social networks",
         "type": "normal",
         "state": "no done",
         "time": "5:40 am",
@@ -78,12 +80,11 @@ export const DEFAULT_TASKS: Task[] = [
         "state": "no done",
         "time": "5:50 am",
     },
-
     {
         "name": "Gym or Exercises for the knee 🦵🏋️‍♂️🏋️‍♀️",
         "type": "important",
         "state": "no done",
-        "time": "6:30 am",
+        "time": "6:00 am",
     },
 
     {
@@ -422,7 +423,7 @@ export const DEFAULT_TASKS: Task[] = [
     },
 
     {
-        "name": "Prayer time with family",
+        "name": "Prayer time with family 🙏👪",
         "type": "spiritual",
         "state": "no done",
         "time": "8:00 pm"
@@ -446,7 +447,7 @@ export const DEFAULT_TASKS: Task[] = [
         "time": "8:50 pm"
     }, */
     {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡 (in my room, kneeling down)",
+        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡 (night, kneeling down)",
         "type": "spiritual",
         "state": "done",
         "time": "9:00 pm"

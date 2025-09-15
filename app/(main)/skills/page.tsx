@@ -20,6 +20,7 @@ export default function page() {
                 unmatched speaking fluency in spanish
                 how to play chess (just the rules)
                 Speed reading with comprehension
+                solving riddles
 
                 music:
                 piano music reading G clef
@@ -59,6 +60,8 @@ export default function page() {
                 computer science
                 programming
                 mathemathics
+                problem solving skills
+                soft skills
 
             </pre>
         </div>
