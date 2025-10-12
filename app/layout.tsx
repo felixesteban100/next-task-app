@@ -42,7 +42,7 @@ export default function RootLayout({
           >
             <main className="flex flex-col gap-10 w-[98vw]">
               <Navbar />
-              <div className="flex flex-col gap-2 mt-10 py-10 justify-center items-center mb-10 overflow-x-hidden w-screen h-screen">
+              <div className="flex flex-col gap-2 mt-10 py-10 justify-center items-center mb-10">
                 {children}
               </div>
             </main>

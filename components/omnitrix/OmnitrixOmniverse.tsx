@@ -2,7 +2,7 @@
 
 import { ALL_ALIENS_OMNIVERSE } from "@/constants/omnitrix"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const aliensWithId = ALL_ALIENS_OMNIVERSE.map((alien, index) => ({ ...alien, id: index }))
 
@@ -12,6 +12,15 @@ export default function OmnitrixOmniverse() {
     const [transform, setTransform] = useState(false)
 
     const [focus, setFocus] = useState(() => Math.floor(Math.random() * aliensWithId.length));
+
+    useEffect(() => {
+        document.documentElement?.requestFullscreen();
+        return () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+        };
+    }, []);
 
     if (transform) {
         return (
