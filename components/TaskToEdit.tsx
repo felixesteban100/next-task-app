@@ -196,7 +196,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                             <FormItem>
                                 <FormMessage />
                                 <FormControl>
-                                    <div>
+                                    <div className='space-y-15 md:space-y-0'>
                                         {(sortByProperty(field.value, organizeByTime ? "time" : "id")).map((task) => {
                                             const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
                                             return (
@@ -213,21 +213,23 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                                                     >
                                                         {task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.name !== TASKS_THAT_DONT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null}
                                                         <div className="flex gap-2 items-center justify-start group">
-                                                            {Object.entries(stateEmoji).map(([state, emoji]) => (
-                                                                <Button
-                                                                    key={task.id + state}
-                                                                    type="button"
-                                                                    size="icon"
-                                                                    variant={"ghost"}
-                                                                    className={`${task.state !== state ? "grayscale-100" : ""}`}
-                                                                    onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
-                                                                >
-                                                                    {emoji}
-                                                                </Button>
-                                                            ))}
+                                                            <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start'>
+                                                                {Object.entries(stateEmoji).map(([state, emoji]) => (
+                                                                    <Button
+                                                                        key={task.id + state}
+                                                                        type="button"
+                                                                        size="icon"
+                                                                        variant={"ghost"}
+                                                                        className={`${task.state !== state ? "grayscale-100" : ""}`}
+                                                                        onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
+                                                                    >
+                                                                        {emoji}
+                                                                    </Button>
+                                                                ))}
+                                                            </div>
 
                                                             <p
-                                                                className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state])}
+                                                                className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
                                                             >
                                                                 {occupiedAndNotSpiritual && hideOccupied ?
                                                                     <>

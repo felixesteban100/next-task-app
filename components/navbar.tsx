@@ -1,7 +1,17 @@
 "use client"
 
 import { ModeToggle } from "@/components/mode-toggle"
-import { Accessibility, Calendar, Clock, History, LetterText, Loader, PlusIcon, Tv } from "lucide-react"
+import {
+    // Accessibility, 
+    Calendar,
+    // Clock, 
+    History,
+    // LetterText, 
+    Loader,
+    // PlusIcon, 
+    Tv,
+    Watch
+} from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { SignInButton, useAuth, UserButton } from "@clerk/nextjs"
@@ -60,31 +70,36 @@ const links = [
         label: "Previous days",
         icon: <History />
     },
-    {
-        href: "/api/today",
-        label: "Add today to the database",
-        icon: <PlusIcon />
-    },
+    // {
+    //     href: "/api/today",
+    //     label: "Add today to the database",
+    //     icon: <PlusIcon />
+    // },
     {
         href: "/to-watch",
         label: "To Watch List",
         icon: <Tv />
     },
     {
-        href: "/clock",
-        label: "Clock App",
-        icon: <Clock />
+        href: "/omnitrix",
+        label: "Omnitrix",
+        icon: <Watch />
     },
-    {
-        href: "/knee",
-        label: "Knee Improvement Routine",
-        icon: <Accessibility />
-    },
-    {
-        href: "/speak-english",
-        label: "Speak English",
-        icon: <LetterText />
-    },
+    // {
+    //     href: "/clock",
+    //     label: "Clock App",
+    //     icon: <Clock />
+    // },
+    // {
+    //     href: "/knee",
+    //     label: "Knee Improvement Routine",
+    //     icon: <Accessibility />
+    // },
+    // {
+    //     href: "/speak-english",
+    //     label: "Speak English",
+    //     icon: <LetterText />
+    // },
 ]
 
 const titles = [
@@ -157,7 +172,7 @@ export default function Navbar() {
 
     return (
         <nav className='h-fit bg-secondary flex flex-row justify-between py-2 px-10 fixed top-0 w-screen z-50'>
-            <Link href={`/`} className=" text-2xl font-bold text-center  transition-opacity duration-300 relative w-full">
+            <Link href={`/`} className=" text-2xl font-bold text-center  transition-opacity duration-300 relative w-full ">
                 <AnimatePresence>
                     <motion.h1
                         key={index}
@@ -166,7 +181,7 @@ export default function Navbar() {
                         exit={{ y: -20, opacity: 0 }}
                         transition={{ ease: "easeInOut" }}
                         style={{ position: "absolute" }}
-                        className="flex items-center gap-2"
+                        className="hidden lg:flex items-center gap-2"
                     >
                         {titles[index]}
                         {emojis[index].map((emoji, i) => {

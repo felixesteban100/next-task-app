@@ -4,12 +4,12 @@ import { /* collectionReflectionQuestions, */ collectionTask } from "@/db/mongod
 import { getTodaysDate } from "@/lib/utils";
 import { ObjectId } from "mongodb";
 import { connection } from "next/server";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+// import {
+//   Accordion,
+//   AccordionContent,
+//   AccordionItem,
+//   AccordionTrigger,
+// } from "@/components/ui/accordion"
 
 export type ReflectionQuestions = {
   reflectionQuestions: string[]
@@ -54,7 +54,7 @@ export default async function Home({
           <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} hideOccupied={hideOccupied === "true"} />
 
           <div className="flex flex-col gap-5 justify-center items-center">
-            <div className="flex flex-col justify-center items-center">
+            {/* <div className="flex flex-col justify-center items-center">
               <p className="font-semibold text-xl ">Today ({today}) is <span className="text-red-400">not a day to sin</span> but is <span className="text-green-400">a day to live for God.</span> Amen.</p>
               <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
@@ -85,7 +85,7 @@ export default async function Home({
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-            </div>
+            </div> */}
 
             {/* <div className="flex flex-row gap-12 justify-center items-center">
               <AnimatedTestimonialsDemo />

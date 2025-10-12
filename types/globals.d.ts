@@ -5,4 +5,11 @@ declare global {
         type: 'normal' | 'important' | 'spiritual',
         state: "done" | "no done" | "occupied",
     }
+
+
+}
+
+declare module "*.mp3" {
+    const src: string;
+    export default src;
 }
