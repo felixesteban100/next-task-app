@@ -8,7 +8,7 @@ import {
     History,
     // LetterText, 
     Loader,
-    // PlusIcon, 
+    PlusIcon,
     Tv,
     Watch
 } from "lucide-react"
@@ -70,11 +70,11 @@ const links = [
         label: "Previous days",
         icon: <History />
     },
-    // {
-    //     href: "/api/today",
-    //     label: "Add today to the database",
-    //     icon: <PlusIcon />
-    // },
+    {
+        href: "/api/today",
+        label: "Add today to the database",
+        icon: <PlusIcon />
+    },
     {
         href: "/to-watch",
         label: "To Watch List",

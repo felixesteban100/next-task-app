@@ -22,6 +22,17 @@ export default function OmnitrixOmniverse() {
         };
     }, []);
 
+    useEffect(() => {
+        const ben10LogoTransformed = document.getElementById("ben-10-logo-transformed")
+        if (ben10LogoTransformed) {
+            ben10LogoTransformed.classList.add("animate-spin")
+            const timeout = setTimeout(() => {
+                ben10LogoTransformed.classList.remove("animate-spin")
+            }, 1000)
+            return () => clearTimeout(timeout)
+        }
+    }, [focus])
+
     if (transform) {
         return (
             <div className="space-y-5 flex flex-col items-center justify-center">
@@ -30,26 +41,42 @@ export default function OmnitrixOmniverse() {
                     alt={aliensWithId[focus].name}
                     width={300}
                     height={300}
-                    className={`${aliensWithId[focus].height?.character} `}
-                    onClick={() => {
-                        setOpen(false)
-                        setTransform(false)
-                    }}
+                    // className={`${aliensWithId[focus].height?.character} `}
+                    className={`h-[300px] w-auto animate-zoom-in`}
+
                 />
-                <Ben10Logo size={50} setTransform={() => setFocus(() => Math.floor(Math.random() * aliensWithId.length))} />
+                <div className="flex gap-5 justify-center items-center">
+                    <div id="ben-10-logo-transformed">
+                        <Ben10Logo size={50} setTransform={() => setFocus(() => Math.floor(Math.random() * aliensWithId.length))} />
+                    </div>
+                    <div
+                        onClick={() => {
+                            setOpen(false)
+                            setTransform(false)
+                        }}
+                    >
+                        <Ben10Logo color="bg-red-500" size={50} setTransform={() => setFocus(() => Math.floor(Math.random() * aliensWithId.length))} />
+                    </div>
+                </div>
             </div>
         )
     }
 
     return (
-        <div className="flex flex-col items-center justify-center relative mt-30 ">
-            <div className="">
+        <div className="flex flex-col items-center justify-center relative mt-30">
+            <div className={`${open ? "animate-spin [animation-iteration-count:1] " : ""}`}>
                 <Ben10Logo setTransform={() => setTransform(true)} />
             </div>
-            <div onClick={() => setDisplaySelector(prev => !prev)} className={`absolute transition-all duration-500  ${open ? "translate-y-[-60%] -rotate-x-70" : ""}`}>
+            <div
+                onClick={() => {
+                    setDisplaySelector(prev => !prev)
+                    setOpen(false)
+                }}
+                className={`absolute transition-all duration-500  ${open ? "translate-y-[-60%] -rotate-x-70" : ""}`}
+            >
                 <Ben10FrontPanel />
             </div>
-            <div className={`absolute opacity-90 ${displaySelector ? "hidden" : ""}`} >
+            <div className={`absolute opacity-90 ${displaySelector ? "hidden" : "flex "} animate-zoom-in justify-center items-center flex-col`} >
                 <Ben10AlienSelectorCircle
                     transform={() => {
                         setOpen(true)
@@ -58,50 +85,70 @@ export default function OmnitrixOmniverse() {
                     focus={focus}
                     setFocus={setFocus}
                 />
+
+                <div
+                    onClick={() => setDisplaySelector(true)}
+                    className="absolute inset-0 bg-lime-500 rounded-full w-[350px] h-[350px]"
+                    style={{
+                        WebkitMaskImage: "conic-gradient(black 0deg 180deg, transparent 90deg 360deg), radial-gradient(circle, transparent 39%, black 40%)",
+                        WebkitMaskComposite: "source-in",
+                        maskComposite: "intersect",
+                        WebkitMaskRepeat: "no-repeat",
+                        WebkitMaskPosition: "center",
+                        WebkitMaskSize: "100% 100%",
+                        rotate: "90deg",
+                    }}
+                />
             </div>
         </div>
     )
 }
 
 
-function Ben10Logo({ setTransform, size = 180 }: { setTransform: () => void, size?: number }) {
+function Ben10Logo({ setTransform, size = 180, color = "bg-lime-500", animate = false }: { setTransform: () => void, size?: number, color?: string, animate?: boolean }) {
     return (
-        <div onClick={() => setTransform()} className={`flex flex-col items-center justify-center bg-black rounded-full relative`} style={{ width: `${size}px`, height: `${size}px` }}>
-            <div
-                className="absolute w-[80%] h-[80%] bg-lime-500"
-                style={{
-                    clipPath: "polygon(0% 0%, 100% 0%, 50% 60%)",
-                    borderTopLeftRadius: "50% 50%",
-                    borderTopRightRadius: "50% 50%",
-                }}
-            />
-            <div
-                className="absolute w-[80%] h-[80%] bg-lime-500"
-                style={{
-                    clipPath: "polygon(50% 30%, 0% 100%, 100% 100%)",
-                    borderBottomLeftRadius: "50% 50%",
-                    borderBottomRightRadius: "50% 50%",
-                }}
-            />
+        <div onClick={() => setTransform()} className="relative flex items-center justify-center cursor-pointer">
+            <div className="bg-gray-300 rounded-full relative" style={{ width: `${size + 15}px`, height: `${size + 15}px` }} />
+            <div className="absolute ">
+                <div className={`flex flex-col items-center justify-center bg-black rounded-full`} style={{ width: `${size}px`, height: `${size}px` }}>
+                    <div
+                        className={`absolute w-[80%] h-[80%] ${color} ${animate ? "animate-[colorFade_2s_ease-in-out_infinite]" : ""}`}
+                        style={{
+                            clipPath: "polygon(0% 0%, 100% 0%, 50% 60%)",
+                            borderTopLeftRadius: "50% 50%",
+                            borderTopRightRadius: "50% 50%",
+                        }}
+                    />
+                    <div
+                        className={`absolute w-[80%] h-[80%] ${color} ${animate ? "animate-[colorFade_2s_ease-in-out_infinite]" : ""}`}
+                        style={{
+                            clipPath: "polygon(50% 30%, 0% 100%, 100% 100%)",
+                            borderBottomLeftRadius: "50% 50%",
+                            borderBottomRightRadius: "50% 50%",
+                        }}
+                    />
+                </div>
+            </div>
         </div>
     )
 }
 
-/* to edit */
 function Ben10FrontPanel() {
-    const size = 180
+    const size = 200
     return (
-        <div className={`flex flex-row items-center justify-center bg-black rounded-sm relative`} style={{ width: `${size}px`, height: `${size}px` }}>
+        <div className={`flex bg-black rounded-sm relative`} style={{ width: `${size}px`, height: `${size}px` }}>
             <div
-                className="absolute w-[100%] h-[100%] bg-lime-500"
+                className="absolute w-[80%] h-[100%] bg-lime-500"
                 style={{
-                    clipPath: "polygon(-10% 0%, 10% 0%, 40% 50%, 10% 100%, -10% 100%, 40% 50%)",
+                    clipPath: "polygon(-10% 0%, 10% 0%, 50% 50%, 10% 100%, -10% 100%, 40% 50%)",
                 }}
             />
             <div
-                className="absolute w-[100%] h-[100%] bg-lime-500"
+                className="absolute w-[80%] h-[100%] bg-lime-500"
                 style={{
-                    clipPath: "polygon(110% 0%, 90% 0%, 60% 50%, 90% 100%, 110% 100%, 60% 50%)",
+                    clipPath: "polygon(-10% 0%, 10% 0%, 50% 50%, 10% 100%, -10% 100%, 40% 50%)",
+                    rotate: "180deg",
+                    translate: "25% 0",
                 }}
             />
         </div>
@@ -125,44 +172,48 @@ function Ben10AlienSelectorCircle({ transform, focus, setFocus }: { transform: (
     }
 
     return (
-        <div className={`relative flex justify-center items-center transition-all`} style={{ width: `${size}px`, height: `${size}px` }}>
-            <div className="w-full h-full bg-lime-800/90 [clip-path:circle(50%_at_50%_50%)] [mask:radial-gradient(circle,transparent_40%,black_41%)]" />
-            {surroundingItems.map((item, idx) => {
-                const position = idx - 2; // center is 0
-                const translateY = -Math.abs(position) * -40;
-                const scale = 1/*  - Math.abs(position) * 0.2 */;
+        <div className={`relative flex justify-center items-center transition-all `} style={{ width: `${size}px`, height: `${size}px` }}>
+            <div className="w-full h-full bg-lime-400/90 [clip-path:circle(50%_at_50%_50%)] [mask:radial-gradient(circle,transparent_40%,black_41%)]" />
+            <div className="absolute w-[40%] h-full flex items-center justify-center">
+                {surroundingItems.map((item, idx) => {
+                    const position = idx - 2; // center is 0
+                    const translateYCenters = -Math.abs(position) * -30;
+                    const translateYEnds = -Math.abs(position) * -50;
+                    const scale = 1;
 
-                return (
-                    <div
-                        key={item.name}
-                        onClick={() => setFocus(items.indexOf(item))}
-                        className={` absolute w-[20%] h-[20%] ${focus === item.id ? "bg-green-800" : ""} flex items-center justify-center rounded-2xl cursor-pointer transition-all duration-300 -translate-y-35`}
-                        style={{
-                            transform: `translateX(${position * 70}px) translateY(${translateY}px) scale(${scale})`,
-                            zIndex: 10 - Math.abs(position),
-                        }}
-                    >
+                    return (
                         <div
-                            className="bg-lime-400 w-10 h-10"
-                            onClick={() => {
-                                if (item.id === focus) {
-                                    transform()
-                                }
-                            }}
+                            key={item.name}
+                            onClick={() => setFocus(items.indexOf(item))}
+                            className={`w-[80%] h-[20%] ${focus === item.id ? "bg-lime-800" : ""} flex items-center justify-center rounded-2xl cursor-pointer transition-all duration-300 -translate-y-35`}
                             style={{
-                                WebkitMaskImage: `url(${item.img})`,
-                                WebkitMaskSize: "contain",
-                                WebkitMaskRepeat: "no-repeat",
-                                WebkitMaskPosition: "center",
-                                maskImage: `url(${item.img})`,
-                                maskSize: "contain",
-                                maskRepeat: "no-repeat",
-                                maskPosition: "center",
+                                transform: `translateX(${position * 30}px) translateY(${position === 2 || position === -2 ? translateYEnds : translateYCenters}px) ${position === -1 ? `translateX(-10px)` : position === 1 ? "translateX(10px)" : ""} scale(${scale})`,
+                                zIndex: 10 - Math.abs(position),
                             }}
-                        ></div>
-                    </div>
-                );
-            })}
+                        >
+                            <div
+                                // className="bg-lime-800 w-10 h-10"
+                                className={`${focus === item.id ? "bg-lime-400" : "bg-lime-800"} w-10 h-10`}
+                                onClick={() => {
+                                    if (item.id === focus) {
+                                        transform()
+                                    }
+                                }}
+                                style={{
+                                    WebkitMaskImage: `url(${item.img})`,
+                                    WebkitMaskSize: "contain",
+                                    WebkitMaskRepeat: "no-repeat",
+                                    WebkitMaskPosition: "center",
+                                    maskImage: `url(${item.img})`,
+                                    maskSize: "contain",
+                                    maskRepeat: "no-repeat",
+                                    maskPosition: "center",
+                                }}
+                            ></div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     )
 }
