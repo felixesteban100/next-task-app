@@ -3,6 +3,7 @@
 import { ALL_ALIENS_OMNIVERSE } from "@/constants/omnitrix"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion";
 
 const aliensWithId = ALL_ALIENS_OMNIVERSE.map((alien, index) => ({ ...alien, id: index }))
 
@@ -88,7 +89,7 @@ export default function OmnitrixOmniverse() {
 
                 <div
                     onClick={() => setDisplaySelector(true)}
-                    className="absolute inset-0 bg-lime-500 rounded-full w-[350px] h-[350px]"
+                    className="absolute inset-0 bg-green-500 rounded-full w-[350px] h-[350px] z-10"
                     style={{
                         WebkitMaskImage: "conic-gradient(black 0deg 180deg, transparent 90deg 360deg), radial-gradient(circle, transparent 39%, black 40%)",
                         WebkitMaskComposite: "source-in",
@@ -155,11 +156,11 @@ function Ben10FrontPanel() {
     )
 }
 
-function Ben10AlienSelectorCircle({ transform, focus, setFocus }: { transform: () => void, focus: number, setFocus: (index: number) => void }) {
+function Ben10AlienSelectorCircle({ transform, focus, setFocus }: { transform: () => void, focus: number, setFocus: React.Dispatch<React.SetStateAction<number>> }) {
     const size = 350
     const items = aliensWithId
 
-    const surroundingItems = getSurroundingItems(items, focus, 2);
+    const surroundingItems = getSurroundingItems(items, focus, 3);
 
     function getSurroundingItems<T>(arr: T[], focusIndex: number, visibleCount: number = 2): T[] {
         const len = arr.length;
@@ -171,48 +172,74 @@ function Ben10AlienSelectorCircle({ transform, focus, setFocus }: { transform: (
         return result;
     }
 
-    return (
-        <div className={`relative flex justify-center items-center transition-all `} style={{ width: `${size}px`, height: `${size}px` }}>
-            <div className="w-full h-full bg-lime-400/90 [clip-path:circle(50%_at_50%_50%)] [mask:radial-gradient(circle,transparent_40%,black_41%)]" />
-            <div className="absolute w-[40%] h-full flex items-center justify-center">
-                {surroundingItems.map((item, idx) => {
-                    const position = idx - 2; // center is 0
-                    const translateYCenters = -Math.abs(position) * -30;
-                    const translateYEnds = -Math.abs(position) * -50;
-                    const scale = 1;
+    // const prev = () => setFocus((prev: number) => (prev - 1 + items.length) % items.length);
+    // const next = () => setFocus((prev: number) => (prev + 1) % items.length);
 
-                    return (
-                        <div
-                            key={item.name}
-                            onClick={() => setFocus(items.indexOf(item))}
-                            className={`w-[80%] h-[20%] ${focus === item.id ? "bg-lime-800" : ""} flex items-center justify-center rounded-2xl cursor-pointer transition-all duration-300 -translate-y-35`}
-                            style={{
-                                transform: `translateX(${position * 30}px) translateY(${position === 2 || position === -2 ? translateYEnds : translateYCenters}px) ${position === -1 ? `translateX(-10px)` : position === 1 ? "translateX(10px)" : ""} scale(${scale})`,
-                                zIndex: 10 - Math.abs(position),
-                            }}
-                        >
-                            <div
-                                // className="bg-lime-800 w-10 h-10"
-                                className={`${focus === item.id ? "bg-lime-400" : "bg-lime-800"} w-10 h-10`}
-                                onClick={() => {
-                                    if (item.id === focus) {
-                                        transform()
-                                    }
+    return (
+        <div className={`relative flex justify-center items-center transition-all  overflow-hidden`} style={{ width: `${size}px`, height: `${size}px` }}>
+            <div className="w-full h-full bg-lime-400/90 [clip-path:circle(50%_at_50%_50%)] [mask:radial-gradient(circle,transparent_40%,black_41%)]" />
+            <div className="absolute w-[40%] h-full flex items-center justify-center ">
+                <AnimatePresence>
+                    {surroundingItems.map((item, idx) => {
+                        const position = idx - 3; // center is 0, goes from -3 to 3
+
+                        // X distance between items
+                        const xOffset = position * 70;
+
+                        // Y curve: smoother and more "circular"
+                        // try adjusting radius or multiplier to control curvature
+                        const radius = 150; // the "curve tightness" — larger means flatter
+                        const yOffset = -Math.sqrt(Math.max(0, radius ** 2 - (position * 70) ** 2)) + radius;
+
+                        // scale and rotation
+                        // const scale = 1 - Math.abs(position) * 0.15;
+                        const rotateY = position * -25;
+
+                        return (
+                            <motion.div
+                                key={item.name}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{
+                                    x: xOffset,
+                                    y: yOffset,
+                                    // scale,
+                                    rotateY,
+                                    opacity: 1,
+                                    zIndex: 100 - Math.abs(position),
                                 }}
-                                style={{
-                                    WebkitMaskImage: `url(${item.img})`,
-                                    WebkitMaskSize: "contain",
-                                    WebkitMaskRepeat: "no-repeat",
-                                    WebkitMaskPosition: "center",
-                                    maskImage: `url(${item.img})`,
-                                    maskSize: "contain",
-                                    maskRepeat: "no-repeat",
-                                    maskPosition: "center",
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                transition={{
+                                    type: "keyframes",
+                                    duration: 0.2, // seconds
+                                    ease: "easeInOut",
                                 }}
-                            ></div>
-                        </div>
-                    );
-                })}
+                                className={`absolute w-24 h-24 ${/* focus === item.id ? "bg-lime-600" : "" */""} rounded-2xl flex items-center justify-center font-semibold cursor-pointer -translate-y-[130px]`}
+                                onClick={() => setFocus(items.indexOf(item))}
+                            >
+                                <div
+                                    // className="bg-lime-800 w-10 h-10"
+                                    className={`${focus === item.id ? "bg-lime-400" : "bg-lime-800"} w-10 h-10`}
+                                    onClick={() => {
+                                        if (item.id === focus) {
+                                            transform()
+                                        }
+                                    }}
+                                    style={{
+                                        WebkitMaskImage: `url(${item.img})`,
+                                        WebkitMaskSize: "contain",
+                                        WebkitMaskRepeat: "no-repeat",
+                                        WebkitMaskPosition: "center",
+                                        maskImage: `url(${item.img})`,
+                                        maskSize: "contain",
+                                        maskRepeat: "no-repeat",
+                                        maskPosition: "center",
+                                    }}
+                                />
+                            </motion.div>
+                        );
+                    })}
+                    <div className="bg-green-700 h-[90px] w-[60px] -translate-y-[140px]" />
+                </AnimatePresence>
             </div>
         </div>
     )
