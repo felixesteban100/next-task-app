@@ -1,6 +1,7 @@
 export type Alien = {
     name: string;
     img: string;
+    video: string;
     height?: {
         silouette?: string;
         character?: string;
