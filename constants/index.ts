@@ -1,4 +1,4 @@
-import { Task } from "@/components/TaskToEdit";
+// import { Task } from "@/components/TaskToEdit";
 
 export const classNamesType = {
     "normal": "",
@@ -43,430 +43,419 @@ export const TASKS_THAT_DONT_SEPARATE_SECTIONS = "Thanksgiving 🙏 and Battle P
 export const PREVIOUS_GODLY_TASK = "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)"
 export const GODLY_TASK = "Are you going to honor God, love your family and invest in your future tonight?"
 
-export const DEFAULT_TASKS: Task[] = [
-    {
-        "name": "Wake up early",
-        "type": "normal",
-        "state": "no done",
-        "time": "5:10 am",
-    },
-    {
-        "name": "Go to the bathroom for grooming and brush teeth",
-        "type": "normal",
-        "state": "no done",
-        "time": "5:10 am",
-    },
-    {
-        "name": "Organize bed",
-        "type": "normal",
-        "state": "no done",
-        "time": "5:10 am",
-    },
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(morning kneeling down)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "5:20 am",
-    },
-    {
-        "name": "Share a Christian quote or a verse to social networks",
-        "type": "normal",
-        "state": "no done",
-        "time": "5:40 am",
-    },
-    {
-        "name": "📃🙏Todays points to overcome and self-directed behavioral change",
-        "type": "important",
-        "state": "no done",
-        "time": "5:50 am",
-    },
-    {
-        "name": "Gym or Exercises for the knee 🦵🏋️‍♂️🏋️‍♀️",
-        "type": "important",
-        "state": "no done",
-        "time": "6:00 am",
-    },
+// export const DEFAULT_TASKS: Task[] = [
+//     {
+//         "name": "Wake up early",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "5:10 am",
+//     },
+//     {
+//         "name": "Go to the bathroom for grooming and brush teeth",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "5:10 am",
+//     },
+//     {
+//         "name": "Organize bed",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "5:10 am",
+//     },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(morning kneeling down)",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "5:20 am",
+//     },
+//     {
+//         "name": "Share a Christian quote or a verse to social networks",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "5:40 am",
+//     },
+//     {
+//         "name": "💊Take vitamins and supplements",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "5:40 am",
+//     },
+//     {
+//         "name": "📃🙏Todays points to overcome and self-directed behavioral change",
+//         "type": "important",
+//         "state": "no done",
+//         "time": "5:50 am",
+//     },
+//     {
+//         "name": "Gym or Exercises for the knee 🦵🏋️‍♂️🏋️‍♀️",
+//         "type": "important",
+//         "state": "no done",
+//         "time": "6:00 am",
+//     },
 
-    {
-        "name": "Practice with Brilliant App",
-        "type": "normal",
-        "state": "no done",
-        "time": "6:30 am",
-    },
-    {
-        "name": "Practice for GED tests (Math, Science, Social Studies, and English Literacy)",
-        "type": "normal",
-        "state": "no done",
-        "time": "6:30 am",
-    },
-    /* {
-        "name": "Practice one Math exercise",
-        "type": "normal",
-        "state": "no done",
-        "time": "6:30 am",
-    }, */
-    {
-        "name": "Practice one Music reading exercise",
-        "type": "normal",
-        "state": "no done",
-        "time": "6:30 am",
-    },
-    {
-        "name": "Rubik's cubes 5x5 / 4x4",
-        "type": "normal",
-        "state": "no done",
-        "time": "6:30 am",
-    },
-    {
-        "name": "Games for brain training",
-        "type": "normal",
-        "state": "no done",
-        "time": "6:30 am",
-    },
-    {
-        "name": "📖✝Read Bible (10+ chapters or an entire book)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "8:50 am",
-    },
-    {
-        "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "8:50 am",
-    },
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "9:00 am",
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "9:00 am",
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "no done",
-        "time": "9:00 am",
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "no done",
-        "time": "9:00 am",
-    },
-    {
-        "name": "💊Take vitamins and supplements",
-        "type": "normal",
-        "state": "no done",
-        "time": "9:10 am",
-    },
-    {
-        "name": "🏀Spin basketball / Practice dribble and passes",
-        "type": "normal",
-        "state": "no done",
-        "time": "9:20 am"
-    },
-    {
-        "name": "Software development / code projects",
-        "type": "important",
-        "state": "no done",
-        "time": "9:30 am"
-    },
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "10:50 am"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "10:50 am"
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "occupied",
-        "time": "10:50 am"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "occupied",
-        "time": "10:50 am"
-    },
-    {
-        "name": "Software development / code projects",
-        "type": "important",
-        "state": "occupied",
-        "time": "11:20 am"
-    },
-    {
-        "name": "Upload youtube short/ instagram reel to Palabra Abierta",
-        "type": "normal",
-        "state": "occupied",
-        "time": "11:50 am"
-    },
+//     {
+//         "name": "Practice with Brilliant App",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "6:30 am",
+//     },
+//     {
+//         "name": "Practice for GED tests (Math, Science, Social Studies, and English Literacy)",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "6:30 am",
+//     },
+//     {
+//         "name": "Practice one Music reading exercise",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "6:30 am",
+//     },
+//     {
+//         "name": "Rubik's cubes 5x5 / 4x4",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "6:30 am",
+//     },
+//     {
+//         "name": "Games for brain training",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "6:30 am",
+//     },
+//     {
+//         "name": "📖✝Read Bible (10+ chapters or an entire book)",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "8:50 am",
+//     },
+//     {
+//         "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "8:50 am",
+//     },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "9:00 am",
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "9:00 am",
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "9:00 am",
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "no done",
+//         "time": "9:00 am",
+//     },
 
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "12:00 pm"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "12:00 pm"
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "occupied",
-        "time": "12:00 pm"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "occupied",
-        "time": "12:00 pm"
-    },
-    {
-        "name": "Record yourself imitating a manly voice",
-        "type": "normal",
-        "state": "occupied",
-        "time": "12:10 pm"
-    },
-    {
-        "name": "🏀Spin basketball / Practice dribble and passes",
-        "type": "normal",
-        "state": "occupied",
-        "time": "12:20 pm"
-    },
+//     {
+//         "name": "🏀Spin basketball / Practice dribble and passes",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "9:20 am"
+//     },
+//     {
+//         "name": "Software development / code projects",
+//         "type": "important",
+//         "state": "no done",
+//         "time": "9:30 am"
+//     },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "10:50 am"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "10:50 am"
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "10:50 am"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "10:50 am"
+//     },
+//     {
+//         "name": "Software development / code projects",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "11:20 am"
+//     },
+//     {
+//         "name": "Upload youtube short/ instagram reel to Palabra Abierta",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "11:50 am"
+//     },
 
-    {
-        "name": "Practice Hard riddle TedEd/MindYourDecisions",
-        "type": "normal",
-        "state": "occupied",
-        "time": "12:50 pm"
-    },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "12:00 pm"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "12:00 pm"
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "12:00 pm"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "12:00 pm"
+//     },
+//     {
+//         "name": "Record yourself imitating a manly voice",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "12:10 pm"
+//     },
+//     {
+//         "name": "🏀Spin basketball / Practice dribble and passes",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "12:20 pm"
+//     },
 
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "1:10 pm"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "1:10 pm"
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "occupied",
-        "time": "1:10 pm"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "occupied",
-        "time": "1:10 pm"
-    },
+//     {
+//         "name": "Practice Hard riddle TedEd/MindYourDecisions",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "12:50 pm"
+//     },
 
-    {
-        "name": "Software development / code projects (long session)",
-        "type": "important",
-        "state": "occupied",
-        "time": "1:50 pm"
-    },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "1:10 pm"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "1:10 pm"
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "1:10 pm"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "1:10 pm"
+//     },
 
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "3:00 pm"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "3:00 pm"
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "occupied",
-        "time": "3:00 pm"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "occupied",
-        "time": "3:00 pm"
-    },
+//     {
+//         "name": "Software development / code projects (long session)",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "1:50 pm"
+//     },
 
-    {
-        "name": "Learn and study Data structures▶💻⚙📊💡💾",
-        "type": "important",
-        "state": "occupied",
-        "time": "3:50 pm"
-    },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "3:00 pm"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "3:00 pm"
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "3:00 pm"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "3:00 pm"
+//     },
 
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "4:10 pm"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "4:10 pm"
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "occupied",
-        "time": "4:10 pm"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "occupied",
-        "time": "4:10 pm"
-    },
-    {
-        "name": "Read from be a man (demark last and mark current)",
-        "type": "normal",
-        "state": "occupied",
-        "time": "4:20 pm"
-    },
-    {
-        "name": "Learn new Software development with tutorials/courses",
-        "type": "important",
-        "state": "occupied",
-        "time": "4:30 pm"
-    },
+//     {
+//         "name": "Learn and study Data structures▶💻⚙📊💡💾",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "3:50 pm"
+//     },
 
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "5:00 pm"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "occupied",
-        "time": "5:00 pm"
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "occupied",
-        "time": "5:00 pm"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "occupied",
-        "time": "5:00 pm"
-    },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "4:10 pm"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "4:10 pm"
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "4:10 pm"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "4:10 pm"
+//     },
+//     {
+//         "name": "Read from be a man (demark last and mark current)",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "4:20 pm"
+//     },
+//     {
+//         "name": "Learn new Software development with tutorials/courses",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "4:30 pm"
+//     },
 
-    {
-        "name": "Learn new Software development with tutorials/courses",
-        "type": "important",
-        "state": "occupied",
-        "time": "5:30 pm"
-    },
-    {
-        "name": "🏀Spin basketball / Practice dribble and passes",
-        "type": "normal",
-        "state": "occupied",
-        "time": "7:20 pm"
-    },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "5:00 pm"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "occupied",
+//         "time": "5:00 pm"
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "5:00 pm"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "5:00 pm"
+//     },
 
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "7:30 pm"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "7:30 pm"
-    },
-    {
-        "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
-        "type": "normal",
-        "state": "no done",
-        "time": "7:30 pm"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "no done",
-        "time": "7:30 pm"
-    },
+//     {
+//         "name": "Learn new Software development with tutorials/courses",
+//         "type": "important",
+//         "state": "occupied",
+//         "time": "5:30 pm"
+//     },
+//     {
+//         "name": "🏀Spin basketball / Practice dribble and passes",
+//         "type": "normal",
+//         "state": "occupied",
+//         "time": "7:20 pm"
+//     },
 
-    {
-        "name": "Prayer time with family 🙏👪",
-        "type": "spiritual",
-        "state": "no done",
-        "time": "8:00 pm"
-    },
-    {
-        "name": "Brush teeth",
-        "type": "normal",
-        "state": "no done",
-        "time": "8:10 pm"
-    },
-    {
-        "name": "🦵 Knee improvement Routine",
-        "type": "important",
-        "state": "no done",
-        "time": "8:20 pm"
-    },
-    /* {
-        "name": "📃🙏Retype Todays points to overcome and self-directed behavioral change",
-        "type": "important",
-        "state": "no done",
-        "time": "8:50 pm"
-    }, */
-    {
-        "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡 (night, kneeling down)",
-        "type": "spiritual",
-        "state": "done",
-        "time": "9:00 pm"
-    },
-    {
-        "name": "Bible verse📖✝: read, memorize and record audio",
-        "type": "spiritual",
-        "state": "done",
-        "time": "9:00 pm"
-    },
-    {
-        "name": "Are you going to honor God, love your family and invest in your future tonight?",
-        "type": "spiritual",
-        "state": "done",
-        "time": "9:10 pm"
-    }
-].map((c, i): Task => {
-    return { ...c, id: i } as Task
-})
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "7:30 pm"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "7:30 pm"
+//     },
+//     {
+//         "name": "5 push ups | 5 abs wheel, 3 pullups, 30 secs deadhang",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "7:30 pm"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "no done",
+//         "time": "7:30 pm"
+//     },
+
+//     {
+//         "name": "Prayer time with family 🙏👪",
+//         "type": "spiritual",
+//         "state": "no done",
+//         "time": "8:00 pm"
+//     },
+//     {
+//         "name": "Brush teeth",
+//         "type": "normal",
+//         "state": "no done",
+//         "time": "8:10 pm"
+//     },
+//     {
+//         "name": "🦵 Knee improvement Routine",
+//         "type": "important",
+//         "state": "no done",
+//         "time": "8:20 pm"
+//     },
+//     {
+//         "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡 (night, kneeling down)",
+//         "type": "spiritual",
+//         "state": "done",
+//         "time": "9:00 pm"
+//     },
+//     {
+//         "name": "Bible verse📖✝: read, memorize and record audio",
+//         "type": "spiritual",
+//         "state": "done",
+//         "time": "9:00 pm"
+//     },
+//     {
+//         "name": "Are you going to honor God, love your family and invest in your future tonight?",
+//         "type": "spiritual",
+//         "state": "done",
+//         "time": "9:10 pm"
+//     }
+// ].map((c, i): Task => {
+//     return { ...c, id: i } as Task
+// })
 
 export const TIMES = [
     "5:00 am",
@@ -1665,5 +1654,3 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
         value: "⛎"
     }
 ];
-
-

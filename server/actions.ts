@@ -2,8 +2,7 @@
 
 import { ToWatch } from "@/app/(main)/to-watch/page"
 import { Task } from "@/components/TaskToEdit"
-import { DEFAULT_TASKS } from "@/constants"
-import { collectionTask, collectionToWatch } from "@/db/mongodb/mongodb"
+import { collectionDefaultTasks, collectionTask, collectionToWatch } from "@/db/mongodb/mongodb"
 import { getTodaysDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { connection } from 'next/server'
@@ -15,7 +14,14 @@ export async function addDefaultTasksWithTodaysDate() {
 
     if (existingDay) return false
 
-    await collectionTask.insertOne({ tasks: DEFAULT_TASKS, date: todayDate })
+    const defaultTasks = await collectionDefaultTasks.findOne()
+
+    await collectionTask.insertOne({
+        tasks: defaultTasks!.tasks.map((c, i): Task => {
+            return { ...c, id: i } as Task
+        }),
+        date: todayDate
+    })
     return true
 }
 

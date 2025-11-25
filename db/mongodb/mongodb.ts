@@ -1,6 +1,6 @@
 import { ToWatch } from "@/app/(main)/to-watch/page";
 import { ReflectionQuestions } from "@/app/(main)/today/page";
-import { DailyTaskAndDetails } from "@/components/TaskToEdit";
+import { DailyTaskAndDetails, Task } from "@/components/TaskToEdit";
 import { MongoClient, type Document } from "mongodb";
 
 export function connectToCluster<CollectionType extends Document>(collectionName: string) {
@@ -21,5 +21,6 @@ export function connectToCluster<CollectionType extends Document>(collectionName
 }
 
 export const collectionTask = connectToCluster<DailyTaskAndDetails>("Task")
+export const collectionDefaultTasks = connectToCluster<{ tasks: Task[] }>("DEFAULT_TASKS")
 export const collectionReflectionQuestions = connectToCluster<ReflectionQuestions>("Reflection Questions")
 export const collectionToWatch = connectToCluster<ToWatch>("List to watch")
