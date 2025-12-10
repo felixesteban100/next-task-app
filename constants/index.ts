@@ -42,6 +42,13 @@ export const TASKS_THAT_DONT_SEPARATE_SECTIONS = "Thanksgiving 🙏 and Battle P
 
 export const PREVIOUS_GODLY_TASK = "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)"
 export const GODLY_TASK = "Are you going to honor God, love your family and invest in your future tonight?"
+export const ULTIMATE_GODLY_TASK = "GODLY NIGHT ROUTINE!"
+
+export const GODLY_TASKS = [
+    "Battle Prayer ⚔🛡 and thanksgiving 🙏(Kneel down and speak aloud)",
+    "Are you going to honor God, love your family and invest in your future tonight?",
+    "GODLY NIGHT ROUTINE!"
+]
 
 // export const DEFAULT_TASKS: Task[] = [
 //     {

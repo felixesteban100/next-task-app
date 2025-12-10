@@ -5,7 +5,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import { classNamesState, classNamesType, doneInWhichWay, failEmojis, GODLY_TASK, PREVIOUS_GODLY_TASK, stateEmoji, successEmojis } from '@/constants'
+import { classNamesState, classNamesType, doneInWhichWay, failEmojis, GODLY_TASKS, stateEmoji, successEmojis } from '@/constants'
 import { cn, getDayName, getMostRepeatedState, getTodaysDate, sortByProperty } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
@@ -73,7 +73,10 @@ export default async function page({
 
 
     function isHolyLastTaskDone(tasks: DailyTaskAndDetails["tasks"]) {
-        const lastTask = tasks.filter(c => c.name === PREVIOUS_GODLY_TASK || c.name == GODLY_TASK).slice(-1)[0];
+        // const lastTask = tasks.filter(c => c.name === PREVIOUS_GODLY_TASK || c.name == GODLY_TASK || c.name == ULTIMATE_GODLY_TASK).slice(-1)[0];
+        const lastTask = tasks
+            .filter(c => GODLY_TASKS.includes(c.name))
+            .slice(-1)[0];
         if (!lastTask) {
             // If no holy task found, check the actual last task in the list
             const actualLastTask = tasks[tasks.length - 1];
