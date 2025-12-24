@@ -7,7 +7,7 @@
 import { cn, filterFutureTimes, getDayName, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
-import { TASKS_THAT_DONT_SEPARATE_SECTIONS, TASKS_THAT_SEPARATE_SECTIONS, TIMES } from "@/constants"
+import { GODLY_TASKS, TASKS_THAT_DONT_SEPARATE_SECTIONS, TASKS_THAT_SEPARATE_SECTIONS, TIMES } from "@/constants"
 
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -129,9 +129,10 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
         fieldOnChange: (value: Task[]) => void
     ) {
         if (!inputValue) return; // Early exit if empty
+
         const [taskToEditName, newValue] = inputValue.split("->");
 
-        if (taskToEditName !== `${task.name}_${task.time}_${index}`) return; // Skip unnecessary update
+        if (taskToEditName !== `${task.name}_${task.time}_${index}`) return; // Skip unnecessary updat
 
         const updatedTasks = tasksState.map((item, indexItem) =>
             `${item.name}_${item.time}_${indexItem}` === taskToEditName
@@ -213,19 +214,23 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                                                     >
                                                         {task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.name !== TASKS_THAT_DONT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null}
                                                         <div className="flex gap-2 items-center justify-start group">
-                                                            <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start'>
-                                                                {Object.entries(stateEmoji).map(([state, emoji]) => (
-                                                                    <Button
-                                                                        key={task.id + state}
-                                                                        type="button"
-                                                                        size="icon"
-                                                                        variant={"ghost"}
-                                                                        className={`${task.state !== state ? "grayscale-100" : ""}`}
-                                                                        onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
-                                                                    >
-                                                                        {emoji}
-                                                                    </Button>
-                                                                ))}
+                                                            <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start '>
+                                                                {Object.entries(stateEmoji).map(([state, emoji]) => {
+                                                                    if (GODLY_TASKS.includes(task.name) && state === "occupied") return (<Button disabled type="button" size="icon"
+                                                                        variant={"ghost"} key={task.id + state}></Button>)
+                                                                    return (
+                                                                        <Button
+                                                                            key={task.id + state}
+                                                                            type="button"
+                                                                            size="icon"
+                                                                            variant={"ghost"}
+                                                                            className={`${task.state !== state ? "grayscale-100" : ""}`}
+                                                                            onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
+                                                                        >
+                                                                            {emoji}
+                                                                        </Button>
+                                                                    )
+                                                                })}
                                                             </div>
 
                                                             <p
@@ -242,7 +247,8 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                                                             <select
                                                                 defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
                                                                 onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
-                                                                className="appearance-none border-none bg-secondary/80 text-foreground rounded-md p-1 "
+                                                                className={`appearance-none border-none bg-secondary/80 ${GODLY_TASKS.includes(task.name) ? "text-foreground/50 cursor-not-allowed" : "text-foreground"}  rounded-md p-1`}
+                                                                disabled={GODLY_TASKS.includes(task.name)}
                                                             >
                                                                 {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
                                                                     <option
