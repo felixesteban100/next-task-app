@@ -229,7 +229,6 @@ export default function Navbar() {
                                 </Dialog>
                             )
 
-
                             return (
                                 <TooltipProvider key={link.href}>
                                     <Tooltip>

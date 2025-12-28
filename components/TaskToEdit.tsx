@@ -32,7 +32,10 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
-import { useState } from "react"
+import { useState/* , useEffect */ } from "react"
+
+// import { io } from 'socket.io-client';
+
 // import { DialogTrigger } from './ui/dialog'
 // import { AnimatedTestimonialsDemo } from './animated-testimonials'
 import { useSearchParams } from 'next/navigation'
@@ -79,6 +82,28 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
     const organizeByTime = new URLSearchParams(useSearchParams()).get('organizeByTime') === "true" ? true : false
 
     const [loading, setLoading] = useState(false);
+
+    /* useEffect(() => {
+        const socket = io("/api/socket", {
+            transports: ["websocket"], // disable polling
+        });
+        socket.on("dbChange", ({ collection, change }) => {
+            // I left it incompleted, continue here https://chatgpt.com/c/695148d5-b9a8-8332-bf86-f50b442ffa06
+
+            console.log(`Change in collection ${collection}:`, change);
+            // Update your React state here
+            toast.info("Database updated! Reloading page in 1s");
+
+            setTimeout(() => {
+                // Use Next.js router replace instead of window.location.reload()
+                window.location.href = window.location.href;
+            }, 1000);
+        });
+
+        return () => {
+            socket.disconnect();
+        };
+    }, []); */
 
     const { tasks, date } = dayInfo
 
@@ -145,7 +170,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
     }
 
     return (
-        <div className={`flex flex-col gap-7 items-center mb-10 w-full `}>
+        <div className={`flex flex-col gap-7 items-center mb-2 w-full `}>
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
 
             <div className='flex flex-col gap-5 items-center justify-between w-full'>

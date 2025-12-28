@@ -54,6 +54,20 @@ export default async function Home({
           <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} hideOccupied={hideOccupied === "true"} />
 
           <div className="flex flex-col gap-5 justify-center items-center">
+            <h1 className="font-bold">GODLY NIGHT ROUTINE! ✅😀</h1>
+            <ol className="list-decimal pl-6">
+              <li><span className="font-semibold">Be Free</span> (from technology and the world) Turn off TV, leave cellphone charging in the couch</li>
+              <li><span className="font-semibold">Brush teeth</span> and <span className="font-semibold">think of 3 things:</span>
+                <ul className="pl-12 list-disc">
+                  <li>What went well today?</li>
+                  <li>What can be improved tomorrow?</li>
+                  <li>What am I thankful for today?</li>
+                </ul>
+              </li>
+              <li className="font-semibold">Read some Bible</li>
+              <li><span className="font-semibold">Pray and thank God</span> for the day (Kneel down or put hands together)</li>
+            </ol>
+
             {/* <div className="flex flex-col justify-center items-center">
               <p className="font-semibold text-xl ">Today ({today}) is <span className="text-red-400">not a day to sin</span> but is <span className="text-green-400">a day to live for God.</span> Amen.</p>
               <Accordion type="single" collapsible>
