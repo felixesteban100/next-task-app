@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/tooltip"
 
 import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
-import { useState/* , useEffect */ } from "react"
+import { useState, useEffect } from "react"
 
 // import { io } from 'socket.io-client';
 
@@ -84,27 +84,39 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
 
     const [loading, setLoading] = useState(false);
 
-    /* useEffect(() => {
-        const socket = io("/api/socket", {
-            transports: ["websocket"], // disable polling
-        });
-        socket.on("dbChange", ({ collection, change }) => {
-            // I left it incompleted, continue here https://chatgpt.com/c/695148d5-b9a8-8332-bf86-f50b442ffa06
+    useEffect(() => {
+        const source = new EventSource('/api/live-tasks')
 
-            console.log(`Change in collection ${collection}:`, change);
-            // Update your React state here
-            toast.info("Database updated! Reloading page in 1s");
+        source.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data)
 
-            setTimeout(() => {
-                // Use Next.js router replace instead of window.location.reload()
-                window.location.href = window.location.href;
-            }, 1000);
-        });
+                // Ignore heartbeats if you have them
+                if (data.type === 'ping') return
 
+                // Update your React state here
+                toast.info("Database updated! Reloading page in 1s");
+
+                setTimeout(() => {
+                    // Use Next.js router replace instead of window.location.reload()
+                    window.location.href = window.location.href;
+                }, 1000);
+
+            } catch (err) {
+                console.error('SSE parse error:', err)
+            }
+        }
+
+        source.onerror = (err) => {
+            console.error('SSE connection error:', err)
+            // EventSource usually auto-reconnects, so no need to do much here
+        }
+
+        // Cleanup when component unmounts
         return () => {
-            socket.disconnect();
-        };
-    }, []); */
+            source.close()
+        }
+    }, [])
 
     const { tasks, date } = dayInfo
 

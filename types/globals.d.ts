@@ -1,4 +1,5 @@
 
+import { MongoClient } from 'mongodb';
 declare global {
     declare type Task = {
         name: string,
@@ -7,6 +8,11 @@ declare global {
     }
 
 
+}
+
+declare global {
+    // eslint-disable-next-line no-var
+    var _mongoClient: MongoClient | undefined;
 }
 
 declare module "*.mp3" {
