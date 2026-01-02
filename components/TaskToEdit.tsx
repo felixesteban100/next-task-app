@@ -89,35 +89,69 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
     const [justSaved, setJustSaved] = useState(false)
 
     useEffect(() => {
-        const source = new EventSource('/api/live-tasks')
+        let source: EventSource;
+        let reconnectAttempts = 0;
+        const maxReconnects = 5;  // Prevent infinite loops
 
-        source.onmessage = (event) => {
+        const connect = () => {
+            source = new EventSource('/api/live-tasks');
 
-            console.log('SSE message received:', event.data)
+            source.onopen = () => {
+                console.log('SSE connected');
+                reconnectAttempts = 0;  // Reset on success
+            };
 
-            try {
-                const change = JSON.parse(event.data)
-                if (change.type === 'ping') return
+            source.onmessage = (event) => {
+                console.log('SSE message received:', event.data);
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'ping' || data.type === 'heartbeat') return;
 
-                if (justSaved) {
-                    setJustSaved(false)
-                    toast.success("Changes saved successfully!")
-                    return
+                    // Your existing logic (check justSaved, toast, refresh if not own change)
+                    try {
+                        const data = JSON.parse(event.data)
+                        if (data.type === 'ping' || data.type === 'heartbeat') return;
+
+                        if (justSaved) {
+                            setJustSaved(false)
+                            toast.success("Changes saved successfully!")
+                            return
+                        }
+
+                        // Change from another source → refresh this tab
+                        toast.info("Data changed elsewhere → refreshing...")
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 800)
+
+                    } catch (err) {
+                        console.error('SSE parse error:', err)
+                    }
+                } catch (err) {
+                    console.error('SSE parse error:', err);
                 }
+            };
 
-                // Change from another source → refresh this tab
-                toast.info("Data changed elsewhere → refreshing...")
-                /* setTimeout(() => {
-                    window.location.reload()
-                }, 800) */
+            source.onerror = (err) => {
+                console.error('SSE error:', err);
+                source.close();
+                if (reconnectAttempts < maxReconnects) {
+                    reconnectAttempts++;
+                    const delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000);  // Exponential backoff, max 30s
+                    console.log(`Reconnecting in ${delay / 1000}s... (attempt ${reconnectAttempts})`);
+                    setTimeout(connect, delay);
+                } else {
+                    toast.error("Real-time updates failed. Please refresh manually.");
+                }
+            };
+        };
 
-            } catch (err) {
-                console.error('SSE parse error:', err)
-            }
-        }
+        connect();
 
-        return () => source.close()
-    }, [justSaved])   // ← add dependency
+        return () => {
+            source?.close();
+        };
+    }, [justSaved]);
 
     useEffect(() => {
         const scheduleRefresh = () => {

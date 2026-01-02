@@ -11,6 +11,8 @@ import {
 import { DailyTaskAndDetails } from '@/components/TaskToEdit';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 60;  // 60 seconds max on Hobby (up to 300s on Pro/Ent)
+export const runtime = 'nodejs';  // Use Node.js runtime (not edge — edge max is ~30s and no state)
 
 export async function GET(request: Request) {
     const encoder = new TextEncoder();
