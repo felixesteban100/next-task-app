@@ -92,6 +92,9 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
         const source = new EventSource('/api/live-tasks')
 
         source.onmessage = (event) => {
+
+            console.log('SSE message received:', event.data)
+
             try {
                 const change = JSON.parse(event.data)
                 if (change.type === 'ping') return
@@ -104,9 +107,9 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
 
                 // Change from another source → refresh this tab
                 toast.info("Data changed elsewhere → refreshing...")
-                setTimeout(() => {
+                /* setTimeout(() => {
                     window.location.reload()
-                }, 800)
+                }, 800) */
 
             } catch (err) {
                 console.error('SSE parse error:', err)
