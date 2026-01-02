@@ -71,7 +71,7 @@ const links = [
         icon: <History />
     },
     {
-        href: "/api/today",
+        href: "/api/add-today",
         label: "Add today to the database",
         icon: <PlusIcon />
     },
