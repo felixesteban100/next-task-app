@@ -1,7 +1,7 @@
 // import { AnimatedTestimonialsDemo } from "@/components/animated-testimonials";
 import Tasks from "@/components/TaskToEdit";
 import { /* collectionReflectionQuestions, */ collectionTask } from "@/db/mongodb/mongodb";
-import { getTodaysDate } from "@/lib/utils";
+import { DateString/* , getTodaysDate */ } from "@/lib/utils";
 import { ObjectId } from "mongodb";
 import { connection } from "next/server";
 // import {
@@ -26,8 +26,10 @@ export default async function Home({
 
   const { hideOccupied } = searchParams ? await searchParams : {};
 
-  const today = getTodaysDate()
-  const ToDayInfo = await collectionTask.findOne({ date: today })
+  const today = new Date()//getTodaysDate()
+  today.setUTCHours(0, 0, 0, 0)          // start of today
+
+  const ToDayInfo = await collectionTask.findOne({ date: today });
   // const reflectionQuestions = await collectionReflectionQuestions.findOne()
 
   const documentId = new ObjectId(ToDayInfo?._id); // Example _id
@@ -119,7 +121,7 @@ export default async function Home({
           </div>
         </>
         :
-        <p className="font-semibold text-2xl">{today} tasks were not added the database</p>
+        <p className="font-semibold text-2xl">{DateString(today)} tasks were not added the database</p>
       }
     </>
   );

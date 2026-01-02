@@ -4,7 +4,7 @@
 //     ToggleGroup,
 //     ToggleGroupItem,
 // } from "@/components/ui/toggle-group"
-import { cn, filterFutureTimes, getDayName, getTotalTasksByType, sortByProperty } from '@/lib/utils'
+import { cn, DateString, filterFutureTimes, getDayName, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { GODLY_TASKS, TASKS_THAT_DONT_SEPARATE_SECTIONS, TASKS_THAT_SEPARATE_SECTIONS, TIMES } from "@/constants"
@@ -53,7 +53,7 @@ const loadingStates = [
 
 export type DailyTaskAndDetails = {
     tasks: Task[],
-    date: string
+    date: Date
 }
 
 const TaskTypesSchema = z.enum(['normal', 'important', 'spiritual'])
@@ -72,7 +72,7 @@ export type TaskStates = z.infer<typeof TaskStatesSchema>
 
 const formSchema = z.object({
     tasks: z.array(TaskSchema).min(1, "At least one item is required"),
-    date: z.string()
+    // date: z.date()
 })
 
 type FormSchemaType = z.infer<typeof formSchema>;
@@ -84,37 +84,72 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
 
     const [loading, setLoading] = useState(false);
 
+
+    // At component top level
+    const [justSaved, setJustSaved] = useState(false)
+
     useEffect(() => {
         const source = new EventSource('/api/live-tasks')
 
         source.onmessage = (event) => {
             try {
-                const data = JSON.parse(event.data)
+                const change = JSON.parse(event.data)
+                if (change.type === 'ping') return
 
-                // Ignore heartbeats if you have them
-                if (data.type === 'ping') return
+                if (justSaved) {
+                    setJustSaved(false)
+                    toast.success("Changes saved successfully!")
+                    return
+                }
 
-                // Update your React state here
-                toast.info("Database updated! Reloading page in 1s");
-
+                // Change from another source → refresh this tab
+                toast.info("Data changed elsewhere → refreshing...")
                 setTimeout(() => {
-                    // Use Next.js router replace instead of window.location.reload()
-                    window.location.href = window.location.href;
-                }, 1000);
+                    window.location.reload()
+                }, 800)
 
             } catch (err) {
                 console.error('SSE parse error:', err)
             }
         }
 
-        source.onerror = (err) => {
-            console.error('SSE connection error:', err)
-            // EventSource usually auto-reconnects, so no need to do much here
+        return () => source.close()
+    }, [justSaved])   // ← add dependency
+
+    useEffect(() => {
+        const scheduleRefresh = () => {
+            const now = new Date()
+            const today21 = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate(),
+                21, 0, 0, 0
+            )
+
+            // If we're already past 21:00 today → refresh immediately
+            if (now >= today21) {
+                window.location.reload()
+                return
+            }
+
+            // Otherwise schedule refresh for tonight 21:00
+            const msUntil21 = today21.getTime() - now.getTime()
+
+            const timeout = setTimeout(() => {
+                window.location.reload()
+            }, msUntil21)
+
+            return () => clearTimeout(timeout)
         }
 
-        // Cleanup when component unmounts
+        const cleanup = scheduleRefresh()
+
+        // In case user keeps tab open multiple days
+        const nextDayCheck = setInterval(scheduleRefresh, 24 * 60 * 60 * 1000)
+
         return () => {
-            source.close()
+            cleanup?.()
+            clearInterval(nextDayCheck)
         }
     }, [])
 
@@ -123,8 +158,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
     const form = useForm<FormSchemaType>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            tasks,
-            date
+            tasks
         },
     })
 
@@ -137,10 +171,11 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
     const occupiedTasks = `${stateEmoji["occupied"]}${tasksState.filter(c => c.state === "occupied").length}`
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setJustSaved(true)
         setLoading(true)
         document.body.classList.add('overflow-hidden'); // disable scroll
 
-        const result = await saveTasksOfCurrentDate(values.date, values.tasks)
+        const result = await saveTasksOfCurrentDate(date, values.tasks)
         form.reset(values);
 
         setTimeout(() => {
@@ -149,11 +184,11 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
 
             if (result === true) {
                 toast.success("Tasks have been saved.", {
-                    description: date,
+                    description: DateString(date),
                 })
             } else {
                 toast.error("Tasks didn't save.", {
-                    description: date,
+                    description: DateString(date),
                 })
             }
         }, durationLoader * loadingStates.length);
@@ -177,12 +212,10 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                 ? { ...item, [property]: newValue, }
                 : item
         );
-
         // fieldOnChange(updatedTasks); // ✅ Pass the new array directly
         fieldOnChange(sortByProperty(updatedTasks, "id")); // ✅ Pass the new array directly
     }
 
-    console.log();
 
     return (
         <div className={`flex flex-col gap-7 items-center mb-2 w-full `}>
@@ -193,7 +226,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                     <Tooltip>
                         <TooltipTrigger>
                             <span className='font-bold text-2xl'>
-                                (Today)  {date} ({getDayName(date)})
+                                (Today)  {DateString(date)} ({getDayName(date)})
                             </span>
                         </TooltipTrigger>
                         <TooltipContent>
@@ -222,20 +255,6 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                     (
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">
-                                <div className='fixed bottom-10 left-10/12 -translate-x-10/12 flex gap-5'>
-                                    <Button
-                                        id="saveButton"
-                                        disabled={form.formState.isSubmitting || !formTasksChanged}
-                                        className={`group disabled:grayscale-25 p-7 text-xl   ${/* form.formState.isSubmitting || !formTasksChanged ? "" : "animate-[pulse_2s_infinite]" */""}`}
-                                        type="submit"
-                                    >
-                                        <p
-                                            className={`group-enabled:animate-bounce flex gap-2 items-center`}
-                                        >
-                                            {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
-                                        </p>
-                                    </Button>
-                                </div>
                                 <FormField
                                     control={form.control}
                                     name="tasks"
@@ -317,11 +336,24 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                                         </FormItem>
                                     )}
                                 />
+                                <div className='fixed bottom-10 left-10/12 -translate-x-10/12 flex gap-5'>
+                                    <Button
+                                        id="saveButton"
+                                        disabled={form.formState.isSubmitting || !formTasksChanged}
+                                        className={`group disabled:grayscale-25 p-7 text-xl   ${/* form.formState.isSubmitting || !formTasksChanged ? "" : "animate-[pulse_2s_infinite]" */""}`}
+                                        type="submit"
+                                    >
+                                        <p
+                                            className={`group-enabled:animate-bounce flex gap-2 items-center`}
+                                        >
+                                            {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
+                                        </p>
+                                    </Button>
+                                </div>
                             </form>
                         </Form>
                     )
             }
-
         </div>
     )
 }

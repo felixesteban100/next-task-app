@@ -3,13 +3,13 @@
 import { ToWatch } from "@/app/(main)/to-watch/page"
 import { Task } from "@/components/TaskToEdit"
 import { collectionDefaultTasks, collectionTask, collectionToWatch } from "@/db/mongodb/mongodb"
-import { getTodaysDate } from "@/lib/utils"
+// import { getTodaysDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { connection } from 'next/server'
 
 export async function addDefaultTasksWithTodaysDate() {
     connection()
-    const todayDate = getTodaysDate()
+    const todayDate = new Date()//getTodaysDate()
     const existingDay = await collectionTask.findOne({ date: todayDate });
 
     if (existingDay) return false
@@ -25,10 +25,10 @@ export async function addDefaultTasksWithTodaysDate() {
     return true
 }
 
-export async function saveTasksOfCurrentDate(date: string, tasks: Task[]) {
+export async function saveTasksOfCurrentDate(date: Date, tasks: Task[]) {
     connection()
     const result = await collectionTask.updateOne(
-        { date },
+        { date: new Date(date) },
         { $set: { tasks: tasks } }, // ✅ Use `$set` to update the `tasks` array
         { upsert: false } // ❌ Ensure it doesn't create a new document
     );

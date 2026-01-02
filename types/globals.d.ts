@@ -6,8 +6,6 @@ declare global {
         type: 'normal' | 'important' | 'spiritual',
         state: "done" | "no done" | "occupied",
     }
-
-
 }
 
 declare global {

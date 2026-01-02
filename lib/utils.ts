@@ -6,17 +6,37 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function getTodaysDate() {
+// export function getTodaysDate() {
+//   // return new Intl.DateTimeFormat("en-US", {
+//   //   timeZone: "America/New_York",
+//   //   year: "numeric",
+//   //   month: "2-digit",
+//   //   day: "2-digit"
+//   // }).format(new Date());
+//   return new Date()
+// }
+
+export function DateString(input: Date | string | null | undefined): string {
+  if (!input) return "—";
+
+  const date = typeof input === 'string' ? new Date(input) : input;
+  if (isNaN(date.getTime())) return "Invalid date";
+
+  // Option 1: clean ISO style
+  // return date.toISOString().split('T')[0];          // → "2026-01-02"
+
+  // Option 2: same M/D/YYYY format, but forced UTC
   return new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/New_York",
+    timeZone: "UTC",
     year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
-  }).format(new Date());
+    month: "numeric",
+    day: "numeric"
+  }).format(date);
 }
 
-export function getDayName(dateStr: string): string {
-  const [month, day, year] = dateStr.split('/').map(Number);
+export function getDayName(dateFormat: Date): string {
+  const dateString = DateString(dateFormat)
+  const [month, day, year] = dateString.split('/').map(Number);
 
   // Validate date components
   if (!month || !day || !year) {

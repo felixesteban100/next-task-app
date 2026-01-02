@@ -6,7 +6,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { classNamesState, classNamesType, doneInWhichWay, failEmojis, GODLY_TASKS, stateEmoji, successEmojis } from '@/constants'
-import { cn, getDayName, getMostRepeatedState, getTodaysDate, sortByProperty } from '@/lib/utils'
+import { cn, DateString, getDayName, getMostRepeatedState, /* getTodaysDate, */ sortByProperty } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
 import {
@@ -34,7 +34,8 @@ export default async function page({
     const searchValue = search ? search : ""
     const dayValue = day ? day : ""
 
-    const today = getTodaysDate()
+    const today = new Date()//getTodaysDate()
+
     const allDaysInfoDb = await collectionTask.aggregate([
         {
             $project: {
@@ -153,9 +154,9 @@ export default async function page({
 
                     return (
                         <div key={day._id.toString() + day.date} className='flex flex-row justify-center items-start'>
-                            <AccordionItem className='flex flex-col items-center gap-2' value={day.date}>
+                            <AccordionItem className='flex flex-col items-center gap-2' value={day.date.toString()}>
                                 <AccordionTrigger className='font-bold text-2xl' >
-                                    {day.date} ({getDayName(day.date).slice(0, 3)})  {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
+                                    {DateString(day.date)} ({getDayName(day.date).slice(0, 3)})  {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>
