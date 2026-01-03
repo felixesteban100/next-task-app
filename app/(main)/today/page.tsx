@@ -26,10 +26,16 @@ export default async function Home({
 
   const { hideOccupied } = searchParams ? await searchParams : {};
 
-  const today = new Date()//getTodaysDate()
-  today.setUTCHours(0, 0, 0, 0)          // start of today
 
-  const ToDayInfo = await collectionTask.findOne({ date: today });
+  // For querying "today's tasks"
+  const todayStart = new Date();
+  todayStart.setUTCHours(0, 0, 0, 0);          // local midnight
+
+  const ToDayInfo = await collectionTask.findOne(
+    {},
+    { sort: { date: -1 } }
+  );
+
   // const reflectionQuestions = await collectionReflectionQuestions.findOne()
 
   const documentId = new ObjectId(ToDayInfo?._id); // Example _id
@@ -121,7 +127,7 @@ export default async function Home({
           </div>
         </>
         :
-        <p className="font-semibold text-2xl">{DateString(today)} tasks were not added the database</p>
+        <p className="font-semibold text-2xl">{DateString(todayStart)} tasks were not added the database</p>
       }
     </>
   );

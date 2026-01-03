@@ -10,7 +10,7 @@ import { connection } from 'next/server'
 export async function addDefaultTasksWithTodaysDate() {
     connection()
     const todayDate = new Date()
-    todayDate.setUTCHours(0, 0, 0, 0)
+    todayDate.setHours(0, 0, 0, 0)
     const existingDay = await collectionTask.findOne({ date: todayDate });
 
     if (existingDay) return false
