@@ -27,29 +27,37 @@ export function DateString(input: Date | string | null | undefined): string {
 
   // Option 2: same M/D/YYYY format, but forced UTC
   return new Intl.DateTimeFormat("en-US", {
-    timeZone: "UTC",
-    year: "numeric",
-    month: "numeric",
-    day: "numeric"
-  }).format(date);
+    timeZone: "America/New_York",
+    dateStyle: "full"
+  }).format(new Date(date.getTime() + 5 * 60 * 60 * 1000));
+}
+export function getFormattedTime(timestamp: Date | number): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  }).format(timestamp);
 }
 
 export function getDayName(dateFormat: Date): string {
-  const dateString = DateString(dateFormat)
-  const [month, day, year] = dateString.split('/').map(Number);
+  return DateString(dateFormat).split(',')[0];
+  // const dateString = DateString(dateFormat)
+  // const [month, day, year] = dateString.split(',').map(Number);
 
-  // Validate date components
-  if (!month || !day || !year) {
-    throw new Error('Invalid date format. Use "m/d/y".');
-  }
+  // // Validate date components
+  // if (!month || !day || !year) {
+  //   throw new Error('Invalid date format. Use "m/d/y".');
+  // }
 
-  const date = new Date(year, month - 1, day); // JavaScript months are 0-based
+  // const date = new Date(year, month - 1, day); // JavaScript months are 0-based
 
-  const dayNames = [
-    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-  ];
+  // const dayNames = [
+  //   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+  // ];
 
-  return dayNames[date.getDay()];
+  // return dayNames[date.getDay()];
 }
 
 export function filterFutureTimes(times: string[]): string[] {
@@ -62,6 +70,7 @@ export function filterFutureTimes(times: string[]): string[] {
     const hour = parseInt(h, 10) % 12 + (p.toLowerCase() === "pm" ? 12 : 0);
     return hour * 60 + parseInt(m, 10);
   };
+
 
   // Find the first time that is equal to or greater than current time
   let index = times.findIndex(t => toMinutes(t) >= currentMinutes);

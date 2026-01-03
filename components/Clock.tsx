@@ -1,5 +1,6 @@
 "use client"
 
+import { getFormattedTime } from "@/lib/utils";
 import { useState, useEffect } from "react";
 
 const Clock = () => {
@@ -8,13 +9,7 @@ const Clock = () => {
     useEffect(() => {
         const updateClock = () => {
             const timestamp = Date.now();
-            const formattedTime = new Intl.DateTimeFormat("en-US", {
-                timeZone: "America/New_York",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: true,
-            }).format(timestamp);
+            const formattedTime = getFormattedTime(timestamp);
             setTime(formattedTime);
         };
 

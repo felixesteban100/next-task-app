@@ -4,7 +4,7 @@
 //     ToggleGroup,
 //     ToggleGroupItem,
 // } from "@/components/ui/toggle-group"
-import { cn, DateString, filterFutureTimes, getDayName, getTotalTasksByType, sortByProperty } from '@/lib/utils'
+import { cn, DateString, filterFutureTimes, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { GODLY_TASKS, TASKS_THAT_DONT_SEPARATE_SECTIONS, TASKS_THAT_SEPARATE_SECTIONS, TIMES } from "@/constants"
@@ -220,11 +220,11 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
 
             if (result === true) {
                 toast.success("Tasks have been saved.", {
-                    description: DateString(date),
+                    description: new Date(date).toLocaleDateString(),
                 })
             } else {
                 toast.error("Tasks didn't save.", {
-                    description: DateString(date),
+                    description: new Date(date).toLocaleDateString(),
                 })
             }
         }, durationLoader * loadingStates.length);
@@ -252,6 +252,8 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
         fieldOnChange(sortByProperty(updatedTasks, "id")); // ✅ Pass the new array directly
     }
 
+    const dateTitle = DateString(new Date())
+
     return (
         <div className={`flex flex-col gap-7 items-center mb-2 w-full `}>
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
@@ -261,7 +263,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                     <Tooltip>
                         <TooltipTrigger>
                             <span className='font-bold text-2xl'>
-                                (Today)  {DateString(date)} ({getDayName(date)})
+                                (Today) {dateTitle}
                             </span>
                         </TooltipTrigger>
                         <TooltipContent>

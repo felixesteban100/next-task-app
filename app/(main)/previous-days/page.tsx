@@ -6,7 +6,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { classNamesState, classNamesType, doneInWhichWay, failEmojis, GODLY_TASKS, stateEmoji, successEmojis } from '@/constants'
-import { cn, DateString, getDayName, getMostRepeatedState, /* getTodaysDate, */ sortByProperty } from '@/lib/utils'
+import { cn, DateString, getDayName, getFormattedTime, getMostRepeatedState, /* getTodaysDate, */ sortByProperty } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 
 import {
@@ -71,7 +71,6 @@ export default async function page({
     function calculatePercentage(part: number) {
         return ((part / allDaysMostRepeated.length) * 100).toFixed(2);
     }
-
 
     function isHolyLastTaskDone(tasks: DailyTaskAndDetails["tasks"]) {
         // const lastTask = tasks.filter(c => c.name === PREVIOUS_GODLY_TASK || c.name == GODLY_TASK || c.name == ULTIMATE_GODLY_TASK).slice(-1)[0];
@@ -143,20 +142,13 @@ export default async function page({
                 {allDaysInfo.map((day, cIndex) => {
                     const documentId = new ObjectId(day._id); // Example _id
                     const timestamp = documentId.getTimestamp(); // Get the creation timestamp
-
-                    const formattedTime = new Intl.DateTimeFormat("en-US", {
-                        timeZone: "America/New_York",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        second: "2-digit",
-                        hour12: true,
-                    }).format(timestamp);
+                    const formattedTime = getFormattedTime(timestamp);
 
                     return (
                         <div key={day._id.toString() + day.date} className='flex flex-row justify-center items-start'>
                             <AccordionItem className='flex flex-col items-center gap-2' value={day.date.toString()}>
                                 <AccordionTrigger className='font-bold text-2xl' >
-                                    {DateString(day.date)} ({getDayName(day.date).slice(0, 3)})  {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
+                                    {DateString(day.date)} {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <p>Added at: {formattedTime}</p>

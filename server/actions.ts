@@ -9,21 +9,32 @@ import { connection } from 'next/server'
 
 export async function addDefaultTasksWithTodaysDate() {
     connection()
-    const todayDate = new Date()
-    todayDate.setHours(0, 0, 0, 0)
-    const existingDay = await collectionTask.findOne({ date: todayDate });
+    const now = new Date()
+    const today21 = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        21, 0, 0, 0
+    )
 
-    if (existingDay) return false
+    // If we're already past 21:00 today → refresh immediately
+    if (now >= today21) {
+        const todayDate = new Date()
+        todayDate.setHours(0, 0, 0, 0)
+        const existingDay = await collectionTask.findOne({ date: todayDate });
 
-    const defaultTasks = await collectionDefaultTasks.findOne()
+        if (existingDay) return false
 
-    await collectionTask.insertOne({
-        tasks: defaultTasks!.tasks.map((c, i): Task => {
-            return { ...c, id: i } as Task
-        }),
-        date: todayDate
-    })
-    return true
+        const defaultTasks = await collectionDefaultTasks.findOne()
+
+        await collectionTask.insertOne({
+            tasks: defaultTasks!.tasks.map((c, i): Task => {
+                return { ...c, id: i } as Task
+            }),
+            date: todayDate
+        })
+        return true
+    }
 }
 
 export async function saveTasksOfCurrentDate(date: Date, tasks: Task[]) {
