@@ -220,11 +220,11 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
 
             if (result === true) {
                 toast.success("Tasks have been saved.", {
-                    description: new Date(date).toLocaleDateString(),
+                    description: DateString(new Date(date))
                 })
             } else {
                 toast.error("Tasks didn't save.", {
-                    description: new Date(date).toLocaleDateString(),
+                    description: DateString(new Date(date)),
                 })
             }
         }, durationLoader * loadingStates.length);
