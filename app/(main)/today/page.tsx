@@ -1,3 +1,4 @@
+import NightChecklist from "@/components/NightChecklist";
 import Tasks from "@/components/TaskToEdit";
 import { collectionTask } from "@/db/mongodb/mongodb";
 import {
@@ -42,7 +43,8 @@ export default async function Home({
         <>
           <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} hideOccupied={hideOccupied === "true"} />
 
-          <div className="flex flex-col gap-5 justify-center items-center">
+          <NightChecklist />
+          {/* <div className="flex flex-col gap-5 justify-center items-center">
             <h1 className="font-bold">GODLY NIGHT ROUTINE! ✅😀</h1>
             <ol className="list-decimal pl-6">
               <li><span className="font-semibold">Be Free</span> (from technology and the world) Turn off TV, leave cellphone charging in the couch</li>
@@ -56,7 +58,7 @@ export default async function Home({
               <li className="font-semibold">Read some Bible</li>
               <li><span className="font-semibold">Pray and thank God</span> for the day (Kneel down or put hands together)</li>
             </ol>
-          </div>
+          </div> */}
         </>
         :
         <p className="font-semibold text-2xl">{DateString(todayStart)} tasks were not added the database</p>
