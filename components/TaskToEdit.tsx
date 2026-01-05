@@ -252,8 +252,6 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
         fieldOnChange(sortByProperty(updatedTasks, "id")); // ✅ Pass the new array directly
     }
 
-    const dateTitle = DateString(new Date())
-
     return (
         <div className={`flex flex-col gap-7 items-center mb-2 w-full `}>
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
@@ -263,7 +261,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                     <Tooltip>
                         <TooltipTrigger>
                             <span className='font-bold text-2xl'>
-                                (Today) {dateTitle}
+                                (Today) {DateString(new Date(date))}
                             </span>
                         </TooltipTrigger>
                         <TooltipContent>

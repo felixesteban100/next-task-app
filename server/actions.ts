@@ -9,8 +9,16 @@ import { connection } from 'next/server'
 
 export async function addDefaultTasksWithTodaysDate() {
     connection()
-    const todayDate = new Date()
-    todayDate.setHours(0, 0, 0, 0)
+    // Get current time in Eastern Time (Massachusetts)
+    const easternTime = new Date().toLocaleString('en-US', {
+        timeZone: 'America/New_York',
+    });
+
+    const todayEastern = new Date(easternTime);
+    todayEastern.setHours(0, 0, 0, 0);  // midnight in Eastern Time
+
+    // Convert back to UTC Date object for MongoDB
+    const todayDate = new Date(todayEastern);
     const existingDay = await collectionTask.findOne({ date: todayDate });
 
     if (existingDay) return false

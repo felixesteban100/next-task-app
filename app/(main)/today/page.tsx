@@ -27,8 +27,8 @@ export default async function Home({
   todayStart.setHours(0, 0, 0, 0);          // local midnight
 
   const ToDayInfo = await collectionTask.findOne(
-    {},
-    { sort: { date: -1 } }
+    { date: todayStart },
+    // { sort: { date: -1 } }
   );
 
   const documentId = new ObjectId(ToDayInfo?._id); // Example _id
@@ -38,7 +38,6 @@ export default async function Home({
 
   return (
     <>
-
       {ToDayInfo ?
         <>
           <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} hideOccupied={hideOccupied === "true"} />
