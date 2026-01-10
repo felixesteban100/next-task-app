@@ -70,3 +70,4 @@ export const collectionTask = db.collection<DailyTaskAndDetails>('Task');
 export const collectionDefaultTasks = db.collection<{ tasks: Task[] }>('DEFAULT_TASKS');
 export const collectionReflectionQuestions = db.collection<ReflectionQuestions>('Reflection Questions');
 export const collectionToWatch = db.collection<ToWatch>('List to watch');
+export const collectionThingsToWatchAtNight = db.collection<{ resources: { name: string, url: string }[] }>('ThingsToWatchAtNight');

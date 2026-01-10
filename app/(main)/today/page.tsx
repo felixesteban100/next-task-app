@@ -1,6 +1,6 @@
 import NightChecklist from "@/components/NightChecklist";
 import Tasks from "@/components/TaskToEdit";
-import { collectionTask } from "@/db/mongodb/mongodb";
+import { collectionTask, collectionThingsToWatchAtNight } from "@/db/mongodb/mongodb";
 import {
   DateString,
   getFormattedTime
@@ -32,6 +32,8 @@ export default async function Home({
     { sort: { date: -1 } }
   );
 
+  const thingsToWatchAtNight = await collectionThingsToWatchAtNight.findOne();
+
   const documentId = new ObjectId(ToDayInfo?._id); // Example _id
   const timestamp = documentId.getTimestamp(); // Get the creation timestamp
 
@@ -43,7 +45,7 @@ export default async function Home({
         <>
           <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} hideOccupied={hideOccupied === "true"} />
 
-          <NightChecklist />
+          <NightChecklist resources={thingsToWatchAtNight?.resources ?? []} />
           {/* <div className="flex flex-col gap-5 justify-center items-center">
             <h1 className="font-bold">GODLY NIGHT ROUTINE! ✅😀</h1>
             <ol className="list-decimal pl-6">

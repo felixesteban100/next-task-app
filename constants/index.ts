@@ -1661,3 +1661,84 @@ export const EMOJIS_CODE: { key: string, value: string }[] = [
         value: "⛎"
     }
 ];
+
+export const NIGHT_BIBLE_PASSAGES = [
+    // Psalms (short & calm)
+    "Psalm 4",
+    "Psalm 23",
+    "Psalm 62",
+    "Psalm 91",
+    "Psalm 121",
+    "Psalm 131",
+    "Psalm 134",
+
+    // Psalms (longer)
+    "Psalm 25",
+    "Psalm 27",
+    "Psalm 63",
+    "Psalm 73",
+    "Psalm 86",
+    "Psalm 139",
+
+    // Words of Jesus
+    "Matthew 11:28–30",
+    "John 14:1–7",
+    "John 14:18–27",
+    "John 15",
+    "Luke 12:22–34",
+    "Luke 10:38–42",
+
+    // Wisdom & stillness
+    "Proverbs 3",
+    "Ecclesiastes 3",
+    "Ecclesiastes 4",
+    "Ecclesiastes 12",
+
+    // Temptation & purity
+    "Job 31",
+    "Romans 13:11–14",
+    "Galatians 5:16–26",
+    "Ephesians 6:10–18",
+    "1 Thessalonians 4:3–8",
+
+    // Surrender & rest
+    "Isaiah 26",
+    "Isaiah 40",
+    "Lamentations 3:22–33",
+    "1 Peter 5:6–11",
+    "Hebrews 4:9–11",
+    "Jude 24–25",
+
+
+    // Identity / Put Off – Put On
+    "Colossians 3",
+    "Romans 6",
+    "Romans 8",
+    "Ephesians 4",
+    "Ephesians 5:1–20",
+    "Galatians 2:20",
+    "Galatians 5:1–26",
+    "Titus 2:11–14",
+
+    // Mind renewal & stillness
+    "Romans 12",
+    "Philippians 2",
+    "Philippians 4",
+    "Colossians 1:9–23",
+    "Colossians 2:6–15",
+    "1 Thessalonians 4",
+    "2 Corinthians 5:14–21",
+
+    // Night guard & purity
+    "1 Thessalonians 5:1–11",
+    "Romans 13:11–14",
+    "Ephesians 6:10–18",
+    "1 Peter 1:13–16",
+    "1 Peter 5:6–11",
+
+    // Gentle exhortation
+    "James 1",
+    "James 3",
+    "Hebrews 12:1–13",
+    "Hebrews 13"
+];
