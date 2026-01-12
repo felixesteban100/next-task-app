@@ -21,11 +21,12 @@ export default function page() {
                 how to play chess (just the rules)
                 Speed reading with comprehension
                 solving riddles
+                card tricks
 
                 music:
                 piano music reading G clef
 
-                parkour, break dance, matial arts and calisthenics:
+                parkour, break dance, matial arts and calisthenics (physical feats):
                 parkour roll on the floor
                 spin a stick with hands around the body
 

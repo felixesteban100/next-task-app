@@ -44,6 +44,7 @@ export default async function ToWatchPage({
     const sortByValue = sortBy ? sortBy : "random"
 
     // add a way to filter by type and state (I think by name won't be necessary)
+    // unlock series and movies by good streak of days not sinning, eg: last 7 days didn't sin, unlock animes
 
     const typeArray = typesValue.split(',').filter(c => c != "") as typeof allowedTypes[number][]
 
