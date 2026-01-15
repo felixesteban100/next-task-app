@@ -19,6 +19,7 @@ import { connection } from "next/server";
 import { ObjectId, WithId } from 'mongodb'
 import QueryTasks from '@/components/QueryTasks'
 import { DailyTaskAndDetails } from '@/components/TaskToEdit'
+import ButtonToggleQueryBasedStatistics from '@/components/ButtonToggleQueryBasedStatistics'
 
 export default async function page({
     searchParams
@@ -26,17 +27,27 @@ export default async function page({
     searchParams?: Promise<{
         search?: string;
         day?: string;
+        fromDate?: string;
+        queryStatistics?: string;
     }>,
 }) {
     connection()
 
-    const { search, day } = searchParams ? await searchParams : {};
+    const { search, day, fromDate, queryStatistics } = searchParams ? await searchParams : {};
     const searchValue = search ? search : ""
     const dayValue = day ? day : ""
+    const fromDateValue = fromDate ? new Date(new Date(fromDate).getTime() - 5 * 60 * 60 * 1000) : new Date(Date.now() - 7 * 86400000)
+    const queryStatisticsValue = queryStatistics === "true"
 
     const today = new Date()//getTodaysDate()
 
+    // filter fromDateValue
+    const allDaysInfoNoQuery = await collectionTask.find({}).toArray()
+
     const allDaysInfoDb = await collectionTask.aggregate([
+        {
+            $match: { date: { $gte: fromDateValue } }
+        },
         {
             $project: {
                 tasks: {
@@ -53,20 +64,22 @@ export default async function page({
         { $match: { tasks: { $ne: [] } } } // Remove documents where no tasks match
     ]).sort({ date: -1 }).toArray() as WithId<DailyTaskAndDetails>[]
 
+
     if (!allDaysInfoDb) return <p>No days on track</p>
 
-    const allDaysInfoByDay = allDaysInfoDb.filter(c => getDayName(c.date) === dayValue)
 
-    const allDaysInfo = dayValue && dayValue !== "all" ? allDaysInfoByDay : allDaysInfoDb
+    const allDaysInfo = dayValue && dayValue !== "all" ? allDaysInfoDb.filter(c => getDayName(c.date) === dayValue) : allDaysInfoDb
 
-    const allDaysMostRepeated = allDaysInfo.map(c => getMostRepeatedState(c.tasks))
+    const allDaysInfoUsedForStatistics = queryStatisticsValue ? allDaysInfoNoQuery : allDaysInfoDb
+
+    const allDaysMostRepeated = allDaysInfoUsedForStatistics.map(c => getMostRepeatedState(c.tasks))
 
     const doneDays = allDaysMostRepeated.filter(day => day === "done").length
     const noDoneDays = allDaysMostRepeated.filter(day => day === "no done").length
     const occupiedDays = allDaysMostRepeated.filter(day => day === "occupied").length
 
-    const daysWithoutLust = allDaysInfo.filter(c => isHolyLastTaskDone(c.tasks) === true).length
-    const daysWithLust = allDaysInfo.filter(c => isHolyLastTaskDone(c.tasks) === false).length
+    const daysWithoutLust = allDaysInfoUsedForStatistics.filter(c => isHolyLastTaskDone(c.tasks) === true).length
+    const daysWithLust = allDaysInfoUsedForStatistics.filter(c => isHolyLastTaskDone(c.tasks) === false).length
 
     function calculatePercentage(part: number) {
         return ((part / allDaysMostRepeated.length) * 100).toFixed(2);
@@ -87,7 +100,7 @@ export default async function page({
 
     function getLastDaysAreWithoutLust() {
         let count = 0;
-        allDaysInfo.forEach((day, index) => {
+        allDaysInfoUsedForStatistics.forEach((day, index) => {
             if (index === count) {
                 if (isHolyLastTaskDone(day.tasks)) {
                     count++;
@@ -98,7 +111,7 @@ export default async function page({
     }
 
     function getBestStreakWithoutLust() {
-        if (allDaysInfo.length === 0) return { streak: 0, beginningDate: "N/A", endDate: "N/A" };
+        if (allDaysInfoUsedForStatistics.length === 0) return { streak: 0, beginningDate: "N/A", endDate: "N/A" };
 
         let maxStreak = 0;
         let currentStreak = 0;
@@ -107,7 +120,7 @@ export default async function page({
         let bestStart: Date | null = null;
         let bestEnd: Date | null = null;
 
-        allDaysInfo.forEach((day) => {
+        allDaysInfoUsedForStatistics.forEach((day) => {
             if (isHolyLastTaskDone(day.tasks)) {
                 if (currentStreak === 0) {
                     streakStart = day.date;   // new streak begins
@@ -140,7 +153,7 @@ export default async function page({
 
     function getLastDaysAreWithLust() {
         let count = 0;
-        allDaysInfo.forEach((day, index) => {
+        allDaysInfoUsedForStatistics.forEach((day, index) => {
             if (index === count) {
                 if (!isHolyLastTaskDone(day.tasks)) {
                     count++;
@@ -151,7 +164,7 @@ export default async function page({
     }
 
     function getWorstStreakWithLust() {
-        if (allDaysInfo.length === 0) return { streak: 0, beginningDate: "N/A", endDate: "N/A" };
+        if (allDaysInfoUsedForStatistics.length === 0) return { streak: 0, beginningDate: "N/A", endDate: "N/A" };
         let maxStreak = 0;
         let currentStreak = 0;
         let streakStart: Date | null = null;
@@ -159,7 +172,7 @@ export default async function page({
         let bestStart: Date | null = null;
         let bestEnd: Date | null = null;
 
-        allDaysInfo.forEach((day) => {
+        allDaysInfoUsedForStatistics.forEach((day) => {
             if (!isHolyLastTaskDone(day.tasks)) {
                 if (currentStreak === 0) {
                     streakStart = day.date;   // new streak begins
@@ -192,14 +205,17 @@ export default async function page({
 
     return (
         <>
-            <div className='flex flex-col items-center gap-2 text-xl mb-4'>
+            <div className='flex flex-col items-start gap-2 text-xl mb-4'>
                 <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem className='flex flex-col items-center gap-2' value="legend">
+                    <AccordionItem className='flex flex-col justify-center items-center gap-2' value="legend">
                         <AccordionTrigger>
                             <h2 className='text-2xl font-bold'>Overall Statistics Summary 📊</h2>
                         </AccordionTrigger>
                         <AccordionContent className='flex flex-col items-center gap-2 text-xl mb-4'>
-                            <p className='font-semibold text-3xl'>Total days: {allDaysInfo.length}</p>
+                            <div className='flex gap-5 items-center justify-center w-full'>
+                                <p className='font-semibold text-3xl'>Total days: {allDaysInfoUsedForStatistics.length}</p>
+                                <ButtonToggleQueryBasedStatistics />
+                            </div>
                             <Separator orientation='horizontal' className='bg-foreground' />
                             <div className='flex gap-2 h-7'>
                                 <p>✅{doneDays} ({calculatePercentage(doneDays)}%)</p>
@@ -245,21 +261,21 @@ export default async function page({
                                     {daysWithoutLust} ({calculatePercentage(daysWithoutLust)}%)
                                 </p>
                             </div>
+
                             <Separator orientation='horizontal' className='bg-foreground' />
                             <p>{successEmojis.join("")} Streaks</p>
                             <p>Current: <span className='font-bold'>{getLastDaysAreWithoutLust()} days</span> in a row</p>
-                            <p>Best: <span className='font-bold'>{getBestStreakWithoutLust().streak} days</span> ({getBestStreakWithoutLust().beginningDate} - {(getBestStreakWithoutLust().endDate)})</p>
+                            <p>Best: <span className='font-bold'>{getBestStreakWithoutLust().streak} days</span> ({getBestStreakWithoutLust().beginningDate} - {(getBestStreakWithoutLust().endDate)}) ({queryStatisticsValue ? "All time" : "Query based"})</p>
                             {/* {getLastDaysAreWithoutLust() >= 7 && <li>Watch unlocked animes and series</li>} */}
                             <Separator orientation='horizontal' className='bg-foreground' />
                             <p>{failEmojis.join("")} Streaks</p>
                             <p>Current: <span className='font-bold'>{getLastDaysAreWithLust()} days</span> in a row</p>
-                            <p>Worst: <span className='font-bold'>{getWorstStreakWithLust().streak} days</span> ({getWorstStreakWithLust().beginningDate} - {(getWorstStreakWithLust().endDate)})</p>
+                            <p>Worst: <span className='font-bold'>{getWorstStreakWithLust().streak} days</span> ({getWorstStreakWithLust().beginningDate} - {(getWorstStreakWithLust().endDate)}) ({queryStatisticsValue ? "All time" : "Query based"})</p>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
-
             </div>
-            <QueryTasks searchValue={searchValue} dayValue={dayValue} />
+            <QueryTasks searchValue={searchValue} dayValue={dayValue} fromDateValue={fromDateValue} />
             <Accordion type="single" collapsible className="w-[80%]">
                 {allDaysInfo.map((day, cIndex) => {
                     const documentId = new ObjectId(day._id); // Example _id
