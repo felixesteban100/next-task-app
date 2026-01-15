@@ -10,7 +10,8 @@ import {
     Loader,
     PlusIcon,
     Tv,
-    Watch
+    ListCheck,
+    // Watch,
 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
@@ -81,10 +82,15 @@ const links = [
         icon: <Tv />
     },
     {
-        href: "/omnitrix",
-        label: "Omnitrix",
-        icon: <Watch />
+        href: "/todo",
+        label: "To Do List",
+        icon: < ListCheck />
     },
+    // {
+    //     href: "/omnitrix",
+    //     label: "Omnitrix",
+    //     icon: <Watch />
+    // },
     // {
     //     href: "/clock",
     //     label: "Clock App",

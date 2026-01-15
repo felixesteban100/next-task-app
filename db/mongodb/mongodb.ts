@@ -32,6 +32,7 @@ import { ReflectionQuestions } from "@/app/(main)/today/page";
 import { ToWatch } from "@/app/(main)/to-watch/page";
 // lib/mongodb.ts (or wherever you keep it)
 import { MongoClient } from 'mongodb';
+import { ToDoTask } from "@/components/TodoList";
 
 if (!process.env.MONGODB_URI) {
     throw new Error('Missing MONGODB_URI environment variable');
@@ -71,3 +72,4 @@ export const collectionDefaultTasks = db.collection<{ tasks: Task[] }>('DEFAULT_
 export const collectionReflectionQuestions = db.collection<ReflectionQuestions>('Reflection Questions');
 export const collectionToWatch = db.collection<ToWatch>('List to watch');
 export const collectionThingsToWatchAtNight = db.collection<{ resources: { name: string, url: string }[] }>('ThingsToWatchAtNight');
+export const collectionToDoList = db.collection<ToDoTask>('To do list');

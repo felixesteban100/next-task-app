@@ -2,10 +2,13 @@
 
 import { ToWatch } from "@/app/(main)/to-watch/page"
 import { Task } from "@/components/TaskToEdit"
-import { collectionDefaultTasks, collectionTask, collectionToWatch } from "@/db/mongodb/mongodb"
+import { z } from "zod";
+import { collectionDefaultTasks, collectionTask, collectionToWatch, collectionToDoList } from "@/db/mongodb/mongodb"
 // import { getTodaysDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { connection } from 'next/server'
+import { ToDoTask } from "@/components/TodoList";
+import { ObjectId } from "mongodb";
 
 export async function addDefaultTasksWithTodaysDate() {
     connection()
@@ -65,4 +68,45 @@ export async function updateToWatchMedia(name: string, info: ToWatch) {
     }
 
     return false
+}
+
+
+// TODOS ACTIONS
+export async function createTodo(formData: FormData) {
+    const todoSchema = z.object({
+        title: z.string().min(1).max(200),
+        type: z.enum(["once", "daily", "weekly", "custom"]),
+    });
+
+    const raw = {
+        title: formData.get("title")?.toString() ?? "",
+        type: formData.get("type")?.toString() ?? "once",
+    };
+
+    const validated = todoSchema.parse(raw);
+
+    // @ts-expect-error _id will be auto-generated
+    await collectionToDoList.insertOne({
+        ...validated,
+        done: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    } satisfies Omit<ToDoTask, "_id">);
+
+    revalidatePath("/todos");
+    return { success: true };
+}
+
+export async function toggleTodo(id: ObjectId, done: boolean) {
+    await collectionToDoList.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: { done: done, updatedAt: new Date() } }
+    );
+
+    revalidatePath("/todos");
+}
+
+export async function deleteTodo(id: ObjectId) {
+    await collectionToDoList.deleteOne({ _id: new ObjectId(id) });
+    revalidatePath("/todos");
 }
