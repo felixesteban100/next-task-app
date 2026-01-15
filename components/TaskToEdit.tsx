@@ -39,11 +39,11 @@ import { useState, useEffect } from "react"
 
 // import { DialogTrigger } from './ui/dialog'
 // import { AnimatedTestimonialsDemo } from './animated-testimonials'
-import { useSearchParams } from 'next/navigation'
 import ButtonOrganizeByTime from './ButtonOrganizeByTime'
 
 import { AnimatePresence, motion } from "framer-motion";
 import ButtonHideOccupied from './ButtonHideOccupied'
+import ButtonTogglePreviousTasks from './ButtonTogglePreviousTasks'
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -79,9 +79,7 @@ type FormSchemaType = z.infer<typeof formSchema>;
 
 const durationLoader = 1000
 
-export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayInfo: DailyTaskAndDetails, hourAdded: string, hideOccupied: boolean }) {
-    const organizeByTime = new URLSearchParams(useSearchParams()).get('organizeByTime') === "true" ? true : false
-
+export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOccupied, togglePreviousTasks }: { dayInfo: DailyTaskAndDetails, hourAdded: string, organizeByTime: boolean, hideOccupied: boolean, togglePreviousTasks: boolean }) {
     const [loading, setLoading] = useState(false);
 
     // At component top level
@@ -277,8 +275,12 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                 </TooltipProvider>
                 <div className='flex gap-5'>
                     <ButtonOrganizeByTime />
+                    <ButtonTogglePreviousTasks />
                     <ButtonHideOccupied />
                 </div>
+                {togglePreviousTasks ? (
+                    <p className='text-sm italic'>Previous tasks are hidden</p>
+                ) : null}
             </div>
 
             <Form {...form}>
@@ -291,11 +293,15 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                                 <FormMessage />
                                 <FormControl>
                                     <div className='space-y-15 md:space-y-0'>
-                                        {(sortByProperty(field.value, organizeByTime ? "time" : "id")).map((task) => {
+                                        {(
+                                            togglePreviousTasks ?
+                                                (sortByProperty(field.value, organizeByTime ? "time" : "id")).filter(task => filterFutureTimes(TIMES).includes(task.time))
+                                                : (sortByProperty(field.value, organizeByTime ? "time" : "id"))
+                                        ).map((task) => {
                                             const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
+
                                             return (
                                                 <AnimatePresence key={task.name + task.time + task.id}>
-                                                    {/* <div */}
                                                     <motion.div
                                                         transition={{
                                                             type: "spring",
@@ -355,7 +361,6 @@ export default function TaskToEdit({ dayInfo, hourAdded, hideOccupied }: { dayIn
                                                             </select>
                                                         </div>
                                                     </motion.div>
-                                                    {/* </div> */}
                                                 </AnimatePresence>
                                             )
                                         })}

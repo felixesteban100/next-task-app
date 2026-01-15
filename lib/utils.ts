@@ -81,6 +81,19 @@ export function filterFutureTimes(times: string[]): string[] {
   return index === -1 ? [] : times.slice(index);
 }
 
+// export function timeToMinutes(timeStr: string): number {
+//   const match = timeStr.match(/^(\d{1,2}):(\d{2})\s*(am|pm)$/i)
+//   if (!match) throw new Error(`Invalid time format: ${timeStr}`)
+
+//   const [, h, m, period] = match
+//   let hour = parseInt(h, 10)
+
+//   if (period.toLowerCase() === 'pm' && hour !== 12) hour += 12
+//   if (period.toLowerCase() === 'am' && hour === 12) hour = 0
+
+//   return hour * 60 + parseInt(m, 10)
+// }
+
 export function getMostRepeatedState(tasks: Task[]) {
   const frequencyMap = tasks.reduce<Record<string, number>>((acc, item) => {
     acc[item.state] = (acc[item.state] || 0) + 1;

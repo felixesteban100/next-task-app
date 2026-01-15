@@ -16,19 +16,22 @@ export default async function Home({
   searchParams
 }: {
   searchParams?: Promise<{
+    organizeByTime?: string;
     hideOccupied?: string;
+    togglePreviousTasks?: string;
   }>,
 }) {
   connection()
 
-  const { hideOccupied } = searchParams ? await searchParams : {};
+  const { hideOccupied, togglePreviousTasks, organizeByTime } = searchParams ? await searchParams : {};
 
-  // For querying "today's tasks"
+  // // For querying "today's tasks"
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);          // local midnight
 
+  /* date: todayStart  */
   const ToDayInfo = await collectionTask.findOne(
-    { /* date: todayStart  */ },
+    {},
     { sort: { date: -1 } }
   );
 
@@ -43,7 +46,7 @@ export default async function Home({
     <>
       {ToDayInfo ?
         <>
-          <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} hideOccupied={hideOccupied === "true"} />
+          <Tasks dayInfo={JSON.parse(JSON.stringify(ToDayInfo))} hourAdded={formattedTime} organizeByTime={organizeByTime === "true"} hideOccupied={hideOccupied === "true"} togglePreviousTasks={togglePreviousTasks === "true"} />
 
           <NightChecklist resources={thingsToWatchAtNight?.resources ?? []} />
           {/* <div className="flex flex-col gap-5 justify-center items-center">

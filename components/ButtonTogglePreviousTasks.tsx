@@ -4,15 +4,15 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Button } from './ui/button'
 import { IdCard, Watch } from 'lucide-react'
 
-export default function ButtonOrganizeByTime() {
+export default function ButtonTogglePreviousTasks() {
     const { push } = useRouter()
     const searchParams = useSearchParams()
     const params = new URLSearchParams(searchParams)
     const pathname = usePathname()
-    const organizeByTime = params.get('organizeByTime') === "true" ? true : false
+    const togglePreviousTasks = params.get('togglePreviousTasks') === "true" ? true : false
 
     function changeParams() {
-        params.set('organizeByTime', organizeByTime ? "false" : "true")
+        params.set('togglePreviousTasks', togglePreviousTasks ? "false" : "true")
 
         push(`${pathname}?${params.toString()}`)
     }
@@ -21,8 +21,8 @@ export default function ButtonOrganizeByTime() {
         <Button
             onClick={() => changeParams()}
         >
-            {organizeByTime ? <Watch /> : <IdCard />}
-            {organizeByTime ? "Organized by time" : "Organized by task id"}
+            {togglePreviousTasks ? <Watch /> : <IdCard />}
+            {togglePreviousTasks ? "Show previous tasks" : "Hide previous tasks"}
         </Button>
     )
 }
