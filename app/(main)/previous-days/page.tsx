@@ -36,13 +36,15 @@ export default async function page({
     const { search, day, fromDate, queryStatistics } = searchParams ? await searchParams : {};
     const searchValue = search ? search : ""
     const dayValue = day ? day : ""
-    const fromDateValue = fromDate ? new Date(new Date(fromDate).getTime() - 5 * 60 * 60 * 1000) : new Date(Date.now() - 7 * 86400000)
     const queryStatisticsValue = queryStatistics === "true"
 
     const today = new Date()//getTodaysDate()
 
+
     // filter fromDateValue
-    const allDaysInfoNoQuery = await collectionTask.find({}).toArray()
+    const allDaysInfoNoQuery = await collectionTask.find({}).sort({ date: -1 }).toArray()
+
+    const fromDateValue = fromDate ? new Date(new Date(fromDate).getTime() - 5 * 60 * 60 * 1000) : new Date(allDaysInfoNoQuery.at(6)!.date)
 
     const allDaysInfoDb = await collectionTask.aggregate([
         {
@@ -98,16 +100,21 @@ export default async function page({
         return lastTask.state === "done" ? true : false;
     }
 
-    function getLastDaysAreWithoutLust() {
-        let count = 0;
-        allDaysInfoUsedForStatistics.forEach((day, index) => {
-            if (index === count) {
-                if (isHolyLastTaskDone(day.tasks)) {
-                    count++;
-                }
+    function getLastDaysAreWithoutLust(): number {
+        let streak = 0;
+
+        // Go backwards from newest to oldest
+        for (let i = allDaysInfoUsedForStatistics.length - 1; i >= 0; i--) {
+            const day = allDaysInfoUsedForStatistics[i];
+
+            if (isHolyLastTaskDone(day.tasks)) {
+                streak++;
+            } else {
+                break; // first failure → streak ends
             }
-        });
-        return count;
+        }
+
+        return streak;
     }
 
     function getBestStreakWithoutLust() {
@@ -152,15 +159,20 @@ export default async function page({
     }
 
     function getLastDaysAreWithLust() {
-        let count = 0;
-        allDaysInfoUsedForStatistics.forEach((day, index) => {
-            if (index === count) {
-                if (!isHolyLastTaskDone(day.tasks)) {
-                    count++;
-                }
+        let streak = 0;
+
+        // Go backwards from newest to oldest
+        for (let i = allDaysInfoUsedForStatistics.length - 1; i >= 0; i--) {
+            const day = allDaysInfoUsedForStatistics[i];
+
+            if (!isHolyLastTaskDone(day.tasks)) {
+                streak++;
+            } else {
+                break; // first failure → streak ends
             }
-        });
-        return count;
+        }
+
+        return streak;
     }
 
     function getWorstStreakWithLust() {
@@ -275,7 +287,7 @@ export default async function page({
                     </AccordionItem>
                 </Accordion>
             </div>
-            <QueryTasks searchValue={searchValue} dayValue={dayValue} fromDateValue={fromDateValue} />
+            <QueryTasks searchValue={searchValue} dayValue={dayValue} fromDateValue={fromDate ? fromDateValue : new Date(fromDateValue.getTime() + 8 * 60 * 60 * 1000)} />
             <Accordion type="single" collapsible className="w-[80%]">
                 {allDaysInfo.map((day, cIndex) => {
                     const documentId = new ObjectId(day._id); // Example _id

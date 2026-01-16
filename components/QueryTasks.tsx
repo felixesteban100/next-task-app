@@ -83,7 +83,7 @@ export default function QueryTasks({ searchValue, dayValue, fromDateValue }: { s
                     <PopoverContent className="w-auto overflow-hidden p-0" align="start">
                         <Calendar
                             mode="single"
-                            selected={fromDate}
+                            selected={new Date(fromDate)}
                             captionLayout="dropdown"
                             onSelect={(date) => {
                                 if (date) {
