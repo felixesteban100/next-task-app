@@ -1,11 +1,11 @@
-// import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 // import { collectionTask } from '@/db/mongodb/mongodb';
 
 // export const dynamic = 'force-dynamic';
 
 export async function GET(/* request: Request */) {
     // and I need to know if I really need auto refresh when db changes 
-    return {}
+    return NextResponse.json({});
 
     // const { searchParams } = new URL(request.url);
     // const dateStr = searchParams.get('date');
