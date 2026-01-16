@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/tooltip"
 
 import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
-import { useState, useEffect } from "react"
+import { useState,/*  useEffect  */ } from "react"
 
 // import { io } from 'socket.io-client';
 
@@ -82,10 +82,19 @@ const durationLoader = 1000
 export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOccupied, togglePreviousTasks }: { dayInfo: DailyTaskAndDetails, hourAdded: string, organizeByTime: boolean, hideOccupied: boolean, togglePreviousTasks: boolean }) {
     const [loading, setLoading] = useState(false);
 
-    // At component top level
-    const [justSaved, setJustSaved] = useState(false)
+    const { tasks, date } = dayInfo
 
-    useEffect(() => {
+    const form = useForm<FormSchemaType>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            tasks
+        },
+    })
+
+    // At component top level
+    // const [justSaved, setJustSaved] = useState(false)
+
+    /* useEffect(() => {
         let source: EventSource;
         let reconnectAttempts = 0;
         const maxReconnects = 5;  // Prevent infinite loops
@@ -148,7 +157,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         return () => {
             source?.close();
         };
-    }, [justSaved]);
+    }, [justSaved]); */
 
     /* useEffect(() => {
         const scheduleRefresh = () => {
@@ -187,14 +196,58 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         }
     }, []) */
 
-    const { tasks, date } = dayInfo
+    // last used 
+    // and I need to know if I really need auto refresh when db changes 
+    // useEffect(() => {
+    //     // Only poll if the tab is visible (saves resources when minimized/background)
+    //     const handleVisibilityChange = () => {
+    //         if (document.visibilityState === 'visible') {
+    //             fetchLatestTasks();
+    //         }
+    //     };
 
-    const form = useForm<FormSchemaType>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            tasks
-        },
-    })
+    //     const fetchLatestTasks = async () => {
+    //         try {
+    //             // Adjust URL if your initial tasks come from a different endpoint
+    //             // This assumes you have a GET route that returns { tasks, date } or similar
+    //             // If not, create a simple /api/tasks?date=... route that queries MongoDB
+    //             const res = await fetch(`/api/live-tasks?date=${new Date(date).toISOString()}`, {
+    //                 cache: 'no-store', // or use revalidate if you add ISR later
+    //             });
+
+    //             if (!res.ok) throw new Error('Failed to fetch tasks');
+
+    //             const updatedData = await res.json(); // Expect { tasks: Task[] }
+
+    //             // Update form with fresh tasks (preserves your form state)
+    //             form.reset({ tasks: updatedData.tasks });
+
+    //             // Optional: If date changed server-side, handle it
+    //             // if (updatedData.date) { /* update local date if needed */ }
+    //         } catch (err) {
+    //             console.error('Polling fetch error:', err);
+    //             // Optional: toast.error("Couldn't refresh tasks. Try manually refreshing.");
+    //         }
+    //     };
+
+    //     // Initial fetch on mount (in case initial prop is stale)
+    //     fetchLatestTasks();
+
+    //     // Poll every 30 seconds (adjust to 60s if you want even lower usage)
+    //     const interval = setInterval(() => {
+    //         if (document.visibilityState === 'visible') {
+    //             fetchLatestTasks();
+    //         }
+    //     }, 30000);
+
+    //     // Listen for tab focus/visibility
+    //     document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    //     return () => {
+    //         clearInterval(interval);
+    //         document.removeEventListener('visibilitychange', handleVisibilityChange);
+    //     };
+    // }, [date, form]); // Re-run if date changes
 
     const { tasks: tasksState } = form.watch();
 
@@ -205,7 +258,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
     const occupiedTasks = `${stateEmoji["occupied"]}${tasksState.filter(c => c.state === "occupied").length}`
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setJustSaved(true)
+        // setJustSaved(true)
         setLoading(true)
         document.body.classList.add('overflow-hidden'); // disable scroll
 
