@@ -124,8 +124,7 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
                 {initialTodos.map((todo) => (
                     <div
                         key={todo._id.toString()}
-                        className={`group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""
-                            }`}
+                        className={`group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""}`}
                     >
                         <Checkbox
                             checked={todo.done}

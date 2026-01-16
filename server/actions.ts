@@ -128,7 +128,7 @@ export async function createTodo(formData: FormData) {
         ...(validated.recurrence && { recurrence: JSON.parse(validated.recurrence) }),
     } satisfies Omit<ToDoTask, "_id">);
 
-    revalidatePath("/todos");
+    revalidatePath("/todo");
 
     return { success: true };
 }
