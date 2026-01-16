@@ -34,6 +34,8 @@ export async function addDefaultTasksWithTodaysDate() {
         }),
         date: todayDate
     })
+    revalidatePath("/today")
+    revalidatePath("/previous-days")
     return true
 }
 
@@ -46,7 +48,7 @@ export async function saveTasksOfCurrentDate(date: Date, tasks: Task[]) {
     );
 
     if (result.modifiedCount > 0) {
-        revalidatePath("*")
+        revalidatePath("/today")
         return true
     }
 
@@ -139,10 +141,10 @@ export async function toggleTodo(id: ObjectId, done: boolean) {
         { $set: { done: done, updatedAt: new Date() } }
     );
 
-    revalidatePath("/todos");
+    revalidatePath("/todo");
 }
 
 export async function deleteTodo(id: ObjectId) {
     await collectionToDoList.deleteOne({ _id: new ObjectId(id) });
-    revalidatePath("/todos");
+    revalidatePath("/todo");
 }
