@@ -72,28 +72,64 @@ export async function updateToWatchMedia(name: string, info: ToWatch) {
 
 
 // TODOS ACTIONS
+// export async function createTodo(formData: FormData) {
+//     const todoSchema = z.object({
+//         title: z.string().min(1).max(200),
+//         type: z.enum(["once", "daily", "weekly", "custom"]),
+//     });
+
+//     const raw = {
+//         title: formData.get("title")?.toString() ?? "",
+//         type: formData.get("type")?.toString() ?? "once",
+//     };
+
+//     const recurrenceStr = formData.get("recurrence")?.toString();
+
+//   const recurrence = recurrenceStr ? JSON.parse(recurrenceStr) : { frequency: "once" };
+
+//     const validated = todoSchema.parse(raw);
+
+//     // @ts-expect-error _id will be auto-generated
+//     await collectionToDoList.insertOne({
+//         ...validated,
+//         done: false,
+//         createdAt: new Date(),
+//         updatedAt: new Date(),
+//     recurrence,
+//     } satisfies Omit<ToDoTask, "_id">);
+
+//     revalidatePath("/todos");
+//     return { success: true };
+// }
+
 export async function createTodo(formData: FormData) {
-    const todoSchema = z.object({
-        title: z.string().min(1).max(200),
-        type: z.enum(["once", "daily", "weekly", "custom"]),
+    const createTodoSchema = z.object({
+        title: z.string().min(1, "Title is required"),
+        type: z.enum(["once", "daily", "weekly", "monthly", "yearly"]),
+        recurrence: z.any().optional(), // or better typed recurrence schema
     });
 
     const raw = {
-        title: formData.get("title")?.toString() ?? "",
+        title: formData.get("title")?.toString()?.trim() ?? "",
         type: formData.get("type")?.toString() ?? "once",
+        recurrence: formData.get("recurrence")?.toString(),
     };
 
-    const validated = todoSchema.parse(raw);
+    const validated = createTodoSchema.parse(raw);
 
-    // @ts-expect-error _id will be auto-generated
+    const now = new Date();
+
     await collectionToDoList.insertOne({
-        ...validated,
+        title: validated.title,
+        type: validated.type,
         done: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: now,
+        updatedAt: now,
+        ...(validated.recurrence && { recurrence: JSON.parse(validated.recurrence) }),
     } satisfies Omit<ToDoTask, "_id">);
 
     revalidatePath("/todos");
+
     return { success: true };
 }
 

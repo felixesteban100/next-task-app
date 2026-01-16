@@ -5,30 +5,36 @@ import { useState, useTransition } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { Trash2, Plus } from "lucide-react";
 import { createTodo, deleteTodo, toggleTodo } from "@/server/actions";
 import { ObjectId } from "mongodb";
+import { RecurrencePicker } from "./RecurrencePicker";
 
 export type ToDoTask = {
     _id: ObjectId;           // ← now required – MongoDB ObjectId as string
     title: string;
-    type: "once" | "daily" | "weekly" | "custom";
+    type: "once" | "daily" | "weekly" | "monthly" | "yearly";
     done: boolean;
     createdAt: Date;
     updatedAt: Date;
+    recurrence: {
+        frequency: "once" | "daily" | "weekly" | "monthly" | "yearly";
+        interval?: number;
+        daysOfWeek?: number[];     // 0=Sun ... 6=Sat
+        dayOfMonth?: number;
+        month?: number;
+        end?: { type: "never" | "after" | "on"; afterCount?: number; date?: Date };
+    };
 };
 
 export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] }) {
     const [isPending, startTransition] = useTransition();
+
     const [newTitle, setNewTitle] = useState("");
-    const [type, setType] = useState<ToDoTask["type"]>("once");
+    const [recurrence, setRecurrence] = useState<ToDoTask["recurrence"]>({
+        frequency: "once",
+        interval: 1,
+    });
 
     const handleCreate = () => {
         if (!newTitle.trim()) return;
@@ -36,11 +42,12 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
         startTransition(async () => {
             const formData = new FormData();
             formData.append("title", newTitle.trim());
-            formData.append("type", type);
+            formData.append("recurrence", JSON.stringify(recurrence));
 
             await createTodo(formData);
             setNewTitle("");
-            // Server action will revalidate the page → fresh list
+            // Reset recurrence to default after creation
+            setRecurrence({ frequency: "once", interval: 1 });
         });
     };
 
@@ -56,86 +63,92 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
         });
     };
 
-    const formatRelativeTime = (date: Date) => {
-        if (!date || isNaN(new Date(date).getTime())) return "—";
-
+    const formatRelativeTime = (dateInput: Date) => {
+        const date = new Date(dateInput)
+        if (!date || isNaN(date.getTime())) return "—";
         const now = new Date();
-        const diffMs = now.getTime() - new Date(date).getTime();
+        const diffMs = now.getTime() - date.getTime();
         const diffMin = Math.round(diffMs / 60000);
-
         if (diffMin < 1) return "just now";
         if (diffMin < 60) return `${diffMin}m ago`;
         const diffHr = Math.floor(diffMin / 60);
         if (diffHr < 24) return `${diffHr}h ago`;
+        return date.toLocaleDateString([], { month: "short", day: "numeric" });
+    };
 
-        return date.toLocaleDateString([], {
-            month: "short",
-            day: "numeric",
-        });
+    const formatRecurrence = (r?: ToDoTask["recurrence"]) => {
+        if (!r || r.frequency === "once") return "once";
+        let str: string = r.frequency;
+        if (r.interval && r.interval > 1) str = `every ${r.interval} ${str}`;
+        if (r.daysOfWeek?.length) {
+            str += ` (${r.daysOfWeek.map(d => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d]).join(", ")})`;
+        }
+        if (r.dayOfMonth) str += ` on day ${r.dayOfMonth}`;
+        if (r.end?.type === "after") str += ` (${r.end.afterCount} times)`;
+        if (r.end?.type === "on" && r.end.date) {
+            str += ` until ${new Date(new Date(r.end.date).getTime() + 5 * 60 * 60 * 1000).toLocaleDateString()}`;
+        }
+        return str;
     };
 
     return (
         <div className="space-y-8">
-            {/* Add form */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            {/* ── Add new task form ────────────────────────────────────────────── */}
+            <div className="space-y-6 rounded-lg border bg-muted/40 p-6">
                 <Input
-                    placeholder="New task..."
+                    placeholder="What needs to be done?"
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleCreate()}
                     disabled={isPending}
                 />
 
-                <Select value={type} onValueChange={(v) => setType(v as ToDoTask["type"])}>
-                    <SelectTrigger className="w-36">
-                        <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="once">Once</SelectItem>
-                        <SelectItem value="daily">Daily</SelectItem>
-                        <SelectItem value="weekly">Weekly</SelectItem>
-                        <SelectItem value="custom">Custom</SelectItem>
-                    </SelectContent>
-                </Select>
+                <RecurrencePicker
+                    value={recurrence}
+                    onChange={setRecurrence}
+                />
 
-                <Button onClick={handleCreate} disabled={isPending || !newTitle.trim()}>
-                    <Plus className="mr-2 h-4 w-4" />
-                    Add
-                </Button>
+                <div className="flex justify-end">
+                    <Button
+                        onClick={handleCreate}
+                        disabled={isPending || !newTitle.trim()}
+                    >
+                        <Plus className="mr-2 h-4 w-4" />
+                        Add Task
+                    </Button>
+                </div>
             </div>
 
-            {/* Task list */}
+            {/* ── Task list ────────────────────────────────────────────────────── */}
             <div className="space-y-3">
                 {initialTodos.map((todo) => (
                     <div
-                        key={todo._id.toString()}  // ← now using _id
-                        className={`group flex flex-col sm:flex-row sm:items-center gap-3 rounded-lg border px-4 py-3 transition-colors ${isPending ? "opacity-70" : ""
+                        key={todo._id.toString()}
+                        className={`group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""
                             }`}
                     >
-                        <div className="flex items-center gap-3 flex-1">
-                            <Checkbox
-                                checked={todo.done}
-                                onCheckedChange={() => handleToggle(todo)}
-                                disabled={isPending}
-                            />
-                            <div className="min-w-0">
-                                <p
-                                    className={`font-medium leading-tight ${todo.done ? "line-through text-muted-foreground" : ""
-                                        }`}
-                                >
-                                    {todo.title}
-                                </p>
-                                <p className="text-xs text-muted-foreground mt-0.5">
-                                    {todo.type} • updated {/* {DateString(todo.updatedAt)} */}{formatRelativeTime(todo.updatedAt)}
-                                </p>
+                        <Checkbox
+                            checked={todo.done}
+                            onCheckedChange={() => handleToggle(todo)}
+                            disabled={isPending}
+                        />
+
+                        <div className="flex-1 min-w-0">
+                            <p className={`font-medium ${todo.done ? "line-through text-muted-foreground" : ""}`}>
+                                {todo.title}
+                            </p>
+                            <div className="mt-1 text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
+                                <span>updated {formatRelativeTime(todo.updatedAt)}</span>
+                                <span>•</span>
+                                <span className="font-medium">{formatRecurrence(todo.recurrence)}</span>
                             </div>
                         </div>
 
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive self-start sm:self-center"
-                            onClick={() => handleDelete(todo._id)}  // ← now using _id
+                            className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive"
+                            onClick={() => handleDelete(todo._id)}
                             disabled={isPending}
                         >
                             <Trash2 className="h-4 w-4" />
