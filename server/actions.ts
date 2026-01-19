@@ -135,10 +135,50 @@ export async function createTodo(formData: FormData) {
     return { success: true };
 }
 
-export async function toggleTodo(id: ObjectId, done: boolean) {
+export async function toggleTodo(id: ObjectId, shouldBeDone: boolean, actionTime: Date) {
+    // Normalize to start of day for completion tracking
+    const dayStart = new Date(actionTime);
+    dayStart.setHours(0, 0, 0, 0);
+
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const updateOps: any = {
+        $set: {
+            done: shouldBeDone,
+            updatedAt: actionTime,      // always update when user interacts
+        },
+    };
+
+    if (shouldBeDone) {
+        updateOps.$set.lastCompletedAt = actionTime; // full time for display
+        updateOps.$addToSet = { completionHistory: dayStart }; // day-level
+    } else {
+        updateOps.$pull = { completionHistory: dayStart };
+
+        const task = await collectionToDoList.findOne({ _id: new ObjectId(id) });
+
+        if (task) {
+            // Remaining days (start-of-day Dates)
+            const remainingDays = (task.completionHistory ?? [])
+                .filter((d: Date) => d.getTime() !== dayStart.getTime());
+
+            if (remainingDays.length > 0) {
+                // Most recent day
+                const latestDay = remainingDays.reduce((prev, curr) =>
+                    curr > prev ? curr : prev
+                );
+                // Set lastCompletedAt to start of that day (or keep full time if you want)
+                updateOps.$set.lastCompletedAt = latestDay;
+            } else {
+                updateOps.$unset = { lastCompletedAt: "" };
+            }
+        } else {
+            updateOps.$unset = { lastCompletedAt: "" };
+        }
+    }
+
     await collectionToDoList.updateOne(
         { _id: new ObjectId(id) },
-        { $set: { done: done, updatedAt: new Date() } }
+        updateOps
     );
 
     revalidatePath("/todo");
