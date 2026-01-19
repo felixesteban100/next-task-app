@@ -69,10 +69,9 @@ export default async function page({
 
     if (!allDaysInfoDb) return <p>No days on track</p>
 
-
     const allDaysInfo = dayValue && dayValue !== "all" ? allDaysInfoDb.filter(c => getDayName(c.date) === dayValue) : allDaysInfoDb
 
-    const allDaysInfoUsedForStatistics = queryStatisticsValue ? allDaysInfoNoQuery : allDaysInfoDb
+    const allDaysInfoUsedForStatistics = queryStatisticsValue ? allDaysInfoNoQuery : allDaysInfo
 
     const allDaysMostRepeated = allDaysInfoUsedForStatistics.map(c => getMostRepeatedState(c.tasks))
 
@@ -100,21 +99,29 @@ export default async function page({
         return lastTask.state === "done" ? true : false;
     }
 
-    function getLastDaysAreWithoutLust(): number {
+    function getLastDaysAreWithoutLust() {
+        const allDaysInfoUsedForStatisticsSorted = [...allDaysInfoUsedForStatistics].reverse()
         let streak = 0;
-
+        const allDaysInRow = []
         // Go backwards from newest to oldest
-        for (let i = allDaysInfoUsedForStatistics.length - 1; i >= 0; i--) {
-            const day = allDaysInfoUsedForStatistics[i];
+        for (let i = allDaysInfoUsedForStatisticsSorted.length - 1; i >= 0; i--) {
+            const day = allDaysInfoUsedForStatisticsSorted[i];
 
             if (isHolyLastTaskDone(day.tasks)) {
+                if (streak === 0) {
+                    allDaysInRow.push(day.date)
+                }
                 streak++;
             } else {
                 break; // first failure → streak ends
             }
         }
 
-        return streak;
+        return {
+            streak,
+            firstDay: allDaysInRow.at(0),
+            lastDay: allDaysInRow.reverse().at(0)
+        };
     }
 
     function getBestStreakWithoutLust() {
@@ -159,16 +166,17 @@ export default async function page({
     }
 
     function getLastDaysAreWithLust() {
+        const allDaysInfoUsedForStatisticsSorted = [...allDaysInfoUsedForStatistics].reverse()
         let streak = 0;
 
         // Go backwards from newest to oldest
-        for (let i = allDaysInfoUsedForStatistics.length - 1; i >= 0; i--) {
-            const day = allDaysInfoUsedForStatistics[i];
+        for (let i = allDaysInfoUsedForStatisticsSorted.length - 1; i >= 0; i--) {
+            const day = allDaysInfoUsedForStatisticsSorted[i];
 
             if (!isHolyLastTaskDone(day.tasks)) {
                 streak++;
             } else {
-                break; // first failure → streak ends
+                break; // first success → streak ends
             }
         }
 
@@ -276,7 +284,7 @@ export default async function page({
 
                             <Separator orientation='horizontal' className='bg-foreground' />
                             <p>{successEmojis.join("")} Streaks</p>
-                            <p>Current: <span className='font-bold'>{getLastDaysAreWithoutLust()} days</span> in a row</p>
+                            <p>Current: <span className='font-bold'>{getLastDaysAreWithoutLust().streak} days</span> in a row ({DateString(getLastDaysAreWithoutLust().firstDay)} - {DateString(getLastDaysAreWithoutLust().lastDay)})</p>
                             <p>Best: <span className='font-bold'>{getBestStreakWithoutLust().streak} days</span> ({getBestStreakWithoutLust().beginningDate} - {(getBestStreakWithoutLust().endDate)}) ({queryStatisticsValue ? "All time" : "Query based"})</p>
                             {/* {getLastDaysAreWithoutLust() >= 7 && <li>Watch unlocked animes and series</li>} */}
                             <Separator orientation='horizontal' className='bg-foreground' />
@@ -287,7 +295,9 @@ export default async function page({
                     </AccordionItem>
                 </Accordion>
             </div>
-            <QueryTasks searchValue={searchValue} dayValue={dayValue} fromDateValue={fromDate ? fromDateValue : new Date(fromDateValue.getTime() + 8 * 60 * 60 * 1000)} />
+            <QueryTasks searchValue={searchValue} dayValue={dayValue} fromDateValue={/* fromDate ? fromDateValue :  */new Date(fromDateValue.getTime() + 8 * 60 * 60 * 1000)} />
+
+            {/* make this load like in a suspense */}
             <Accordion type="single" collapsible className="w-[80%]">
                 {allDaysInfo.map((day, cIndex) => {
                     const documentId = new ObjectId(day._id); // Example _id

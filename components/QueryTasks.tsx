@@ -13,6 +13,7 @@ export default function QueryTasks({ searchValue, dayValue, fromDateValue }: { s
     const [day, setDay] = useState(dayValue)
     const [open, setOpen] = useState(false)
     const [fromDate, setFromDate] = useState(fromDateValue)
+    const [month, setMonth] = useState(fromDateValue)
 
     const { push } = useRouter()
     const searchParams = useSearchParams()
@@ -85,6 +86,8 @@ export default function QueryTasks({ searchValue, dayValue, fromDateValue }: { s
                             mode="single"
                             selected={new Date(fromDate)}
                             captionLayout="dropdown"
+                            month={month}
+                            onMonthChange={setMonth}
                             onSelect={(date) => {
                                 if (date) {
                                     const dateValue = new Date(date)
@@ -92,7 +95,10 @@ export default function QueryTasks({ searchValue, dayValue, fromDateValue }: { s
                                     setOpen(false)
                                 }
                             }}
-                            disabled={(date) => date > new Date()}
+                            disabled={{
+                                before: new Date(2025, 2, 15),
+                                after: new Date()
+                            }}
                         />
                     </PopoverContent>
                 </Popover>
