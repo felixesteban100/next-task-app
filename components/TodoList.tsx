@@ -9,6 +9,8 @@ import { Trash2, Plus } from "lucide-react";
 import { createTodo, deleteTodo, toggleTodo } from "@/server/actions";
 import { ObjectId } from "mongodb";
 import { RecurrencePicker } from "./RecurrencePicker";
+import { toast } from "sonner";
+import { shouldBeDoneToday } from "@/lib/utils";
 
 export type ToDoTask = {
     _id: ObjectId;           // ← now required – MongoDB ObjectId as string
@@ -37,86 +39,6 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
         interval: 1,
     });
 
-    function shouldBeDoneToday(task: ToDoTask, todaysDate = new Date()): boolean {
-        if (!task.lastCompletedAt) {
-            return false;
-        }
-
-        const last = new Date(task.lastCompletedAt);
-        const ref = new Date(todaysDate);
-
-        // Normalize both dates to start of day for consistent comparison
-        const lastDay = new Date(last);
-        lastDay.setHours(0, 0, 0, 0);
-
-        const refDay = new Date(ref);
-        refDay.setHours(0, 0, 0, 0);
-
-        const freq = task.recurrence?.frequency ?? "once";
-
-        if (freq === "once") {
-            // One-time task: once completed, always considered done
-            return true;
-        }
-
-        // Daily: only done if completed on the current day
-        if (freq === "daily") {
-            return lastDay.getTime() === refDay.getTime();
-        }
-
-        // Weekly: done only if completed during the current week on an allowed day
-        if (freq === "weekly") {
-            const allowedDays = task.recurrence?.daysOfWeek ?? [];
-            if (allowedDays.length === 0) {
-                return false;
-            }
-
-            // Start of current week (Sunday)
-            const weekStart = new Date(refDay);
-            weekStart.setDate(refDay.getDate() - refDay.getDay());
-
-            // Must be in current week + on an allowed weekday
-            return (
-                lastDay >= weekStart &&
-                lastDay <= refDay &&
-                allowedDays.includes(ref.getDay())
-            );
-        }
-
-        // Monthly: done only if completed on the target day of the current month
-        if (freq === "monthly") {
-            const targetDay = task.recurrence?.dayOfMonth ?? 1;
-
-            // Special case for "last day of month" (if you want to support it later)
-            if (targetDay === -1) {
-                // Approximate: if today is last day of month
-                const lastDayOfMonth = new Date(ref.getFullYear(), ref.getMonth() + 1, 0);
-                return ref.getDate() === lastDayOfMonth.getDate();
-            }
-
-            return (
-                ref.getDate() === targetDay &&
-                last.getMonth() === ref.getMonth() &&
-                last.getFullYear() === ref.getFullYear()
-            );
-        }
-
-        // Yearly: done only if completed on the target month + day of the current year
-        if (freq === "yearly") {
-            const targetMonth = task.recurrence?.month ?? 0;
-            const targetDay = task.recurrence?.dayOfMonth ?? 1;
-
-            return (
-                ref.getMonth() === targetMonth &&
-                ref.getDate() === targetDay &&
-                last.getFullYear() === ref.getFullYear()
-            );
-        }
-
-        // Fallback - if frequency is unknown
-        return false;
-    }
-
     function handleCreate() {
         if (!newTitle.trim()) return;
 
@@ -133,11 +55,29 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
     };
 
     function handleToggle(todo: ToDoTask) {
+        const todoId = todo._id.toString();
+        const currentDone = todo.done;  // directly from DB prop
+        const intendedDone = !currentDone;
+
+        toast.loading(`Updating "${todo.title}"...`, { id: todoId });
+
         startTransition(async () => {
             const now = new Date();
-            await toggleTodo(todo._id, !shouldBeDoneToday(todo, new Date()), now);
+            const response = await toggleTodo(todo._id, intendedDone, now);  // ← pass full todo
+
+            if (response.success) {
+                toast.success(
+                    `"${todo.title}" marked as ${intendedDone ? "done" : "not done"}`,
+                    { id: todoId, duration: 4000 }
+                );
+            } else {
+                toast.error(
+                    response.message || `"${todo.title}" could not be updated (recurrence rules)`,
+                    { id: todoId, duration: 6000 }
+                );
+            }
         });
-    };
+    }
 
     function handleDelete(id: ObjectId) {
         startTransition(async () => {
@@ -173,6 +113,9 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
         return str;
     };
 
+    function isDoneToday(todo: ToDoTask): boolean {
+        return shouldBeDoneToday(todo) && todo.done;
+    }
 
 
     return (
@@ -207,7 +150,7 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
             {/* ── Task list ────────────────────────────────────────────────────── */}
             <div className="space-y-3">
                 {initialTodos.map((todo) => {
-                    const isDoneToday = shouldBeDoneToday(todo, new Date());
+                    const isDoneTodayTodo = isDoneToday(todo);
                     const timesCompleted = todo.completionHistory?.length ?? 0;
 
                     return (
@@ -216,13 +159,13 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
                             className={`group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""}`}
                         >
                             <Checkbox
-                                checked={isDoneToday}
+                                checked={isDoneTodayTodo}
                                 onCheckedChange={() => handleToggle(todo)}
                                 disabled={isPending}
                             />
 
                             <div className="flex-1 min-w-0">
-                                <p className={`font-medium ${isDoneToday ? "line-through text-muted-foreground" : ""}`}>
+                                <p className={`font-medium ${isDoneTodayTodo ? "line-through text-muted-foreground" : ""}`}>
                                     {todo.title}
                                 </p>
                                 <div className="mt-1 text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">

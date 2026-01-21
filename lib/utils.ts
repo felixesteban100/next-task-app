@@ -1,4 +1,5 @@
 import { Task, TaskStates, TaskTypes } from "@/components/TaskToEdit";
+import { ToDoTask } from "@/components/TodoList";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -130,5 +131,98 @@ export function sortByProperty(array: Task[], property: "time" | "id"): Task[] {
   }) : array.sort((a, b) => a.id - b.id);
 }
 
+/**
+ * Determines if this task should currently appear as "done" (checked) on the given day.
+ * 
+ * Logic:
+ * - "once" tasks → done forever after first completion
+ * - recurring tasks → done only if the user marked it done on the current period
+ *   (today for daily, this week for weekly, this month for monthly, this year for yearly)
+ */
+export function shouldBeDoneToday(task: ToDoTask, referenceDate = new Date()): boolean {
+  // No completion ever → not done
+  // if (!task.lastCompletedAt) {
+  // console.log(task.title, "no lastCompletedAt");
+  // return false;
+  // }
 
+  const last = new Date(task.lastCompletedAt ?? (new Date(new Date().setHours(0, 0, 0, 0))));  // Fallback to epoch start if missing
+  const ref = new Date(referenceDate);
 
+  // Normalize both to start of day (00:00:00) for fair period comparison
+  const lastDay = new Date(last);
+  lastDay.setHours(0, 0, 0, 0);
+
+  const refDay = new Date(ref);
+  refDay.setHours(0, 0, 0, 0);
+
+  const freq = task.recurrence.frequency ?? "once";
+
+  // ────────────────────────────────────────────────────────────────
+  // One-time task: once completed → always done forever
+  // ────────────────────────────────────────────────────────────────
+  if (freq === "once") {
+    return true;
+  }
+
+  // ────────────────────────────────────────────────────────────────
+  // Daily: only done if marked done today
+  // ────────────────────────────────────────────────────────────────
+  if (freq === "daily") {
+    return lastDay.getTime() === refDay.getTime();
+  }
+
+  // ────────────────────────────────────────────────────────────────
+  // Weekly: done only if marked done on an allowed weekday in current week
+  // ────────────────────────────────────────────────────────────────
+  if (freq === "weekly") {
+    const allowedDays = task.recurrence?.daysOfWeek ?? [];
+    if (allowedDays.length === 0) {
+      return false;
+    }
+
+    // Start of current week (Sunday)
+    const weekStart = new Date(refDay);
+    weekStart.setDate(refDay.getDate() - refDay.getDay());
+
+    // Must be:
+    // 1. in current week
+    // 2. on an allowed weekday
+    return (
+      lastDay.getTime() >= weekStart.getTime() &&
+      lastDay.getTime() <= refDay.getTime() &&
+      allowedDays.includes(ref.getDay())
+    );
+  }
+
+  // ────────────────────────────────────────────────────────────────
+  // Monthly: done only if marked done on the target day of this month
+  // ────────────────────────────────────────────────────────────────
+  if (freq === "monthly") {
+    const targetDay = task.recurrence?.dayOfMonth ?? 1;
+
+    // Basic check: same day of month, same month, same year
+    return (
+      ref.getDate() === targetDay &&
+      last.getMonth() === ref.getMonth() &&
+      last.getFullYear() === ref.getFullYear()
+    );
+  }
+
+  // ────────────────────────────────────────────────────────────────
+  // Yearly: done only if marked done on the target month+day this year
+  // ────────────────────────────────────────────────────────────────
+  if (freq === "yearly") {
+    const targetMonth = task.recurrence?.month ?? 0;
+    const targetDay = task.recurrence?.dayOfMonth ?? 1;
+
+    return (
+      ref.getMonth() === targetMonth &&
+      ref.getDate() === targetDay &&
+      last.getFullYear() === ref.getFullYear()
+    );
+  }
+
+  // Fallback for unknown frequency
+  return false;
+}

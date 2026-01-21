@@ -9,6 +9,7 @@ import { revalidatePath } from "next/cache"
 import { connection } from 'next/server'
 import { ToDoTask } from "@/components/TodoList";
 import { ObjectId } from "mongodb";
+import { shouldBeDoneToday } from "@/lib/utils";
 
 export async function addDefaultTasksWithTodaysDate() {
     connection()
@@ -135,53 +136,72 @@ export async function createTodo(formData: FormData) {
     return { success: true };
 }
 
-export async function toggleTodo(id: ObjectId, shouldBeDone: boolean, actionTime: Date) {
-    // Normalize to start of day for completion tracking
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+
+export async function toggleTodo(
+    id: ObjectId,
+    intendedDone: boolean,
+    actionTime: Date = new Date()
+) {
+    const objectId = new ObjectId(id);
+
     const dayStart = new Date(actionTime);
     dayStart.setHours(0, 0, 0, 0);
 
+    const task = await collectionToDoList.findOne({ _id: objectId });
+    if (!task) {
+        return { success: false, reason: "not_found" };
+    }
+
+    const currentlyAllowed = shouldBeDoneToday(task, actionTime);
+
+    // Only allow any change (check or uncheck) if today is a recurrence-allowed day
+    if (currentlyAllowed === false) {
+        return {
+            success: false,
+            reason: "recurrence_not_allowed_today",
+            message: "This task is not scheduled for today"
+        };
+    }
+
+    // If we reach here → today is allowed → perform the update
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const updateOps: any = {
         $set: {
-            done: shouldBeDone,
-            updatedAt: actionTime,      // always update when user interacts
+            done: intendedDone,
+            updatedAt: actionTime,
         },
     };
 
-    if (shouldBeDone) {
-        updateOps.$set.lastCompletedAt = actionTime; // full time for display
+    if (intendedDone) {
+        updateOps.$set.lastCompletedAt = actionTime;
         updateOps.$addToSet = { completionHistory: dayStart }; // day-level
     } else {
         updateOps.$pull = { completionHistory: dayStart };
 
-        const task = await collectionToDoList.findOne({ _id: new ObjectId(id) });
+        const history = (task.completionHistory ?? [])
+            .filter((d: Date) => d.getTime() !== dayStart.getTime());
 
-        if (task) {
-            // Remaining days (start-of-day Dates)
-            const remainingDays = (task.completionHistory ?? [])
-                .filter((d: Date) => d.getTime() !== dayStart.getTime());
-
-            if (remainingDays.length > 0) {
-                // Most recent day
-                const latestDay = remainingDays.reduce((prev, curr) =>
-                    curr > prev ? curr : prev
-                );
-                // Set lastCompletedAt to start of that day (or keep full time if you want)
-                updateOps.$set.lastCompletedAt = latestDay;
-            } else {
-                updateOps.$unset = { lastCompletedAt: "" };
-            }
+        if (history.length > 0) {
+            const latest = history.reduce((a: Date, b: Date) => (b > a ? b : a));
+            updateOps.$set.lastCompletedAt = latest;
         } else {
             updateOps.$unset = { lastCompletedAt: "" };
         }
     }
 
-    await collectionToDoList.updateOne(
-        { _id: new ObjectId(id) },
+    const result = await collectionToDoList.updateOne(
+        { _id: objectId },
         updateOps
     );
 
     revalidatePath("/todo");
+
+    return {
+        success: result.modifiedCount > 0,
+        reason: "updated",
+        modifiedCount: result.modifiedCount
+    };
 }
 
 export async function deleteTodo(id: ObjectId) {
