@@ -86,7 +86,7 @@ export default async function ToWatchPage({
 
     return (
         <div className="w-full flex flex-col px-10 space-y-5 items-center">
-            <h1 className="text-3xl font-bold mb-4">To Watch List</h1>
+            {/* <h1 className="text-3xl font-bold mb-4">To Watch List</h1> */}
             <FilterToWatch />
             <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
                 {(sortByValue === "random" ? shuffle(toWatch) : toWatch).map((media) => (

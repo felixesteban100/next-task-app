@@ -56,6 +56,22 @@ export async function saveTasksOfCurrentDate(date: Date, tasks: Task[]) {
     return false
 }
 
+export async function toggleGodlyTaskOfPreviousDate(date: Date, tasks: Task[]) {
+    connection()
+    const result = await collectionTask.updateOne(
+        { date: date },
+        { $set: { tasks: tasks } }, // ✅ Use `$set` to update the `tasks` array
+        { upsert: false } // ❌ Ensure it doesn't create a new document
+    );
+
+    if (result.modifiedCount > 0) {
+        revalidatePath("/previous-days")
+        return true
+    }
+
+    return false
+}
+
 export async function updateToWatchMedia(name: string, info: ToWatch) {
     connection()
 

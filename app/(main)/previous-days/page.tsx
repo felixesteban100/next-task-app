@@ -20,6 +20,7 @@ import { ObjectId, WithId } from 'mongodb'
 import QueryTasks from '@/components/QueryTasks'
 import { DailyTaskAndDetails } from '@/components/TaskToEdit'
 import ButtonToggleQueryBasedStatistics from '@/components/ButtonToggleQueryBasedStatistics'
+import ButtonChangePreviousDayLastTaskState from '@/components/ButtonChangePreviousDayLastTaskState'
 
 export default async function page({
     searchParams
@@ -225,6 +226,8 @@ export default async function page({
 
     return (
         <>
+            <QueryTasks searchValue={searchValue} dayValue={dayValue} fromDateValue={/* fromDate ? fromDateValue :  */new Date(fromDateValue.getTime() + 8 * 60 * 60 * 1000)} />
+
             <div className='flex flex-col items-start gap-2 text-xl mb-4'>
                 <Accordion type="single" collapsible className="w-full">
                     <AccordionItem className='flex flex-col justify-center items-center gap-2' value="legend">
@@ -295,7 +298,6 @@ export default async function page({
                     </AccordionItem>
                 </Accordion>
             </div>
-            <QueryTasks searchValue={searchValue} dayValue={dayValue} fromDateValue={/* fromDate ? fromDateValue :  */new Date(fromDateValue.getTime() + 8 * 60 * 60 * 1000)} />
 
             {/* make this load like in a suspense */}
             <Accordion type="single" collapsible className="w-[80%]">
@@ -337,13 +339,18 @@ export default async function page({
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger className='font-bold text-2xl mt-4'>{failEmojis.join("")}</TooltipTrigger>
-                                        <TooltipContent>
+                                        <TooltipContent className='flex flex-col items-center justify-center'>
                                             <ul>
                                                 <li>{failEmojis[0]} Regret and sorrow for the sin.</li>
                                                 <li>{failEmojis[1]} The struggle and temptation of lust.</li>
                                                 <li>{failEmojis[2]} Turning to Christ for forgiveness, holiness, and righteousness.</li>
                                             </ul>
                                             <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
+                                            <ButtonChangePreviousDayLastTaskState
+                                                text={successEmojis.join("") + " Done?"}
+                                                tasks={day.tasks}
+                                                date={day.date}
+                                            />
                                         </TooltipContent>
                                     </Tooltip>
                                 </TooltipProvider>
@@ -351,13 +358,18 @@ export default async function page({
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger className='font-bold text-2xl'>{successEmojis.join("")}</TooltipTrigger>
-                                        <TooltipContent>
+                                        <TooltipContent className='flex flex-col items-center justify-center'>
                                             <ul>
                                                 <li>{successEmojis[0]} Joy and peace in victory over sin.</li>
                                                 <li>{successEmojis[1]} Purity and self-control through God&apos;s strength.</li>
                                                 <li>{successEmojis[2]} Walking in faith and righteousness with Christ.</li>
                                             </ul>
                                             <p className='font-bold'>Keep fighting the good fight!</p>
+                                            <ButtonChangePreviousDayLastTaskState
+                                                text={failEmojis.join("") + " Not done?"}
+                                                tasks={day.tasks}
+                                                date={day.date}
+                                            />
                                         </TooltipContent>
                                     </Tooltip>
                                 </TooltipProvider>
