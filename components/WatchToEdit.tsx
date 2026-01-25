@@ -270,7 +270,7 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
                                                         <FormItem>
                                                             <FormLabel>End year</FormLabel>
                                                             <FormControl>
-                                                                <Input placeholder="Ongoing" {...field} />
+                                                                <Input disabled={form.watch("watching_state") === "completed"} placeholder="Ongoing" {...field} />
                                                             </FormControl>
                                                             <FormMessage />
                                                         </FormItem>
