@@ -44,6 +44,7 @@ import ButtonOrganizeByTime from './ButtonOrganizeByTime'
 import { AnimatePresence, motion } from "framer-motion";
 import ButtonHideOccupied from './ButtonHideOccupied'
 import ButtonTogglePreviousTasks from './ButtonTogglePreviousTasks'
+import { useTabAndInactivityRedirect } from '@/lib/useTabAndInactivityRedirect'
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -90,6 +91,13 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
             tasks
         },
     })
+
+    useTabAndInactivityRedirect({
+        inactivityTimeoutMs: 2 * 60 * 1000,   // 2 minutes
+        redirectTo: '/',                      // or '/login', '/home', etc.
+        enabled: true,
+        showCountdown: true,                  // optional
+    });
 
     // At component top level
     // const [justSaved, setJustSaved] = useState(false)

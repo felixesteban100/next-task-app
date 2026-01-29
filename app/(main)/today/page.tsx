@@ -42,6 +42,8 @@ export default async function Home({
 
   const formattedTime = getFormattedTime(timestamp);
 
+  // make it redirect to home page when 2 minutes past without mouse movement over tab or when changing to another tab in browser
+
   return (
     <>
       {ToDayInfo ?
