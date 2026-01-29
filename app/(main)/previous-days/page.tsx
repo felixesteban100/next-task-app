@@ -338,7 +338,7 @@ export default async function page({
                             {searchValue != "" ? null : day.date == today ? null : isHolyLastTaskDone(day.tasks) === false ?
                                 <TooltipProvider>
                                     <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl mt-4'>{failEmojis.join("")}</TooltipTrigger>
+                                        <TooltipTrigger className='font-bold text-2xl select-none mt-4'>{failEmojis.join("")}</TooltipTrigger>
                                         <TooltipContent className='flex flex-col items-center justify-center'>
                                             <ul>
                                                 <li>{failEmojis[0]} Regret and sorrow for the sin.</li>
@@ -357,7 +357,7 @@ export default async function page({
                                 :
                                 <TooltipProvider>
                                     <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl'>{successEmojis.join("")}</TooltipTrigger>
+                                        <TooltipTrigger className='font-bold text-2xl select-none mt-4'>{successEmojis.join("")}</TooltipTrigger>
                                         <TooltipContent className='flex flex-col items-center justify-center'>
                                             <ul>
                                                 <li>{successEmojis[0]} Joy and peace in victory over sin.</li>
