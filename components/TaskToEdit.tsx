@@ -1,9 +1,5 @@
 "use client"
 
-// import {
-//     ToggleGroup,
-//     ToggleGroupItem,
-// } from "@/components/ui/toggle-group"
 import { cn, DateString, filterFutureTimes, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
@@ -32,13 +28,20 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+
 import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
-import { useState,/*  useEffect  */ } from "react"
+import { useState, useEffect } from "react"
 
-// import { io } from 'socket.io-client';
-
-// import { DialogTrigger } from './ui/dialog'
-// import { AnimatedTestimonialsDemo } from './animated-testimonials'
 import ButtonOrganizeByTime from './ButtonOrganizeByTime'
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -73,7 +76,6 @@ export type TaskStates = z.infer<typeof TaskStatesSchema>
 
 const formSchema = z.object({
     tasks: z.array(TaskSchema).min(1, "At least one item is required"),
-    // date: z.date()
 })
 
 type FormSchemaType = z.infer<typeof formSchema>;
@@ -82,6 +84,8 @@ const durationLoader = 1000
 
 export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOccupied, togglePreviousTasks }: { dayInfo: DailyTaskAndDetails, hourAdded: string, organizeByTime: boolean, hideOccupied: boolean, togglePreviousTasks: boolean }) {
     const [loading, setLoading] = useState(false);
+    const [showDiscardDialog, setShowDiscardDialog] = useState(false);
+    const [pendingNavigation, setPendingNavigation] = useState<(() => void) | null>(null);
 
     const { tasks, date } = dayInfo
 
@@ -93,189 +97,132 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
     })
 
     useTabAndInactivityRedirect({
-        inactivityTimeoutMs: 2 * 60 * 1000,   // 2 minutes
-        redirectTo: '/',                      // or '/login', '/home', etc.
+        inactivityTimeoutMs: 2 * 60 * 1000,
+        redirectTo: '/',
         enabled: true,
-        showCountdown: true,                  // optional
+        showCountdown: true,
     });
-
-    // At component top level
-    // const [justSaved, setJustSaved] = useState(false)
-
-    /* useEffect(() => {
-        let source: EventSource;
-        let reconnectAttempts = 0;
-        const maxReconnects = 5;  // Prevent infinite loops
-
-        const connect = () => {
-            source = new EventSource('/api/live-tasks');
-
-            source.onopen = () => {
-                console.log('SSE connected');
-                reconnectAttempts = 0;  // Reset on success
-            };
-
-            source.onmessage = (event) => {
-                console.log('SSE message received:', event.data);
-                try {
-                    const data = JSON.parse(event.data);
-                    if (data.type === 'ping' || data.type === 'heartbeat') return;
-
-                    // Your existing logic (check justSaved, toast, refresh if not own change)
-                    try {
-                        const data = JSON.parse(event.data)
-                        if (data.type === 'ping' || data.type === 'heartbeat') return;
-
-                        if (justSaved) {
-                            setJustSaved(false)
-                            toast.success("Changes saved successfully!")
-                            return
-                        }
-
-                        // Change from another source → refresh this tab
-                        toast.info("Data changed elsewhere → refreshing...")
-                        setTimeout(() => {
-                            window.location.reload()
-                        }, 800)
-
-                    } catch (err) {
-                        console.error('SSE parse error:', err)
-                    }
-                } catch (err) {
-                    console.error('SSE parse error:', err);
-                }
-            };
-
-            source.onerror = (err) => {
-                console.error('SSE error:', err);
-                source.close();
-                if (reconnectAttempts < maxReconnects) {
-                    reconnectAttempts++;
-                    const delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000);  // Exponential backoff, max 30s
-                    console.log(`Reconnecting in ${delay / 1000}s... (attempt ${reconnectAttempts})`);
-                    setTimeout(connect, delay);
-                } else {
-                    toast.error("Real-time updates failed. Please refresh manually.");
-                }
-            };
-        };
-
-        connect();
-
-        return () => {
-            source?.close();
-        };
-    }, [justSaved]); */
-
-    /* useEffect(() => {
-        const scheduleRefresh = () => {
-            const now = new Date()
-            const today21 = new Date(
-                now.getFullYear(),
-                now.getMonth(),
-                now.getDate(),
-                21, 0, 0, 0
-            )
-
-            // If we're already past 21:00 today → refresh immediately
-            if (now >= today21) {
-                window.location.reload()
-                return
-            }
-
-            // Otherwise schedule refresh for tonight 21:00
-            const msUntil21 = today21.getTime() - now.getTime()
-
-            const timeout = setTimeout(() => {
-                window.location.reload()
-            }, msUntil21)
-
-            return () => clearTimeout(timeout)
-        }
-
-        const cleanup = scheduleRefresh()
-
-        // In case user keeps tab open multiple days
-        const nextDayCheck = setInterval(scheduleRefresh, 24 * 60 * 60 * 1000)
-
-        return () => {
-            cleanup?.()
-            clearInterval(nextDayCheck)
-        }
-    }, []) */
-
-    // last used 
-    // and I need to know if I really need auto refresh when db changes 
-    // useEffect(() => {
-    //     // Only poll if the tab is visible (saves resources when minimized/background)
-    //     const handleVisibilityChange = () => {
-    //         if (document.visibilityState === 'visible') {
-    //             fetchLatestTasks();
-    //         }
-    //     };
-
-    //     const fetchLatestTasks = async () => {
-    //         try {
-    //             // Adjust URL if your initial tasks come from a different endpoint
-    //             // This assumes you have a GET route that returns { tasks, date } or similar
-    //             // If not, create a simple /api/tasks?date=... route that queries MongoDB
-    //             const res = await fetch(`/api/live-tasks?date=${new Date(date).toISOString()}`, {
-    //                 cache: 'no-store', // or use revalidate if you add ISR later
-    //             });
-
-    //             if (!res.ok) throw new Error('Failed to fetch tasks');
-
-    //             const updatedData = await res.json(); // Expect { tasks: Task[] }
-
-    //             // Update form with fresh tasks (preserves your form state)
-    //             form.reset({ tasks: updatedData.tasks });
-
-    //             // Optional: If date changed server-side, handle it
-    //             // if (updatedData.date) { /* update local date if needed */ }
-    //         } catch (err) {
-    //             console.error('Polling fetch error:', err);
-    //             // Optional: toast.error("Couldn't refresh tasks. Try manually refreshing.");
-    //         }
-    //     };
-
-    //     // Initial fetch on mount (in case initial prop is stale)
-    //     fetchLatestTasks();
-
-    //     // Poll every 30 seconds (adjust to 60s if you want even lower usage)
-    //     const interval = setInterval(() => {
-    //         if (document.visibilityState === 'visible') {
-    //             fetchLatestTasks();
-    //         }
-    //     }, 30000);
-
-    //     // Listen for tab focus/visibility
-    //     document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    //     return () => {
-    //         clearInterval(interval);
-    //         document.removeEventListener('visibilitychange', handleVisibilityChange);
-    //     };
-    // }, [date, form]); // Re-run if date changes
 
     const { tasks: tasksState } = form.watch();
 
     const formTasksChanged = form.formState.isDirty && (JSON.stringify(tasks.sort((a, b) => a.id - b.id)) !== JSON.stringify(tasksState.sort((a, b) => a.id - b.id)))
+
+    // Prevent browser tab close/refresh when there are unsaved changes
+    useEffect(() => {
+        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+            if (formTasksChanged) {
+                e.preventDefault();
+                e.returnValue = ''; // Required for Chrome
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [formTasksChanged]);
+
+    // Intercept ALL navigation attempts (links, buttons, router.push, etc.)
+    useEffect(() => {
+        if (!formTasksChanged) return;
+
+        // Handle regular link clicks
+        const handleClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            const link = target.closest('a, button');
+
+            // Skip if it's the save button or if there are no unsaved changes
+            if (!link || link.id === 'saveButton') return;
+
+            // Check if this is a navigation element
+            const isNavigationLink = link.tagName === 'A' ||
+                link.hasAttribute('data-navigation') ||
+                link.className.includes('navigation') ||
+                link.textContent?.includes('Back') ||
+                link.textContent?.includes('Home');
+
+            if (isNavigationLink) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Store the navigation action
+                if (link.tagName === 'A') {
+                    const href = (link as HTMLAnchorElement).href;
+                    setPendingNavigation(() => () => {
+                        window.location.href = href;
+                    });
+                } else {
+                    // For buttons, trigger their click after confirmation
+                    setPendingNavigation(() => () => {
+                        // Temporarily disable the check
+                        const clickEvent = new MouseEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+                        link.dispatchEvent(clickEvent);
+                    });
+                }
+
+                setShowDiscardDialog(true);
+            }
+        };
+
+        // Handle browser back/forward buttons
+        const handlePopState = (e: PopStateEvent) => {
+            e.preventDefault();
+            history.pushState(null, '', window.location.href); // Prevent navigation
+
+            setPendingNavigation(() => () => {
+                history.back();
+            });
+            setShowDiscardDialog(true);
+        };
+
+        // Push current state to enable popstate detection
+        history.pushState(null, '', window.location.href);
+
+        document.addEventListener('click', handleClick, true);
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            document.removeEventListener('click', handleClick, true);
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [formTasksChanged]);
+
+    const handleDiscardChanges = () => {
+        if (pendingNavigation) {
+            // Temporarily reset form state to allow navigation
+            form.reset(form.getValues());
+            setTimeout(() => {
+                pendingNavigation();
+            }, 0);
+        }
+        setShowDiscardDialog(false);
+        setPendingNavigation(null);
+    };
+
+    const handleCancelDiscard = () => {
+        setShowDiscardDialog(false);
+        setPendingNavigation(null);
+    };
 
     const doneTasks = `${stateEmoji["done"]}${tasksState.filter(c => c.state === "done").length}`
     const noDoneTasks = `${stateEmoji["no done"]}${tasksState.filter(c => c.state === "no done").length}`
     const occupiedTasks = `${stateEmoji["occupied"]}${tasksState.filter(c => c.state === "occupied").length}`
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        // setJustSaved(true)
         setLoading(true)
-        document.body.classList.add('overflow-hidden'); // disable scroll
+        document.body.classList.add('overflow-hidden');
 
         const result = await saveTasksOfCurrentDate(date, values.tasks)
         form.reset(values);
 
         setTimeout(() => {
             setLoading(false)
-            document.body.classList.remove('overflow-hidden'); // enable scroll
+            document.body.classList.remove('overflow-hidden');
 
             if (result === true) {
                 toast.success("Tasks have been saved.", {
@@ -296,24 +243,43 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         property: 'time' | 'state',
         fieldOnChange: (value: Task[]) => void
     ) {
-        if (!inputValue) return; // Early exit if empty
+        if (!inputValue) return;
 
         const [taskToEditName, newValue] = inputValue.split("->");
 
-        if (taskToEditName !== `${task.name}_${task.time}_${index}`) return; // Skip unnecessary updat
+        if (taskToEditName !== `${task.name}_${task.time}_${index}`) return;
 
         const updatedTasks = tasksState.map((item, indexItem) =>
             `${item.name}_${item.time}_${indexItem}` === taskToEditName
                 ? { ...item, [property]: newValue, }
                 : item
         );
-        // fieldOnChange(updatedTasks); // ✅ Pass the new array directly
-        fieldOnChange(sortByProperty(updatedTasks, "id")); // ✅ Pass the new array directly
+        fieldOnChange(sortByProperty(updatedTasks, "id"));
     }
 
     return (
         <div className={`flex flex-col gap-7 items-center mb-2 w-full `}>
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
+
+            {/* Discard Changes Dialog */}
+            <AlertDialog open={showDiscardDialog} onOpenChange={setShowDiscardDialog}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Unsaved Changes</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            You have unsaved changes. Are you sure you want to discard them and leave this page?
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel onClick={handleCancelDiscard}>
+                            Stay on Page
+                        </AlertDialogCancel>
+                        <AlertDialogAction onClick={handleDiscardChanges} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                            Discard Changes
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
 
             <div className='flex flex-col gap-5 items-center justify-between w-full'>
                 <TooltipProvider>
@@ -434,30 +400,16 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                         <Button
                             id="saveButton"
                             disabled={form.formState.isSubmitting || !formTasksChanged}
-                            className={`group disabled:grayscale-25 p-7 text-xl   ${/* form.formState.isSubmitting || !formTasksChanged ? "" : "animate-[pulse_2s_infinite]" */""}`}
+                            className={`group disabled:grayscale-25 p-7 text-xl`}
                             type="submit"
                         >
-                            <p
-                                className={`group-enabled:animate-bounce flex gap-2 items-center`}
-                            >
+                            <p className={`group-enabled:animate-bounce flex gap-2 items-center`}>
                                 {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
                             </p>
                         </Button>
                     </div>
                 </form>
             </Form>
-
-            {/* {
-                !filterFutureTimes(TIMES).length ?
-                    (
-                        <p>Day is over. <span className='font-medium'>Trust God and live</span></p>
-                    )
-                    :
-                    (
-                        
-                    )
-            } */}
         </div>
     )
 }
-
