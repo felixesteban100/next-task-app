@@ -96,12 +96,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         },
     })
 
-    useTabAndInactivityRedirect({
-        inactivityTimeoutMs: 2 * 60 * 1000,
-        redirectTo: '/',
-        enabled: true,
-        showCountdown: true,
-    });
+
 
     const { tasks: tasksState } = form.watch();
 
@@ -208,6 +203,32 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         setShowDiscardDialog(false);
         setPendingNavigation(null);
     };
+
+    useTabAndInactivityRedirect({
+        inactivityTimeoutMs: 2 * 60 * 1000,
+        redirectTo: '/',
+        enabled: true,
+        disabled: false,//form.formState.isDirty || formTasksChanged,  // ← pause when unsaved changes
+        onBeforeRedirect: async () => {
+            // Only save if there are actually changes
+            if (form.formState.isDirty || formTasksChanged) {
+                toast.loading("Auto-saving before leaving...", { id: "auto-save" });
+
+                try {
+                    await form.handleSubmit(async (values) => {
+                        await saveTasksOfCurrentDate(date, values.tasks);
+                        form.reset(values);  // Clear dirty state after save
+                        toast.success("Auto-saved successfully", { id: "auto-save" });
+                    })();
+                } catch (err) {
+                    toast.error("Auto-save failed — changes may be lost", { id: "auto-save" });
+                    console.log(err)
+                    // Optional: prevent redirect if save fails?
+                    // throw err; // ← if you want to stop redirect on save failure
+                }
+            }
+        },
+    });
 
     const doneTasks = `${stateEmoji["done"]}${tasksState.filter(c => c.state === "done").length}`
     const noDoneTasks = `${stateEmoji["no done"]}${tasksState.filter(c => c.state === "no done").length}`

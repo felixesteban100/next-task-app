@@ -1,100 +1,69 @@
 // hooks/useTabAndInactivityRedirect.ts
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface Options {
-    inactivityTimeoutMs?: number;   // e.g. 120_000 = 2 minutes
-    redirectTo?: string;            // default '/'
+interface InactivityOptions {
+    inactivityTimeoutMs?: number;
+    redirectTo?: string;
     enabled?: boolean;
-    showCountdown?: boolean;        // optional UI countdown
+    disabled?: boolean;
+    onBeforeRedirect?: () => Promise<void> | void;  // ← NEW: runs before redirect
 }
 
 export function useTabAndInactivityRedirect({
-    inactivityTimeoutMs = 120_000,   // 2 minutes
+    inactivityTimeoutMs = 120_000,
     redirectTo = '/',
     enabled = true,
-    showCountdown = false,
-}: Options = {}) {
+    disabled = false,
+    onBeforeRedirect,
+}: InactivityOptions = {}) {
     const router = useRouter();
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const lastActivityRef = useRef(Date.now());
-    const countdownIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-    // Reset inactivity timer
-    const resetInactivityTimer = () => {
-        if (!enabled) return;
-
-        lastActivityRef.current = Date.now();
-
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
-        }
-
-        timeoutRef.current = setTimeout(() => {
-            router.replace(redirectTo);
-        }, inactivityTimeoutMs);
-    };
-
-    // Handle tab visibility change
-    const handleVisibilityChange = () => {
-        if (!enabled) return;
-
-        if (document.visibilityState === 'hidden') {
-            // Tab hidden → redirect immediately
-            router.replace(redirectTo);
-        } else {
-            // Tab visible again → reset inactivity timer
-            resetInactivityTimer();
-        }
-    };
-
-    // Update countdown display (optional)
-    const updateCountdown = () => {
-        if (!showCountdown) return;
-
-        const timeLeft = Math.max(
-            0,
-            Math.round((inactivityTimeoutMs - (Date.now() - lastActivityRef.current)) / 1000)
-        );
-
-        const el = document.getElementById('inactivity-countdown');
-        if (el) {
-            el.textContent = `Redirect in ${timeLeft}s (stay active)`;
-        }
-    };
 
     useEffect(() => {
-        if (!enabled) return;
+        if (!enabled || disabled) return;
 
-        // Reset on mount
-        resetInactivityTimer();
+        let inactivityTimer: NodeJS.Timeout | null = null;
 
-        // Activity listeners (mouse, keyboard, touch, scroll)
+        const redirect = async () => {
+            if (onBeforeRedirect) {
+                try {
+                    await onBeforeRedirect();  // Wait for save to complete
+                } catch (err) {
+                    console.error("Auto-save failed before redirect:", err);
+                    // Optional: show toast error here
+                }
+            }
+            router.replace(redirectTo);
+        };
+
+        const resetTimer = () => {
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(redirect, inactivityTimeoutMs);
+        };
+
+        const onActivity = () => resetTimer();
+
         const events = ['mousemove', 'keydown', 'mousedown', 'touchstart', 'scroll', 'click'];
-        const onActivity = () => resetInactivityTimer();
+        events.forEach(evt => window.addEventListener(evt, onActivity, { passive: true }));
 
-        events.forEach(evt => {
-            window.addEventListener(evt, onActivity, { passive: true });
-        });
+        const handleVisibility = () => {
+            if (document.visibilityState === 'hidden') {
+                redirect();  // Immediate redirect on tab leave
+            } else {
+                resetTimer();
+            }
+        };
 
-        // Tab visibility listener
-        document.addEventListener('visibilitychange', handleVisibilityChange);
+        document.addEventListener('visibilitychange', handleVisibility);
 
-        // Optional countdown
-        if (showCountdown) {
-            countdownIntervalRef.current = setInterval(updateCountdown, 1000);
-            updateCountdown();
-        }
+        resetTimer();
 
-        // Cleanup
         return () => {
             events.forEach(evt => window.removeEventListener(evt, onActivity));
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-            if (countdownIntervalRef.current) clearInterval(countdownIntervalRef.current);
+            document.removeEventListener('visibilitychange', handleVisibility);
+            if (inactivityTimer) clearTimeout(inactivityTimer);
         };
-    }, [enabled, inactivityTimeoutMs, redirectTo]);
+    }, [enabled, disabled, inactivityTimeoutMs, redirectTo, router, onBeforeRedirect]);
 }
