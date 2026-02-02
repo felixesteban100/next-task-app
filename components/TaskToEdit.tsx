@@ -257,6 +257,27 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         }, durationLoader * loadingStates.length);
     }
 
+    // function updateTask(
+    //     inputValue: string,
+    //     task: Task,
+    //     index: number,
+    //     property: 'time' | 'state',
+    //     fieldOnChange: (value: Task[]) => void
+    // ) {
+    //     if (!inputValue) return;
+
+    //     const [taskToEditName, newValue] = inputValue.split("->");
+
+    //     if (taskToEditName !== `${task.name}_${task.time}_${index}`) return;
+
+    //     const updatedTasks = tasksState.map((item, indexItem) =>
+    //         `${item.name}_${item.time}_${indexItem}` === taskToEditName
+    //             ? { ...item, [property]: newValue, }
+    //             : item
+    //     );
+    //     fieldOnChange(sortByProperty(updatedTasks, "id"));
+    // }
+
     function updateTask(
         inputValue: string,
         task: Task,
@@ -267,14 +288,26 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         if (!inputValue) return;
 
         const [taskToEditName, newValue] = inputValue.split("->");
-
         if (taskToEditName !== `${task.name}_${task.time}_${index}`) return;
 
-        const updatedTasks = tasksState.map((item, indexItem) =>
-            `${item.name}_${item.time}_${indexItem}` === taskToEditName
-                ? { ...item, [property]: newValue, }
-                : item
-        );
+        const getMinutes = (timeStr: string) => {
+            const [time, period] = timeStr.split(' ');
+            const [h, m] = time.split(':').map(Number);
+            const h24 = period === 'pm' && h !== 12 ? h + 12 : period === 'am' && h === 12 ? 0 : h;
+            return h24 * 60 + m;
+        };
+
+        const updatedTasks = tasksState.map((item, indexItem) => {
+            if (`${item.name}_${item.time}_${indexItem}` !== taskToEditName) return item;
+
+            if (property === 'state' && newValue === 'done') {
+                const now = getMinutes(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }));
+                const closestTime = TIMES.reduce((a, b) => Math.abs(now - getMinutes(b)) < Math.abs(now - getMinutes(a)) ? b : a);
+                return { ...item, state: newValue as "done" | "no done" | "occupied", time: closestTime };
+            }
+            return { ...item, [property]: newValue };
+        });
+
         fieldOnChange(sortByProperty(updatedTasks, "id"));
     }
 
