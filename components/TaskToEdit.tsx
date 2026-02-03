@@ -301,9 +301,10 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
             if (`${item.name}_${item.time}_${indexItem}` !== taskToEditName) return item;
 
             if (property === 'state' && newValue === 'done') {
-                const now = getMinutes(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }));
-                const closestTime = TIMES.reduce((a, b) => Math.abs(now - getMinutes(b)) < Math.abs(now - getMinutes(a)) ? b : a);
-                return { ...item, state: newValue as "done" | "no done" | "occupied", time: closestTime };
+                const now = new Date();
+                const currentMinutes = now.getHours() * 60 + now.getMinutes();
+                const closestTime = TIMES.reduce((a, b) => Math.abs(currentMinutes - getMinutes(b)) < Math.abs(currentMinutes - getMinutes(a)) ? b : a);
+                return { ...item, state: newValue, time: closestTime };
             }
             return { ...item, [property]: newValue };
         });
