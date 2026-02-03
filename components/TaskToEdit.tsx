@@ -427,8 +427,8 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                             <select
                                                                 defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
                                                                 onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
-                                                                className={`appearance-none border-none bg-secondary/80 ${GODLY_TASKS.includes(task.name) ? "text-foreground/50 cursor-not-allowed" : "text-foreground"}  rounded-md p-1`}
-                                                                disabled={GODLY_TASKS.includes(task.name)}
+                                                                className={`appearance-none border-none bg-secondary/80 ${/* GODLY_TASKS.includes(task.name) ? "text-foreground/50 cursor-not-allowed" :  */"text-foreground"}  rounded-md p-1`}
+                                                            // disabled={GODLY_TASKS.includes(task.name)}
                                                             >
                                                                 {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
                                                                     <option
