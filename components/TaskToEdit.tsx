@@ -304,7 +304,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                 const now = new Date();
                 const currentMinutes = now.getHours() * 60 + now.getMinutes();
                 const closestTime = TIMES.reduce((a, b) => Math.abs(currentMinutes - getMinutes(b)) < Math.abs(currentMinutes - getMinutes(a)) ? b : a);
-                return { ...item, state: newValue, time: closestTime };
+                return { ...item, state: newValue as "done" | "no done" | "occupied", time: closestTime };
             }
             return { ...item, [property]: newValue };
         });
