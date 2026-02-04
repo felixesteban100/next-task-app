@@ -11,6 +11,7 @@ import {
     PlusIcon,
     Tv,
     ListCheck,
+    LaughIcon,
     // Watch,
 } from "lucide-react"
 import Link from "next/link"
@@ -85,6 +86,11 @@ const links = [
         href: "/todo",
         label: "To Do List",
         icon: < ListCheck />
+    },
+    {
+        href: "/thanksgivings",
+        label: "Thanksgivings List",
+        icon: <LaughIcon />
     },
     // {
     //     href: "/omnitrix",
