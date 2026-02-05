@@ -48,6 +48,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ButtonHideOccupied from './ButtonHideOccupied'
 import ButtonTogglePreviousTasks from './ButtonTogglePreviousTasks'
 import { useTabAndInactivityRedirect } from '@/lib/useTabAndInactivityRedirect'
+import Link from 'next/link'
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -67,7 +68,8 @@ const TaskSchema = z.object({
     type: TaskTypesSchema,
     state: TaskStatesSchema,
     time: z.string(),
-    id: z.number()
+    id: z.number(),
+    link: z.string().optional(),
 })
 
 export type Task = z.infer<typeof TaskSchema>
@@ -397,8 +399,17 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                         <div className="flex gap-2 items-center justify-start group">
                                                             <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start '>
                                                                 {Object.entries(stateEmoji).map(([state, emoji]) => {
-                                                                    if (GODLY_TASKS.includes(task.name) && state === "occupied") return (<Button disabled type="button" size="icon"
-                                                                        variant={"ghost"} key={task.id + state}></Button>)
+                                                                    if (GODLY_TASKS.includes(task.name) && state === "occupied") {
+                                                                        return (
+                                                                            <Button
+                                                                                disabled
+                                                                                type="button"
+                                                                                size="icon"
+                                                                                variant={"ghost"}
+                                                                                key={task.id + state}
+                                                                            />
+                                                                        )
+                                                                    }
                                                                     return (
                                                                         <Button
                                                                             key={task.id + state}
@@ -414,16 +425,33 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                 })}
                                                             </div>
 
-                                                            <p
-                                                                className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
-                                                            >
-                                                                {occupiedAndNotSpiritual && hideOccupied ?
-                                                                    <>
-                                                                        <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
-                                                                        <span className='hidden group-hover:block'>{task.name}</span>
-                                                                    </>
-                                                                    : task.name}
-                                                            </p>
+
+
+                                                            {task.link != undefined && task.state != "occupied" ?
+                                                                (
+                                                                    <Link href={task.link} className='hover:underline'>
+                                                                        <p
+                                                                            className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
+                                                                        >
+                                                                            {occupiedAndNotSpiritual && hideOccupied ?
+                                                                                <>
+                                                                                    <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                                                    <span className='hidden group-hover:block'>{task.name}</span>
+                                                                                </>
+                                                                                : task.name}
+                                                                        </p>
+                                                                    </Link>
+                                                                ) :
+                                                                <p
+                                                                    className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
+                                                                >
+                                                                    {occupiedAndNotSpiritual && hideOccupied ?
+                                                                        <>
+                                                                            <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                                            <span className='hidden group-hover:block'>{task.name}</span>
+                                                                        </>
+                                                                        : task.name}
+                                                                </p>}
 
                                                             <select
                                                                 defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
