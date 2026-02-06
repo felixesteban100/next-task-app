@@ -11,6 +11,7 @@ import { ObjectId } from "mongodb";
 import { RecurrencePicker } from "./RecurrencePicker";
 import { toast } from "sonner";
 import { shouldBeDoneToday } from "@/lib/utils";
+import AnimateWrapper from "./AnimateWrapper";
 
 export type ToDoTask = {
     _id: ObjectId;           // ← now required – MongoDB ObjectId as string
@@ -154,41 +155,45 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
                     const timesCompleted = todo.completionHistory?.length ?? 0;
 
                     return (
-                        <div
+                        <AnimateWrapper
                             key={todo._id.toString()}
-                            className={`${!shouldBeDoneToday(todo) ? "opacity-40" : "opacity-100"} group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""}`}
+                            keyItem={todo._id.toString()}
                         >
-                            <Checkbox
-                                checked={isDoneTodayTodo}
-                                onCheckedChange={() => handleToggle(todo)}
-                                disabled={isPending}
-                            />
-
-                            <div className="flex-1 min-w-0">
-                                <p className={`font-medium ${isDoneTodayTodo ? "line-through text-muted-foreground" : ""}`}>
-                                    {todo.title}
-                                </p>
-                                <div className="mt-1 text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
-                                    <span>updated {formatRelativeTime(todo.updatedAt)}</span>
-                                    <span>•</span>
-                                    <span className="font-medium">{formatRecurrence(todo.recurrence)}</span>
-                                </div>
-                                <div className="text-xs text-muted-foreground">
-                                    Completed {timesCompleted} time{timesCompleted !== 1 ? "s" : ""}
-                                    {timesCompleted > 0 && ` • last ${formatRelativeTime(todo.lastCompletedAt!)}`}
-                                </div>
-                            </div>
-
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive"
-                                onClick={() => handleDelete(todo._id)}
-                                disabled={isPending}
+                            <div
+                                className={`${!shouldBeDoneToday(todo) ? "opacity-40" : "opacity-100"} group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""}`}
                             >
-                                <Trash2 className="h-4 w-4" />
-                            </Button>
-                        </div>
+                                <Checkbox
+                                    checked={isDoneTodayTodo}
+                                    onCheckedChange={() => handleToggle(todo)}
+                                    disabled={isPending}
+                                />
+
+                                <div className="flex-1 min-w-0">
+                                    <p className={`font-medium ${isDoneTodayTodo ? "line-through text-muted-foreground" : ""}`}>
+                                        {todo.title}
+                                    </p>
+                                    <div className="mt-1 text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
+                                        <span>updated {formatRelativeTime(todo.updatedAt)}</span>
+                                        <span>•</span>
+                                        <span className="font-medium">{formatRecurrence(todo.recurrence)}</span>
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                        Completed {timesCompleted} time{timesCompleted !== 1 ? "s" : ""}
+                                        {timesCompleted > 0 && ` • last ${formatRelativeTime(todo.lastCompletedAt!)}`}
+                                    </div>
+                                </div>
+
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive"
+                                    onClick={() => handleDelete(todo._id)}
+                                    disabled={isPending}
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                </Button>
+                            </div>
+                        </AnimateWrapper>
                     );
                 })}
             </div>

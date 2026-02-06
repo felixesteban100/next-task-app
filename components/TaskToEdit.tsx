@@ -44,11 +44,12 @@ import { useState, useEffect } from "react"
 
 import ButtonOrganizeByTime from './ButtonOrganizeByTime'
 
-import { AnimatePresence, motion } from "framer-motion";
+
 import ButtonHideOccupied from './ButtonHideOccupied'
 import ButtonTogglePreviousTasks from './ButtonTogglePreviousTasks'
 import { useTabAndInactivityRedirect } from '@/lib/useTabAndInactivityRedirect'
 import Link from 'next/link'
+import AnimateWrapper from './AnimateWrapper'
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -385,93 +386,83 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                             const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
 
                                             return (
-                                                <AnimatePresence key={task.name + task.time + task.id}>
-                                                    <motion.div
-                                                        transition={{
-                                                            type: "spring",
-                                                            damping: 20,
-                                                            stiffness: 300
-                                                        }}
-                                                        layout
-                                                        key={task.name + task.time + task.id}
-                                                    >
-                                                        {task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.name !== TASKS_THAT_DONT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null}
-                                                        <div className="flex gap-2 items-center justify-start group">
-                                                            <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start '>
-                                                                {Object.entries(stateEmoji).map(([state, emoji]) => {
-                                                                    if (GODLY_TASKS.includes(task.name) && state === "occupied") {
-                                                                        return (
-                                                                            <Button
-                                                                                disabled
-                                                                                type="button"
-                                                                                size="icon"
-                                                                                variant={"ghost"}
-                                                                                key={task.id + state}
-                                                                            />
-                                                                        )
-                                                                    }
+                                                <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
+                                                    {task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.name !== TASKS_THAT_DONT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null}
+                                                    <div className="flex gap-2 items-center justify-start group">
+                                                        <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start '>
+                                                            {Object.entries(stateEmoji).map(([state, emoji]) => {
+                                                                if (GODLY_TASKS.includes(task.name) && state === "occupied") {
                                                                     return (
                                                                         <Button
-                                                                            key={task.id + state}
+                                                                            disabled
                                                                             type="button"
                                                                             size="icon"
                                                                             variant={"ghost"}
-                                                                            className={`${task.state !== state ? "grayscale-100" : ""}`}
-                                                                            onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
-                                                                        >
-                                                                            {emoji}
-                                                                        </Button>
+                                                                            key={task.id + state}
+                                                                        />
                                                                     )
-                                                                })}
-                                                            </div>
-
-
-
-                                                            {task.link != undefined && task.state != "occupied" ?
-                                                                (
-                                                                    <Link href={task.link} className='hover:underline'>
-                                                                        <p
-                                                                            className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
-                                                                        >
-                                                                            {occupiedAndNotSpiritual && hideOccupied ?
-                                                                                <>
-                                                                                    <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
-                                                                                    <span className='hidden group-hover:block'>{task.name}</span>
-                                                                                </>
-                                                                                : task.name}
-                                                                        </p>
-                                                                    </Link>
-                                                                ) :
-                                                                <p
-                                                                    className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
-                                                                >
-                                                                    {occupiedAndNotSpiritual && hideOccupied ?
-                                                                        <>
-                                                                            <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
-                                                                            <span className='hidden group-hover:block'>{task.name}</span>
-                                                                        </>
-                                                                        : task.name}
-                                                                </p>}
-
-                                                            <select
-                                                                defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
-                                                                onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
-                                                                className={`appearance-none border-none bg-secondary/80 ${/* GODLY_TASKS.includes(task.name) ? "text-foreground/50 cursor-not-allowed" :  */"text-foreground"}  rounded-md p-1`}
-                                                            // disabled={GODLY_TASKS.includes(task.name)}
-                                                            >
-                                                                {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
-                                                                    <option
-                                                                        key={task.name + time.name}
-                                                                        value={time.value}
-                                                                        className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-red-300 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                                }
+                                                                return (
+                                                                    <Button
+                                                                        key={task.id + state}
+                                                                        type="button"
+                                                                        size="icon"
+                                                                        variant={"ghost"}
+                                                                        className={`${task.state !== state ? "grayscale-100" : ""}`}
+                                                                        onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
                                                                     >
-                                                                        {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
-                                                                    </option>
-                                                                ))}
-                                                            </select>
+                                                                        {emoji}
+                                                                    </Button>
+                                                                )
+                                                            })}
                                                         </div>
-                                                    </motion.div>
-                                                </AnimatePresence>
+
+
+
+                                                        {task.link != undefined && task.state != "occupied" ?
+                                                            (
+                                                                <Link href={task.link} className='hover:underline'>
+                                                                    <p
+                                                                        className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
+                                                                    >
+                                                                        {occupiedAndNotSpiritual && hideOccupied ?
+                                                                            <>
+                                                                                <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                                                <span className='hidden group-hover:block'>{task.name}</span>
+                                                                            </>
+                                                                            : task.name}
+                                                                    </p>
+                                                                </Link>
+                                                            ) :
+                                                            <p
+                                                                className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
+                                                            >
+                                                                {occupiedAndNotSpiritual && hideOccupied ?
+                                                                    <>
+                                                                        <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                                        <span className='hidden group-hover:block'>{task.name}</span>
+                                                                    </>
+                                                                    : task.name}
+                                                            </p>}
+
+                                                        <select
+                                                            defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
+                                                            onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
+                                                            className={`appearance-none border-none bg-secondary/80 ${/* GODLY_TASKS.includes(task.name) ? "text-foreground/50 cursor-not-allowed" :  */"text-foreground"}  rounded-md p-1`}
+                                                        // disabled={GODLY_TASKS.includes(task.name)}
+                                                        >
+                                                            {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
+                                                                <option
+                                                                    key={task.name + time.name}
+                                                                    value={time.value}
+                                                                    className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-red-300 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                                >
+                                                                    {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                </AnimateWrapper>
                                             )
                                         })}
                                     </div>
