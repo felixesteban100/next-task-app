@@ -1,6 +1,9 @@
 import { CardThanksgiving } from '@/components/CardThanksgiving';
 import { collectionThanksgivings } from '@/db/mongodb/mongodb';
-import React from 'react'
+import { connection } from 'next/server';
+
+export const dynamic = 'force-dynamic';
+
 
 export type Thanksgivings = {
     thanksgivings: Thanksgiving[];
@@ -14,6 +17,7 @@ export type Thanksgiving = {
 }
 
 export default async function page() {
+    connection()
     const personalThanksgivings = await collectionThanksgivings.findOne()
 
     return (
