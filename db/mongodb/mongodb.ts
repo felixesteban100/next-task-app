@@ -73,5 +73,5 @@ export const collectionDefaultTasks = db.collection<{ tasks: Task[] }>('DEFAULT_
 export const collectionReflectionQuestions = db.collection<ReflectionQuestions>('Reflection Questions');
 export const collectionToWatch = db.collection<ToWatch>('List to watch');
 export const collectionThingsToWatchAtNight = db.collection<{ resources: { name: string, url: string }[] }>('ThingsToWatchAtNight');
-export const collectionToDoList = db.collection<ToDoTask>('To do list');
+export const collectionToDoList = db.collection<Omit<ToDoTask, "_id">>('To do list');
 export const collectionThanksgivings = db.collection<Thanksgivings>('Personal Thanksgivings');

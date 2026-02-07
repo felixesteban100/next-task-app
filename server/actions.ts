@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache"
 import { connection } from 'next/server'
 import { ToDoTask } from "@/components/TodoList";
 import { ObjectId } from "mongodb";
-import { shouldBeDoneToday } from "@/lib/utils";
+import { isAllowedToday } from "@/lib/utils";
 
 export async function addDefaultTasksWithTodaysDate() {
     connection()
@@ -124,13 +124,11 @@ export async function updateToWatchMedia(name: string, info: ToWatch) {
 export async function createTodo(formData: FormData) {
     const createTodoSchema = z.object({
         title: z.string().min(1, "Title is required"),
-        type: z.enum(["once", "daily", "weekly", "monthly", "yearly"]),
         recurrence: z.any().optional(), // or better typed recurrence schema
     });
 
     const raw = {
         title: formData.get("title")?.toString()?.trim() ?? "",
-        type: formData.get("type")?.toString() ?? "once",
         recurrence: formData.get("recurrence")?.toString(),
     };
 
@@ -140,7 +138,6 @@ export async function createTodo(formData: FormData) {
 
     await collectionToDoList.insertOne({
         title: validated.title,
-        type: validated.type,
         done: false,
         createdAt: now,
         updatedAt: now,
@@ -160,23 +157,24 @@ export async function toggleTodo(
     actionTime: Date = new Date()
 ) {
     const objectId = new ObjectId(id);
+    console.log(objectId)
 
     const dayStart = new Date(actionTime);
     dayStart.setHours(0, 0, 0, 0);
 
     const task = await collectionToDoList.findOne({ _id: objectId });
     if (!task) {
-        return { success: false, reason: "not_found" };
+        return { success: false, reason: "not_found", message: "Task not found" };
     }
 
-    const currentlyAllowed = shouldBeDoneToday(task, actionTime);
+    const isAllowed = isAllowedToday(task, actionTime);
 
     // Only allow any change (check or uncheck) if today is a recurrence-allowed day
-    if (currentlyAllowed === false) {
+    if (isAllowed === false) {
         return {
             success: false,
             reason: "recurrence_not_allowed_today",
-            message: "This task is not scheduled for today"
+            message: "This task is not scheduled for today, backend prevented the update."
         };
     }
 

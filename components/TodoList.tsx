@@ -10,13 +10,12 @@ import { createTodo, deleteTodo, toggleTodo } from "@/server/actions";
 import { ObjectId } from "mongodb";
 import { RecurrencePicker } from "./RecurrencePicker";
 import { toast } from "sonner";
-import { shouldBeDoneToday } from "@/lib/utils";
+import { isAllowedToday, shouldBeDoneToday } from "@/lib/utils";
 import AnimateWrapper from "./AnimateWrapper";
 
 export type ToDoTask = {
     _id: ObjectId;           // ← now required – MongoDB ObjectId as string
     title: string;
-    type: "once" | "daily" | "weekly" | "monthly" | "yearly";
     done: boolean;
     lastCompletedAt?: Date;       // ← key field: when was it last marked done
     createdAt: Date;
@@ -73,7 +72,7 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
                 );
             } else {
                 toast.error(
-                    response.message || `"${todo.title}" could not be updated (recurrence rules)`,
+                    response.message || `"${todo.title}" could not be updated (recurrence rules) frontend prevented`,
                     { id: todoId, duration: 6000 }
                 );
             }
@@ -160,12 +159,12 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
                             keyItem={todo._id.toString()}
                         >
                             <div
-                                className={`${!shouldBeDoneToday(todo) ? "opacity-40" : "opacity-100"} group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""}`}
+                                className={`${(/* shouldBeDoneToday(todo) &&  */isAllowedToday(todo) === false) ? "opacity-40" : "opacity-100"} group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""}`}
                             >
                                 <Checkbox
                                     checked={isDoneTodayTodo}
                                     onCheckedChange={() => handleToggle(todo)}
-                                    disabled={isPending}
+                                    disabled={isPending || isAllowedToday(todo) === false}
                                 />
 
                                 <div className="flex-1 min-w-0">

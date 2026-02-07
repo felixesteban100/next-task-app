@@ -140,13 +140,13 @@ export function sortByProperty(array: Task[], property: "time" | "id"): Task[] {
  *   (today for daily, this week for weekly, this month for monthly, this year for yearly)
  */
 export function shouldBeDoneToday(task: ToDoTask, referenceDate = new Date()): boolean {
-  // No completion ever → not done
-  // if (!task.lastCompletedAt) {
-  // console.log(task.title, "no lastCompletedAt");
-  // return false;
-  // }
+  //No completion ever → not done
+  if (!task.lastCompletedAt) {
+    // console.log(task.title, "no lastCompletedAt");
+    return false;
+  }
 
-  const last = new Date(task.lastCompletedAt ?? (new Date(new Date().setHours(0, 0, 0, 0))));  // Fallback to epoch start if missing
+  const last = new Date(task.lastCompletedAt /* ?? (new Date(new Date().setHours(0, 0, 0, 0))) */);  // Fallback to epoch start if missing
   const ref = new Date(referenceDate);
 
   // Normalize both to start of day (00:00:00) for fair period comparison
@@ -169,6 +169,11 @@ export function shouldBeDoneToday(task: ToDoTask, referenceDate = new Date()): b
   // Daily: only done if marked done today
   // ────────────────────────────────────────────────────────────────
   if (freq === "daily") {
+    if (task.title === "ok") {
+      console.log(task.title, task.lastCompletedAt)
+      console.log("last", lastDay.getTime(), new Date(last));
+      console.log("refDay", refDay.getTime(), new Date(ref));
+    }
     return lastDay.getTime() === refDay.getTime();
   }
 
@@ -224,5 +229,38 @@ export function shouldBeDoneToday(task: ToDoTask, referenceDate = new Date()): b
   }
 
   // Fallback for unknown frequency
+  console.log("unknown frequency", freq);
+  return false;
+}
+
+export function isAllowedToday(task: ToDoTask, referenceDate = new Date()): boolean {
+  const freq = task.recurrence?.frequency ?? "once";
+  const ref = new Date(referenceDate);
+  ref.setHours(0, 0, 0, 0); // normalize to day start
+
+  if (freq === "once") {
+    return true; // always allowed
+  }
+
+  if (freq === "daily") {
+    return true; // always allowed
+  }
+
+  if (freq === "weekly") {
+    const allowedDays = task.recurrence?.daysOfWeek ?? [];
+    return allowedDays.includes(ref.getDay());
+  }
+
+  if (freq === "monthly") {
+    const targetDay = task.recurrence?.dayOfMonth ?? 1;
+    return ref.getDate() === targetDay;
+  }
+
+  if (freq === "yearly") {
+    const targetMonth = task.recurrence?.month ?? 0;
+    const targetDay = task.recurrence?.dayOfMonth ?? 1;
+    return ref.getMonth() === targetMonth && ref.getDate() === targetDay;
+  }
+
   return false;
 }
