@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import {
     Card,
     CardAction,
+    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
@@ -18,7 +19,7 @@ export function CardThanksgiving({ thanksgiving }: { thanksgiving: Thanksgiving 
     const { date, description, img, name } = thanksgiving
 
     return (
-        <Card className="relative w-full py-6 gap-6 pt-0">
+        <Card className="relative w-full py-6 gap-6 pt-0 flex flex-col justify-between items-center">
             <div className="relative w-full aspect-video">
                 <Image
                     src={img}
@@ -27,16 +28,20 @@ export function CardThanksgiving({ thanksgiving }: { thanksgiving: Thanksgiving 
                     className="object-cover"
                 />
             </div>
-            <CardHeader>
+            <CardHeader className="w-full">
                 <CardAction>
                     <Badge variant="secondary">{typeof date === "string" ? date : DateString(date)}</Badge>
                 </CardAction>
                 <CardTitle>{name}</CardTitle>
+            </CardHeader>
+            <CardContent>
                 <CardDescription>
                     {description}
                 </CardDescription>
-            </CardHeader>
+            </CardContent>
+
             <CardFooter>
+                {/* make this button do something: can be a  */}
                 <Button className="w-full">PRAISE THE LORD!!! 🙌🙏</Button>
             </CardFooter>
         </Card>
