@@ -19,7 +19,7 @@ import {
 import { saveTasksOfCurrentDate } from "@/server/actions"
 import { classNamesState, classNamesType, stateEmoji } from "@/constants"
 import { Separator } from "./ui/separator"
-import { Loader2, SaveAll } from "lucide-react"
+import { CopyIcon, Loader2, SaveAll } from "lucide-react"
 
 import {
     Tooltip,
@@ -48,7 +48,6 @@ import ButtonOrganizeByTime from './ButtonOrganizeByTime'
 import ButtonHideOccupied from './ButtonHideOccupied'
 import ButtonTogglePreviousTasks from './ButtonTogglePreviousTasks'
 import { useTabAndInactivityRedirect } from '@/lib/useTabAndInactivityRedirect'
-import Link from 'next/link'
 import AnimateWrapper from './AnimateWrapper'
 
 const loadingStates = [
@@ -418,32 +417,26 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                         </div>
 
 
-
+                                                        <p
+                                                            className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
+                                                        >
+                                                            {occupiedAndNotSpiritual && hideOccupied ?
+                                                                <>
+                                                                    <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
+                                                                    <span className='hidden group-hover:block'>{task.name}</span>
+                                                                </>
+                                                                : task.name}
+                                                        </p>
                                                         {task.link != undefined && task.state != "occupied" ?
                                                             (
-                                                                <Link href={task.link} className='hover:underline'>
-                                                                    <p
-                                                                        className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
-                                                                    >
-                                                                        {occupiedAndNotSpiritual && hideOccupied ?
-                                                                            <>
-                                                                                <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
-                                                                                <span className='hidden group-hover:block'>{task.name}</span>
-                                                                            </>
-                                                                            : task.name}
-                                                                    </p>
-                                                                </Link>
-                                                            ) :
-                                                            <p
-                                                                className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
-                                                            >
-                                                                {occupiedAndNotSpiritual && hideOccupied ?
-                                                                    <>
-                                                                        <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
-                                                                        <span className='hidden group-hover:block'>{task.name}</span>
-                                                                    </>
-                                                                    : task.name}
-                                                            </p>}
+                                                                <Button type="button" size="icon" variant="outline" onClick={() => {
+                                                                    navigator.clipboard.writeText(task.link ?? "")
+                                                                    toast.info("Link copied to clipboard!", {
+                                                                        description: task.link,
+                                                                    })
+                                                                }}><CopyIcon /></Button>
+                                                            ) : null
+                                                        }
 
                                                         <select
                                                             defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}

@@ -1,3 +1,406 @@
+/* {
+  "_id": {
+    "$oid": "6925b2aba834608d552be632"
+  },
+  "tasks": [
+    {
+      "name": "Wake up early",
+      "type": "normal",
+      "state": "no done",
+      "time": "5:10 am"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡(morning kneeling down)",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "5:10 am"
+    },
+    {
+      "name": "Go to the bathroom for grooming and brush teeth",
+      "type": "normal",
+      "state": "no done",
+      "time": "5:20 am"
+    },
+    {
+      "name": "Organize bed",
+      "type": "normal",
+      "state": "no done",
+      "time": "5:20 am"
+    },
+    {
+      "name": "📖✝Read Bible (10+ chapters or an entire book)",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "5:30 am"
+    },
+    {
+      "name": "Share a Christian quote or a verse to social networks",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:00 am"
+    },
+    {
+      "name": "💊Take vitamins and supplements",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:10 am"
+    },
+    {
+      "name": "📃🙏Todays points to overcome and self-directed behavioral change",
+      "type": "important",
+      "state": "no done",
+      "time": "6:20 am"
+    },
+    {
+      "name": "Read Bible App plan (YouVersion)",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Practice GED App (Math, Science, Social Studies, and English Literacy)",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Practice Mimo Programming",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Practice with Brilliant App",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Read from the Deepstash app",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Check in The Freedom Fight App",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Solve the daily challenge from freeCodeCamp app",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Rubik's cubes 5x5 / 4x4",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Practice one Music reading exercise",
+      "type": "normal",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Gym or Exercises for the knee 🦵🏋️‍♂️🏋️‍♀️",
+      "type": "important",
+      "state": "no done",
+      "time": "7:00 am"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "9:00 am"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "9:00 am"
+    },
+    {
+      "name": "5 dips | 5 abs wheel | 3 pullups | 30 secs deadhang",
+      "type": "normal",
+      "state": "no done",
+      "time": "9:00 am"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "no done",
+      "time": "9:00 am"
+    },
+    {
+      "name": "Study for GED tests (Math, Science, Social Studies, and English Literacy)",
+      "type": "important",
+      "state": "no done",
+      "time": "9:20 am"
+    },
+    {
+      "name": "🏀Spin basketball / Practice dribble and passes",
+      "type": "normal",
+      "state": "no done",
+      "time": "10:20 am"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "10:50 am"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "10:50 am"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "occupied",
+      "time": "10:50 am"
+    },
+    {
+      "name": "Software development / code projects",
+      "type": "important",
+      "state": "occupied",
+      "time": "11:20 am"
+    },
+    {
+      "name": "Upload youtube short/ instagram reel to Palabra Abierta",
+      "type": "normal",
+      "state": "occupied",
+      "time": "11:50 am"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "12:00 pm"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "12:00 pm"
+    },
+    {
+      "name": "5 dips | 5 abs wheel | 3 pullups | 30 secs deadhang",
+      "type": "normal",
+      "state": "occupied",
+      "time": "12:00 pm"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "occupied",
+      "time": "12:00 pm"
+    },
+    {
+      "name": "Record yourself imitating a manly voice",
+      "type": "normal",
+      "state": "occupied",
+      "time": "12:10 pm"
+    },
+    {
+      "name": "Study for GED tests (Math, Science, Social Studies, and English Literacy)",
+      "type": "important",
+      "state": "occupied",
+      "time": "12:30 pm"
+    },
+    {
+      "name": "Practice Hard riddle TedEd/MindYourDecisions",
+      "type": "normal",
+      "state": "occupied",
+      "time": "1:00 pm"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "1:10 pm"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "1:10 pm"
+    },
+    {
+      "name": "5 dips | 5 abs wheel | 3 pullups | 30 secs deadhang",
+      "type": "normal",
+      "state": "occupied",
+      "time": "1:10 pm"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "occupied",
+      "time": "1:10 pm"
+    },
+    {
+      "name": "Software development / code projects (long session)",
+      "type": "important",
+      "state": "occupied",
+      "time": "1:50 pm"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "3:00 pm"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "3:00 pm"
+    },
+    {
+      "name": "5 dips | 5 abs wheel | 3 pullups | 30 secs deadhang",
+      "type": "normal",
+      "state": "occupied",
+      "time": "3:00 pm"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "occupied",
+      "time": "3:00 pm"
+    },
+    {
+      "name": "Learn and study Data structures▶💻⚙📊💡💾",
+      "type": "important",
+      "state": "occupied",
+      "time": "3:50 pm"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "4:10 pm"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "4:10 pm"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "occupied",
+      "time": "4:10 pm"
+    },
+    {
+      "name": "Read from be a man (demark last and mark current)",
+      "type": "normal",
+      "state": "occupied",
+      "time": "4:20 pm",
+      "link": "https://docs.google.com/document/d/1lGcAYqY4m_m2ANHv90BdXyaHpWyQjRVa/edit"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "4:50 pm"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "occupied",
+      "time": "4:50 pm"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "occupied",
+      "time": "4:50 pm"
+    },
+    {
+      "name": "Upperbody workout / Accessory workout",
+      "type": "important",
+      "state": "no done",
+      "time": "5:00 pm"
+    },
+    {
+      "name": "Study for GED tests (Math, Science, Social Studies, and English Literacy)",
+      "type": "important",
+      "state": "no done",
+      "time": "5:00 pm"
+    },
+    {
+      "name": "Leave cellphone in table facing down",
+      "type": "important",
+      "state": "no done",
+      "time": "6:50 pm"
+    },
+    {
+      "name": "📖✝Bookmark or review the key verses from the bible chapters I read (NKJV)",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "6:50 am"
+    },
+    {
+      "name": "Card tricks",
+      "type": "normal",
+      "state": "no done",
+      "time": "7:00 pm"
+    },
+    {
+      "name": "Thanksgiving 🙏 and Battle Prayer ⚔🛡",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "7:30 pm"
+    },
+    {
+      "name": "Bible verse📖✝: read, memorize and record audio",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "7:30 pm"
+    },
+    {
+      "name": "🦵 Knee improvement Routine",
+      "type": "important",
+      "state": "no done",
+      "time": "7:30 pm"
+    },
+    {
+      "name": "Consume good quality entertaiment 💻🙏📖✝✨",
+      "type": "normal",
+      "state": "no done",
+      "time": "7:30 pm"
+    },
+    {
+      "name": "Prayer time with family 🙏👪",
+      "type": "spiritual",
+      "state": "no done",
+      "time": "8:00 pm",
+      "link": "https://docs.google.com/document/d/10ixPbByGoYxnqslqjyf5HiK4Kwz8Tl9_UdhQcCKEaZE/edit?tab=t.0"
+    },
+    {
+      "name": "GODLY NIGHT ROUTINE!",
+      "type": "spiritual",
+      "state": "done",
+      "time": "8:30 pm"
+    }
+  ]
+} */
+
+
+
+
+
+
+
+
+
+
 /* [
     {
         "name": "Wake up early",
