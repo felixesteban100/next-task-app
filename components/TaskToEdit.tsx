@@ -387,7 +387,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                             return (
                                                 <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
                                                     {task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.name !== TASKS_THAT_DONT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null}
-                                                    <div className="flex gap-2 items-center justify-start group">
+                                                    <div className="flex gap-2 items-center justify-start group max-w-2xl">
                                                         <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start '>
                                                             {Object.entries(stateEmoji).map(([state, emoji]) => {
                                                                 if (GODLY_TASKS.includes(task.name) && state === "occupied") {

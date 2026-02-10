@@ -159,7 +159,7 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
                             keyItem={todo._id.toString()}
                         >
                             <div
-                                className={`${(/* shouldBeDoneToday(todo) &&  */isAllowedToday(todo) === false) ? "opacity-40" : "opacity-100"} group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""}`}
+                                className={`${(/* shouldBeDoneToday(todo) &&  */isAllowedToday(todo) === false) ? "opacity-40" : "opacity-100"} group flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border px-5 py-4 transition-colors ${isPending ? "opacity-70" : ""} max-w-2xl`}
                             >
                                 <Checkbox
                                     checked={isDoneTodayTodo}
