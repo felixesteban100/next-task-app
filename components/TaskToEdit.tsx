@@ -19,7 +19,7 @@ import {
 import { saveTasksOfCurrentDate } from "@/server/actions"
 import { classNamesState, classNamesType, stateEmoji } from "@/constants"
 import { Separator } from "./ui/separator"
-import { CopyIcon, Loader2, SaveAll } from "lucide-react"
+import { CopyIcon, Loader2, SaveAll, TimerIcon } from "lucide-react"
 
 import {
     Tooltip,
@@ -98,13 +98,11 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         },
     })
 
-
-
     const { tasks: tasksState } = form.watch();
 
     const formTasksChanged = form.formState.isDirty && (JSON.stringify(tasks.sort((a, b) => a.id - b.id)) !== JSON.stringify(tasksState.sort((a, b) => a.id - b.id)))
 
-    // Prevent browser tab close/refresh when there are unsaved changes
+    // // Prevent browser tab close/refresh when there are unsaved changes
     useEffect(() => {
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
             if (formTasksChanged) {
@@ -259,27 +257,6 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         }, durationLoader * loadingStates.length);
     }
 
-    // function updateTask(
-    //     inputValue: string,
-    //     task: Task,
-    //     index: number,
-    //     property: 'time' | 'state',
-    //     fieldOnChange: (value: Task[]) => void
-    // ) {
-    //     if (!inputValue) return;
-
-    //     const [taskToEditName, newValue] = inputValue.split("->");
-
-    //     if (taskToEditName !== `${task.name}_${task.time}_${index}`) return;
-
-    //     const updatedTasks = tasksState.map((item, indexItem) =>
-    //         `${item.name}_${item.time}_${indexItem}` === taskToEditName
-    //             ? { ...item, [property]: newValue, }
-    //             : item
-    //     );
-    //     fieldOnChange(sortByProperty(updatedTasks, "id"));
-    // }
-
     function updateTask(
         inputValue: string,
         task: Task,
@@ -290,8 +267,21 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         if (!inputValue) return;
 
         const [taskToEditName, newValue] = inputValue.split("->");
+
         if (taskToEditName !== `${task.name}_${task.time}_${index}`) return;
 
+        const updatedTasks = tasksState.map((item, indexItem) =>
+            `${item.name}_${item.time}_${indexItem}` === taskToEditName
+                ? { ...item, [property]: newValue, }
+                : item
+        );
+        fieldOnChange(sortByProperty(updatedTasks, "id"));
+    }
+
+    function updateTaskTimeToNow(
+        task: Task,
+        fieldOnChange: (value: Task[]) => void
+    ) {
         const getMinutes = (timeStr: string) => {
             const [time, period] = timeStr.split(' ');
             const [h, m] = time.split(':').map(Number);
@@ -299,20 +289,52 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
             return h24 * 60 + m;
         };
 
-        const updatedTasks = tasksState.map((item, indexItem) => {
-            if (`${item.name}_${item.time}_${indexItem}` !== taskToEditName) return item;
+        const updatedTasks = tasksState.map((item) => {
+            if (`${item.name}_${item.time}_${item.id}` !== `${task.name}_${task.time}_${task.id}`) return item;
 
-            if (property === 'state' && newValue === 'done') {
-                const now = new Date();
-                const currentMinutes = now.getHours() * 60 + now.getMinutes();
-                const closestTime = TIMES.reduce((a, b) => Math.abs(currentMinutes - getMinutes(b)) < Math.abs(currentMinutes - getMinutes(a)) ? b : a);
-                return { ...item, state: newValue as "done" | "no done" | "occupied", time: closestTime };
-            }
-            return { ...item, [property]: newValue };
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            const closestTime = TIMES.reduce((a, b) => Math.abs(currentMinutes - getMinutes(b)) < Math.abs(currentMinutes - getMinutes(a)) ? b : a);
+            return { ...item, time: closestTime };
         });
 
         fieldOnChange(sortByProperty(updatedTasks, "id"));
     }
+
+
+    // function updateTaskAndSometimesTimeAutomatically(
+    //     inputValue: string,
+    //     task: Task,
+    //     index: number,
+    //     property: 'time' | 'state',
+    //     fieldOnChange: (value: Task[]) => void
+    // ) {
+    //     if (!inputValue) return;
+
+    //     const [taskToEditName, newValue] = inputValue.split("->");
+    //     if (taskToEditName !== `${task.name}_${task.time}_${index}`) return;
+
+    //     const getMinutes = (timeStr: string) => {
+    //         const [time, period] = timeStr.split(' ');
+    //         const [h, m] = time.split(':').map(Number);
+    //         const h24 = period === 'pm' && h !== 12 ? h + 12 : period === 'am' && h === 12 ? 0 : h;
+    //         return h24 * 60 + m;
+    //     };
+
+    //     const updatedTasks = tasksState.map((item, indexItem) => {
+    //         if (`${item.name}_${item.time}_${indexItem}` !== taskToEditName) return item;
+
+    //         if (property === 'state' && newValue === 'done') {
+    //             const now = new Date();
+    //             const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    //             const closestTime = TIMES.reduce((a, b) => Math.abs(currentMinutes - getMinutes(b)) < Math.abs(currentMinutes - getMinutes(a)) ? b : a);
+    //             return { ...item, state: newValue as "done" | "no done" | "occupied", time: closestTime };
+    //         }
+    //         return { ...item, [property]: newValue };
+    //     });
+
+    //     fieldOnChange(sortByProperty(updatedTasks, "id"));
+    // }
 
     return (
         <div className={`flex flex-col gap-7 items-center mb-2 w-full `}>
@@ -387,7 +409,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                             return (
                                                 <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
                                                     {task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.name !== TASKS_THAT_DONT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null}
-                                                    <div className="flex gap-2 items-center justify-start group max-w-2xl">
+                                                    <div className="group/task flex gap-2 items-center justify-start max-w-2xl">
                                                         <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start '>
                                                             {Object.entries(stateEmoji).map(([state, emoji]) => {
                                                                 if (GODLY_TASKS.includes(task.name) && state === "occupied") {
@@ -416,14 +438,13 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                             })}
                                                         </div>
 
-
                                                         <p
                                                             className={cn(occupiedAndNotSpiritual ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
                                                         >
                                                             {occupiedAndNotSpiritual && hideOccupied ?
                                                                 <>
-                                                                    <span className='group-hover:hidden block'>{"Either Working or occupied..."}</span>
-                                                                    <span className='hidden group-hover:block'>{task.name}</span>
+                                                                    <span className='group-hover/task:hidden block'>{"Either Working or occupied..."}</span>
+                                                                    <span className='hidden group-hover/task:block'>{task.name}</span>
                                                                 </>
                                                                 : task.name}
                                                         </p>
@@ -434,7 +455,9 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                     toast.info("Link copied to clipboard!", {
                                                                         description: task.link,
                                                                     })
-                                                                }}><CopyIcon /></Button>
+                                                                }}>
+                                                                    <CopyIcon />
+                                                                </Button>
                                                             ) : null
                                                         }
 
@@ -454,6 +477,16 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                 </option>
                                                             ))}
                                                         </select>
+
+                                                        <Button
+                                                            size={"icon"}
+                                                            variant={"outline"}
+                                                            className={`hidden group-hover/task:flex `}
+                                                            type='button'
+                                                            onClick={() => updateTaskTimeToNow(task, field.onChange)}
+                                                        >
+                                                            <TimerIcon />
+                                                        </Button>
                                                     </div>
                                                 </AnimateWrapper>
                                             )
@@ -467,10 +500,10 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                         <Button
                             id="saveButton"
                             disabled={form.formState.isSubmitting || !formTasksChanged}
-                            className={`group disabled:grayscale-25 p-7 text-xl`}
+                            className={`group/submit-button disabled:grayscale-25 p-7 text-xl`}
                             type="submit"
                         >
-                            <p className={`group-enabled:animate-bounce flex gap-2 items-center`}>
+                            <p className={`group-enabled/submit-button:animate-bounce flex gap-2 items-center`}>
                                 {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
                             </p>
                         </Button>
