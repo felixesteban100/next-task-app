@@ -21,6 +21,10 @@ import QueryTasks from '@/components/QueryTasks'
 import { DailyTaskAndDetails } from '@/components/TaskToEdit'
 import ButtonToggleQueryBasedStatistics from '@/components/ButtonToggleQueryBasedStatistics'
 import ButtonChangePreviousDayLastTaskState from '@/components/ButtonChangePreviousDayLastTaskState'
+import { Loader2Icon } from 'lucide-react'
+import { Suspense } from 'react'
+
+/* figure out a way to make this load faster... maybe pagination or maybe just load a part of the day info or none and be able to see each day info in another page for each id/date of that specific day */
 
 export default async function page({
     searchParams
@@ -219,10 +223,12 @@ export default async function page({
 
         return {
             streak: maxStreak,
-            beginningDate: formatter.format(bestStart!.getTime() + 5 * 60 * 60 * 1000),
-            endDate: formatter.format(bestEnd!.getTime() + 5 * 60 * 60 * 1000)
+            beginningDate: formatter.format(new Date(bestStart!.getTime() + 5 * 60 * 60 * 1000)),
+            endDate: formatter.format(new Date(bestEnd!.getTime() + 5 * 60 * 60 * 1000))
         };
     }
+
+    const suspenseKey = `${searchValue}-${dayValue}-${fromDate ?? 'all'}`
 
     return (
         <>
@@ -300,84 +306,87 @@ export default async function page({
             </div>
 
             {/* make this load like in a suspense */}
-            <Accordion type="single" collapsible className="w-[80%]">
-                {allDaysInfo.map((day, cIndex) => {
-                    const documentId = new ObjectId(day._id); // Example _id
-                    const timestamp = documentId.getTimestamp(); // Get the creation timestamp
-                    const formattedTime = getFormattedTime(timestamp);
 
-                    return (
-                        <div key={day._id.toString() + day.date} className='flex flex-row justify-center items-start'>
-                            <AccordionItem className='flex flex-col items-center gap-2' value={day.date.toString()}>
-                                <AccordionTrigger className='font-bold text-2xl' >
-                                    {DateString(day.date)} {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <p>Added at: {formattedTime}</p>
-                                    {sortByProperty(day.tasks, "time").map((task, taskIndex) => {
-                                        const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
-                                        return (
-                                            <div key={cIndex + task.name + task.time + taskIndex} className='flex flex-col items-start justify-center group'>
-                                                {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className='my-2' /> : null}
-                                                <p
-                                                    className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state], "my-1 flex gap-1")}
-                                                >
-                                                    {occupiedAndNotSpiritual ?
-                                                        <span>
-                                                            <span className='group-hover:hidden flex'>{"Either Working or occupied... "}</span>
-                                                            <span className='hidden group-hover:flex'>{task.name}</span>
-                                                        </span>
-                                                        : `${task.name} `}
-                                                    <span className='font-semibold'>({task.time})</span>
-                                                </p>
-                                            </div>
-                                        )
-                                    })}
-                                </AccordionContent>
-                            </AccordionItem>
-                            {searchValue != "" ? null : day.date == today ? null : isHolyLastTaskDone(day.tasks) === false ?
-                                <TooltipProvider>
-                                    <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl select-none mt-4'>{failEmojis.join("")}</TooltipTrigger>
-                                        <TooltipContent className='flex flex-col items-center justify-center'>
-                                            <ul>
-                                                <li>{failEmojis[0]} Regret and sorrow for the sin.</li>
-                                                <li>{failEmojis[1]} The struggle and temptation of lust.</li>
-                                                <li>{failEmojis[2]} Turning to Christ for forgiveness, holiness, and righteousness.</li>
-                                            </ul>
-                                            <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
-                                            <ButtonChangePreviousDayLastTaskState
-                                                text={successEmojis.join("") + " Done?"}
-                                                tasks={day.tasks}
-                                                date={day.date}
-                                            />
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                                :
-                                <TooltipProvider>
-                                    <Tooltip>
-                                        <TooltipTrigger className='font-bold text-2xl select-none mt-4'>{successEmojis.join("")}</TooltipTrigger>
-                                        <TooltipContent className='flex flex-col items-center justify-center'>
-                                            <ul>
-                                                <li>{successEmojis[0]} Joy and peace in victory over sin.</li>
-                                                <li>{successEmojis[1]} Purity and self-control through God&apos;s strength.</li>
-                                                <li>{successEmojis[2]} Walking in faith and righteousness with Christ.</li>
-                                            </ul>
-                                            <p className='font-bold'>Keep fighting the good fight!</p>
-                                            <ButtonChangePreviousDayLastTaskState
-                                                text={failEmojis.join("") + " Not done?"}
-                                                tasks={day.tasks}
-                                                date={day.date}
-                                            />
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                            }
-                        </div>
-                    )
-                })}
-            </Accordion>
+            <Suspense key={suspenseKey} fallback={<Loader2Icon className="animate-spin size-20" />}>
+                <Accordion type="single" collapsible className="w-[80%]">
+                    {allDaysInfo.map((day, cIndex) => {
+                        const documentId = new ObjectId(day._id); // Example _id
+                        const timestamp = documentId.getTimestamp(); // Get the creation timestamp
+                        const formattedTime = getFormattedTime(timestamp);
+
+                        return (
+                            <div key={day._id.toString() + day.date} className='flex flex-row justify-center items-start'>
+                                <AccordionItem className='flex flex-col items-center gap-2' value={day.date.toString()}>
+                                    <AccordionTrigger className='font-bold text-2xl' >
+                                        {DateString(day.date)} {day.date == today ? `${stateEmoji[getMostRepeatedState(day.tasks)]} 🙏Fear, ❤love and 🙌glorify God today` : doneInWhichWay[getMostRepeatedState(day.tasks)]}
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                        <p>Added at: {formattedTime}</p>
+                                        {sortByProperty(day.tasks, "time").map((task, taskIndex) => {
+                                            const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
+                                            return (
+                                                <div key={cIndex + task.name + task.time + taskIndex} className='flex flex-col items-start justify-center group'>
+                                                    {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className='my-2' /> : null}
+                                                    <p
+                                                        className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state], "my-1 flex gap-1")}
+                                                    >
+                                                        {occupiedAndNotSpiritual ?
+                                                            <span>
+                                                                <span className='group-hover:hidden flex'>{"Either Working or occupied... "}</span>
+                                                                <span className='hidden group-hover:flex'>{task.name}</span>
+                                                            </span>
+                                                            : `${task.name} `}
+                                                        <span className='font-semibold'>({task.time})</span>
+                                                    </p>
+                                                </div>
+                                            )
+                                        })}
+                                    </AccordionContent>
+                                </AccordionItem>
+                                {searchValue != "" ? null : day.date == today ? null : isHolyLastTaskDone(day.tasks) === false ?
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger className='font-bold text-2xl select-none mt-4'>{failEmojis.join("")}</TooltipTrigger>
+                                            <TooltipContent className='flex flex-col items-center justify-center'>
+                                                <ul>
+                                                    <li>{failEmojis[0]} Regret and sorrow for the sin.</li>
+                                                    <li>{failEmojis[1]} The struggle and temptation of lust.</li>
+                                                    <li>{failEmojis[2]} Turning to Christ for forgiveness, holiness, and righteousness.</li>
+                                                </ul>
+                                                <p className='font-bold'>Stay strong in faith—God’s grace is greater than any failure!</p>
+                                                <ButtonChangePreviousDayLastTaskState
+                                                    text={successEmojis.join("") + " Done?"}
+                                                    tasks={day.tasks}
+                                                    date={day.date}
+                                                />
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                    :
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger className='font-bold text-2xl select-none mt-4'>{successEmojis.join("")}</TooltipTrigger>
+                                            <TooltipContent className='flex flex-col items-center justify-center'>
+                                                <ul>
+                                                    <li>{successEmojis[0]} Joy and peace in victory over sin.</li>
+                                                    <li>{successEmojis[1]} Purity and self-control through God&apos;s strength.</li>
+                                                    <li>{successEmojis[2]} Walking in faith and righteousness with Christ.</li>
+                                                </ul>
+                                                <p className='font-bold'>Keep fighting the good fight!</p>
+                                                <ButtonChangePreviousDayLastTaskState
+                                                    text={failEmojis.join("") + " Not done?"}
+                                                    tasks={day.tasks}
+                                                    date={day.date}
+                                                />
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                }
+                            </div>
+                        )
+                    })}
+                </Accordion>
+            </Suspense>
         </>
     )
 }
