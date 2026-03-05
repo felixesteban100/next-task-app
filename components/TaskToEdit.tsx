@@ -100,116 +100,116 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
 
     const formTasksChanged = form.formState.isDirty && (JSON.stringify(tasks.sort((a, b) => a.id - b.id)) !== JSON.stringify(tasksState.sort((a, b) => a.id - b.id)))
 
-    // // Prevent browser tab close/refresh when there are unsaved changes
-    // useEffect(() => {
-    //     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-    //         if (formTasksChanged) {
-    //             e.preventDefault();
-    //             e.returnValue = ''; // Required for Chrome
-    //         }
-    //     };
+    // Prevent browser tab close/refresh when there are unsaved changes
+    useEffect(() => {
+        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+            if (formTasksChanged) {
+                e.preventDefault();
+                e.returnValue = ''; // Required for Chrome
+            }
+        };
 
-    //     window.addEventListener('beforeunload', handleBeforeUnload);
+        window.addEventListener('beforeunload', handleBeforeUnload);
 
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleBeforeUnload);
-    //     };
-    // }, [formTasksChanged]);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [formTasksChanged]);
 
-    // // Intercept ALL navigation attempts (links, buttons, router.push, etc.)
-    // useEffect(() => {
-    //     if (!formTasksChanged) return;
+    // Intercept ALL navigation attempts (links, buttons, router.push, etc.)
+    useEffect(() => {
+        if (!formTasksChanged) return;
 
-    //     // Handle regular link clicks
-    //     const handleClick = (e: MouseEvent) => {
-    //         const target = e.target as HTMLElement;
-    //         const link = target.closest('a, button');
+        // Handle regular link clicks
+        const handleClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            const link = target.closest('a, button');
 
-    //         // Skip if it's the save button or if there are no unsaved changes
-    //         if (!link || link.id === 'saveButton') return;
+            // Skip if it's the save button or if there are no unsaved changes
+            if (!link || link.id === 'saveButton') return;
 
-    //         // Check if this is a navigation element
-    //         const isNavigationLink = link.tagName === 'A' ||
-    //             link.hasAttribute('data-navigation') ||
-    //             link.className.includes('navigation') ||
-    //             link.textContent?.includes('Back') ||
-    //             link.textContent?.includes('Home');
+            // Check if this is a navigation element
+            const isNavigationLink = link.tagName === 'A' ||
+                link.hasAttribute('data-navigation') ||
+                link.className.includes('navigation') ||
+                link.textContent?.includes('Back') ||
+                link.textContent?.includes('Home');
 
-    //         if (isNavigationLink) {
-    //             e.preventDefault();
-    //             e.stopPropagation();
+            if (isNavigationLink) {
+                e.preventDefault();
+                e.stopPropagation();
 
-    //             // Store the navigation action
-    //             if (link.tagName === 'A') {
-    //                 const href = (link as HTMLAnchorElement).href;
-    //                 setPendingNavigation(() => () => {
-    //                     window.location.href = href;
-    //                 });
-    //             } else {
-    //                 // For buttons, trigger their click after confirmation
-    //                 setPendingNavigation(() => () => {
-    //                     // Temporarily disable the check
-    //                     const clickEvent = new MouseEvent('click', {
-    //                         bubbles: true,
-    //                         cancelable: true,
-    //                         view: window
-    //                     });
-    //                     link.dispatchEvent(clickEvent);
-    //                 });
-    //             }
+                // Store the navigation action
+                if (link.tagName === 'A') {
+                    const href = (link as HTMLAnchorElement).href;
+                    setPendingNavigation(() => () => {
+                        window.location.href = href;
+                    });
+                } else {
+                    // For buttons, trigger their click after confirmation
+                    setPendingNavigation(() => () => {
+                        // Temporarily disable the check
+                        const clickEvent = new MouseEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window
+                        });
+                        link.dispatchEvent(clickEvent);
+                    });
+                }
 
-    //             setShowDiscardDialog(true);
-    //         }
-    //     };
+                setShowDiscardDialog(true);
+            }
+        };
 
-    //     // Handle browser back/forward buttons
-    //     const handlePopState = (e: PopStateEvent) => {
-    //         e.preventDefault();
-    //         history.pushState(null, '', window.location.href); // Prevent navigation
+        // Handle browser back/forward buttons
+        const handlePopState = (e: PopStateEvent) => {
+            e.preventDefault();
+            history.pushState(null, '', window.location.href); // Prevent navigation
 
-    //         setPendingNavigation(() => () => {
-    //             history.back();
-    //         });
-    //         setShowDiscardDialog(true);
-    //     };
+            setPendingNavigation(() => () => {
+                history.back();
+            });
+            setShowDiscardDialog(true);
+        };
 
-    //     // Push current state to enable popstate detection
-    //     history.pushState(null, '', window.location.href);
+        // Push current state to enable popstate detection
+        history.pushState(null, '', window.location.href);
 
-    //     document.addEventListener('click', handleClick, true);
-    //     window.addEventListener('popstate', handlePopState);
+        document.addEventListener('click', handleClick, true);
+        window.addEventListener('popstate', handlePopState);
 
-    //     return () => {
-    //         document.removeEventListener('click', handleClick, true);
-    //         window.removeEventListener('popstate', handlePopState);
-    //     };
-    // }, [formTasksChanged]);
+        return () => {
+            document.removeEventListener('click', handleClick, true);
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [formTasksChanged]);
 
-    // useTabAndInactivityRedirect({
-    //     inactivityTimeoutMs: 2 * 60 * 1000,
-    //     redirectTo: '/',
-    //     enabled: true,
-    //     disabled: false,//form.formState.isDirty || formTasksChanged,  // ← pause when unsaved changes
-    //     onBeforeRedirect: async () => {
-    //         // Only save if there are actually changes
-    //         if (form.formState.isDirty || formTasksChanged) {
-    //             toast.loading("Auto-saving before leaving...", { id: "auto-save" });
+    useTabAndInactivityRedirect({
+        inactivityTimeoutMs: 2 * 60 * 1000,
+        redirectTo: '/',
+        enabled: true,
+        disabled: false,//form.formState.isDirty || formTasksChanged,  // ← pause when unsaved changes
+        onBeforeRedirect: async () => {
+            // Only save if there are actually changes
+            if (form.formState.isDirty || formTasksChanged) {
+                toast.loading("Auto-saving before leaving...", { id: "auto-save" });
 
-    //             try {
-    //                 await form.handleSubmit(async (values) => {
-    //                     await saveTasksOfCurrentDate(date, values.tasks);
-    //                     form.reset(values);  // Clear dirty state after save
-    //                     toast.success("Auto-saved successfully", { id: "auto-save" });
-    //                 })();
-    //             } catch (err) {
-    //                 toast.error("Auto-save failed — changes may be lost", { id: "auto-save" });
-    //                 console.log(err)
-    //                 // Optional: prevent redirect if save fails?
-    //                 // throw err; // ← if you want to stop redirect on save failure
-    //             }
-    //         }
-    //     },
-    // });
+                try {
+                    await form.handleSubmit(async (values) => {
+                        await saveTasksOfCurrentDate(date, values.tasks);
+                        form.reset(values);  // Clear dirty state after save
+                        toast.success("Auto-saved successfully", { id: "auto-save" });
+                    })();
+                } catch (err) {
+                    toast.error("Auto-save failed — changes may be lost", { id: "auto-save" });
+                    console.log(err)
+                    // Optional: prevent redirect if save fails?
+                    // throw err; // ← if you want to stop redirect on save failure
+                }
+            }
+        },
+    });
 
     const handleDiscardChanges = () => {
         if (pendingNavigation) {
