@@ -43,6 +43,8 @@ import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
 import { useState, useEffect } from "react"
 
 import ButtonOrganizeByTime from './ButtonOrganizeByTime'
+
+
 import ButtonHideOccupied from './ButtonHideOccupied'
 import ButtonTogglePreviousTasks from './ButtonTogglePreviousTasks'
 import { useTabAndInactivityRedirect } from '@/lib/useTabAndInactivityRedirect'
@@ -187,6 +189,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
 
     const handleDiscardChanges = () => {
         if (pendingNavigation) {
+            // Temporarily reset form state to allow navigation
             form.reset(form.getValues());
             setTimeout(() => {
                 pendingNavigation();
@@ -298,47 +301,76 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         fieldOnChange(sortByProperty(updatedTasks, "id"));
     }
 
+
+    // function updateTaskAndSometimesTimeAutomatically(
+    //     inputValue: string,
+    //     task: Task,
+    //     index: number,
+    //     property: 'time' | 'state',
+    //     fieldOnChange: (value: Task[]) => void
+    // ) {
+    //     if (!inputValue) return;
+
+    //     const [taskToEditName, newValue] = inputValue.split("->");
+    //     if (taskToEditName !== `${task.name}_${task.time}_${index}`) return;
+
+    //     const getMinutes = (timeStr: string) => {
+    //         const [time, period] = timeStr.split(' ');
+    //         const [h, m] = time.split(':').map(Number);
+    //         const h24 = period === 'pm' && h !== 12 ? h + 12 : period === 'am' && h === 12 ? 0 : h;
+    //         return h24 * 60 + m;
+    //     };
+
+    //     const updatedTasks = tasksState.map((item, indexItem) => {
+    //         if (`${item.name}_${item.time}_${indexItem}` !== taskToEditName) return item;
+
+    //         if (property === 'state' && newValue === 'done') {
+    //             const now = new Date();
+    //             const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    //             const closestTime = TIMES.reduce((a, b) => Math.abs(currentMinutes - getMinutes(b)) < Math.abs(currentMinutes - getMinutes(a)) ? b : a);
+    //             return { ...item, state: newValue as "done" | "no done" | "occupied", time: closestTime };
+    //         }
+    //         return { ...item, [property]: newValue };
+    //     });
+
+    //     fieldOnChange(sortByProperty(updatedTasks, "id"));
+    // }
+
     return (
-        // Responsive outer container: full width, constrained max, centered
-        <div className="flex flex-col gap-5 sm:gap-7 items-center mb-20 sm:mb-2 w-full px-3 sm:px-4">
+        <div className={`flex flex-col gap-7 items-center mb-2 w-full `}>
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={durationLoader} loop={false} callbackAfterLoading={() => setLoading(false)} />
 
             {/* Discard Changes Dialog */}
             <AlertDialog open={showDiscardDialog} onOpenChange={setShowDiscardDialog}>
-                <AlertDialogContent className="mx-4 max-w-[calc(100vw-2rem)] sm:max-w-lg">
+                <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>Unsaved Changes</AlertDialogTitle>
                         <AlertDialogDescription>
                             You have unsaved changes. Are you sure you want to discard them and leave this page?
                         </AlertDialogDescription>
                     </AlertDialogHeader>
-                    <AlertDialogFooter className="flex-col gap-2 sm:flex-row sm:gap-0">
-                        <AlertDialogCancel onClick={handleCancelDiscard} className="w-full sm:w-auto">
+                    <AlertDialogFooter>
+                        <AlertDialogCancel onClick={handleCancelDiscard}>
                             Stay on Page
                         </AlertDialogCancel>
-                        <AlertDialogAction
-                            onClick={handleDiscardChanges}
-                            className="w-full sm:w-auto bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                        >
+                        <AlertDialogAction onClick={handleDiscardChanges} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
                             Discard Changes
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
 
-            {/* Header section */}
-            <div className="flex flex-col gap-3 sm:gap-5 items-center justify-between w-full">
+            <div className='flex flex-col gap-5 items-center justify-between w-full'>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
-                            {/* Responsive date heading */}
-                            <span className="font-bold text-lg sm:text-2xl text-center block">
+                            <span className='font-bold text-2xl'>
                                 (Today) {DateString(new Date(date))}
                             </span>
                         </TooltipTrigger>
                         <TooltipContent>
                             <p>Added at: {hourAdded}</p>
-                            <div className="flex flex-col gap-2 items-center text-xl sm:text-2xl">
+                            <div className='flex flex-col gap-2 items-center text-2xl'>
                                 <p>Spiritual: {getTotalTasksByType(tasksState, "spiritual")}</p>
                                 <p>Important: {getTotalTasksByType(tasksState, "important")}</p>
                                 <p>Normal: {getTotalTasksByType(tasksState, "normal")}</p>
@@ -347,50 +379,44 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
-
-                {/* Control buttons — wrap on small screens */}
-                <div className="flex flex-wrap gap-2 sm:gap-5 justify-center">
+                <div className='flex gap-5'>
                     <ButtonOrganizeByTime />
                     <ButtonTogglePreviousTasks />
                     <ButtonHideOccupied />
                 </div>
-
                 {togglePreviousTasks ? (
-                    <p className="text-sm italic">Previous tasks are hidden</p>
+                    <p className='text-sm italic'>Previous tasks are hidden</p>
                 ) : null}
+                {/* instead of hiding the previous tasks, scroll to the task with the current time */}
             </div>
 
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 sm:gap-5 items-center justify-center w-full">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 justify-center">
                     <FormField
                         control={form.control}
                         name="tasks"
                         render={({ field }) => {
-                            const tasksToShow = (togglePreviousTasks
-                                ? sortByProperty(field.value, organizeByTime ? "time" : "id").filter(task => filterFutureTimes(TIMES).includes(task.time))
-                                : sortByProperty(field.value, organizeByTime ? "time" : "id"))
-
+                            const tasksToShow = (togglePreviousTasks ?
+                                (sortByProperty(field.value, organizeByTime ? "time" : "id")).filter(task => filterFutureTimes(TIMES).includes(task.time))
+                                : (sortByProperty(field.value, organizeByTime ? "time" : "id")))
                             return (
                                 <FormItem>
                                     <FormMessage />
                                     <FormControl>
-                                        {/* Center the entire task list, constrain width */}
-                                        <div className="flex flex-col items-center w-full">
-                                            <div className="w-full max-w-2xl ">
-                                                {tasksToShow.map((task, i) => {
+                                        <div className='space-y-15 md:space-y-0'>
+                                            {
+                                                tasksToShow.map((task, i) => {
+                                                    // const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
                                                     const occupied = task.state === "occupied"
 
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
-                                                            {/* Hour separator */}
-                                                            {task.time.split(":")[0] > tasksToShow[i - 1]?.time.split(":")[0] && i !== 0 && tasksToShow[i + 1].state !== "occupied"
-                                                                ? <Separator className="my-3 sm:my-5" />
-                                                                : null}
+                                                            {/* {task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.name !== TASKS_THAT_DONT_SEPARATE_SECTIONS ? <Separator className="my-5" /> : null} */}
+                                                            {/* show separator when each hour passes */}
+                                                            {task.time.split(":")[0] > tasksToShow[i - 1]?.time.split(":")[0] && i !== 0 ? <Separator className="my-5" /> : null}
 
-                                                            <div className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0">
-
-                                                                {/* State emoji buttons */}
-                                                                <div className="flex flex-row gap-0.5 items-center shrink-0">
+                                                            <div className="group/task flex gap-2 items-center justify-start max-w-2xl">
+                                                                <div className='flex flex-col md:flex-row md:gap-2 items-center justify-start '>
                                                                     {Object.entries(stateEmoji).map(([state, emoji]) => {
                                                                         if (GODLY_TASKS.includes(task.name) && state === "occupied") {
                                                                             return (
@@ -398,9 +424,8 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                                     disabled
                                                                                     type="button"
                                                                                     size="icon"
-                                                                                    variant="ghost"
+                                                                                    variant={"ghost"}
                                                                                     key={task.id + state}
-                                                                                    className="h-8 w-8 sm:h-10 sm:w-10"
                                                                                 />
                                                                             )
                                                                         }
@@ -409,8 +434,8 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                                 key={task.id + state}
                                                                                 type="button"
                                                                                 size="icon"
-                                                                                variant="ghost"
-                                                                                className={`h-8 w-8 sm:h-10 sm:w-10 ${task.state !== state ? "grayscale-100" : ""}`}
+                                                                                variant={"ghost"}
+                                                                                className={`${task.state !== state ? "grayscale-100" : ""}`}
                                                                                 onClick={() => updateTask(`${task.name}_${task.time}_${task.id}->${state}`, task, task.id, "state", field.onChange)}
                                                                             >
                                                                                 {emoji}
@@ -419,102 +444,74 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                     })}
                                                                 </div>
 
-                                                                {/* Task name + optional link copy button */}
-                                                                <div className="flex items-center gap-2 flex-1 min-w-0">
-                                                                    <p
-                                                                        className={cn(
-                                                                            occupied ? null : `${classNamesType[task.type]}`,
-                                                                            classNamesState[task.state],
-                                                                            "text-sm sm:text-base break-words min-w-0 flex-1"
-                                                                        )}
-                                                                    >
-                                                                        {occupied && hideOccupied ? (
-                                                                            <>
-                                                                                <span className="group-hover/task:hidden block">{"Either Working or occupied..."}</span>
-                                                                                <span className="hidden group-hover/task:block">{task.name}</span>
-                                                                            </>
-                                                                        ) : task.name}
-                                                                    </p>
-
-                                                                    {task.link != undefined && task.state !== "occupied" ? (
-                                                                        <Button
-                                                                            type="button"
-                                                                            size="icon"
-                                                                            variant="outline"
-                                                                            className="h-8 w-8 sm:h-9 sm:w-9 shrink-0"
-                                                                            onClick={() => {
-                                                                                navigator.clipboard.writeText(task.link ?? "")
-                                                                                toast.info("Link copied to clipboard!", {
-                                                                                    description: task.link,
-                                                                                })
-                                                                            }}
-                                                                        >
-                                                                            <CopyIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                                                                <p
+                                                                    className={cn(/* occupiedAndNotSpiritual */occupied ? null : `${classNamesType[task.type]} `, classNamesState[task.state], "max-w-[220px] lg:max-w-full ")}
+                                                                >
+                                                                    {/* occupiedAndNotSpiritual */occupied && hideOccupied ?
+                                                                        <>
+                                                                            <span className='group-hover/task:hidden block'>{"Either Working or occupied..."}</span>
+                                                                            <span className='hidden group-hover/task:block'>{task.name}</span>
+                                                                        </>
+                                                                        : task.name}
+                                                                </p>
+                                                                {task.link != undefined && task.state != "occupied" ?
+                                                                    (
+                                                                        <Button type="button" size="icon" variant="outline" onClick={() => {
+                                                                            navigator.clipboard.writeText(task.link ?? "")
+                                                                            toast.info("Link copied to clipboard!", {
+                                                                                description: task.link,
+                                                                            })
+                                                                        }}>
+                                                                            <CopyIcon />
                                                                         </Button>
-                                                                    ) : null}
-                                                                </div>
+                                                                    ) : null
+                                                                }
 
-                                                                {/* Time select + timer button */}
-                                                                <div className="flex items-center gap-1.5 shrink-0">
-                                                                    <select
-                                                                        defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
-                                                                        onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
-                                                                        className="appearance-none border-none bg-secondary/80 text-foreground rounded-md p-1 text-xs sm:text-sm"
-                                                                    >
-                                                                        {TIMES.map(c => ({
-                                                                            value: `${task.name}_${task.time}_${task.id}->${c}`,
-                                                                            name: c
-                                                                        })).map((time) => (
-                                                                            <option
-                                                                                key={task.name + time.name}
-                                                                                value={time.value}
-                                                                                className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-red-300 font-stretch-semi-condensed" : "text-foreground"}`}
-                                                                            >
-                                                                                {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
-                                                                            </option>
-                                                                        ))}
-                                                                    </select>
+                                                                <select
+                                                                    defaultValue={`${task.name}_${task.time}_${task.id}->${task.time}`}
+                                                                    onChange={(e) => updateTask(e.target.value, task, task.id, "time", field.onChange)}
+                                                                    className={`appearance-none border-none bg-secondary/80 ${/* GODLY_TASKS.includes(task.name) ? "text-foreground/50 cursor-not-allowed" :  */"text-foreground"}  rounded-md p-1`}
+                                                                // disabled={GODLY_TASKS.includes(task.name)}
+                                                                >
+                                                                    {TIMES.map(c => ({ value: `${task.name}_${task.time}_${task.id}->${c}`, name: c })).map((time) => (
+                                                                        <option
+                                                                            key={task.name + time.name}
+                                                                            value={time.value}
+                                                                            className={`bg-background ${!filterFutureTimes(TIMES).includes(time.name) ? "text-red-300 font-stretch-semi-condensed" : "text-foreground"}`}
+                                                                        >
+                                                                            {time.name}{!filterFutureTimes(TIMES).includes(time.name) && "!"}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
 
-                                                                    {/* Timer button: always visible on mobile, hover-only on desktop */}
-                                                                    <Button
-                                                                        size="icon"
-                                                                        variant="outline"
-                                                                        className="flex sm:hidden group-hover/task:flex h-8 w-8 sm:h-9 sm:w-9 shrink-0"
-                                                                        type="button"
-                                                                        onClick={() => updateTaskTimeToNow(task, field.onChange)}
-                                                                    >
-                                                                        <TimerIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                                                                    </Button>
-                                                                </div>
+                                                                <Button
+                                                                    size={"icon"}
+                                                                    variant={"outline"}
+                                                                    className={`hidden group-hover/task:flex `}
+                                                                    type='button'
+                                                                    onClick={() => updateTaskTimeToNow(task, field.onChange)}
+                                                                >
+                                                                    <TimerIcon />
+                                                                </Button>
                                                             </div>
                                                         </AnimateWrapper>
                                                     )
                                                 })}
-                                            </div>
                                         </div>
                                     </FormControl>
                                 </FormItem>
                             )
                         }}
                     />
-
-                    {/*
-                        Save button:
-                        - Mobile: fixed to bottom, full width with safe padding
-                        - Desktop: fixed bottom-right corner (original behaviour)
-                    */}
-                    <div className="fixed bottom-0 left-0 right-0 p-3 bg-background/80 backdrop-blur-sm border-t sm:border-0 sm:bg-transparent sm:backdrop-blur-none sm:bottom-10 sm:left-auto sm:right-10 sm:p-0 z-50">
+                    <div className='fixed bottom-10 left-10/12 -translate-x-10/12 flex gap-5'>
                         <Button
                             id="saveButton"
                             disabled={form.formState.isSubmitting || !formTasksChanged}
-                            className="group/submit-button disabled:grayscale-25 w-full sm:w-auto px-5 py-5 sm:p-7 text-base sm:text-xl"
+                            className={`group/submit-button disabled:grayscale-25 p-7 text-xl`}
                             type="submit"
                         >
-                            <p className="group-enabled/submit-button:animate-bounce flex gap-2 items-center justify-center">
-                                {form.formState.isSubmitting
-                                    ? <><span>Saving...</span><Loader2 className="animate-spin" size={20} /></>
-                                    : <><span>Save progress</span><SaveAll className="size-5 sm:size-7" /></>
-                                }
+                            <p className={`group-enabled/submit-button:animate-bounce flex gap-2 items-center`}>
+                                {form.formState.isSubmitting ? <>Saving...<Loader2 className="animate-spin" size={120} /></> : <>Save progress<SaveAll className='size-7' /></>}
                             </p>
                         </Button>
                     </div>

@@ -33,26 +33,26 @@ export default function QueryTasks({ searchValue, dayValue, fromDateValue }: { s
         params.delete('day')
         setDay('all')
         params.delete('fromDate')
-        setFromDate(new Date(Date.now() - 7 * 86400000))
+        setFromDate(new Date(Date.now() - 7 * 86400000)) // Seven days ago (86400000 = 24×60×60×1000 milliseconds in a day)
         push(`${pathname}?${params.toString()}`)
     }
 
     return (
-        // On mobile: stack vertically. On sm+: single row.
-        <div className='flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 mb-4 w-full'>
-
-            {/* Search input — full width on mobile, constrained on desktop */}
+        <div className='flex items-center justify-center gap-4 mb-4 w-full px-4'>
             <Input
                 type="text"
                 placeholder="Search by task name..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className='w-full sm:w-48 md:w-64'
+                onChange={(e) => {
+                    setSearch(e.target.value)
+                }}
+                className='w-[45%] '
             />
-
-            {/* Day select — full width on mobile */}
-            <Select defaultValue="all" value={day} onValueChange={(value) => setDay(value)}>
-                <SelectTrigger className="w-full sm:w-40">
+            {/* filter by range dates */}
+            <Select defaultValue="all" value={day} onValueChange={(value) => {
+                setDay(value)
+            }}>
+                <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select a day" />
                 </SelectTrigger>
                 <SelectContent>
@@ -69,44 +69,43 @@ export default function QueryTasks({ searchValue, dayValue, fromDateValue }: { s
                     </SelectGroup>
                 </SelectContent>
             </Select>
-
-            {/* Date picker — full width trigger on mobile */}
-            <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                    <Button
-                        variant="outline"
-                        id="date"
-                        className="w-full sm:w-44 justify-between font-normal"
-                    >
-                        {fromDate ? fromDate.toLocaleDateString() : "Select date"}
-                        <ChevronDownIcon />
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-                    <Calendar
-                        mode="single"
-                        selected={new Date(fromDate)}
-                        captionLayout="dropdown"
-                        month={month}
-                        onMonthChange={setMonth}
-                        onSelect={(date) => {
-                            if (date) {
-                                setFromDate(new Date(date))
-                                setOpen(false)
-                            }
-                        }}
-                        disabled={{
-                            before: new Date(2025, 2, 15),
-                            after: new Date()
-                        }}
-                    />
-                </PopoverContent>
-            </Popover>
-
-            {/* Action buttons — side by side, full width on mobile */}
-            <div className='flex items-center gap-2 w-full sm:w-auto'>
-                <Button className="flex-1 sm:flex-none" onClick={changeParams}><Search /></Button>
-                <Button className="flex-1 sm:flex-none" onClick={clearParams}><X /></Button>
+            <div className="flex flex-col gap-3">
+                <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger asChild>
+                        <Button
+                            variant="outline"
+                            id="date"
+                            className="w-48 justify-between font-normal"
+                        >
+                            {fromDate ? fromDate.toLocaleDateString()/* DateString(fromDate) */ : "Select date"}
+                            <ChevronDownIcon />
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+                        <Calendar
+                            mode="single"
+                            selected={new Date(fromDate)}
+                            captionLayout="dropdown"
+                            month={month}
+                            onMonthChange={setMonth}
+                            onSelect={(date) => {
+                                if (date) {
+                                    const dateValue = new Date(date)
+                                    setFromDate(dateValue)
+                                    setOpen(false)
+                                }
+                            }}
+                            disabled={{
+                                before: new Date(2025, 2, 15),
+                                after: new Date()
+                            }}
+                        />
+                    </PopoverContent>
+                </Popover>
+            </div>
+            <div className='flex items-center gap-2'>
+                <Button onClick={() => changeParams()}><Search /></Button>
+                <Button onClick={() => clearParams()}><X /></Button>
             </div>
         </div>
     )
