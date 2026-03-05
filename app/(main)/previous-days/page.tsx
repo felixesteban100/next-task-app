@@ -328,12 +328,13 @@ export default async function page({
                                     <AccordionContent className="w-full">
                                         <p className="text-sm sm:text-base mb-1">Added at: {formattedTime}</p>
                                         {sortByProperty(day.tasks, "time").map((task, taskIndex) => {
-                                            const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
+                                            // const occupiedAndNotSpiritual = task.state === "occupied" && task.type !== "spiritual"
+                                            const occupied = task.state === "occupied"
                                             return (
                                                 <div key={cIndex + task.name + task.time + taskIndex} className="flex flex-col items-start justify-center group">
                                                     {task.name === "Battle Prayer ⚔🛡 and thanksgiving 🙏" ? <Separator className="my-2" /> : null}
-                                                    <p className={cn(occupiedAndNotSpiritual ? null : classNamesType[task.type], classNamesState[task.state], "my-1 flex gap-1 text-sm sm:text-base flex-wrap")}>
-                                                        {occupiedAndNotSpiritual ?
+                                                    <p className={cn(occupied ? null : classNamesType[task.type], classNamesState[task.state], "my-1 flex gap-1 text-sm sm:text-base flex-wrap")}>
+                                                        {occupied ?
                                                             <span>
                                                                 <span className="group-hover:hidden flex">{"Either Working or occupied... "}</span>
                                                                 <span className="hidden group-hover:flex">{task.name}</span>
