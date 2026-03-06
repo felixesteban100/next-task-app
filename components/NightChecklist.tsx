@@ -13,13 +13,15 @@ export default function NightChecklist({ resources }: { resources: { name: strin
     const notWorkingTomorrowMorning = (
         <li className="space-y-2" onClick={() => setWorkOrNotTommorrowMorning(null)}>
             <div className="flex gap-3">
-                <span className="">▢</span>
-                <span>Watch something not fast pased </span>
+                <span>▢</span>
+                <span>Watch something not fast paced</span>
             </div>
             <ul className="ml-8">
                 {resources.map((resource) => (
                     <li key={resource.name} className="list-disc list-inside">
-                        <a href={resource.url} target="_blank" className="hover:underline hover:text-indigo-600">{resource.name}</a>
+                        <a href={resource.url} target="_blank" className="hover:underline hover:text-indigo-600 break-words">
+                            {resource.name}
+                        </a>
                     </li>
                 ))}
             </ul>
@@ -29,23 +31,27 @@ export default function NightChecklist({ resources }: { resources: { name: strin
     const workingTomorrowMorning = (
         <li className="space-y-2" onClick={() => setWorkOrNotTommorrowMorning(null)}>
             <div className="flex gap-3">
-                <span className="">▢</span>
-                <span>Go upstairs and Read phisical bible in <span className="text-indigo-600">{randomSelectedBiblePassage}</span></span>
+                <span>▢</span>
+                <span>
+                    Go upstairs and Read physical bible in{" "}
+                    <span className="text-indigo-600">{randomSelectedBiblePassage}</span>
+                </span>
             </div>
         </li>
     )
 
     return (
-        <div className="mt-6 w-[80%] rounded-2xl border border-foreground-800  p-6 shadow-foreground/10 shadow-xl flex flex-col gap-6 justify-center items-center">
+        // Full width on mobile, 80% centered on sm+
+        <div className="mt-6 w-full sm:w-[80%] sm:mx-auto max-w-lg rounded-2xl border border-foreground-800 p-4 sm:p-6 shadow-foreground/10 shadow-xl flex flex-col gap-6 justify-center items-center">
             <header>
-                <h2 className="text-lg font-bold tracking-wide">
+                <h2 className="text-base sm:text-lg font-bold tracking-wide text-center">
                     TRUST GOD FOR THE TOMMORROW
                 </h2>
             </header>
 
-            <ul className="space-y-4 text-sm leading-relaxed">
+            <ul className="space-y-4 text-sm leading-relaxed w-full">
                 <li className="flex gap-3">
-                    <span className="">▢</span>
+                    <span className="shrink-0">▢</span>
                     <span>Teeth brushed</span>
                 </li>
 
@@ -57,8 +63,8 @@ export default function NightChecklist({ resources }: { resources: { name: strin
                                 <div className="flex flex-col">
                                     <p className="mb-2">Will you be working tomorrow morning?</p>
                                     <div className="flex w-full gap-4 justify-center">
-                                        <Button onClick={() => setWorkOrNotTommorrowMorning(true)}>Yes</Button>
-                                        <Button onClick={() => setWorkOrNotTommorrowMorning(false)}>No</Button>
+                                        <Button className="flex-1 sm:flex-none" onClick={() => setWorkOrNotTommorrowMorning(true)}>Yes</Button>
+                                        <Button className="flex-1 sm:flex-none" onClick={() => setWorkOrNotTommorrowMorning(false)}>No</Button>
                                     </div>
                                 </div>
                             )
@@ -66,9 +72,10 @@ export default function NightChecklist({ resources }: { resources: { name: strin
                 </div>
 
                 <li className="flex gap-3">
-                    <span className="">▢</span>
+                    <span className="shrink-0">▢</span>
                     <span>
-                        (When feeling sleepy) Go to bedroom <span className="font-semibold ">without Phone</span>
+                        (When feeling sleepy) Go to bedroom{" "}
+                        <span className="font-semibold">without Phone</span>
                     </span>
                 </li>
             </ul>

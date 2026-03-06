@@ -119,7 +119,7 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
 
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 px-5">
             {/* ── Add new task form ────────────────────────────────────────────── */}
             <div className="space-y-6 rounded-lg border bg-muted/40 p-6">
                 <Input

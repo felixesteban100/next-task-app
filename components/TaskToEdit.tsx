@@ -383,7 +383,14 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
                                                             {/* Hour separator */}
-                                                            {i !== 0 && task.time.split(":")[0] > tasksToShow[i - 1]?.time.split(":")[0] && task.state !== "occupied" /* tasksToShow[i - 1].state !== "occupied" && tasksToShow[i + 1].state !== "occupied" */
+                                                            {(i !== 0 && !(i + 1 >= tasksToShow.length)
+                                                                &&
+                                                                (task.time.split(":")[0] > tasksToShow[i - 1]?.time.split(":")[0] && task.state !== "occupied" && tasksToShow[i - 1].state !== "occupied" && tasksToShow[i + 1].state !== "occupied")
+                                                                ||
+                                                                (task.state === "occupied" && tasksToShow[i + 1]?.state === "occupied" && tasksToShow[i - 1]?.state !== "occupied")
+                                                                ||
+                                                                (task.state !== "occupied" && tasksToShow[i - 1]?.state === "occupied" && tasksToShow[i - 2]?.state === "occupied")
+                                                            )
                                                                 ? <Separator className="my-3 sm:my-5" />
                                                                 : null}
 
