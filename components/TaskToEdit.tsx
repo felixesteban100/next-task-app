@@ -379,20 +379,36 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                             <div className="w-full max-w-2xl ">
                                                 {tasksToShow.map((task, i) => {
                                                     const occupied = task.state === "occupied"
+                                                    const previousTask = tasksToShow[i - 1]
+                                                    const nextTask = tasksToShow[i + 1]
+                                                    const afterNextTask = tasksToShow[i + 2]
+
+                                                    /* if (task.name === "Upload youtube short/ instagram reel to Palabra Abierta") {
+                                                        console.log(Number(task.time.split(":")[0]), Number(previousTask?.time.split(":")[0]))
+                                                    } */
 
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
                                                             {/* Hour separator */}
-                                                            {(i !== 0 && !(i + 1 >= tasksToShow.length)
-                                                                &&
-                                                                (task.time.split(":")[0] > tasksToShow[i - 1]?.time.split(":")[0] && task.state !== "occupied" && tasksToShow[i - 1].state !== "occupied" && tasksToShow[i + 1].state !== "occupied")
-                                                                ||
-                                                                (task.state === "occupied" && tasksToShow[i + 1]?.state === "occupied" && tasksToShow[i - 1]?.state !== "occupied")
-                                                                ||
-                                                                (task.state !== "occupied" && tasksToShow[i - 1]?.state === "occupied" && tasksToShow[i - 2]?.state === "occupied")
-                                                            )
-                                                                ? <Separator className="my-3 sm:my-5" />
-                                                                : null}
+                                                            {
+                                                                (
+                                                                    i !== 0 && !(i + 1 >= tasksToShow.length)
+                                                                    &&
+                                                                    Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
+                                                                    &&
+                                                                    (
+                                                                        (previousTask.state !== "occupied" && task.state !== "occupied" && nextTask.state !== "occupied")
+                                                                        ||
+                                                                        (previousTask?.state !== "occupied" && task.state === "occupied" && nextTask?.state === "occupied")
+                                                                        ||
+                                                                        (previousTask?.state === "occupied" && task.state !== "occupied" && afterNextTask?.state === "occupied")
+                                                                        ||
+                                                                        (previousTask?.state === "occupied" && task.state !== "occupied" && nextTask?.state !== "occupied")
+                                                                    )
+                                                                )
+                                                                    ? <Separator className="my-3 sm:my-5" />
+                                                                    : null
+                                                            }
 
                                                             <div className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0">
 
