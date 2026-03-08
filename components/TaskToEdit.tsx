@@ -383,10 +383,6 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                     const nextTask = tasksToShow[i + 1]
                                                     const afterNextTask = tasksToShow[i + 2]
 
-                                                    /* if (task.name === "Upload youtube short/ instagram reel to Palabra Abierta") {
-                                                        console.log(Number(task.time.split(":")[0]), Number(previousTask?.time.split(":")[0]))
-                                                    } */
-
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
                                                             {/* Hour separator */}
@@ -394,10 +390,12 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                 (
                                                                     i !== 0 && !(i + 1 >= tasksToShow.length)
                                                                     &&
-                                                                    Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
-                                                                    &&
                                                                     (
-                                                                        (previousTask.state !== "occupied" && task.state !== "occupied" && nextTask.state !== "occupied")
+                                                                        (
+                                                                            Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
+                                                                            &&
+                                                                            previousTask?.state !== "occupied" && task.state !== "occupied" && nextTask.state !== "occupied"
+                                                                        )
                                                                         ||
                                                                         (previousTask?.state !== "occupied" && task.state === "occupied" && nextTask?.state === "occupied")
                                                                         ||
