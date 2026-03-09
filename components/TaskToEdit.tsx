@@ -3,7 +3,7 @@
 import { cn, DateString, filterFutureTimes, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
-import { GODLY_TASKS, /* TASKS_THAT_DONT_SEPARATE_SECTIONS, TASKS_THAT_SEPARATE_SECTIONS, */ TIMES } from "@/constants"
+import { GODLY_TASKS, /* TASKS_THAT_DONT_SEPARATE_SECTIONS,*/  TASKS_THAT_SEPARATE_SECTIONS, TIMES } from "@/constants"
 
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -380,29 +380,40 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                 {tasksToShow.map((task, i) => {
                                                     const occupied = task.state === "occupied"
                                                     const previousTask = tasksToShow[i - 1]
-                                                    // const nextTask = tasksToShow[i + 1]
-                                                    // const afterNextTask = tasksToShow[i + 2]
+                                                    const nextTask = tasksToShow[i + 1]
+                                                    const afterNextTask = tasksToShow[i + 2]
+
+                                                    if (task.name === "Solve the daily challenge from freeCodeCamp app") {
+                                                        console.log((
+                                                            Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
+                                                            &&
+                                                            task.state !== "occupied"
+                                                        ))
+                                                    }
 
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
-                                                            {/* Hour separator */}
+                                                            {/* only separate occupied blocks with 2+ tasks and prayer tasks*/}
                                                             {
                                                                 (
                                                                     i !== 0 && !(i + 1 >= tasksToShow.length)
-                                                                    &&
-                                                                    (
-                                                                        (Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
-                                                                            && previousTask?.state !== "occupied" && task.state !== "occupied"/*  && nextTask.state !== "occupied" */)
-                                                                        /* ||
-                                                                        (previousTask?.state !== "occupied" && task.state === "occupied" && nextTask?.state === "occupied")
-                                                                        ||
-                                                                        (previousTask?.state === "occupied" && task.state !== "occupied" && afterNextTask?.state === "occupied")
-                                                                        ||
-                                                                        (previousTask?.state === "occupied" && task.state !== "occupied" && nextTask?.state !== "occupied") */
-                                                                    )
+                                                                        &&
+                                                                        (
+                                                                            (task.name.includes(TASKS_THAT_SEPARATE_SECTIONS) && task.state !== "occupied")
+                                                                            ||
+                                                                            (
+                                                                                // entering occupied block — only separate if it's more than 1 task
+                                                                                previousTask.state !== "occupied" && task.state === "occupied" && nextTask.state === "occupied"
+                                                                            )
+                                                                            ||
+                                                                            (
+                                                                                // leaving occupied block — only separate if it was more than 1 task
+                                                                                previousTask.state === "occupied" && task.state !== "occupied" && afterNextTask?.state === "occupied"
+                                                                            )
+                                                                        )
+                                                                        ? <Separator className="my-3 sm:my-5" />
+                                                                        : null
                                                                 )
-                                                                    ? <Separator className="my-3 sm:my-5" />
-                                                                    : null
                                                             }
 
                                                             <div className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0">
