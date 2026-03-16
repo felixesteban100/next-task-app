@@ -465,6 +465,8 @@ export const GODLY_TASKS = [
 // })
 
 export const TIMES = [
+    "4:40 am",
+    "4:50 am",
     "5:00 am",
     "5:10 am",
     "5:20 am",

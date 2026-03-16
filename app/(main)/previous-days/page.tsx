@@ -272,34 +272,46 @@ export default async function page({
 
                             {/* Success streaks */}
                             <p>{successEmojis.join("")} Streaks</p>
-                            {/* Wrap long date ranges on small screens */}
-                            <p className="text-center text-sm sm:text-base">
-                                Current:{' '}
-                                <span className="font-bold">{getLastDaysAreWithoutLust().streak} days</span>{' '}
-                                in a row ({DateString(getLastDaysAreWithoutLust().firstDay)} - {DateString(getLastDaysAreWithoutLust().lastDay)})
-                            </p>
-                            <p className="text-center text-sm sm:text-base">
-                                Best:{' '}
-                                <span className="font-bold">{getBestStreakWithoutLust().streak} days</span>{' '}
-                                ({getBestStreakWithoutLust().beginningDate} - {getBestStreakWithoutLust().endDate}){' '}
-                                ({queryStatisticsValue ? "All time" : "Query based"})
-                            </p>
+                            {
+                                daysWithoutLust > 0 ? (
+                                    <>
+                                        {/* Wrap long date ranges on small screens */}
+                                        <p className="text-center text-sm sm:text-base">
+                                            Current:{' '}
+                                            <span className="font-bold">{getLastDaysAreWithoutLust().streak} days</span>{' '}
+                                            in a row ({DateString(getLastDaysAreWithoutLust().firstDay)} - {DateString(getLastDaysAreWithoutLust().lastDay)})
+                                        </p>
+                                        <p className="text-center text-sm sm:text-base">
+                                            Best:{' '}
+                                            <span className="font-bold">{getBestStreakWithoutLust().streak} days</span>{' '}
+                                            ({getBestStreakWithoutLust().beginningDate} - {getBestStreakWithoutLust().endDate}){' '}
+                                            ({queryStatisticsValue ? "All time" : "Query based"})
+                                        </p>
+                                    </>
+                                ) : (<p className="text-center text-sm sm:text-base">No failure streaks found.</p>)
+                            }
 
                             <Separator orientation="horizontal" className="bg-foreground" />
 
                             {/* Failure streaks */}
                             <p>{failEmojis.join("")} Streaks</p>
-                            <p className="text-center text-sm sm:text-base">
-                                Current:{' '}
-                                <span className="font-bold">{getLastDaysAreWithLust()} days</span>{' '}
-                                in a row
-                            </p>
-                            <p className="text-center text-sm sm:text-base">
-                                Worst:{' '}
-                                <span className="font-bold">{getWorstStreakWithLust().streak} days</span>{' '}
-                                ({getWorstStreakWithLust().beginningDate} - {getWorstStreakWithLust().endDate}){' '}
-                                ({queryStatisticsValue ? "All time" : "Query based"})
-                            </p>
+                            {
+                                daysWithLust > 0 ? (
+                                    <>
+                                        <p className="text-center text-sm sm:text-base">
+                                            Current:{' '}
+                                            <span className="font-bold">{getLastDaysAreWithLust()} days</span>{' '}
+                                            in a row
+                                        </p>
+                                        <p className="text-center text-sm sm:text-base">
+                                            Worst:{' '}
+                                            <span className="font-bold">{getWorstStreakWithLust().streak} days</span>{' '}
+                                            ({getWorstStreakWithLust().beginningDate} - {getWorstStreakWithLust().endDate}){' '}
+                                            ({queryStatisticsValue ? "All time" : "Query based"})
+                                        </p>
+                                    </>
+                                ) : (<p className="text-center text-sm sm:text-base">No failure streaks found.</p>)
+                            }
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
