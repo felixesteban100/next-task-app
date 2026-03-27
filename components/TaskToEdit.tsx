@@ -438,6 +438,14 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                     //     ))
                                                     // }
 
+                                                    const firstFutureTime = filterFutureTimes(TIMES)[0] ?? tasksToShow[tasksToShow.length - 1]?.time;
+
+                                                    let firstFutureTimeAssigned = false;
+
+                                                    const isFirstFutureTime = !firstFutureTimeAssigned && firstFutureTime === task.time;
+                                                    if (isFirstFutureTime) firstFutureTimeAssigned = true;
+
+
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
                                                             {/* only separate occupied blocks with 2+ tasks and prayer tasks*/}
@@ -466,8 +474,9 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
 
                                                             <div
                                                                 className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0"
-                                                                ref={filterFutureTimes(TIMES).includes(task.time) ? firstFutureTimeRef : null}
-                                                            // ref={task.time === filterFutureTimes(TIMES)[0] ? firstFutureTimeRef : null}
+                                                                // ref={filterFutureTimes(TIMES).includes(task.time) ? firstFutureTimeRef : null}
+                                                                // ref={task.time === filterFutureTimes(TIMES)[0] ? firstFutureTimeRef : null}
+                                                                ref={isFirstFutureTime ? firstFutureTimeRef : null}
                                                             >
 
                                                                 {/* State emoji buttons */}
