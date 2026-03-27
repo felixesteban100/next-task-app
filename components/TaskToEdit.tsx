@@ -19,7 +19,7 @@ import {
 import { saveTasksOfCurrentDate } from "@/server/actions"
 import { classNamesState, classNamesType, stateEmoji } from "@/constants"
 import { Separator } from "./ui/separator"
-import { CopyIcon, Loader2, SaveAll, TimerIcon } from "lucide-react"
+import { ArrowDownAZ, CopyIcon, Eye, EyeOff, IdCard, Loader2, SaveAll, TimerIcon, Watch } from "lucide-react"
 
 import {
     Tooltip,
@@ -40,13 +40,11 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { MultiStepLoader } from "./acernity-ui/multi-step-loader"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
-import ButtonOrganizeByTime from './ButtonOrganizeByTime'
-import ButtonHideOccupied from './ButtonHideOccupied'
-import ButtonTogglePreviousTasks from './ButtonTogglePreviousTasks'
 import { useTabAndInactivityRedirect } from '@/lib/useTabAndInactivityRedirect'
 import AnimateWrapper from './AnimateWrapper'
+import ReusableToggleButton from './ReusableToggleButton'
 
 const loadingStates = [
     { text: "Client Sends Data to server" },
@@ -86,6 +84,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
     const [loading, setLoading] = useState(false);
     const [showDiscardDialog, setShowDiscardDialog] = useState(false);
     const [pendingNavigation, setPendingNavigation] = useState<(() => void) | null>(null);
+    const firstFutureTimeRef = useRef<HTMLDivElement>(null);
 
     const { tasks, date } = dayInfo
 
@@ -99,6 +98,10 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
     const { tasks: tasksState } = form.watch();
 
     const formTasksChanged = form.formState.isDirty && (JSON.stringify(tasks.sort((a, b) => a.id - b.id)) !== JSON.stringify(tasksState.sort((a, b) => a.id - b.id)))
+
+    useEffect(() => {
+        scrollToCurrentTime()
+    }, []);
 
     // Prevent browser tab close/refresh when there are unsaved changes
     useEffect(() => {
@@ -227,6 +230,10 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         setPendingNavigation(null);
     };
 
+    const scrollToCurrentTime = () => {
+        firstFutureTimeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     const doneTasks = `${stateEmoji["done"]}${tasksState.filter(c => c.state === "done").length}`
     const noDoneTasks = `${stateEmoji["no done"]}${tasksState.filter(c => c.state === "no done").length}`
     const occupiedTasks = `${stateEmoji["occupied"]}${tasksState.filter(c => c.state === "occupied").length}`
@@ -350,9 +357,49 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
 
                 {/* Control buttons — wrap on small screens */}
                 <div className="flex flex-wrap gap-2 sm:gap-5 justify-center">
-                    <ButtonOrganizeByTime />
-                    <ButtonTogglePreviousTasks />
-                    <ButtonHideOccupied />
+                    <ReusableToggleButton
+                        paramKey="organizeByTime"
+                        iconOn={<Watch />}
+                        iconOff={<Watch />}
+                        labelOn="Organized by time"
+                        labelOff="Organized by task id"
+                        tooltip="Organized by task id"
+                    />
+
+                    <ReusableToggleButton
+                        paramKey="togglePreviousTasks"
+                        iconOn={<IdCard />}
+                        iconOff={<IdCard />}
+                        labelOn="Show previous tasks"
+                        labelOff="Hide previous tasks"
+                        tooltip="Hide previous tasks"
+                    />
+
+                    <ReusableToggleButton
+                        paramKey="hideOccupied"
+                        iconOn={<EyeOff />}
+                        iconOff={<Eye />}
+                        labelOn="Show occupied tasks"
+                        labelOff="Hide occupied tasks"
+                        tooltip="Hide/Show actual name for occupied tasks"
+                    />
+
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    type="button"
+                                    variant="secondary"
+                                    onClick={() => scrollToCurrentTime()}
+                                >
+                                    <ArrowDownAZ />
+                                    <span className="hidden md:inline">Scroll to current time</span>
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent><p>Scroll to current time</p></TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                 </div>
 
                 {togglePreviousTasks ? (
@@ -383,13 +430,13 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                     const nextTask = tasksToShow[i + 1]
                                                     const afterNextTask = tasksToShow[i + 2]
 
-                                                    if (task.name === "Solve the daily challenge from freeCodeCamp app") {
-                                                        console.log((
-                                                            Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
-                                                            &&
-                                                            task.state !== "occupied"
-                                                        ))
-                                                    }
+                                                    // if (task.name === "Solve the daily challenge from freeCodeCamp app") {
+                                                    //     console.log((
+                                                    //         Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
+                                                    //         &&
+                                                    //         task.state !== "occupied"
+                                                    //     ))
+                                                    // }
 
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
@@ -417,7 +464,11 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                 )
                                                             }
 
-                                                            <div className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0">
+                                                            <div
+                                                                className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0"
+                                                                ref={filterFutureTimes(TIMES).includes(task.time) ? firstFutureTimeRef : null}
+                                                            // ref={task.time === filterFutureTimes(TIMES)[0] ? firstFutureTimeRef : null}
+                                                            >
 
                                                                 {/* State emoji buttons */}
                                                                 <div className="flex flex-row gap-0.5 items-center shrink-0">
