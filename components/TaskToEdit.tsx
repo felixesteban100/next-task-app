@@ -417,6 +417,10 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                 ? sortByProperty(field.value, organizeByTime ? "time" : "id").filter(task => filterFutureTimes(TIMES).includes(task.time))
                                 : sortByProperty(field.value, organizeByTime ? "time" : "id"))
 
+                            // const firstFutureTime = filterFutureTimes(TIMES)[0] ?? tasksToShow[tasksToShow.length - 1]?.time;
+                            const firstFutureTime = filterFutureTimes(TIMES)[0] ?? tasksToShow[tasksToShow.length - 1]?.time;
+                            let firstFutureTimeAssigned = false;
+
                             return (
                                 <FormItem>
                                     <FormMessage />
@@ -430,15 +434,9 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                     const nextTask = tasksToShow[i + 1]
                                                     const afterNextTask = tasksToShow[i + 2]
 
-                                                    // if (task.name === "Solve the daily challenge from freeCodeCamp app") {
-                                                    //     console.log((
-                                                    //         Number(task.time.split(":")[0]) > Number(previousTask?.time.split(":")[0])
-                                                    //         &&
-                                                    //         task.state !== "occupied"
-                                                    //     ))
-                                                    // }
 
-                                                    const firstFutureTime = filterFutureTimes(TIMES)[0] ?? tasksToShow[tasksToShow.length - 1]?.time;
+                                                    const isFirstFutureTime = !firstFutureTimeAssigned && task.time === firstFutureTime;
+                                                    if (isFirstFutureTime) firstFutureTimeAssigned = true;
 
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
@@ -468,11 +466,14 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
 
                                                             <div
                                                                 className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0"
-                                                                // ref={filterFutureTimes(TIMES).includes(task.time) ? firstFutureTimeRef : null}
-                                                                // ref={task.time === filterFutureTimes(TIMES)[0] ? firstFutureTimeRef : null}
-                                                                ref={firstFutureTime ? firstFutureTimeRef : null}
+                                                                ref={isFirstFutureTime ? firstFutureTimeRef : null}
                                                             >
-
+                                                                {firstFutureTime === task.time && (
+                                                                    <div className="">
+                                                                        <Separator className="mb-3 sm:mb-5" />
+                                                                        <p className="text-center text-sm sm:text-base italic -mt-3 sm:-mt-5">Current time: {task.time}</p>
+                                                                    </div>
+                                                                )}
                                                                 {/* State emoji buttons */}
                                                                 <div className="flex flex-row gap-0.5 items-center shrink-0">
                                                                     {Object.entries(stateEmoji).map(([state, emoji]) => {
