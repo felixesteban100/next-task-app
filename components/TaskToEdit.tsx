@@ -468,12 +468,6 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                                 className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0"
                                                                 ref={isFirstFutureTime ? firstFutureTimeRef : null}
                                                             >
-                                                                {firstFutureTime === task.time && (
-                                                                    <div className="">
-                                                                        <Separator className="mb-3 sm:mb-5" />
-                                                                        <p className="text-center text-sm sm:text-base italic -mt-3 sm:-mt-5">Current time: {task.time}</p>
-                                                                    </div>
-                                                                )}
                                                                 {/* State emoji buttons */}
                                                                 <div className="flex flex-row gap-0.5 items-center shrink-0">
                                                                     {Object.entries(stateEmoji).map(([state, emoji]) => {
