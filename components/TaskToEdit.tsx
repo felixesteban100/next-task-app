@@ -396,7 +396,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                     <span className="hidden md:inline">Scroll to current time</span>
                                 </Button>
                             </TooltipTrigger>
-                            <TooltipContent><p>Scroll to current time ({tasks.filter(task => filterFutureTimes(TIMES).includes(task.time))[0].time})</p></TooltipContent>
+                            <TooltipContent><p>Scroll to current time </p></TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
 
@@ -420,7 +420,8 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
 
 
                             // const firstFutureTime = filterFutureTimes(TIMES)[0] ?? tasksToShow[tasksToShow.length - 1]?.time;
-                            const firstFutureTime = tasks.filter(task => filterFutureTimes(TIMES).includes(task.time))[0].time;
+                            const firstFuturetTaskTime = tasks.filter(task => filterFutureTimes(TIMES).includes(task.time))[0];
+                            const firstFutureTime = tasks.at(-1)?.time ?? firstFuturetTaskTime.time;
                             let firstFutureTimeAssigned = false;
 
                             return (
