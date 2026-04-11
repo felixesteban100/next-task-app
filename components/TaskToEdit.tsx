@@ -1,6 +1,6 @@
 "use client"
 
-import { cn, DateString, filterFutureTimes, getTotalTasksByType, sortByProperty } from '@/lib/utils'
+import { cn, compareTime, DateString, filterFutureTimes, getTotalTasksByType, sortByProperty } from '@/lib/utils'
 import { toast } from "sonner"
 
 import { GODLY_TASKS, TASKS_THAT_DONT_SEPARATE_SECTIONS, TASKS_THAT_SEPARATE_SECTIONS, TIMES } from "@/constants"
@@ -234,6 +234,8 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
         firstFutureTimeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    // console.log(firstFutureTimeRef.current)
+
     const doneTasks = `${stateEmoji["done"]}${tasksState.filter(c => c.state === "done").length}`
     const noDoneTasks = `${stateEmoji["no done"]}${tasksState.filter(c => c.state === "no done").length}`
     const occupiedTasks = `${stateEmoji["occupied"]}${tasksState.filter(c => c.state === "occupied").length}`
@@ -304,6 +306,7 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
 
         fieldOnChange(sortByProperty(updatedTasks, "id"));
     }
+
 
     return (
         // Responsive outer container: full width, constrained max, centered
@@ -393,10 +396,11 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                     onClick={() => scrollToCurrentTime()}
                                 >
                                     <ArrowDownAZ />
+                                    {/* show current time */}
                                     <span className="hidden md:inline">Scroll to current time</span>
                                 </Button>
                             </TooltipTrigger>
-                            <TooltipContent><p>Scroll to current time </p></TooltipContent>
+                            <TooltipContent><p>Scroll to current time ({new Date().toLocaleTimeString()})</p></TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
 
@@ -417,12 +421,14 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                 ? sortByProperty(field.value, organizeByTime ? "time" : "id").filter(task => filterFutureTimes(TIMES).includes(task.time))
                                 : sortByProperty(field.value, organizeByTime ? "time" : "id"))
 
-
+                            const firstLater = tasksToShow.find(task => compareTime(task.time, filterFutureTimes(TIMES)[0]) === 1)
+                            // console.log(firstLater)
 
                             // const firstFutureTime = filterFutureTimes(TIMES)[0] ?? tasksToShow[tasksToShow.length - 1]?.time;
-                            const firstFuturetTaskTime = tasks.filter(task => filterFutureTimes(TIMES).includes(task.time))[0];
-                            const firstFutureTime = tasks.at(-1)?.time ?? firstFuturetTaskTime.time;
-                            let firstFutureTimeAssigned = false;
+                            // const firstFuturetTaskTime = tasks.filter(task => filterFutureTimes(TIMES).includes(task.time))[0];
+                            // const firstFutureTime = tasks.at(-1)?.time ?? firstFuturetTaskTime.time;
+                            // let firstFutureTimeAssigned = false;
+
 
                             return (
                                 <FormItem>
@@ -437,9 +443,15 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                     const nextTask = tasksToShow[i + 1]
                                                     const afterNextTask = tasksToShow[i + 2]
 
+                                                    const isFirstLaterTask = firstLater && task.id === firstLater.id
 
-                                                    const isFirstFutureTime = !firstFutureTimeAssigned && task.time === firstFutureTime;
-                                                    if (isFirstFutureTime) firstFutureTimeAssigned = true;
+                                                    // I just one the first one that is later than current time and scroll to it, but if there are multiple tasks with the same time, I want to scroll to the first one of them
+
+
+                                                    // const isFirstFutureTime = !firstFutureTimeAssigned && task.time === firstFutureTime;
+                                                    // if (isFirstFutureTime) firstFutureTimeAssigned = true;
+
+                                                    //
 
                                                     return (
                                                         <AnimateWrapper key={task.name + task.time + task.id} keyItem={task.name + task.time + task.id}>
@@ -468,8 +480,9 @@ export default function TaskToEdit({ dayInfo, hourAdded, organizeByTime, hideOcc
                                                             }
 
                                                             <div
-                                                                className="group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0"
-                                                                ref={isFirstFutureTime ? firstFutureTimeRef : null}
+                                                                className={`group/task flex flex-row gap-2 items-center justify-start w-full py-0.5 md:py-0 ${isFirstLaterTask && "font-bold "}`}
+                                                                ref={isFirstLaterTask ? firstFutureTimeRef : null}
+                                                                id={task.name + task.time + task.id}
                                                             >
                                                                 {/* State emoji buttons */}
                                                                 <div className="flex flex-row gap-0.5 items-center shrink-0">

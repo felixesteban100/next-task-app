@@ -82,6 +82,32 @@ export function filterFutureTimes(times: string[]): string[] {
   return index === -1 ? [] : times.slice(index);
 }
 
+export function compareTime(timeStr1: string, timeStr2: string): number {
+  // Helper to convert "H:MM AM/PM" to a Date object (using today's date as reference)
+  const parseTimeToDate = (timeStr: string): Date => {
+    const date = new Date();
+    // Set hours, minutes, seconds based on the string
+    const [timePart, modifier] = timeStr.trim().toUpperCase().split(' ');
+    const [hours, minutes] = timePart.split(':').map(Number);
+
+    let hour = hours;
+    if (modifier === 'PM' && hour !== 12) hour += 12;
+    if (modifier === 'AM' && hour === 12) hour = 0;
+
+    date.setHours(hour, minutes, 0, 0);
+    return date;
+  };
+
+  const date1 = parseTimeToDate(timeStr1);
+  const date2 = parseTimeToDate(timeStr2);
+
+  const diff = date1.getTime() - date2.getTime();
+
+  if (diff > 0) return 1;       // time1 is later
+  if (diff < 0) return -1;      // time1 is earlier
+  return 0;                     // times are equal
+}
+
 // export function timeToMinutes(timeStr: string): number {
 //   const match = timeStr.match(/^(\d{1,2}):(\d{2})\s*(am|pm)$/i)
 //   if (!match) throw new Error(`Invalid time format: ${timeStr}`)
