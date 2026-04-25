@@ -85,7 +85,8 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
         });
     };
 
-    function formatRelativeTime(dateInput: Date) {
+    function formatRelativeTime(dateInput: Date | undefined) {
+        if (!dateInput) return "—";
         const date = new Date(dateInput)
         if (!date || isNaN(date.getTime())) return "—";
         const now = new Date();
@@ -178,7 +179,8 @@ export default function TodoList({ initialTodos }: { initialTodos: ToDoTask[] })
                                     </div>
                                     <div className="text-xs text-muted-foreground">
                                         Completed {timesCompleted} time{timesCompleted !== 1 ? "s" : ""}
-                                        {timesCompleted > 0 && ` • last ${formatRelativeTime(todo.lastCompletedAt!)}`}
+                                        {/* add a couple of hours else it will show the day before instead of the current day */}
+                                        {timesCompleted > 0 && ` • last ${formatRelativeTime(todo.completionHistory ? new Date(new Date(todo.completionHistory[todo.completionHistory.length - 1]).getTime() + 5 * 60 * 60 * 1000) : undefined)}`}
                                     </div>
                                 </div>
 

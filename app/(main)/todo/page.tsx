@@ -5,6 +5,7 @@
 
 import TodoList from "@/components/TodoList";
 import { collectionToDoList } from "@/db/mongodb/mongodb";
+import { connection } from "next/server";
 
 /* add organize the verses to memorize in bookmars in opera gx */
 /* add organize all the proverbs by topics */
@@ -14,6 +15,7 @@ import { collectionToDoList } from "@/db/mongodb/mongodb";
 // all of this is based on: https://grok.com/c/d4c94acc-e3df-4a13-8bc5-e021efa16628?rid=3a8da54c-0762-455f-bf2d-ff5733ac83a9
 
 export default async function page() {
+    connection()
     const initialTodos = await collectionToDoList.find({}).sort({ updatedAt: -1 }).toArray();
 
     return (
