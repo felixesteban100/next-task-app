@@ -9,6 +9,29 @@ import WatchToEdit from "@/components/WatchToEdit";
 
 export const dynamic = 'force-dynamic';
 
+// const movies = movies: z.array(z.object({
+//             name: z.string().min(2, {
+//                 message: "Name must be at least 2 characters.",
+//             }),
+//             url_last_watched: z.string().url({
+//                 message: "You must provide a valid URL.",
+//             }),
+//             img_portrait: z.string().min(2, {
+//                 message: "Username must be at least 2 characters.",
+//             }),
+//             watching_state: z.enum(allowedWatchingStates as [string, ...string[]], {
+//                 errorMap: () => ({ message: "You must select a valid state." }),
+//             }),
+//             type: z.enum(allowedTypes as [string, ...string[]], {
+//                 errorMap: () => ({ message: "You must select a valid type." }),
+//             }),
+//             rated: z.enum(["G", "PG", "PG-13", "R", "NC-17"] as [string, ...string[]], {
+//                 errorMap: () => ({ message: "You must select a valid rating." }),
+//             }),
+//             release_year: z.string().min(4),
+//             rating: z.number().min(0).max(10),
+//         })).optional(),
+
 export type ToWatch = {
     name: string
     url_last_watched: string,
@@ -23,7 +46,16 @@ export type ToWatch = {
     end_year: string,
     rating: number,
     // main_characters: { name: string, image: string }[]
-    description: string
+    description: string;
+    // an array of the movies of that series, anime or cartoon, with the same info as a single media but without seasons and episodes, and with an extra field of season number, so you can edit them separately if you want to
+    movies: {
+        name: string;
+        img_portrait: string;
+        rated: "G" | "PG" | "PG-13" | "R" | "NC-17";
+        release_year: string;
+        rating: number;
+        duration: string;
+    }[];
 }
 
 

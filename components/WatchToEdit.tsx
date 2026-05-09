@@ -63,6 +63,21 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
         end_year: z.string().min(4),
         seasons: z.number().min(1),
         episodes: z.number().min(1),
+        // an array of the movies of that series, anime or cartoon, with the same info as a single media but without seasons and episodes, and with an extra field of season number, so you can edit them separately if you want to
+        movies: z.array(z.object({
+            name: z.string().min(2, {
+                message: "Name must be at least 2 characters.",
+            }),
+            img_portrait: z.string().min(2, {
+                message: "Username must be at least 2 characters.",
+            }),
+            rated: z.enum(["G", "PG", "PG-13", "R", "NC-17"] as [string, ...string[]], {
+                errorMap: () => ({ message: "You must select a valid rating." }),
+            }),
+            release_year: z.string().min(4),
+            rating: z.number().min(0).max(10),
+            duration: z.string().min(1),
+        })).optional(),
     })
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -79,7 +94,6 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
             release_year: media.release_year,
             end_year: media.end_year,
             rating: media.rating,
-
         },
     })
 
@@ -160,6 +174,44 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
                             <div>
                                 <p>{media.description}</p>
                             </div>
+
+                            {
+                                media.movies && media.movies.length > 0 && (
+                                    <div className="space-y-2">
+                                        <h4 className="font-semibold">Movies:</h4>
+                                        <div className="grid grid-cols-1 gap-4">
+                                            {media.movies.map((movie) => (
+                                                <div key={movie.name} className="border rounded-lg p-2">
+                                                    <div className="flex flex-col items-center gap-2">
+                                                        <div>
+                                                            <p className="font-medium">{movie.name}</p>
+                                                        </div>
+                                                        <Image
+                                                            src={movie.img_portrait || "/placeholder.svg"}
+                                                            alt={movie.name}
+                                                            className="w-40 h-68 object-cover rounded"
+                                                            width={500}
+                                                            height={500}
+                                                        />
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="flex items-center gap-1">
+                                                                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                                                                <span className="font-medium text-sm text-foreground">{movie.rating}</span>
+                                                            </div>
+                                                            <span className="text-muted-foreground text-sm">•</span>
+                                                            <span className="text-muted-foreground text-sm">{movie.release_year}</span>
+                                                            <span className="text-muted-foreground text-sm">•</span>
+                                                            <span className="text-sm text-muted-foreground font-medium">{movie.rated}</span>
+                                                            <span className="text-muted-foreground text-sm">•</span>
+                                                            <span className="text-sm text-muted-foreground font-medium">{movie.duration}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )
+                            }
 
                             {media.url_last_watched !== "" && <Link href={media.url_last_watched}> Continue watching {media.name}</Link>}
                         </TabsContent>
@@ -279,7 +331,7 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
                                             </div>
                                         </div>
 
-                                        {(media.type === "series" || media.type === "anime") && (
+                                        {(media.type !== "movie") && (
                                             <div className="grid grid-cols-2 gap-4">
                                                 <div className="grid gap-2">
                                                     <FormField
