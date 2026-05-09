@@ -27,8 +27,9 @@ export async function addDefaultTasksWithTodaysDate() {
 
     if (existingDay) return false
 
-    // if today is saturday use the one with the when property "free", otherwise use the one with "routine" 
-    const defaultTasks = await collectionDefaultTasks.findOne({ when: new Date().getDay() === 6 ? "free" : "routine" });
+    // if today is saturday in USA use the one with the when property "free", otherwise use the one with "routine" 
+    const defaultTasks = await collectionDefaultTasks.findOne({ when: todayEastern.getDay() === 6 ? "free" : "routine" });
+    // const defaultTasks = await collectionDefaultTasks.findOne({ when: new Date().getDay() === 6 ? "free" : "routine" });
 
     await collectionTask.insertOne({
         tasks: defaultTasks!.tasks.map((c, i): Task => {
