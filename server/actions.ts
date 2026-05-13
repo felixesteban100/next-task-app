@@ -3,7 +3,7 @@
 import { ToWatch } from "@/app/(main)/to-watch/page"
 import { Task } from "@/components/TaskToEdit"
 import { z } from "zod";
-import { collectionDefaultTasks, collectionTask, collectionToWatch, collectionToDoList } from "@/db/mongodb/mongodb"
+import { collectionDefaultTasks, collectionTask, collectionToWatch, collectionToDoList, collectionDayOff } from "@/db/mongodb/mongodb"
 // import { getTodaysDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { connection } from 'next/server'
@@ -27,9 +27,11 @@ export async function addDefaultTasksWithTodaysDate() {
 
     if (existingDay) return false
 
-    // if today is saturday in USA use the one with the when property "free", otherwise use the one with "routine" 
-    const defaultTasks = await collectionDefaultTasks.findOne({ when: todayEastern.getDay() === 6 ? "free" : "routine" });
-    // const defaultTasks = await collectionDefaultTasks.findOne({ when: new Date().getDay() === 6 ? "free" : "routine" });
+    const dayOffDoc = await collectionDayOff.findOne({});
+    const dayOff = dayOffDoc?.dayId ?? 6; // default to 6 (Saturday) if not set
+
+    // if today is dayOffDoc?.dayId in USA use the one with the when property "free", otherwise use the one with "routine" 
+    const defaultTasks = await collectionDefaultTasks.findOne({ when: todayEastern.getDay() === dayOff ? "free" : "routine" });
 
     await collectionTask.insertOne({
         tasks: defaultTasks!.tasks.map((c, i): Task => {
@@ -52,6 +54,23 @@ export async function saveTasksOfCurrentDate(date: Date, tasks: Task[]) {
 
     if (result.modifiedCount > 0) {
         revalidatePath("/today")
+        return true
+    }
+
+    return false
+}
+
+export async function saveDayOff(dayOff: number, fullName: string) {
+    connection()
+    // update the only one document in collectionDayOff with the new dayOff value
+    const result = await collectionDayOff.updateOne(
+        {}, // Update the first document
+        { $set: { dayId: dayOff, dayName: fullName } }, // ✅ Use `$set` to update the `dayId` field
+        { upsert: false } // ❌ Ensure it doesn't create a new document
+    );
+
+    if (result.modifiedCount > 0) {
+        revalidatePath("/dayoff")
         return true
     }
 

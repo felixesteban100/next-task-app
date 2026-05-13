@@ -12,6 +12,7 @@ import {
     Tv,
     ListCheck,
     LaughIcon,
+    CalendarOff,
     // Watch,
 } from "lucide-react"
 import Link from "next/link"
@@ -71,6 +72,11 @@ const links = [
         href: "/previous-days",
         label: "Previous days",
         icon: <History />
+    },
+    {
+        href: "/dayoff",
+        label: "Day Off",
+        icon: <CalendarOff />
     },
     {
         href: "/api/add-today",
