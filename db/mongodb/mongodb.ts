@@ -34,6 +34,7 @@ import { ToWatch } from "@/app/(main)/to-watch/page";
 import { MongoClient } from 'mongodb';
 import { ToDoTask } from "@/components/TodoList";
 import { Thanksgivings } from "@/app/(main)/thanksgivings/page";
+import { DayOff } from "@/components/DayOffSelector";
 
 if (!process.env.MONGODB_URI) {
     throw new Error('Missing MONGODB_URI environment variable');
@@ -70,7 +71,7 @@ export const db = client.db('Tasks');
 // Export your collections (safe because client is now always defined)
 export const collectionTask = db.collection<DailyTaskAndDetails>('Task');
 export const collectionDefaultTasks = db.collection<{ when: "routine" | "free", tasks: Task[] }>('DEFAULT_TASKS');
-export const collectionDayOff = db.collection<{ dayId: number, dayName: string }>('DAYOFF');
+export const collectionDayOff = db.collection<{ days: DayOff[] }>('DAYOFF');
 export const collectionReflectionQuestions = db.collection<ReflectionQuestions>('Reflection Questions');
 export const collectionToWatch = db.collection<ToWatch>('List to watch');
 export const collectionThingsToWatchAtNight = db.collection<{ resources: { name: string, url: string }[] }>('ThingsToWatchAtNight');

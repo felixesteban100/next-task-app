@@ -10,6 +10,7 @@ import { connection } from 'next/server'
 import { ToDoTask } from "@/components/TodoList";
 import { ObjectId } from "mongodb";
 import { isAllowedToday } from "@/lib/utils";
+import { DayOff } from "@/components/DayOffSelector";
 
 export async function addDefaultTasksWithTodaysDate() {
     connection()
@@ -28,10 +29,10 @@ export async function addDefaultTasksWithTodaysDate() {
     if (existingDay) return false
 
     const dayOffDoc = await collectionDayOff.findOne({});
-    const dayOff = dayOffDoc?.dayId ?? 6; // default to 6 (Saturday) if not set
+    const daysOff = dayOffDoc?.days.filter(c => c.selected).map(c => c.id) ?? [6]; // default to 6 (Saturday) if not set
 
     // if today is dayOffDoc?.dayId in USA use the one with the when property "free", otherwise use the one with "routine" 
-    const defaultTasks = await collectionDefaultTasks.findOne({ when: todayEastern.getDay() === dayOff ? "free" : "routine" });
+    const defaultTasks = await collectionDefaultTasks.findOne({ when: daysOff.includes(todayEastern.getDay()) ? "free" : "routine" });
 
     await collectionTask.insertOne({
         tasks: defaultTasks!.tasks.map((c, i): Task => {
@@ -60,12 +61,12 @@ export async function saveTasksOfCurrentDate(date: Date, tasks: Task[]) {
     return false
 }
 
-export async function saveDayOff(dayOff: number, fullName: string) {
+export async function saveDayOff(daysOff: DayOff[]) {
     connection()
     // update the only one document in collectionDayOff with the new dayOff value
     const result = await collectionDayOff.updateOne(
         {}, // Update the first document
-        { $set: { dayId: dayOff, dayName: fullName } }, // ✅ Use `$set` to update the `dayId` field
+        { $set: { days: daysOff } }, // ✅ Use `$set` to update the `dayId` field
         { upsert: false } // ❌ Ensure it doesn't create a new document
     );
 
