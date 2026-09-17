@@ -185,6 +185,7 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
                                                     <div className="flex flex-col items-center gap-2">
                                                         <div>
                                                             <p className="font-medium">{movie.name}</p>
+                                                            <p>{movie.description}</p>
                                                         </div>
                                                         <Image
                                                             src={movie.img_portrait || "/placeholder.svg"}
