@@ -28,7 +28,7 @@ export default function FilterToWatch() {
     const [watchingStates, setWatchingStates] = useState<string[]>(
         params.get("watchingStates") ? params.get("watchingStates")!.split(",").filter(Boolean) : []
     )
-    const [sortBy, setSortBy] = useState<string>(params.get("sortBy")?.toString() ?? "random")
+    const [sortBy, setSortBy] = useState<string>(params.get("sortBy")?.toString() ?? "uploaded")
     const [name, setName] = useState<string>(params.get("name")?.toString() ?? "")
     const [direction, setDirection] = useState<string>(params.get("direction")?.toString() ?? "-1")
 
