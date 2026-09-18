@@ -42,20 +42,20 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
         name: z.string().min(2, {
             message: "Name must be at least 2 characters.",
         }),
-        url_last_watched: z.string().url({
+        url_last_watched: z.string()/* .url({
             message: "You must provide a valid URL.",
-        }),
+        }) */,
         type: z.enum(allowedTypes as [string, ...string[]], {
             errorMap: () => ({ message: "You must select a valid type." }),
         }),
-        rated: z.enum(["G", "PG", "PG-13", "R", "NC-17"] as [string, ...string[]], {
+        rated: z.enum(["G", "PG", "PG-13", "R", "NC-17", "TV-Y", "TV-Y7", "TV-G", "TV-PG", "TV-14", "TV-MA"] as [string, ...string[]], {
             errorMap: () => ({ message: "You must select a valid rating." }),
         }),
         rating: z.number().min(0).max(10),
         release_year: z.string().min(4),
         //
         img_portrait: z.string().min(2, {
-            message: "Username must be at least 2 characters.",
+            message: "Url must be at least 2 characters.",
         }),
         watching_state: z.enum(allowedWatchingStates as [string, ...string[]], {
             errorMap: () => ({ message: "You must select a valid state." }),
@@ -159,7 +159,7 @@ export default function WatchToEdit({ media }: { media: ToWatch }) {
                                     <span className="font-medium text-sm text-foreground">{media.rating}</span>
                                 </div>
                                 <span className="text-muted-foreground text-sm">•</span>
-                                <span className="text-muted-foreground text-sm">{media.release_year} - {media.end_year}</span>
+                                <span className="text-muted-foreground text-sm">{media.release_year} - {media.end_year === "" ? "Ongoing" : media.end_year}</span>
                             </div>
 
                             <div className="flex items-center justify-between">
