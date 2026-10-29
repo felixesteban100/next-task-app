@@ -14,6 +14,8 @@ import {
     LaughIcon,
     CalendarOff,
     // Watch,
+    PillBottle,
+    ListFilter
 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
@@ -97,6 +99,16 @@ const links = [
         href: "/thanksgivings",
         label: "Thanksgivings List",
         icon: <LaughIcon />
+    },
+    /* {
+        href: "/groceries_list",
+        label: "Thanksgivings List",
+        icon: <ListFilter />
+    }, */
+    {
+        href: "/perfumes",
+        label: "Perfumes",
+        icon: <PillBottle />
     },
     // {
     //     href: "/omnitrix",

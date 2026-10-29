@@ -36,6 +36,7 @@ import { ToDoTask } from "@/components/TodoList";
 import { Thanksgivings } from "@/app/(main)/thanksgivings/page";
 import { DayOff } from "@/components/DayOffSelector";
 import { GroceriesList } from "@/app/(main)/groceries_list/[id]/page";
+import { PerfumeDocument } from "@/types";
 
 if (!process.env.MONGODB_URI) {
     throw new Error('Missing MONGODB_URI environment variable');
@@ -79,3 +80,4 @@ export const collectionThingsToWatchAtNight = db.collection<{ resources: { name:
 export const collectionToDoList = db.collection<Omit<ToDoTask, "_id">>('To do list');
 export const collectionThanksgivings = db.collection<Thanksgivings>('Personal Thanksgivings');
 export const collectionGroceriesList = db.collection<GroceriesList>('Groceries List');
+export const collectionPerfumes = db.collection<PerfumeDocument>('Perfumes');
