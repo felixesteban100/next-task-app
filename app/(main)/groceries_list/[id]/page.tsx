@@ -1,4 +1,4 @@
-// app/(main)/groceries/[id]/page.tsx  (Server Component)
+// app/(main)/groceries_list/[id]/page.tsx
 import GroceriesListClient from '@/components/GroceriesListClient'
 import { collectionGroceriesList } from '@/db/mongodb/mongodb'
 import { ObjectId } from 'mongodb'
@@ -25,8 +25,15 @@ export type GroceriesList = {
   departments: GroceryDepartment[]
 }
 
-export default async function GroceriesPage({ params }: { params: { id: string } }) {
-  const list = await collectionGroceriesList.findOne({ _id: new ObjectId(params.id) })
+interface PageProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function GroceriesPage({ params }: PageProps) {
+  // Await the params Promise required in Next.js 15
+  const { id } = await params
+
+  const list = await collectionGroceriesList.findOne({ _id: new ObjectId(id) })
   if (!list) return <div>List not found</div>
 
   // Serialize ObjectId to string for the client
