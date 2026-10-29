@@ -20,8 +20,9 @@ export async function updatePerfumeUserData(perfumeId: string, userData: UserPer
 
         revalidatePath('/perfumes');
         return { success: true };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Failed to update perfume user data:", error);
-        return { success: false, error: error.message || "Database update failed." };
+        const errorMessage = error instanceof Error ? error.message : "Database update failed.";
+        return { success: false, error: errorMessage };
     }
 }
